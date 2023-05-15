@@ -33,6 +33,7 @@ SOURCES += \
     PageImagePage.cpp \
     PageWelcomePage.cpp \
     PageWidget.cpp \
+    SystemMessageWidget.cpp \
     UserMessageItemWidget.cpp \
     main.cpp \
     MainWindow.cpp \
@@ -67,6 +68,7 @@ HEADERS += \
     PageImagePage.h \
     PageWelcomePage.h \
     PageWidget.h \
+    SystemMessageWidget.h \
     UserMessageItemWidget.h \
     third/liboai/include/components/audio.h \
     third/liboai/include/components/chat.h \
@@ -98,6 +100,7 @@ FORMS += \
     PageGeneralChatPage.ui \
     PageImagePage.ui \
     PageWelcomePage.ui \
+    SystemMessageWidget.ui \
     UserMessageItemWidget.ui
 
 # Default rules for deployment.
