@@ -62,8 +62,15 @@ void PageImagePage::updateCntx(AppContext *cntx)
 
 void PageImagePage::on_requestButton_clicked()
 {
-    ui->requestButton->setEnabled(false);
     auto text = ui->requestEdit->toPlainText();
+
+    if (text.length() <= 3) {
+        QMessageBox::warning(this, "warning", tr("Your picture description is too short"));
+        ui->requestEdit->setFocus(Qt::OtherFocusReason);
+        return;
+    }
+
+    ui->requestButton->setEnabled(false);
 
     auto size = ui->imageSizeComboBox->currentText();
 
@@ -72,7 +79,8 @@ void PageImagePage::on_requestButton_clicked()
 
     if (urlStr.isEmpty() && !err.isEmpty()) {
         QMessageBox::warning(this, "error", err);
-        // TODO: enable elements?
+        ui->requestButton->setEnabled(true);
+        ui->imgLabel->setEnabled(true);
         return;
     }
 
