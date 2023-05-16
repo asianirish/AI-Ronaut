@@ -53,6 +53,12 @@ void ChatWidget::showEvent(QShowEvent *event)
 
 void ChatWidget::on_sendButton_clicked()
 {
+    if (ui->textEdit->document()->isEmpty()) {
+        ui->textEdit->setFocus(Qt::OtherFocusReason);
+        return; // do not send an empty string
+    }
+
+
     UserMessageItemWidget *itemWidget = new UserMessageItemWidget(this);
     addMessageItem(itemWidget, ui->textEdit->toPlainText());
 }
