@@ -26,6 +26,8 @@ public:
     bool setKey(const QString &key, QString *err = nullptr);
     QString key() const;
 
+    bool setKeyEnv(const QString &envKey, QString *err = nullptr);
+
     // TODO: add other args
     QString loadImage(const QString &text, const QString &size, QString *err = nullptr) const;
 

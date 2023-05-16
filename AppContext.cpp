@@ -75,6 +75,31 @@ QString AppContext::key() const
     return QString(_oai.auth.GetKey().data());
 }
 
+bool AppContext::setKeyEnv(const QString &envKey, QString *err)
+{
+    auto ok = _oai.auth.SetKeyEnv(envKey.toStdString());
+
+    if (!ok) {
+        return false;
+    }
+
+    try {
+        auto list = _oai.Model->list();
+    } catch (liboai::exception::OpenAIException &ex) {
+        if (err) {
+            *err = ex.what();
+        }
+        return false;
+    } catch (...) {
+        if (err) {
+            *err = "unknown error";
+        }
+        return false;
+    }
+
+    return true;
+}
+
 QString AppContext::loadImage(const QString &text, const QString &size, QString *err) const
 {
     std::string urlStr;
