@@ -31,6 +31,7 @@ SOURCES += \
     PageDonatePage.cpp \
     PageGeneralChatPage.cpp \
     PageImagePage.cpp \
+    PagePlotPage.cpp \
     PageWelcomePage.cpp \
     PageWidget.cpp \
     SystemMessageWidget.cpp \
@@ -66,6 +67,7 @@ HEADERS += \
     PageDonatePage.h \
     PageGeneralChatPage.h \
     PageImagePage.h \
+    PagePlotPage.h \
     PageWelcomePage.h \
     PageWidget.h \
     SystemMessageWidget.h \
@@ -99,6 +101,7 @@ FORMS += \
     PageDonatePage.ui \
     PageGeneralChatPage.ui \
     PageImagePage.ui \
+    PagePlotPage.ui \
     PageWelcomePage.ui \
     SystemMessageWidget.ui \
     UserMessageItemWidget.ui
