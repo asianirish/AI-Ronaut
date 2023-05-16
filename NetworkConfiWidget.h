@@ -24,6 +24,8 @@ private slots:
 
     void on_applyButton_clicked();
 
+    void on_useProxyBox_stateChanged(int isProxy);
+
 private:
     Ui::NetworkConfiWidget *ui;
     AppContext *_cntx;

@@ -45,3 +45,13 @@ void NetworkConfiWidget::on_applyButton_clicked()
     ui->applyButton->setEnabled(false);
 }
 
+
+void NetworkConfiWidget::on_useProxyBox_stateChanged(int isProxy)
+{
+    if (isProxy) {
+        ui->proxyFrame->setEnabled(true);
+    } else {
+        ui->proxyFrame->setEnabled(false);
+    }
+}
+
