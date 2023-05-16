@@ -10,6 +10,15 @@ To access the OpenAI API, this application utilizes a modified third-party libra
 
 A distinctive advantage of our C++ client lies in its ability to handle intensive computations on the client side, independent of the OpenAI API. This allows for significant performance benefits, particularly for applications that require high computational power and efficiency. As we move forward, we plan to further optimize and enhance this feature, to provide an even more powerful tool for your AI development needs.
 
+## Licenses
+
+This project is distributed under two licenses: the [CC BY-NC-SA](https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode.txt) License and a commercial license. This means:
+
+1. You are free to use, modify, and distribute this project under the terms of the [CC BY-NC-SA](https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode.txt) License.
+2. If you plan to use this project for commercial purposes, you need to obtain a commercial license. Please contact us at asianirish@gmail.com for more information on the commercial license.
+
+We aim to maintain the openness and accessibility of this project by providing the permissive [CC BY-NC-SA](https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode.txt) License. However, we also understand that some organizations may be interested in commercial usage. We offer the option of a commercial license to provide additional support and development for the project.
+
 
 ## Future Plans
 
@@ -31,15 +40,6 @@ Our project is continuously evolving, and we have a number of exciting plans for
 
 Our team is committed to realizing these plans and continuously improving the project. We believe that these enhancements will greatly benefit our users and contribute to the further development of AI.
 
-
-## Licenses
-
-This project is distributed under two licenses: the CC BY-NC-SA License and a commercial license. This means:
-
-1. You are free to use, modify, and distribute this project under the terms of the CC BY-NC-SA License.
-2. If you plan to use this project for commercial purposes, you need to obtain a commercial license. Please contact us at asianirish@gmail.com for more information on the commercial license.
-
-We aim to maintain the openness and accessibility of this project by providing the permissive CC BY-NC-SA License. However, we also understand that some organizations may be interested in commercial usage. We offer the option of a commercial license to provide additional support and development for the project.
 
 
 ## Donate
