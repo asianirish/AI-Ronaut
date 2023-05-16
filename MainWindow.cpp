@@ -3,6 +3,7 @@
 #include "PageGeneralChatPage.h"
 #include "PageDonatePage.h"
 #include "PageAboutPage.h"
+#include "PagePlotPage.h"
 
 #include "ui_MainWindow.h"
 
@@ -22,6 +23,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(welcomePage, &PageWelcomePage::openChatAction, this, &MainWindow::onOpenChat);
     connect(welcomePage, &PageWelcomePage::openDonateAction, this, &MainWindow::onOpenDonate);
     connect(welcomePage, &PageWelcomePage::openAboutAction, this, &MainWindow::onOpenAbout);
+    connect(welcomePage, &PageWelcomePage::openPlotAction, this, &MainWindow::onOpenPlot);
 }
 
 MainWindow::~MainWindow()
@@ -37,7 +39,7 @@ void MainWindow::onOpenImage()
     PageWidget *imagePage = new PageImagePage(this);
     imagePage->setCntx(welcomePage->cntx());
 
-    int index = ui->tabWidget->addTab(imagePage, "Image");
+    int index = ui->tabWidget->addTab(imagePage, tr("Image"));
     ui->tabWidget->setCurrentIndex(index);
 }
 
@@ -49,7 +51,7 @@ void MainWindow::onOpenChat()
     PageWidget *specificPage = new PageGeneralChatPage(this);
     specificPage->setCntx(page->cntx());
 
-    int index = ui->tabWidget->addTab(specificPage, "Chat");
+    int index = ui->tabWidget->addTab(specificPage, tr("Chat"));
     ui->tabWidget->setCurrentIndex(index);
 }
 
@@ -57,7 +59,7 @@ void MainWindow::onOpenDonate()
 {
     QWidget *donateWidget = new PageDonatePage(this);
 
-    int index = ui->tabWidget->addTab(donateWidget, "Donate");
+    int index = ui->tabWidget->addTab(donateWidget, tr("Donate"));
     ui->tabWidget->setCurrentIndex(index);
 }
 
@@ -65,7 +67,19 @@ void MainWindow::onOpenAbout()
 {
     QWidget *wdt = new PageAboutPage(this);
 
-    int index = ui->tabWidget->addTab(wdt, "About");
+    int index = ui->tabWidget->addTab(wdt, tr("About"));
+    ui->tabWidget->setCurrentIndex(index);
+}
+
+void MainWindow::onOpenPlot()
+{
+    auto mainPage = ui->tabWidget->widget(0);
+    auto page = qobject_cast<PageWelcomePage *>(mainPage);
+
+    PageWidget *specificPage = new PagePlotPage(this);
+    specificPage->setCntx(page->cntx());
+
+    int index = ui->tabWidget->addTab(specificPage, tr("Plot"));
     ui->tabWidget->setCurrentIndex(index);
 }
 

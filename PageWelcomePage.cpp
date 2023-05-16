@@ -4,11 +4,13 @@
 #include <QFileDialog>
 #include <QMessageBox>
 #include <QSettings>
+#include <QProcessEnvironment>
 
 using namespace liboai;
 
 const QString PageWelcomePage::IMAGE_ACTION("image");
 const QString PageWelcomePage::CHAT_ACTION("chat");
+const QString PageWelcomePage::PLOT_ACTION("plot");
 const QString PageWelcomePage::DONATE_ACTION("donate");
 const QString PageWelcomePage::ABOUT_ACTION("about");
 

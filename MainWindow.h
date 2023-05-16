@@ -21,6 +21,7 @@ private slots:
     void onOpenChat();
     void onOpenDonate();
     void onOpenAbout();
+    void onOpenPlot();
 
     void on_tabWidget_tabCloseRequested(int index);
 
