@@ -20,8 +20,8 @@ PageWelcomePage::PageWelcomePage(QWidget *parent) :
 
     ui->activityComboBox->addItem(tr("General сhat сonversation"), CHAT_ACTION);
     ui->activityComboBox->addItem(tr("Image generation"), IMAGE_ACTION);
-    ui->activityComboBox->addItem(tr("Educational Chat Conversation")); // TODO: second arg
-//    ui->activityComboBox->addItem(tr("Writing a plot")); // TODO: second arg
+//    ui->activityComboBox->addItem(tr("Educational Chat Conversation")); // TODO: second arg
+    ui->activityComboBox->addItem(tr("Writing a plot"), PLOT_ACTION);
 
     ui->activityComboBox->addItem(tr("Donate"), DONATE_ACTION);
     ui->activityComboBox->addItem(tr("About"), ABOUT_ACTION);
@@ -29,7 +29,10 @@ PageWelcomePage::PageWelcomePage(QWidget *parent) :
     ui->activityComboBox->setCurrentIndex(-1);
 
     displayWait();
-    checkKeyFromSettings();
+
+    if (!checkKeyFromEnv()) {
+        QMessageBox::warning(this, "OpenAI Key", "Please set OPENAI_API_KEY as an environment variable with your OpenAI API key");
+    }
 }
 
 PageWelcomePage::~PageWelcomePage()
@@ -59,10 +62,12 @@ void PageWelcomePage::on_browseKeyButton_clicked()
 
     onKeySuccess();
 
-    QSettings settings;
+    // do not put into the settings
+//    QSettings settings;
 
-    // TODO: crypt the key
-    settings.setValue("oai/key", key);
+//    // TODO: crypt the key
+//    settings.setValue("oai/key", key);
+
 }
 
 
@@ -74,23 +79,29 @@ void PageWelcomePage::on_openActivityButton_clicked()
 
 void PageWelcomePage::displaySuccess()
 {
-    ui->keyFileLabel->setText(tr("OpenAI API file loaded successfully"));
+    ui->keyFileLabel->setText(tr("OpenAI API key loaded successfully"));
     ui->keyFileLabel->setStyleSheet("QLabel { color : green; }");
     ui->activityFrame->setEnabled(true);
     ui->activityFrame->setVisible(true);
+
+    ui->browseKeyButton->setVisible(false);
+    ui->setTheKeyEnvText->setVisible(false);
 }
 
 void PageWelcomePage::displayError()
 {
-    ui->keyFileLabel->setText(tr("Error: Failed to load OpenAI API file"));
+    ui->keyFileLabel->setText(tr("Error: Failed to load OpenAI API key"));
     ui->keyFileLabel->setStyleSheet("QLabel { color : red; }");
     ui->activityFrame->setEnabled(false);
     ui->activityFrame->setVisible(false);
+
+    ui->browseKeyButton->setVisible(true);
+    ui->setTheKeyEnvText->setVisible(true);
 }
 
 void PageWelcomePage::displayWait()
 {
-    ui->keyFileLabel->setText(tr("Waiting for OpenAI API file to load..."));
+    ui->keyFileLabel->setText(tr("Waiting for OpenAI API key to load..."));
     ui->keyFileLabel->setStyleSheet("QLabel { color : red; }");
     ui->activityFrame->setEnabled(false);
     ui->activityFrame->setVisible(false);
@@ -106,23 +117,33 @@ void PageWelcomePage::openAction(const QString &actionData)
         emit openDonateAction();
     } else if (actionData == ABOUT_ACTION) {
         emit openAboutAction();
+    } else if (actionData == PLOT_ACTION) {
+        emit openPlotAction();
     }
 }
 
-void PageWelcomePage::checkKeyFromSettings()
+bool PageWelcomePage::checkKeyFromEnv()
 {
-    QSettings settings;
-    auto key = settings.value("oai/key").toString();
+    QProcessEnvironment env = QProcessEnvironment::systemEnvironment();
 
-    if (!key.isEmpty()) {
+    QString envKey("OPENAI_API_KEY");
+
+    if (env.contains(envKey)) { // OPENAI_API_KEY
+        QString value = env.value(envKey);
+        qDebug() << "OPENAI_API_KEY =" << value;
+
         QString err;
-
-        bool ok = _appContext.setKey(key, &err);
+        bool ok = _appContext.setKeyEnv(envKey, &err);
 
         if (ok) {
             onKeySuccess();
+            return true;
+        } else {
+            qDebug() << "ERROR:" << err;
         }
     }
+
+    return false;
 }
 
 void PageWelcomePage::onKeySuccess()

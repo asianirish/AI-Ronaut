@@ -52,7 +52,7 @@ private:
 
     void openAction(const QString &actionData);
 
-    void checkKeyFromSettings();
+    bool checkKeyFromEnv();
 
     void onKeySuccess();
 
