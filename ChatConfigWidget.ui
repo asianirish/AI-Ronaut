@@ -216,6 +216,15 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>modelComboBox</tabstop>
+  <tabstop>temperatureSpinBox</tabstop>
+  <tabstop>maxTokensSlider</tabstop>
+  <tabstop>topPSlider</tabstop>
+  <tabstop>frequencyPenaltySlider</tabstop>
+  <tabstop>presencePenaltySlider</tabstop>
+  <tabstop>checkBox</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>
