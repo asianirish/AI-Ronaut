@@ -22,6 +22,7 @@ SOURCES += \
     AppContext.cpp \
     ChatConfigWidget.cpp \
     ChatItemWidget.cpp \
+    ChatSessionWidget.cpp \
     ChatWidget.cpp \
     ErrorMessageItemWidget.cpp \
     ModelContext.cpp \
@@ -36,6 +37,11 @@ SOURCES += \
     PageWidget.cpp \
     SystemMessageWidget.cpp \
     UserMessageItemWidget.cpp \
+    chat/AssistantMessage.cpp \
+    chat/Message.cpp \
+    chat/Session.cpp \
+    chat/SystemMessage.cpp \
+    chat/UserMessage.cpp \
     main.cpp \
     MainWindow.cpp \
     third/liboai/components/audio.cpp \
@@ -57,6 +63,7 @@ HEADERS += \
     AppContext.h \
     ChatConfigWidget.h \
     ChatItemWidget.h \
+    ChatSessionWidget.h \
     ChatWidget.h \
     ErrorMessageItemWidget.h \
     MainWindow.h \
@@ -72,6 +79,11 @@ HEADERS += \
     PageWidget.h \
     SystemMessageWidget.h \
     UserMessageItemWidget.h \
+    chat/AssistantMessage.h \
+    chat/Message.h \
+    chat/Session.h \
+    chat/SystemMessage.h \
+    chat/UserMessage.h \
     third/liboai/include/components/audio.h \
     third/liboai/include/components/chat.h \
     third/liboai/include/components/completions.h \
@@ -93,6 +105,7 @@ HEADERS += \
 FORMS += \
     AIMessageItemWidget.ui \
     ChatConfigWidget.ui \
+    ChatSessionWidget.ui \
     ChatWidget.ui \
     ErrorMessageItemWidget.ui \
     MainWindow.ui \

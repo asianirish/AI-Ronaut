@@ -33,13 +33,14 @@
        <item row="1" column="0">
         <widget class="QStackedWidget" name="stackedWidget">
          <property name="currentIndex">
-          <number>2</number>
+          <number>3</number>
          </property>
          <widget class="ChatConfigWidget" name="chatConfigWidget">
           <layout class="QGridLayout" name="gridLayout_3"/>
          </widget>
          <widget class="NetworkConfiWidget" name="networkConfigWidget"/>
          <widget class="SystemMessageWidget" name="systemMessageWidget"/>
+         <widget class="ChatSessionWidget" name="chatSessionWidget"/>
         </widget>
        </item>
       </layout>
@@ -79,6 +80,12 @@
    <class>SystemMessageWidget</class>
    <extends>QWidget</extends>
    <header>SystemMessageWidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ChatSessionWidget</class>
+   <extends>QWidget</extends>
+   <header>ChatSessionWidget.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
