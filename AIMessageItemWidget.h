@@ -21,6 +21,11 @@ protected:
     QTextBrowser *textBrowser() const override;
     int extraSpaceHeight() const override;
 
+private slots:
+    void on_actionCopy_triggered();
+
+    void on_actionEdit_triggered();
+
 private:
     Ui::AIMessageItemWidget *ui;
 };

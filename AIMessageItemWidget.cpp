@@ -6,6 +6,11 @@ AIMessageItemWidget::AIMessageItemWidget(QWidget *parent) :
     ui(new Ui::AIMessageItemWidget)
 {
     ui->setupUi(this);
+
+    addAction(ui->actionCopy);
+    addAction(ui->actionEdit);
+    addAction(ui->actionSave_to_list);
+    addAction(ui->actionSave_to_file);
 }
 
 AIMessageItemWidget::~AIMessageItemWidget()
@@ -33,3 +38,17 @@ int AIMessageItemWidget::extraSpaceHeight() const
     // TODO: what is the magic number for?
     return topMargin + bottomMargin + 4; // TODO: other controls
 }
+
+void AIMessageItemWidget::on_actionCopy_triggered()
+{
+    // TODO: add you copy code here
+    qDebug() << "ACTION COPY";
+}
+
+
+void AIMessageItemWidget::on_actionEdit_triggered()
+{
+    // TODO: add you edit code here
+    qDebug() << "ACTION EDIT";
+}
+
