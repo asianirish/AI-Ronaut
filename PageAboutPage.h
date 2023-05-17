@@ -15,6 +15,9 @@ public:
     explicit PageAboutPage(QWidget *parent = nullptr);
     ~PageAboutPage();
 
+private slots:
+    void on_commandLinkButton_clicked();
+
 private:
     Ui::PageAboutPage *ui;
 };
