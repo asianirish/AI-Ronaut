@@ -2,6 +2,8 @@
 
 #include <QAbstractTextDocumentLayout>
 #include <QLayout>
+#include <QClipboard>
+#include <QGuiApplication>
 
 ChatItemWidget::ChatItemWidget(QWidget *parent)
     : QWidget{parent}
@@ -29,4 +31,11 @@ void ChatItemWidget::stylize() const
     QString currentStyle = textBrowser()->styleSheet();
     qDebug() << "style:" << currentStyle;
     textBrowser()->setStyleSheet(currentStyle + " border-radius: 10px;"); // border: 1px solid gray;
+}
+
+void ChatItemWidget::onCopyAction() const
+{
+    QClipboard *clipboard = QGuiApplication::clipboard();
+    auto text = textBrowser()->toPlainText();
+    clipboard->setText(text);
 }

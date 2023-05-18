@@ -20,6 +20,10 @@ protected:
     virtual QTextBrowser *textBrowser() const = 0;
     virtual int extraSpaceHeight() const = 0;
 
+protected:
+    // call from parent actions:
+    void onCopyAction() const;
+
 signals:
 
 };
