@@ -6,6 +6,8 @@ ErrorMessageItemWidget::ErrorMessageItemWidget(QWidget *parent) :
     ui(new Ui::ErrorMessageItemWidget)
 {
     ui->setupUi(this);
+
+    addAction(ui->actionCopy);
 }
 
 ErrorMessageItemWidget::~ErrorMessageItemWidget()
@@ -26,3 +28,9 @@ int ErrorMessageItemWidget::extraSpaceHeight() const
 
     return topMargin + bottomMargin;
 }
+
+void ErrorMessageItemWidget::on_actionCopy_triggered()
+{
+    onCopyAction();
+}
+
