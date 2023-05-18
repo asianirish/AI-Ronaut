@@ -26,8 +26,6 @@ public:
 private slots:
     void on_modelComboBox_currentTextChanged(const QString &modelName);
 
-    void on_temperatureSpinBox_valueChanged(double t);
-
     void on_maxTokensSlider_sliderMoved(int position);
 
     void on_maxTokensSlider_valueChanged(int value);
@@ -43,6 +41,10 @@ private slots:
     void on_presencePenaltySlider_sliderMoved(int position);
 
     void on_presencePenaltySlider_valueChanged(int value);
+
+    void on_temperatureSlider_sliderMoved(int position);
+
+    void on_temperatureSlider_valueChanged(int value);
 
 private:
     Ui::ChatConfigWidget *ui;

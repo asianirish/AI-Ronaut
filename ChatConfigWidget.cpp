@@ -67,16 +67,6 @@ void ChatConfigWidget::setModelCntx(ModelContext *newModelCntx)
     _modelCntx = newModelCntx;
 }
 
-
-void ChatConfigWidget::on_temperatureSpinBox_valueChanged(double t)
-{
-    if (_modelCntx) {
-        _modelCntx->setTemperature(t);
-        qDebug() << "t" << t;
-    }
-}
-
-
 void ChatConfigWidget::on_maxTokensSlider_sliderMoved(int position)
 {
     ui->maxTokensLabel->setText(QString::number(position));
@@ -106,8 +96,8 @@ void ChatConfigWidget::on_topPSlider_valueChanged(int value)
     double fPosition = (double)value/100.;
     ui->topPLabel->setText(QString::number(fPosition));
     if (_modelCntx) {
-        _modelCntx->setTopP(value);
-        qDebug() << "top_p" << value;
+        _modelCntx->setTopP(fPosition);
+        qDebug() << "top_p" << fPosition;
     }
 }
 
@@ -126,8 +116,8 @@ void ChatConfigWidget::on_frequencyPenaltySlider_valueChanged(int value)
     double fPosition = (double)value/100.;
     ui->frequencyPenaltyLabel->setText(QString::number(fPosition));
     if (_modelCntx) {
-        _modelCntx->setFrequencyPenalty(value);
-        qDebug() << "frequencyPenalty" << value;
+        _modelCntx->setFrequencyPenalty(fPosition);
+        qDebug() << "frequencyPenalty" << fPosition;
     }
 }
 
@@ -145,8 +135,27 @@ void ChatConfigWidget::on_presencePenaltySlider_valueChanged(int value)
     double fPosition = (double)value/100.;
     ui->presencePenaltyLabel->setText(QString::number(fPosition));
     if (_modelCntx) {
-        _modelCntx->setPresencePenalty(value);
-        qDebug() << "presencePenalty" << value;
+        _modelCntx->setPresencePenalty(fPosition);
+        qDebug() << "presencePenalty" << fPosition;
+    }
+}
+
+
+void ChatConfigWidget::on_temperatureSlider_sliderMoved(int position)
+{
+    double fPosition = (double)position/100.;
+    auto strPos = QString::number(fPosition);
+    ui->temperatureLabel->setText(strPos);
+}
+
+
+void ChatConfigWidget::on_temperatureSlider_valueChanged(int value)
+{
+    double fPosition = (double)value/100.;
+    ui->temperatureLabel->setText(QString::number(fPosition));
+    if (_modelCntx) {
+        _modelCntx->setTemperature(fPosition);
+        qDebug() << "temperature" << fPosition;
     }
 }
 
