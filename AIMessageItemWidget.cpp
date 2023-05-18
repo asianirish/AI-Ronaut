@@ -41,8 +41,7 @@ int AIMessageItemWidget::extraSpaceHeight() const
 
 void AIMessageItemWidget::on_actionCopy_triggered()
 {
-    // TODO: add you copy code here
-    qDebug() << "ACTION COPY";
+    onCopyAction();
 }
 
 
