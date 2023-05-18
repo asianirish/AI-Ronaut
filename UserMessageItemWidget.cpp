@@ -8,6 +8,9 @@ UserMessageItemWidget::UserMessageItemWidget(QWidget *parent) :
     ui(new Ui::UserMessageItemWidget)
 {
     ui->setupUi(this);
+
+    addAction(ui->actionCopy);
+    addAction(ui->actionEdit);
 }
 
 UserMessageItemWidget::~UserMessageItemWidget()
