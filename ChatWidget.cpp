@@ -18,6 +18,8 @@ ChatWidget::ChatWidget(QWidget *parent) :
     _appCntx(nullptr)
 {
     ui->setupUi(this);
+
+    ui->textEdit->setTabChangesFocus(true);
 }
 
 ChatWidget::~ChatWidget()
