@@ -33,3 +33,9 @@ int UserMessageItemWidget::extraSpaceHeight() const
     return topMargin + bottomMargin + 4; // TODO: other controls
 }
 
+
+void UserMessageItemWidget::on_actionCopy_triggered()
+{
+    onCopyAction();
+}
+

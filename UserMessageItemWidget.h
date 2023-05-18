@@ -21,6 +21,9 @@ protected:
     QTextBrowser *textBrowser() const override;
     int extraSpaceHeight() const override;
 
+private slots:
+    void on_actionCopy_triggered();
+
 private:
     Ui::UserMessageItemWidget *ui;
 
