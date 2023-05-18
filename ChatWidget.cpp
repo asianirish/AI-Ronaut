@@ -145,6 +145,8 @@ void ChatWidget::onReplyComplete()
 {
     qDebug() << "REPLY COMPLETE";
     _chatThread.quit();
+
+    ui->textEdit->setFocus();
 }
 
 void ChatWidget::onDeltaError(const QString &deltaError)
