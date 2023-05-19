@@ -24,6 +24,9 @@ ChatWidget::ChatWidget(QWidget *parent) :
 
 ChatWidget::~ChatWidget()
 {
+    _chatThread.quit();
+    _chatThread.wait();
+
     delete ui;
 }
 
