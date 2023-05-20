@@ -11,6 +11,8 @@ using namespace liboai;
 const QString PageWelcomePage::IMAGE_ACTION("image");
 const QString PageWelcomePage::CHAT_ACTION("chat");
 const QString PageWelcomePage::PLOT_ACTION("plot");
+
+const QString PageWelcomePage::NETWORK_CONFIG_ACTION("network");
 const QString PageWelcomePage::DONATE_ACTION("donate");
 const QString PageWelcomePage::ABOUT_ACTION("about");
 
@@ -25,6 +27,7 @@ PageWelcomePage::PageWelcomePage(QWidget *parent) :
 //    ui->activityComboBox->addItem(tr("Educational Chat Conversation")); // TODO: second arg
     ui->activityComboBox->addItem(tr("Writing a plot"), PLOT_ACTION);
 
+    ui->activityComboBox->addItem(tr("Network Configuration"), NETWORK_CONFIG_ACTION);
     ui->activityComboBox->addItem(tr("Donate"), DONATE_ACTION);
     ui->activityComboBox->addItem(tr("About"), ABOUT_ACTION);
 
@@ -121,6 +124,8 @@ void PageWelcomePage::openAction(const QString &actionData)
         emit openAboutAction();
     } else if (actionData == PLOT_ACTION) {
         emit openPlotAction();
+    } else if (actionData == NETWORK_CONFIG_ACTION) {
+        emit openNetworkConfigAction();
     }
 }
 

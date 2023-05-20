@@ -22,6 +22,7 @@ private slots:
     void onOpenDonate();
     void onOpenAbout();
     void onOpenPlot();
+    void onOpenNetworkConfig();
 
     void on_tabWidget_tabCloseRequested(int index);
 

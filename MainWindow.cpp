@@ -5,6 +5,8 @@
 #include "PageAboutPage.h"
 #include "PagePlotPage.h"
 
+#include "NetworkConfiWidget.h"
+
 #include "ui_MainWindow.h"
 
 #include <QMessageBox>
@@ -24,6 +26,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(welcomePage, &PageWelcomePage::openDonateAction, this, &MainWindow::onOpenDonate);
     connect(welcomePage, &PageWelcomePage::openAboutAction, this, &MainWindow::onOpenAbout);
     connect(welcomePage, &PageWelcomePage::openPlotAction, this, &MainWindow::onOpenPlot);
+    connect(welcomePage, &PageWelcomePage::openNetworkConfigAction, this, &MainWindow::onOpenNetworkConfig);
 }
 
 MainWindow::~MainWindow()
@@ -80,6 +83,18 @@ void MainWindow::onOpenPlot()
     specificPage->setCntx(page->cntx());
 
     int index = ui->tabWidget->addTab(specificPage, tr("Plot"));
+    ui->tabWidget->setCurrentIndex(index);
+}
+
+void MainWindow::onOpenNetworkConfig()
+{
+    auto mainPage = ui->tabWidget->widget(0);
+    auto page = qobject_cast<PageWelcomePage *>(mainPage);
+
+    NetworkConfiWidget *wdt = new NetworkConfiWidget(this);
+    wdt->updateCntx(page->cntx());
+
+    int index = ui->tabWidget->addTab(wdt, tr("Network Config"));
     ui->tabWidget->setCurrentIndex(index);
 }
 

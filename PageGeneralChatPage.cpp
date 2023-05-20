@@ -11,9 +11,8 @@ PageGeneralChatPage::PageGeneralChatPage(QWidget *parent) :
     ui->chatWidget->setModelCntx(&_modelCntx);
 
     ui->toolComboBox->addItem(tr("Model configuration"), 0);
-    ui->toolComboBox->addItem(tr("Network configuration"), 1);
-    ui->toolComboBox->addItem(tr("System message"), 2);
-    ui->toolComboBox->addItem(tr("Sessions"), 3);
+    ui->toolComboBox->addItem(tr("System message"), 1);
+    ui->toolComboBox->addItem(tr("Sessions"), 2);
 }
 
 PageGeneralChatPage::~PageGeneralChatPage()
@@ -25,7 +24,6 @@ void PageGeneralChatPage::updateCntx(AppContext *cntx)
 {
     ui->chatConfigWidget->updateCntx(cntx);
     ui->chatWidget->setAppCntx(cntx);
-    ui->networkConfigWidget->updateCntx(cntx);
 }
 
 void PageGeneralChatPage::on_toolComboBox_currentIndexChanged(int index)

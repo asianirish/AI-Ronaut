@@ -17,6 +17,8 @@ public:
     static const QString IMAGE_ACTION;
     static const QString CHAT_ACTION;
     static const QString PLOT_ACTION;
+
+    static const QString NETWORK_CONFIG_ACTION;
     static const QString DONATE_ACTION;
     static const QString ABOUT_ACTION;
 
@@ -38,6 +40,7 @@ signals:
     void openDonateAction();
     void openAboutAction();
     void openPlotAction();
+    void openNetworkConfigAction();
 
 protected:
     void updateCntx(AppContext *cntx) override;

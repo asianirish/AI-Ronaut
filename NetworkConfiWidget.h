@@ -9,6 +9,8 @@ class NetworkConfiWidget;
 
 class AppContext;
 
+
+// TODO: rename to page and inherit from PageWidget
 class NetworkConfiWidget : public QWidget
 {
     Q_OBJECT
