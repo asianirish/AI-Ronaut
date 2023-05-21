@@ -1,4 +1,3 @@
-QT = core
 QT = core network
 
 CONFIG += c++17 cmdline
@@ -9,6 +8,7 @@ CONFIG += c++17 cmdline
 
 SOURCES += \
         Auth.cpp \
+        Chat.cpp \
         Component.cpp \
         Image.cpp \
         Manager.cpp \
@@ -21,6 +21,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 HEADERS += \
     Auth.h \
+    Chat.h \
     Component.h \
     Image.h \
     Manager.h
