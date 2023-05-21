@@ -25,3 +25,7 @@ HEADERS += \
     Component.h \
     Image.h \
     Manager.h
+
+DISTFILES += \
+    LICENSE \
+    README.md
