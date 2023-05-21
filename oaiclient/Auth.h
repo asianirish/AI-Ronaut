@@ -10,7 +10,7 @@ namespace oaic {
 
 using FilePath = QString;
 using EnvVar = QString;
-using Headers = QMap<QString, QString>;
+using Headers = QMap<QByteArray, QByteArray>;
 
 class Auth
 {

@@ -55,7 +55,7 @@ bool Auth::setKeyEnv(const EnvVar &var) noexcept
 bool Auth::setAuthorizationHeader()
 {
     if (!_key.isEmpty()) {
-        _headers.insert("Authorization", QString("Bearer ") + _key);
+        _headers.insert(QByteArray("Authorization"), QByteArray("Bearer ") + _key.toLatin1());
         return true;
     }
 
