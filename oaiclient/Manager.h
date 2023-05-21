@@ -3,20 +3,32 @@
 
 #include "Auth.h"
 #include "Image.h"
+#include "Chat.h"
 
 namespace oaic {
 
-class Manager
+class Manager : public QObject
 {
+    Q_OBJECT
 public:
-    Manager();
+    explicit Manager(QObject *parent = nullptr);
 
     Auth &auth();
 
-    ImagePtr image();
+    Image *image();
+
+    Chat *chat();
+
+
+    QNetworkAccessManager *networkAccessManager() const;
 
 private:
     Auth _auth;
+    Image *_image;
+    Chat *_chat;
+
+
+    QNetworkAccessManager *_networkAccessManager;
 };
 
 } // namespace oaic

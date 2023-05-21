@@ -10,10 +10,11 @@ namespace oaic {
 class Image : public Component
 {
 public:
-    Image(Auth &auth);
+    Image(Auth *auth, Manager *parent);
+
+    void sendGenImageRequest(const QString &prompt, const QString &size) const;
 };
 
-using ImagePtr = QSharedPointer<Image>;
 
 } // namespace oaic
 
