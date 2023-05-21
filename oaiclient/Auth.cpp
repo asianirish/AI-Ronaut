@@ -67,5 +67,15 @@ Headers Auth::headers() const
     return _headers;
 }
 
+int Auth::timeout() const
+{
+    return _timeout;
+}
+
+void Auth::setTimeout(int newTimeout)
+{
+    _timeout = newTimeout;
+}
+
 
 } // namespace oaic

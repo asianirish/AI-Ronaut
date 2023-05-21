@@ -30,9 +30,13 @@ public:
 
     Headers headers() const;
 
+    int timeout() const;
+    void setTimeout(int newTimeout);
+
 private:
     QString _key;
     Headers _headers;
+    int _timeout;
 };
 
 } // namespace oaic
