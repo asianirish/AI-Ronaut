@@ -1,4 +1,4 @@
-# AI-Ronaut
+-# AI-Ronaut
 
 ## Introduction
 
@@ -24,8 +24,8 @@ We aim to maintain the openness and accessibility of this project by providing t
 
 Our project is continuously evolving, and we have a number of exciting plans for the future. We are looking forward to implementing the following features:
 
-1. **Developing a proprietary QT-based library for accessing the OpenAI API:** Our goal is to create a robust, efficient, and user-friendly library that makes accessing the OpenAI API easier and more intuitive.
-
+1. **Developing an in-house QT-based library for accessing the OpenAI API:** Our goal is to create a robust, efficient, and user-friendly library, built by our own team and tailored specifically for our project, making accessing the OpenAI API easier and more intuitive without relying on third-party libraries.
+ 
 2. **Coordinating and integrating multiple AI models to create multi-component AI systems:** We plan on utilizing multiple AI models in a cooperative fashion. This approach is aimed at overcoming certain limitations and crafting more complex and dynamic AI systems.
 
 3. **Developing tools for AI research:** We intend to design tools to assist in AI research, enabling researchers to train, test, and understand AI models more effectively.
