@@ -1,4 +1,5 @@
 QT = core
+QT = core network
 
 CONFIG += c++17 cmdline
 
