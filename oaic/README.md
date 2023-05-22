@@ -18,7 +18,8 @@ These instructions will help you set up the library for development and testing 
 
 ## Usage
 
-After successfully building the project, you can integrate it into the AI-Ronaut GUI client or any other application that requires access to the OpenAI API.
+After successfully building the project, you need to set an environment variable called OPENAI_API_KEY with the value of the key obtained from the OpenAI API.
+You can integrate this project into the AI-Ronaut GUI client or any other application that requires access to the OpenAI API.
 
 ## License
 
