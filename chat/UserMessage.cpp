@@ -7,9 +7,9 @@ UserMessage::UserMessage()
 
 }
 
-Message::MSG_TYPE UserMessage::msgType() const
+Message::ROLE UserMessage::role() const
 {
-    return MSG_TYPE::USER;
+    return ROLE::USER;
 }
 
 } // namespace chat

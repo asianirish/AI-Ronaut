@@ -9,8 +9,8 @@ class AssistantMessage : public Message
 {
 public:
     AssistantMessage();
-
-    MSG_TYPE msgType() const override;
+    
+    ROLE role() const override;
 };
 
 } // namespace chat

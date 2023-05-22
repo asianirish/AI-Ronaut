@@ -7,9 +7,9 @@ SystemMessage::SystemMessage()
 
 }
 
-Message::MSG_TYPE SystemMessage::msgType() const
+Message::ROLE SystemMessage::role() const
 {
-    return MSG_TYPE::SYSTEM;
+    return ROLE::SYSTEM;
 }
 
 } // namespace chat

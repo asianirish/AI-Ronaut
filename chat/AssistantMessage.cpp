@@ -7,9 +7,9 @@ AssistantMessage::AssistantMessage()
 
 }
 
-Message::MSG_TYPE AssistantMessage::msgType() const
+Message::ROLE AssistantMessage::role() const
 {
-    return MSG_TYPE::ASSISTANT;
+    return ROLE::ASSISTANT;
 }
 
 } // namespace chat

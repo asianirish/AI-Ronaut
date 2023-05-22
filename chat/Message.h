@@ -3,13 +3,14 @@
 
 #include <QString>
 #include <QSharedPointer>
+#include <QMap>
 
 namespace chat {
 
 class Message
 {
 public:
-    enum MSG_TYPE {
+    enum ROLE {
         UNDEFINED,
         SYSTEM,
         USER,
@@ -20,13 +21,17 @@ public:
 
     virtual ~Message() = default;
 
-    virtual MSG_TYPE msgType() const = 0;
+    virtual ROLE role() const = 0;
 
     QString text() const;
     void setText(const QString &newText);
 
+    QString roleAsString() const;
+
 private:
     QString _text;
+
+    static const QMap<ROLE, QString> ROLE_TO_STRING;
 };
 
 using MessagePtr = QSharedPointer<Message>;

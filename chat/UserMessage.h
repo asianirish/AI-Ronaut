@@ -9,8 +9,8 @@ class UserMessage : public Message
 {
 public:
     UserMessage();
-
-    MSG_TYPE msgType() const override;
+    
+    ROLE role() const override;
 };
 
 } // namespace chat

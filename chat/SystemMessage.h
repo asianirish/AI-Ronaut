@@ -9,8 +9,8 @@ class SystemMessage : public Message
 {
 public:
     SystemMessage();
-
-    MSG_TYPE msgType() const override;
+    
+    ROLE role() const override;
 };
 
 } // namespace chat
