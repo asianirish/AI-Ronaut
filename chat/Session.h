@@ -6,6 +6,8 @@
 #include <QList>
 #include <QUuid>
 
+#include <QSharedPointer>
+
 namespace chat {
 
 class Session
@@ -32,12 +34,18 @@ public:
 
     void activate();
 
+    QString name() const;
+    void setName(const QString &newName);
+
 private:
     SystemMessage _systemMessage;
     QList<MessagePtr> _messageList;
 
     QUuid _uuid;
+    QString _name;
 };
+
+using SessionPtr = QSharedPointer<Session>;
 
 } // namespace chat
 

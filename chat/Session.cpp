@@ -67,4 +67,14 @@ void Session::activate()
     _uuid = QUuid::createUuid();
 }
 
+QString Session::name() const
+{
+    return _name;
+}
+
+void Session::setName(const QString &newName)
+{
+    _name = newName;
+}
+
 } // namespace chat
