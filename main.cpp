@@ -1,6 +1,7 @@
 #include "MainWindow.h"
 
 #include "ModelContext.h"
+#include "chat/SessionManager.h"
 
 #include <QApplication>
 
@@ -12,6 +13,8 @@ int main(int argc, char *argv[])
     QCoreApplication::setApplicationName("ai-ronaut");
 
     qRegisterMetaType<ModelContext>();
+
+    QObject::connect(&a, &QApplication::aboutToQuit, chat::SessionManager::instance(), &chat::SessionManager::onQuit);
 
     MainWindow w;
     w.show();
