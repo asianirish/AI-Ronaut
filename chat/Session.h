@@ -37,12 +37,17 @@ public:
     QString name() const;
     void setName(const QString &newName);
 
+    bool isPersistent() const;
+    void setIsPersistent(bool newIsPersistent);
+
 private:
     SystemMessage _systemMessage;
     QList<MessagePtr> _messageList;
 
     QUuid _uuid;
     QString _name;
+
+    bool _isPersistent;
 };
 
 using SessionPtr = QSharedPointer<Session>;

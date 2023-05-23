@@ -2,7 +2,7 @@
 
 namespace chat {
 
-Session::Session()
+Session::Session() : _isPersistent(false)
 {
 
 }
@@ -75,6 +75,16 @@ QString Session::name() const
 void Session::setName(const QString &newName)
 {
     _name = newName;
+}
+
+bool Session::isPersistent() const
+{
+    return _isPersistent;
+}
+
+void Session::setIsPersistent(bool newIsPersistent)
+{
+    _isPersistent = newIsPersistent;
 }
 
 } // namespace chat
