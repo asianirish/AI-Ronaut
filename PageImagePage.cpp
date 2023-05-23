@@ -1,20 +1,12 @@
 #include "PageImagePage.h"
 #include "ui_PageImagePage.h"
 
+#include "util/gfunc.h"
+
 #include <QNetworkReply>
 #include <QKeyEvent>
 #include <QMessageBox>
 #include <QFileDialog>
-
-// TODO: share
-QString phraseToCamelCase(const QString& s)
-{
-    QStringList parts = s.split(' ', Qt::SkipEmptyParts);
-    for (int i=1; i<parts.size(); ++i)
-        parts[i].replace(0, 1, parts[i][0].toUpper());
-
-    return parts.join("");
-}
 
 PageImagePage::PageImagePage(QWidget *parent) :
     PageWidget(parent),
@@ -114,7 +106,7 @@ void PageImagePage::on_actionSave_Image_as_File_triggered()
 //    auto fileName = QFileDialog::getSaveFileName(this, tr("Save Image"), formattedTimeMsg + ".png", tr("Image Files (*.png *.jpg *.bmp)"));
 
     auto text = ui->requestEdit->toPlainText();
-    auto ftext = phraseToCamelCase(text);
+    auto ftext = potato_util::phraseToCamelCase(text, 7);
     ftext = ftext.left(64);
     auto fileName = QFileDialog::getSaveFileName(this, tr("Save Image"), ftext + ".png", tr("Image Files (*.png *.jpg *.bmp)"));
 
