@@ -15,6 +15,9 @@ public:
     explicit ChatSessionWidget(QWidget *parent = nullptr);
     ~ChatSessionWidget();
 
+private slots:
+    void on_startSessionBox_stateChanged(int state);
+
 private:
     Ui::ChatSessionWidget *ui;
 };
