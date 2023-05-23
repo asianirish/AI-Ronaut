@@ -40,6 +40,7 @@ SOURCES += \
     chat/AssistantMessage.cpp \
     chat/Message.cpp \
     chat/Session.cpp \
+    chat/SessionManager.cpp \
     chat/SystemMessage.cpp \
     chat/UserMessage.cpp \
     main.cpp \
@@ -83,6 +84,7 @@ HEADERS += \
     chat/AssistantMessage.h \
     chat/Message.h \
     chat/Session.h \
+    chat/SessionManager.h \
     chat/SystemMessage.h \
     chat/UserMessage.h \
     third/liboai/include/components/audio.h \
