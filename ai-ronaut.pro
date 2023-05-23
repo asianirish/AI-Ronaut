@@ -56,7 +56,8 @@ SOURCES += \
     third/liboai/components/moderations.cpp \
     third/liboai/core/authorization.cpp \
     third/liboai/core/netimpl.cpp \
-    third/liboai/core/response.cpp
+    third/liboai/core/response.cpp \
+    util/gfunc.cpp
 
 HEADERS += \
     AIMessageItemWidget.h \
@@ -100,7 +101,9 @@ HEADERS += \
     third/liboai/include/core/network.h \
     third/liboai/include/core/response.h \
     third/liboai/include/liboai.h \
-    third/nlohmann/json.hpp
+    third/nlohmann/json.hpp \
+    util/OrderedMap.h \
+    util/gfunc.h
 
 FORMS += \
     AIMessageItemWidget.ui \
