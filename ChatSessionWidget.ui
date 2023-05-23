@@ -35,7 +35,7 @@
     </widget>
    </item>
    <item row="1" column="0" colspan="3">
-    <widget class="QFrame" name="frame">
+    <widget class="QFrame" name="sessionFrame">
      <property name="enabled">
       <bool>false</bool>
      </property>
@@ -55,6 +55,20 @@
       </item>
       <item>
        <widget class="QLineEdit" name="sessionEdit"/>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_3">
+        <property name="text">
+         <string>System message:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QTextEdit" name="systemMessageEdit">
+        <property name="placeholderText">
+         <string>You are an exceptional mathematics professor renowned for your ability to articulate complex material in a comprehensible and engaging manner.</string>
+        </property>
+       </widget>
       </item>
       <item>
        <widget class="QPushButton" name="applyEditedButton">
