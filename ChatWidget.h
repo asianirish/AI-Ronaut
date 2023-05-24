@@ -44,6 +44,8 @@ private slots:
 
     void onDeltaError(const QString &deltaError);
 
+    void on_isSessionBox_stateChanged(int isSession);
+
 signals:
     void queryAiModelPlease(const QString &input, const QString &key, const ModelContext &modelCntx);
 

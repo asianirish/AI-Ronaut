@@ -5,6 +5,8 @@
 #include "OpenAIApiHandler.h"
 #include "AIMessageItemWidget.h"
 
+#include "chat/SessionManager.h"
+
 #include "ui_ChatWidget.h"
 
 #include <QListWidgetItem>
@@ -215,4 +217,18 @@ QWidget *ChatWidget::lastChatItemMessageWidget() const
 //    auto chatWidget = qobject_cast<ChatItemWidget*>(widget);
 }
 
+
+
+void ChatWidget::on_isSessionBox_stateChanged(int isSession)
+{
+    if (isSession == Qt::Unchecked) {
+// TODO:        st->clearSession();
+    } else {
+        auto sm = chat::SessionManager::instance();
+        sm->createSession();
+
+        // TODO: set system message
+        ui->textEdit->setFocus();
+    }
+}
 
