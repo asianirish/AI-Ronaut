@@ -21,7 +21,11 @@ QString SessionManager::createSession()
     QUuid sessionId = QUuid::createUuid();
     session->setUuid(sessionId);
 
-    return sessionId.toString();
+    _sessions.insert(sessionId.toString(), session);
+
+    _currentSessionId = sessionId.toString();
+
+    return _currentSessionId;
 }
 
 SessionPtr SessionManager::session(const QString &sessionId) const
@@ -38,6 +42,18 @@ void SessionManager::onQuit()
 {
     qDebug() << "cleaning sessions";
     _sessions.clear();
+}
+
+QString SessionManager::currentSessionId() const
+{
+    return _currentSessionId;
+}
+
+void SessionManager::setCurrentSessionId(const QString &newCurrentSessionId)
+{
+    if (_sessions.contains(newCurrentSessionId)) {
+        _currentSessionId = newCurrentSessionId;
+    }
 }
 
 SessionManager::SessionManager(QObject *parent)

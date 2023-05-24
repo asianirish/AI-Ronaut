@@ -20,6 +20,9 @@ public:
 
     OrderedMap<QString, SessionPtr> sessions() const;
 
+    QString currentSessionId() const;
+    void setCurrentSessionId(const QString &newCurrentSessionId);
+
 private:
     OrderedMap<QString, SessionPtr> _sessions;
 
@@ -27,6 +30,9 @@ signals:
 
 public slots:
     void onQuit();
+
+private:
+    QString _currentSessionId;
 
 private:
     explicit SessionManager(QObject *parent = nullptr);
