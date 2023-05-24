@@ -65,13 +65,6 @@
        </widget>
       </item>
       <item>
-       <widget class="QCheckBox" name="isPersistentBox">
-        <property name="text">
-         <string>Persistent</string>
-        </property>
-       </widget>
-      </item>
-      <item>
        <widget class="QLabel" name="label_2">
         <property name="text">
          <string>Sessions:</string>
@@ -109,7 +102,6 @@
  <tabstops>
   <tabstop>sessionEdit</tabstop>
   <tabstop>applyEditedButton</tabstop>
-  <tabstop>isPersistentBox</tabstop>
   <tabstop>sessionListWidget</tabstop>
   <tabstop>deleteButton</tabstop>
  </tabstops>
