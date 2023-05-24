@@ -20,7 +20,7 @@ protected:
     void updateCntx(AppContext *cntx) override;
 
 private slots:
-    void on_toolComboBox_currentIndexChanged(int index);
+    void changeCurrentToolPage(int index);
 
 private:
     Ui::PageGeneralChatPage *ui;

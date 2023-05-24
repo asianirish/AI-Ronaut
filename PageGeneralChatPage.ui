@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>538</width>
+    <height>374</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -28,18 +28,53 @@
       </property>
       <layout class="QGridLayout" name="gridLayout_2">
        <item row="0" column="0">
-        <widget class="QComboBox" name="toolComboBox"/>
-       </item>
-       <item row="1" column="0">
-        <widget class="QStackedWidget" name="stackedWidget">
+        <widget class="QTabWidget" name="tabWidget">
          <property name="currentIndex">
-          <number>1</number>
+          <number>0</number>
          </property>
-         <widget class="ChatConfigWidget" name="chatConfigWidget">
+         <property name="iconSize">
+          <size>
+           <width>32</width>
+           <height>32</height>
+          </size>
+         </property>
+         <widget class="ChatConfigWidget" name="chatConfigWidget" native="true">
+          <attribute name="icon">
+           <iconset resource="air.qrc">
+            <normaloff>:/img/ModelConfigurationIcon.png</normaloff>:/img/ModelConfigurationIcon.png</iconset>
+          </attribute>
+          <attribute name="title">
+           <string/>
+          </attribute>
+          <attribute name="toolTip">
+           <string>Chat Configuration</string>
+          </attribute>
+         </widget>
+         <widget class="SystemMessageWidget" name="systemMessageWidget" native="true">
+          <attribute name="icon">
+           <iconset resource="air.qrc">
+            <normaloff>:/img/AISystemMessageIcon.png</normaloff>:/img/AISystemMessageIcon.png</iconset>
+          </attribute>
+          <attribute name="title">
+           <string/>
+          </attribute>
+          <attribute name="toolTip">
+           <string>Assistant System Message</string>
+          </attribute>
           <layout class="QGridLayout" name="gridLayout_3"/>
          </widget>
-         <widget class="SystemMessageWidget" name="systemMessageWidget"/>
-         <widget class="ChatSessionWidget" name="chatSessionWidget"/>
+         <widget class="ChatSessionWidget" name="chatSessionWidget" native="true">
+          <attribute name="icon">
+           <iconset resource="air.qrc">
+            <normaloff>:/img/AIChatSessionListIcon.png</normaloff>:/img/AIChatSessionListIcon.png</iconset>
+          </attribute>
+          <attribute name="title">
+           <string/>
+          </attribute>
+          <attribute name="toolTip">
+           <string>Chat Sessions</string>
+          </attribute>
+         </widget>
         </widget>
        </item>
       </layout>
@@ -82,6 +117,8 @@
    <container>1</container>
   </customwidget>
  </customwidgets>
- <resources/>
+ <resources>
+  <include location="air.qrc"/>
+ </resources>
  <connections/>
 </ui>

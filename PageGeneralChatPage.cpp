@@ -9,10 +9,6 @@ PageGeneralChatPage::PageGeneralChatPage(QWidget *parent) :
 
     ui->chatConfigWidget->setModelCntx(&_modelCntx);
     ui->chatWidget->setModelCntx(&_modelCntx);
-
-    ui->toolComboBox->addItem(tr("Model configuration"), 0);
-    ui->toolComboBox->addItem(tr("System message"), 1);
-    ui->toolComboBox->addItem(tr("Sessions"), 2);
 }
 
 PageGeneralChatPage::~PageGeneralChatPage()
@@ -26,8 +22,8 @@ void PageGeneralChatPage::updateCntx(AppContext *cntx)
     ui->chatWidget->setAppCntx(cntx);
 }
 
-void PageGeneralChatPage::on_toolComboBox_currentIndexChanged(int index)
+void PageGeneralChatPage::changeCurrentToolPage(int index)
 {
-    ui->stackedWidget->setCurrentIndex(index);
+    ui->tabWidget->setCurrentIndex(index);
 }
 
