@@ -14,7 +14,7 @@ class SessionManager : public QObject
 public:
     static SessionManager *instance();
 
-    QString createSession();
+    QString createSession(const QString &sessionName = QString()); // TODO: isPersistent?
 
     SessionPtr session(const QString &sessionId) const;
 

@@ -1,6 +1,7 @@
 #include "SessionManager.h"
 
 #include <QDebug>
+#include <QDateTime>
 
 namespace chat {
 
@@ -15,11 +16,20 @@ SessionManager *SessionManager::instance()
     return _instance;
 }
 
-QString SessionManager::createSession()
+QString SessionManager::createSession(const QString &sessionName)
 {
     SessionPtr session = SessionPtr(new Session());
     QUuid sessionId = QUuid::createUuid();
     session->setUuid(sessionId);
+
+    if (sessionName.isEmpty()) {
+        QDateTime date = QDateTime::currentDateTime();
+        QString formattedTime = date.toString("yyyyMMddhhmmss");
+        QByteArray formattedTimeMsg = formattedTime.toLocal8Bit();
+        session->setName(formattedTimeMsg);
+    } else {
+        session->setName(sessionName);
+    }
 
     _sessions.insert(sessionId.toString(), session);
 
