@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/">
+        <file>img/AIChatSessionListIcon.png</file>
+        <file>img/AISystemMessageIcon.png</file>
+        <file>img/ModelConfigurationIcon.png</file>
+        <file>img/AIronautApplicationSymbolicIconWhiteBlueYellow.png</file>
+    </qresource>
+</RCC>
