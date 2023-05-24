@@ -49,11 +49,21 @@ QString SessionManager::currentSessionId() const
     return _currentSessionId;
 }
 
-void SessionManager::setCurrentSessionId(const QString &newCurrentSessionId)
+void SessionManager::setCurrentSessionId(const QString &sessionId)
 {
-    if (_sessions.contains(newCurrentSessionId)) {
-        _currentSessionId = newCurrentSessionId;
+    if (_sessions.contains(sessionId)) {
+        _currentSessionId = sessionId;
     }
+}
+
+void SessionManager::selectSession(const QString &sessionId)
+{
+    setCurrentSessionId(sessionId);
+}
+
+void SessionManager::deselectSession()
+{
+    _currentSessionId.clear();
 }
 
 SessionManager::SessionManager(QObject *parent)

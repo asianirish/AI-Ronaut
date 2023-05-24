@@ -21,7 +21,10 @@ public:
     OrderedMap<QString, SessionPtr> sessions() const;
 
     QString currentSessionId() const;
-    void setCurrentSessionId(const QString &newCurrentSessionId);
+    void setCurrentSessionId(const QString &sessionId);
+    void selectSession(const QString &sessionId); // synonim of setCurrentSessionId
+    void deselectSession();
+
 
 private:
     OrderedMap<QString, SessionPtr> _sessions;
