@@ -13,6 +13,10 @@
   <property name="windowTitle">
    <string>AI-Ronaut</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="air.qrc">
+    <normaloff>:/img/AIronautApplicationSymbolicIconWhiteBlueYellow.png</normaloff>:/img/AIronautApplicationSymbolicIconWhiteBlueYellow.png</iconset>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
     <item row="0" column="0">
@@ -44,7 +48,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>27</height>
+     <height>19</height>
     </rect>
    </property>
   </widget>
@@ -62,6 +66,8 @@
    <container>1</container>
   </customwidget>
  </customwidgets>
- <resources/>
+ <resources>
+  <include location="air.qrc"/>
+ </resources>
  <connections/>
 </ui>
