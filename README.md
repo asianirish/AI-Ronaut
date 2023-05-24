@@ -1,4 +1,6 @@
-# AI-Ronaut
+![Logo](img/AIronautApplicationSymbolicIconWhiteBlueYellow1.png) 
+# AI-Ronaut 
+
 
 ## Introduction
 
