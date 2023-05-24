@@ -221,11 +221,16 @@ QWidget *ChatWidget::lastChatItemMessageWidget() const
 
 void ChatWidget::on_isSessionBox_stateChanged(int isSession)
 {
+    auto sm = chat::SessionManager::instance();
+
     if (isSession == Qt::Unchecked) {
-// TODO:        st->clearSession();
+        sm->deselectSession();
+//        ui->isSessionPersistentBox->setCheckState(Qt::Unchecked);
+        ui->isSessionPersistentBox->setEnabled(false);
     } else {
-        auto sm = chat::SessionManager::instance();
         sm->createSession();
+
+        ui->isSessionPersistentBox->setEnabled(true);
 
         // TODO: set system message
         ui->textEdit->setFocus();
