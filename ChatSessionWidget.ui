@@ -45,6 +45,13 @@
        <number>0</number>
       </property>
       <item>
+       <widget class="QPushButton" name="newSessionButton">
+        <property name="text">
+         <string>New Session</string>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QLabel" name="label">
         <property name="text">
          <string>Current session:</string>
@@ -52,7 +59,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QLineEdit" name="sessionEdit"/>
+       <widget class="QLineEdit" name="sessionNameEdit"/>
       </item>
       <item>
        <widget class="QPushButton" name="applyEditedButton">
@@ -100,7 +107,7 @@
   </layout>
  </widget>
  <tabstops>
-  <tabstop>sessionEdit</tabstop>
+  <tabstop>sessionNameEdit</tabstop>
   <tabstop>applyEditedButton</tabstop>
   <tabstop>sessionListWidget</tabstop>
   <tabstop>deleteButton</tabstop>
