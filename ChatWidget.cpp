@@ -9,6 +9,8 @@
 
 #include "ui_ChatWidget.h"
 
+#include "util/gfunc.h"
+
 #include <QListWidgetItem>
 #include <QTimer>
 #include <QKeyEvent>
@@ -228,7 +230,25 @@ void ChatWidget::on_isSessionBox_stateChanged(int isSession)
 //        ui->isSessionPersistentBox->setCheckState(Qt::Unchecked);
         ui->isSessionPersistentBox->setEnabled(false);
     } else {
-        sm->createSession();
+
+        QString msg;
+
+        if (ui->listWidget->count()) {
+            UserMessageItemWidget *userWidget = lastChatItemMessageWidgetByType<UserMessageItemWidget>();
+
+            if (userWidget) {
+                msg = userWidget->text();
+            }
+
+        } else {
+            msg = ui->textEdit->toPlainText();
+        }
+
+        if (!msg.isNull()) {
+            msg = potato_util::phraseToCamelCase(msg, 7);
+        }
+
+        sm->createSession(msg);
 
         ui->isSessionPersistentBox->setEnabled(true);
 

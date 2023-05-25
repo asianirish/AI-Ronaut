@@ -4,6 +4,7 @@
 #include "ChatItemWidget.h"
 #include "ModelContext.h"
 #include "AppContext.h"
+#include "ui_ChatWidget.h"
 
 #include <QWidget>
 #include <QThread>
@@ -62,6 +63,22 @@ private:
     void addMessageItem(ChatItemWidget *itemWidget, const QString &text);
 
     QWidget *lastChatItemMessageWidget() const;
+
+    template<typename T>
+    T *lastChatItemMessageWidgetByType() const {
+        auto cnt = ui->listWidget->count();
+        for (int i = cnt - 1; i >= 0; i--) {
+            auto item = ui->listWidget->item(i);
+            auto itemWidget = ui->listWidget->itemWidget(item);
+            auto chatWidget = qobject_cast<T*>(itemWidget);
+
+            if (chatWidget) {
+                return chatWidget;
+            }
+        }
+
+        return nullptr;
+    }
 };
 
 #endif // CHATWIDGET_H
