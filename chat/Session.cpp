@@ -5,6 +5,9 @@ namespace chat {
 Session::Session() : _isPersistent(false)
 {
     _created = QDateTime::currentDateTime();
+    _accessed = _created;
+
+    _uuid = QUuid::createUuid();
 }
 
 SystemMessage Session::systemMessage() const
@@ -15,6 +18,7 @@ SystemMessage Session::systemMessage() const
 void Session::setSystemMessage(const SystemMessage &newSystemMessage)
 {
     _systemMessage = newSystemMessage;
+    _accessed = QDateTime::currentDateTime();
 }
 
 QList<MessagePtr> Session::messageList() const
@@ -25,6 +29,7 @@ QList<MessagePtr> Session::messageList() const
 void Session::addMessage(const MessagePtr &msgPtr)
 {
     _messageList.append(msgPtr);
+    _accessed = QDateTime::currentDateTime();
 }
 
 QUuid Session::uuid() const
@@ -52,21 +57,6 @@ void Session::setUuid(const QByteArray &uuid)
     _uuid = QUuid::fromString(uuid);
 }
 
-bool Session::isNull() const
-{
-    return _uuid.isNull();
-}
-
-Session::operator bool() const
-{
-    return !isNull();
-}
-
-void Session::activate()
-{
-    _uuid = QUuid::createUuid();
-}
-
 QString Session::name() const
 {
     return _name;
@@ -75,6 +65,7 @@ QString Session::name() const
 void Session::setName(const QString &newName)
 {
     _name = newName;
+    _accessed = QDateTime::currentDateTime();
 }
 
 bool Session::isPersistent() const
@@ -94,7 +85,12 @@ QDateTime Session::created() const
 
 SessionData Session::data() const
 {
-    return SessionData{_uuid.toString(), _name, _created, _isPersistent};
+    return SessionData{_uuid.toString(), _name, _created, _accessed, _isPersistent};
+}
+
+QDateTime Session::accessed() const
+{
+    return _accessed;
 }
 
 } // namespace chat

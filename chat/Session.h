@@ -32,11 +32,6 @@ public:
 
     void setUuid(const QByteArray &uuid);
 
-    bool isNull() const;
-    operator bool() const;
-
-    void activate();
-
     QString name() const;
     void setName(const QString &newName);
 
@@ -47,6 +42,8 @@ public:
 
     SessionData data() const;
 
+    QDateTime accessed() const;
+
 private:
     SystemMessage _systemMessage;
     QList<MessagePtr> _messageList;
@@ -54,6 +51,7 @@ private:
     QUuid _uuid;
     QString _name;
     QDateTime _created;
+    QDateTime _accessed;
 
     bool _isPersistent;
 };
@@ -64,6 +62,7 @@ struct SessionData {
     QString id;
     QString name;
     QDateTime created;
+    QDateTime accessed;
 
     bool isPersistent = false;
 };
