@@ -4,7 +4,7 @@ namespace chat {
 
 Session::Session() : _isPersistent(false)
 {
-
+    _created = QDateTime::currentDateTime();
 }
 
 SystemMessage Session::systemMessage() const
@@ -85,6 +85,16 @@ bool Session::isPersistent() const
 void Session::setIsPersistent(bool newIsPersistent)
 {
     _isPersistent = newIsPersistent;
+}
+
+QDateTime Session::created() const
+{
+    return _created;
+}
+
+SessionData Session::data() const
+{
+    return SessionData{_uuid.toString(), _name, _created, _isPersistent};
 }
 
 } // namespace chat
