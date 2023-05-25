@@ -2,6 +2,7 @@
 #define CHATSESSIONWIDGET_H
 
 #include <QWidget>
+#include <QListWidgetItem>
 
 namespace Ui {
 class ChatSessionWidget;
@@ -17,6 +18,12 @@ public:
 
 private slots:
     void on_startSessionBox_stateChanged(int state);
+
+    void onSessionCreated(const QString &sessionId);
+
+    void on_sessionListWidget_itemActivated(QListWidgetItem *item);
+
+    void on_sessionListWidget_currentTextChanged(const QString &currentText);
 
 private:
     Ui::ChatSessionWidget *ui;
