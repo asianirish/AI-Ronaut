@@ -30,6 +30,7 @@ private:
     OrderedMap<QString, SessionPtr> _sessions;
 
 signals:
+    void sessionCreated(const QString currentSessionId);
 
 public slots:
     void onQuit();

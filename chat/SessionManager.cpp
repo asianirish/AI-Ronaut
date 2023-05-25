@@ -34,6 +34,7 @@ QString SessionManager::createSession(const QString &sessionName)
     _sessions.insert(sessionId.toString(), session);
 
     _currentSessionId = sessionId.toString();
+    emit sessionCreated(_currentSessionId);
 
     return _currentSessionId;
 }
