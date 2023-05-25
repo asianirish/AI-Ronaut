@@ -16,6 +16,8 @@ public:
 
     void stylize() const;
 
+    QString text() const;
+
 protected:
     virtual QTextBrowser *textBrowser() const = 0;
     virtual int extraSpaceHeight() const = 0;
