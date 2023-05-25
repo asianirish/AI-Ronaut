@@ -1,5 +1,7 @@
 #include "gfunc.h"
 
+#include <QRegularExpression>
+
 namespace potato_util
 {
 
@@ -97,34 +99,31 @@ int varToInt(const QVariant &arg)
     }
 }
 
-QString phraseToCamelCase(const QString& s, int maxWords)
+QString phraseToCamelCase(const QString& str, int maxWords, int fromIndex)
 {
+    QString s = str;
+    static QRegularExpression re("[,.:;?!*()%&\\/\"\'\n\\r\\t-]");
+    s.remove(re);
+
     QStringList parts = s.split(' ', Qt::SkipEmptyParts);
     QStringList camelParts;
 
     int num = parts.size() > maxWords ? maxWords : parts.size();
 
-    for (int i = 0; i < num; ++i) {
-        auto camelPart = parts[i].replace(0, 1, parts[i][0].toUpper());
+    for (int i = fromIndex; i < num; ++i) {
+        auto part = parts[i];
+        part.truncate(12);
+
+        auto camelPart = parts[i].replace(0, 1, part[0].toUpper());
         camelParts.append(camelPart);
     }
 
     return camelParts.join("");
 }
 
-QString phraseToLowerCamelCase(const QString &s, int maxWords)
+QString phraseToLowerCamelCase(const QString &str, int maxWords)
 {
-    QStringList parts = s.split(' ', Qt::SkipEmptyParts);
-    QStringList camelParts{parts.at(0)};
-
-    int num = parts.size() > maxWords ? maxWords : parts.size();
-
-    for (int i = 1; i < num; ++i) {
-        auto camelPart = parts[i].replace(0, 1, parts[i][0].toUpper());
-        camelParts.append(camelPart);
-    }
-
-    return camelParts.join("");
+    return phraseToCamelCase(str, maxWords, 1);
 }
 
 #endif

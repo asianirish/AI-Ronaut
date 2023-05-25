@@ -23,7 +23,7 @@ bool isInteger(const QVariant &arg);
 
 int varToInt(const QVariant &arg);
 
-QString phraseToCamelCase(const QString& s, int maxWords);
+QString phraseToCamelCase(const QString& str, int maxWords, int fromIndex = 0);
 QString phraseToLowerCamelCase(const QString& s, int maxWords);
 
 #endif
