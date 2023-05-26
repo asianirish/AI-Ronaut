@@ -33,7 +33,33 @@ void Chat::sendSimpleChatRequest(const QString &model, const QString &content, b
     obj.insert("messages", conv);
     obj.insert("stream", stream);
 
-    auto resp = sendJsonRequest("/chat/completions", obj);
+    auto resp = sendJsonRequest("/chat/completions", obj, stream);
+
+    // TODO: use resp
+    (void)resp;
+}
+
+void Chat::sendSimpleChatRequest(const QString &model, const QList<MsgData> messages, bool stream) const
+{
+    QJsonObject obj;
+    obj.insert("model", model); // "gpt-4"
+
+    QJsonObject sysMsg;
+    sysMsg.insert("role", "system");
+    sysMsg.insert("content",
+                  "Use your creativity to inspire positivity and promote well-being in your response");
+
+    QJsonArray conv;
+    conv.append(sysMsg);
+
+    for (auto &msg : messages) {
+        conv.append(msg.toJson());
+    }
+
+    obj.insert("messages", conv);
+    obj.insert("stream", stream);
+
+    auto resp = sendJsonRequest("/chat/completions", obj, stream);
 
     // TODO: use resp
     (void)resp;

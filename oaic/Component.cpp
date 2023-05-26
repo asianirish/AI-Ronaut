@@ -20,9 +20,7 @@ void Component::onJsonRequestFinished()
     if (reply)
     {
         auto dataRead = reply->readAll();
-
-        qDebug().noquote() << "DATA READ:" << dataRead;
-
+        emit jsonResponse(dataRead);
         reply->deleteLater();
     }
 }
@@ -33,12 +31,11 @@ void Component::onJsonRequestReadyRead()
 
     if (reply) {
         auto dataRead = reply->readAll();
-
-        qDebug().noquote() << "DATA READY READ:" << dataRead;
+        emit jsonResponseStream(dataRead);
     }
 }
 
-QNetworkReply *Component::sendJsonRequest(const QString &endpoint, const QJsonObject &jData) const
+QNetworkReply *Component::sendJsonRequest(const QString &endpoint, const QJsonObject &jData, bool stream) const
 {
     QString contentType("application/json");
     QNetworkRequest rqst = request(endpoint, contentType);
@@ -50,7 +47,10 @@ QNetworkReply *Component::sendJsonRequest(const QString &endpoint, const QJsonOb
     QNetworkReply *reply = nam->post(rqst, data);
 
     connect(reply, &QNetworkReply::finished, this, &Component::onJsonRequestFinished);
-    connect(reply, &QNetworkReply::readyRead, this, &Component::onJsonRequestReadyRead);
+
+    if (stream) {
+        connect(reply, &QNetworkReply::readyRead, this, &Component::onJsonRequestReadyRead);
+    }
     // connect error...
 
     return reply;

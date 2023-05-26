@@ -15,7 +15,7 @@ void Image::sendGenImageRequest(const QString &prompt, const QString &size) cons
     obj.insert("prompt", prompt);
     obj.insert("size", size);
 
-    auto resp = sendJsonRequest("/images/generations", obj);
+    auto resp = sendJsonRequest("/images/generations", obj, false);
 
     // TODO: use resp
     (void)resp;

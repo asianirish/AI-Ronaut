@@ -29,7 +29,7 @@ private slots:
     void onJsonRequestReadyRead();
 
 protected:
-    QNetworkReply *sendJsonRequest(const QString &endpoint, const QJsonObject &jData) const;
+    QNetworkReply *sendJsonRequest(const QString &endpoint, const QJsonObject &jData, bool stream) const;
 
 private:
     Auth *_auth;
@@ -39,6 +39,10 @@ private:
     QNetworkAccessManager *networkAccessManager() const;
 
     Manager *parentManager() const;
+
+signals:
+    void jsonResponse(const QString &response);
+    void jsonResponseStream(const QString &response);
 
 };
 
