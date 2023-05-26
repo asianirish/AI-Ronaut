@@ -1,5 +1,5 @@
 #include "TestImageConsumer.h"
-
+#include "Image.h"
 
 #include <QDebug>
 #include <iostream>
@@ -13,10 +13,7 @@ TestImageConsumer::TestImageConsumer(QObject *parent)
     EnvVar env("OPENAI_API_KEY");
     _client->auth().setKeyEnv(env);
 
-    auto image = _client->image();
-    _imageHandler = new ImageHandler(image, this);
-
-    connect(_imageHandler, &ImageHandler::urlResponse, this, &TestImageConsumer::onUrlResponse);
+    connect(_client->image(), &Image::urlResponse, this, &TestImageConsumer::onUrlResponse);
 }
 
 void TestImageConsumer::requestImage()

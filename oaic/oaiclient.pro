@@ -11,7 +11,6 @@ SOURCES += \
         Chat.cpp \
         Component.cpp \
         Image.cpp \
-        ImageHandler.cpp \
         Manager.cpp \
         MsgData.cpp \
         TestImageConsumer.cpp \
@@ -27,7 +26,6 @@ HEADERS += \
     Chat.h \
     Component.h \
     Image.h \
-    ImageHandler.h \
     Manager.h \
     MsgData.h \
     TestImageConsumer.h

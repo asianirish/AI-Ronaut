@@ -3,7 +3,6 @@
 
 #include "Manager.h"
 #include "Auth.h"
-#include "ImageHandler.h"
 
 #include <QObject>
 
@@ -19,7 +18,6 @@ public:
 
 private:
     Manager *_client;
-    ImageHandler *_imageHandler;
 
 signals:
 
