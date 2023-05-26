@@ -11,7 +11,10 @@ SOURCES += \
         Chat.cpp \
         Component.cpp \
         Image.cpp \
+        ImageHandler.cpp \
         Manager.cpp \
+        MsgData.cpp \
+        TestImageConsumer.cpp \
         main.cpp
 
 # Default rules for deployment.
@@ -24,7 +27,10 @@ HEADERS += \
     Chat.h \
     Component.h \
     Image.h \
-    Manager.h
+    ImageHandler.h \
+    Manager.h \
+    MsgData.h \
+    TestImageConsumer.h
 
 DISTFILES += \
     LICENSE \
