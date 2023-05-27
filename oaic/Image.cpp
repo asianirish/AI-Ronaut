@@ -28,7 +28,7 @@ void Image::handleResponse(const QString &response)
 {
     QJsonParseError jerr;
 
-    auto jDoc = QJsonDocument::fromJson(response.toUtf8(), &jerr); // TODO: use json parser error
+    auto jDoc = QJsonDocument::fromJson(response.toUtf8(), &jerr);
 
     if (jerr.error != QJsonParseError::NoError) {
         emit responseError(QString("Error parsing JSON:") + jerr.errorString());
