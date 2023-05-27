@@ -13,6 +13,7 @@ SOURCES += \
         Image.cpp \
         Manager.cpp \
         MsgData.cpp \
+        TestChatConsumer.cpp \
         TestImageConsumer.cpp \
         main.cpp
 
@@ -28,6 +29,7 @@ HEADERS += \
     Image.h \
     Manager.h \
     MsgData.h \
+    TestChatConsumer.h \
     TestImageConsumer.h
 
 DISTFILES += \

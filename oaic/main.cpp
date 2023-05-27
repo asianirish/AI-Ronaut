@@ -1,5 +1,6 @@
 #include "Manager.h"
 #include "TestImageConsumer.h"
+#include "TestChatConsumer.h"
 
 #include <QCoreApplication>
 #include <iostream>
@@ -73,8 +74,11 @@ int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
 
-    TestImageConsumer *consumer = new TestImageConsumer();
-    consumer->requestImage();
+//    TestImageConsumer *consumer = new TestImageConsumer();
+//    consumer->requestImage();
+
+    TestChatConsumer *consumer = new TestChatConsumer();
+    consumer->requestChat();
 
 //    sendImgRequest();
 //    sendChatRequest();
