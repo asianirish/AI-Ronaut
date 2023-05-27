@@ -35,6 +35,33 @@ void Component::onJsonRequestReadyRead()
     }
 }
 
+void Component::onNetworkError(QNetworkReply::NetworkError code)
+{
+    QNetworkReply *reply = qobject_cast<QNetworkReply *>(sender());
+
+    if (reply) {
+        QString msg;
+
+        if (code == 0) {
+            msg = "No Error (redirect?)";
+        } else if (code < 100) {
+            msg = "network layer errors";
+        } else if (code < 200) {
+            msg = "proxy error";
+        } else if (code < 300) {
+            msg = "content error";
+        } else if (code < 400) {
+            msg = "protocol error";
+        } else {
+            msg = "server side error";
+        }
+
+        emit networkError(msg, code);
+
+        reply->deleteLater();
+    }
+}
+
 QNetworkReply *Component::sendJsonRequest(const QString &endpoint, const QJsonObject &jData, bool stream) const
 {
     QString contentType("application/json");
@@ -48,10 +75,14 @@ QNetworkReply *Component::sendJsonRequest(const QString &endpoint, const QJsonOb
 
     connect(reply, &QNetworkReply::finished, this, &Component::onJsonRequestFinished);
 
+    // connect error...
+    connect(reply, &QNetworkReply::errorOccurred, this, &Component::onNetworkError);
+
     if (stream) {
         connect(reply, &QNetworkReply::readyRead, this, &Component::onJsonRequestReadyRead);
     }
-    // connect error...
+
+    connect(reply, &QNetworkReply::destroyed, this, &Component::replyDestroyed);
 
     return reply;
 }

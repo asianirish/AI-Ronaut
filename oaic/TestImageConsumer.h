@@ -24,6 +24,11 @@ signals:
 public slots:
     void onUrlResponse(const QStringList &urls);
 
+    void onNetworkError(const QString &errMsg, int errCode);
+    void onResponseError(const QString &errMsg);
+
+    void onReplyDestroyed(QObject * = nullptr);
+
 };
 
 } // namespace oaic

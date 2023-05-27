@@ -28,6 +28,8 @@ private slots:
     void onJsonRequestFinished();
     void onJsonRequestReadyRead();
 
+    void onNetworkError(QNetworkReply::NetworkError code);
+
 protected:
     QNetworkReply *sendJsonRequest(const QString &endpoint, const QJsonObject &jData, bool stream) const;
 
@@ -43,6 +45,11 @@ private:
 signals:
     void jsonResponse(const QString &response);
     void jsonResponseStream(const QString &response);
+
+    void responseError(const QString &desc);
+    void networkError(const QString &errMsg, int errCode);
+
+    void replyDestroyed(QObject * = nullptr);
 
 };
 
