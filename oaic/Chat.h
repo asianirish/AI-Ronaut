@@ -10,12 +10,19 @@ namespace oaic {
 
 class Chat : public Component
 {
+    Q_OBJECT
 public:
     explicit Chat(Auth *auth, Manager *parent);
 
     void sendSimpleChatRequest(const QString &model, const QString &content, bool stream) const;
 
     void sendSimpleChatRequest(const QString &model, const QList<MsgData> messages, bool stream) const;
+
+private slots:
+    void handleResponse(const QString &response);
+
+signals:
+    void messageResponse(const QStringList &messages);
 };
 
 } // namespace oaic
