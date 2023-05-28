@@ -5,8 +5,11 @@ namespace oaic {
 const double ModelContext::DEFAULT_TEMPERATURE = 0.70;
 const int ModelContext::DEFAULT_MAX_TOKENS = 256;
 const double ModelContext::DEFAULT_TOP_P = 1.;
+const QString ModelContext::DEFAULT_MODEL("gpt-3.5-turbo");
 
-ModelContext::ModelContext() : _temperature(DEFAULT_TEMPERATURE),
+ModelContext::ModelContext() :
+    _modelName(DEFAULT_MODEL),
+    _temperature(DEFAULT_TEMPERATURE),
     _maxTokens(DEFAULT_MAX_TOKENS),
     _topP(DEFAULT_TOP_P),
     _frequencyPenalty(0.),

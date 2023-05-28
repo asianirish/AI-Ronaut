@@ -12,6 +12,8 @@ public:
     static const double DEFAULT_TEMPERATURE;
     static const int DEFAULT_MAX_TOKENS;
     static const double DEFAULT_TOP_P;
+
+    static const QString DEFAULT_MODEL; //gpt-3.5-turbo
     ModelContext();
 
     QString modelName() const;
