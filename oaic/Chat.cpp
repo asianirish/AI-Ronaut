@@ -4,12 +4,39 @@
 #include <QJsonArray>
 #include <QJsonObject>
 
+// TODO: member static function?
+QStringList extractJSON(const QString& input) {
+    QStringList jsons;
+    int start = 0;
+    int end = 0;
+    int brackets = 0;
+    bool in_json = false;
+    for (int i = 0; i < input.size(); ++i) {
+        if (input[i] == '{') {
+            if (!in_json) {
+                start = i;
+                in_json = true;
+            }
+            brackets++;
+        } else if (input[i] == '}') {
+            brackets--;
+            if (brackets == 0 && in_json) {
+                end = i;
+                in_json = false;
+                jsons.push_back(input.mid(start, end - start + 1));
+            }
+        }
+    }
+    return jsons;
+}
+
 namespace oaic {
 
 Chat::Chat(Auth *auth, Manager *parent)
     : Component{auth, parent}
 {
     connect(this, &Component::jsonResponse, this, &Chat::handleResponse);
+    connect(this, &Component::jsonResponseStream, this, &Chat::handleResponseStream);
 }
 
 void Chat::sendSimpleChatRequest(const QString &model, const QString &content, bool stream) const
@@ -66,19 +93,20 @@ void Chat::sendSimpleChatRequest(const QString &model, const QList<MsgData> mess
     (void)resp;
 }
 
-void Chat::handleResponse(const QString &response)
+QStringList Chat::extractMessages(const QString &response, const QString &msgKey)
 {
+    // TODO: do not emit response for specific delta messages!
     QJsonParseError jerr;
 
     auto jDoc = QJsonDocument::fromJson(response.toUtf8(), &jerr);
 
     if (jerr.error != QJsonParseError::NoError) {
         emit responseError(QString("Error parsing JSON:") + jerr.errorString());
-        return;
+        return QStringList();
     }
     if (!jDoc.isObject()) {
         emit responseError("the JSON is not an object: " + response);
-        return;
+        return {};
     }
     auto root = jDoc.object();
 
@@ -86,7 +114,7 @@ void Chat::handleResponse(const QString &response)
 
     if (!root.contains("choices")) {
         emit responseError("unknown API error");
-        return;
+        return {};
     }
 
     auto choices = root.value("choices").toArray();
@@ -96,33 +124,62 @@ void Chat::handleResponse(const QString &response)
     for (auto choice : choices) {
         if (!choice.isObject()) {
             emit responseError("choice JSON is not an object" + response);
-            return;
+            return {};
         }
 
         auto choiceObj = choice.toObject();
 
-        if (!choiceObj.contains("message")) {
+        if (!choiceObj.contains(msgKey)) {
             emit responseError("lack of message JSON" + response);
-            return;
+            return {};
         }
 
-        auto messageVal = choiceObj.value("message");
+        auto messageVal = choiceObj.value(msgKey);
         if (!messageVal.isObject()) {
             emit responseError("message JSON is not an object" + response);
-            return;
+            return {};
         }
 
         auto messageObj = messageVal.toObject();
 
         if (messageObj.contains("content")) {
             auto message = messageObj.value("content").toString();
-//            qDebug() << "MESSAGE:" << message;
+            //            qDebug() << "MESSAGE:" << message;
             messages.append(message);
         }
     }
 
-    emit messageResponse(messages);
+    return messages;
+}
 
+void Chat::handleResponse(const QString &response)
+{
+    QStringList messages = extractMessages(response, "message");
+
+    if (!messages.isEmpty()) {
+        emit messageResponse(messages);
+    }
+}
+
+void Chat::handleResponseStream(const QString &response)
+{
+//    qDebug() << "stream:" << response;
+
+    QStringList messages;
+
+    auto jsons = extractJSON(response);
+
+    for (auto &jsonStr : jsons) {
+        QStringList deltas = extractMessages(jsonStr, "delta");
+//        qDebug().noquote() << "JSON STRING:" << deltas;
+        if (!deltas.isEmpty()) {
+            messages.append(deltas);
+        }
+    }
+
+    if (!messages.isEmpty()) {
+        emit messageResponseStream(messages);
+    }
 }
 
 } // namespace oaic

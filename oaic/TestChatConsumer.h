@@ -19,6 +19,7 @@ private:
 
 private slots:
     void onMessageResponse(const QStringList &messages);
+    void onMessageResponseStream(const QStringList &messages);
     void onReplyDestroyed(QObject * = nullptr);
 };
 
