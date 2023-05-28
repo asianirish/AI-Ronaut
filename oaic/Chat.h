@@ -3,6 +3,7 @@
 
 #include "Component.h"
 #include "MsgData.h"
+#include "ModelContext.h"
 
 #include <QList>
 
@@ -15,8 +16,9 @@ public:
     explicit Chat(Auth *auth, Manager *parent);
 
     void sendSimpleChatRequest(const QString &model, const QString &content, bool stream) const;
-
     void sendSimpleChatRequest(const QString &model, const QList<MsgData> messages, bool stream) const;
+
+    void sendChatRequest(const ModelContext &modelCntx, const QString &content, bool stream) const;
 
 private:
     QStringList extractMessages(const QString &response, const QString &msgKey);

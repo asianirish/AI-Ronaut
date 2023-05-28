@@ -1,4 +1,5 @@
 #include "Chat.h"
+#include "ModelContext.h"
 
 #include <QJsonDocument>
 #include <QJsonArray>
@@ -83,6 +84,45 @@ void Chat::sendSimpleChatRequest(const QString &model, const QList<MsgData> mess
     for (auto &msg : messages) {
         conv.append(msg.toJson());
     }
+
+    obj.insert("messages", conv);
+    obj.insert("stream", stream);
+
+    auto resp = sendJsonRequest("/chat/completions", obj, stream);
+
+    // TODO: use resp
+    (void)resp;
+}
+
+void Chat::sendChatRequest(const ModelContext &modelCntx, const QString &content, bool stream) const
+{
+    QJsonObject obj;
+    obj.insert("model", modelCntx.modelName());
+    obj.insert("temperature", modelCntx.temperature());
+    obj.insert("top_p", modelCntx.topP());
+// TODO:    obj.insert("n", modelCntx.n());
+    obj.insert("stream", stream);
+// TODO:   obj.insert("stop", modelCntx.stop());
+    obj.insert("max_tokens", modelCntx.maxTokens());
+    obj.insert("presence_penalty", modelCntx.presencePenalty());
+    obj.insert("frequency_penalty", modelCntx.frequencyPenalty());
+    // TODO:   obj.insert("logit_bias", modelCntx.?
+    // TODO:   obj.insert("user", modelCntx.user());
+
+
+    QJsonObject sysMsg;
+    sysMsg.insert("role", "system");
+    sysMsg.insert("content",
+                  "Use your creativity to inspire positivity and promote well-being in your response");
+
+
+    QJsonObject msg;
+    msg.insert("role", "user");
+    msg.insert("content", content);
+
+    QJsonArray conv;
+    conv.append(sysMsg);
+    conv.append(msg);
 
     obj.insert("messages", conv);
     obj.insert("stream", stream);

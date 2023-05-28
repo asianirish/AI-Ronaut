@@ -52,7 +52,9 @@ void TestChatConsumer::requestChat()
     if (userPrompt == "exit") {
         exit(0);
     } else {
-        _client->chat()->sendSimpleChatRequest("gpt-3.5-turbo", userPromptStr, useStream); // "gpt-4"
+        ModelContext cntx; // default values, model == gpt-3.5-turbo
+//        cntx.setModelName("gpt-4");
+        _client->chat()->sendChatRequest(cntx, userPromptStr, useStream); // "gpt-4"
     }
 }
 
