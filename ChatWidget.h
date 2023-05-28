@@ -2,9 +2,10 @@
 #define CHATWIDGET_H
 
 #include "ChatItemWidget.h"
-#include "ModelContext.h"
 #include "AppContext.h"
 #include "ui_ChatWidget.h"
+
+#include <ModelContext.h>
 
 #include <QWidget>
 #include <QThread>

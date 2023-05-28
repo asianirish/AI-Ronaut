@@ -1,7 +1,8 @@
 #include "MainWindow.h"
 
-#include "ModelContext.h"
 #include "chat/SessionManager.h"
+
+#include <ModelContext.h>
 
 #include <QApplication>
 

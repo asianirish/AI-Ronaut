@@ -2,7 +2,8 @@
 #define PAGEGENERALCHATPAGE_H
 
 #include "PageWidget.h"
-#include "ModelContext.h"
+
+#include <ModelContext.h>
 
 namespace Ui {
 class PageGeneralChatPage;

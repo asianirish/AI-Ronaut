@@ -2,7 +2,8 @@
 #define CHATCONFIGWIDGET_H
 
 #include "AppContext.h"
-#include "ModelContext.h"
+
+#include <ModelContext.h>
 
 #include <QWidget>
 

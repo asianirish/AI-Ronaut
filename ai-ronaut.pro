@@ -7,6 +7,8 @@ CONFIG += c++17
 
 INCLUDEPATH += third/liboai/include
 INCLUDEPATH += third/
+INCLUDEPATH += oaic/
+
 
 LIBS += -lcurl
 
@@ -25,7 +27,6 @@ SOURCES += \
     ChatSessionWidget.cpp \
     ChatWidget.cpp \
     ErrorMessageItemWidget.cpp \
-    ModelContext.cpp \
     NetworkConfiWidget.cpp \
     OpenAIApiHandler.cpp \
     PageAboutPage.cpp \
@@ -46,6 +47,7 @@ SOURCES += \
     chat/UserMessage.cpp \
     main.cpp \
     MainWindow.cpp \
+    oaic/ModelContext.cpp \
     third/liboai/components/audio.cpp \
     third/liboai/components/chat.cpp \
     third/liboai/components/completions.cpp \
@@ -70,7 +72,6 @@ HEADERS += \
     ChatWidget.h \
     ErrorMessageItemWidget.h \
     MainWindow.h \
-    ModelContext.h \
     NetworkConfiWidget.h \
     OpenAIApiHandler.h \
     PageAboutPage.h \
@@ -89,6 +90,7 @@ HEADERS += \
     chat/SessionManager.h \
     chat/SystemMessage.h \
     chat/UserMessage.h \
+    oaic/ModelContext.h \
     third/liboai/include/components/audio.h \
     third/liboai/include/components/chat.h \
     third/liboai/include/components/completions.h \

@@ -1,5 +1,6 @@
 #include "AppContext.h"
-#include "ModelContext.h"
+
+#include <ModelContext.h>
 
 #include <QStringList>
 #include <QDebug>

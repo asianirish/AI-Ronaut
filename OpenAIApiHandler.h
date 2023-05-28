@@ -1,7 +1,7 @@
 #ifndef OPENAIAPIHANDLER_H
 #define OPENAIAPIHANDLER_H
 
-#include "ModelContext.h"
+#include <ModelContext.h>
 
 #include <QObject>
 
