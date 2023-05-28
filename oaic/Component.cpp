@@ -20,7 +20,11 @@ void Component::onJsonRequestFinished()
     if (reply)
     {
         auto dataRead = reply->readAll();
-        emit jsonResponse(dataRead);
+
+        if (!dataRead.isEmpty()) { // it's no sence to emit empty strings
+            emit jsonResponse(dataRead);
+        }
+
         reply->deleteLater();
     }
 }
