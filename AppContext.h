@@ -12,7 +12,9 @@
 
 #include <QString>
 
+namespace oaic {
 class ModelContext;
+}
 
 class AppContext
 {
@@ -33,8 +35,8 @@ public:
 
     void modelList(QStringList &list, QString *err = nullptr) const;
 
-    QString queryAiModel(const QString &input, const ModelContext &modelCntx, QString *err = nullptr) const;
-    void queryAiModel(const QString &input, const ModelContext &modelCntx, std::function<bool(std::string data, intptr_t ptr)> stream, intptr_t ptr) const;
+    QString queryAiModel(const QString &input, const oaic::ModelContext &modelCntx, QString *err = nullptr) const;
+    void queryAiModel(const QString &input, const oaic::ModelContext &modelCntx, std::function<bool(std::string data, intptr_t ptr)> stream, intptr_t ptr) const;
 
     int32_t timeOutMs() const;
     void setTimeOutMs(int32_t newTimeOutMs);

@@ -21,8 +21,8 @@ public:
     explicit ChatWidget(QWidget *parent = nullptr);
     ~ChatWidget();
 
-    ModelContext *modelCntx() const;
-    void setModelCntx(ModelContext *newModelCntx);
+    oaic::ModelContext *modelCntx() const;
+    void setModelCntx(oaic::ModelContext *newModelCntx);
 
     AppContext *appCntx() const;
     void setAppCntx(AppContext *newAppCntx);
@@ -48,12 +48,12 @@ private slots:
     void on_isSessionBox_stateChanged(int isSession);
 
 signals:
-    void queryAiModelPlease(const QString &input, const QString &key, const ModelContext &modelCntx);
+    void queryAiModelPlease(const QString &input, const QString &key, const oaic::ModelContext &modelCntx);
 
 private:
     Ui::ChatWidget *ui;
 
-    ModelContext *_modelCntx;
+    oaic::ModelContext *_modelCntx;
     AppContext *_appCntx;
 
     QThread _chatThread;

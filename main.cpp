@@ -12,7 +12,7 @@ int main(int argc, char *argv[])
     QCoreApplication::setOrganizationName("asianirish");
     QCoreApplication::setApplicationName("ai-ronaut");
 
-    qRegisterMetaType<ModelContext>();
+    qRegisterMetaType<oaic::ModelContext>();
 
     QObject::connect(&a, &QApplication::aboutToQuit, chat::SessionManager::instance(), &chat::SessionManager::onQuit);
 

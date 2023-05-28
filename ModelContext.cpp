@@ -1,5 +1,7 @@
 #include "ModelContext.h"
 
+namespace oaic {
+
 const double ModelContext::DEFAULT_TEMPERATURE = 0.70;
 const int ModelContext::DEFAULT_MAX_TOKENS = 256;
 const double ModelContext::DEFAULT_TOP_P = 1.;
@@ -72,3 +74,5 @@ void ModelContext::setPresencePenalty(double newPresencePenalty)
 {
     _presencePenalty = newPresencePenalty;
 }
+
+} // namespace oaic

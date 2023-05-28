@@ -1,8 +1,10 @@
-#ifndef MODELCONTEXT_H
-#define MODELCONTEXT_H
+#ifndef OAIC_MODELCONTEXT_H
+#define OAIC_MODELCONTEXT_H
 
 #include <QString>
 #include <QMetaType>
+
+namespace oaic {
 
 class ModelContext
 {
@@ -39,6 +41,8 @@ private:
     double _presencePenalty;
 };
 
-Q_DECLARE_METATYPE(ModelContext)
+} // namespace
 
-#endif // MODELCONTEXT_H
+Q_DECLARE_METATYPE(oaic::ModelContext)
+
+#endif // OAIC_MODELCONTEXT_H

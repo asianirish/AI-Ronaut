@@ -5,6 +5,7 @@
 #include <QDebug>
 
 using namespace liboai;
+using namespace oaic;
 
 const int32_t AppContext::DEFAULT_TIMEOUT_MS = 60 * 1000;
 

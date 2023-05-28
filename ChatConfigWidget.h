@@ -20,8 +20,8 @@ public:
 
     void updateCntx(AppContext *cntx);
 
-    ModelContext *modelCntx() const;
-    void setModelCntx(ModelContext *newModelCntx);
+    oaic::ModelContext *modelCntx() const;
+    void setModelCntx(oaic::ModelContext *newModelCntx);
 
 private slots:
     void on_modelComboBox_currentTextChanged(const QString &modelName);
@@ -50,7 +50,7 @@ private:
     Ui::ChatConfigWidget *ui;
 
     AppContext *_cntx;
-    ModelContext *_modelCntx;
+    oaic::ModelContext *_modelCntx;
 };
 
 #endif // CHATCONFIGWIDGET_H

@@ -14,7 +14,7 @@ public:
     void handle(const std::string data);
 
 public slots:
-    void queryAiModel(const QString &input, const QString &key, const ModelContext &modelCntx);
+    void queryAiModel(const QString &input, const QString &key, const oaic::ModelContext &modelCntx);
 
 
 signals:

@@ -25,7 +25,7 @@ private slots:
 private:
     Ui::PageGeneralChatPage *ui;
 
-    ModelContext _modelCntx;
+    oaic::ModelContext _modelCntx;
 };
 
 #endif // PAGEGENERALCHATPAGE_H

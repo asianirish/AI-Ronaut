@@ -8,6 +8,8 @@
 
 using namespace liboai;
 
+using namespace oaic;
+
 std::vector<std::string> extractJSON(const std::string& input) {
     std::vector<std::string> jsons;
     std::size_t start = 0;

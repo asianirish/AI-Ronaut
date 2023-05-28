@@ -3,6 +3,8 @@
 
 #include <QSettings>
 
+using namespace oaic;
+
 ChatConfigWidget::ChatConfigWidget(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::ChatConfigWidget),

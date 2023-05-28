@@ -15,6 +15,8 @@
 #include <QTimer>
 #include <QKeyEvent>
 
+using namespace oaic;
+
 ChatWidget::ChatWidget(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::ChatWidget),
