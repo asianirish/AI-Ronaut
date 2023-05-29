@@ -44,11 +44,13 @@ signals:
 
 protected:
     void updateCntx(AppContext *cntx) override;
+    void updateClient(oaic::Manager *_client) override;
 
 private:
     Ui::PageWelcomePage *ui;
-    AppContext _appContext;
 
+    [[deprecated("use _client instead")]]
+    AppContext _appContext;
 
 private:
     void displaySuccess();
@@ -57,6 +59,7 @@ private:
 
     void openAction(const QString &actionData);
 
+    [[deprecated("use updateClient instead of this")]]
     bool checkKeyFromEnv();
 
     void onKeySuccess();

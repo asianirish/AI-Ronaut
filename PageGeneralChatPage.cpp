@@ -22,6 +22,11 @@ void PageGeneralChatPage::updateCntx(AppContext *cntx)
     ui->chatWidget->setAppCntx(cntx);
 }
 
+void PageGeneralChatPage::updateClient(oaic::Manager *_client)
+{
+
+}
+
 void PageGeneralChatPage::changeCurrentToolPage(int index)
 {
     ui->tabWidget->setCurrentIndex(index);

@@ -1,6 +1,8 @@
 #include "PageWelcomePage.h"
 #include "ui_PageWelcomePage.h"
 
+#include <oaic/Manager.h>
+
 #include <QFileDialog>
 #include <QMessageBox>
 #include <QSettings>
@@ -174,5 +176,23 @@ void PageWelcomePage::on_activityComboBox_currentIndexChanged(int index)
 void PageWelcomePage::updateCntx(AppContext *cntx)
 {
     Q_UNUSED(cntx); // nothing to do
+}
+
+void PageWelcomePage::updateClient(oaic::Manager *_client)
+{
+    QProcessEnvironment env = QProcessEnvironment::systemEnvironment();
+
+    QString envKey("OPENAI_API_KEY");
+
+    if (env.contains(envKey)) { // OPENAI_API_KEY
+        bool ok = client()->auth().setKeyEnv(envKey);
+
+        if (ok) {
+            onKeySuccess();
+        } else {
+            qDebug() << "AUTH ERROR";
+            QMessageBox::warning(this, "OpenAI Key", "Please set OPENAI_API_KEY as an environment variable with your OpenAI API key");
+        }
+    }
 }
 

@@ -19,6 +19,7 @@ public:
 
 protected:
     void updateCntx(AppContext *cntx) override;
+    void updateClient(oaic::Manager *_client) override;
 
 private slots:
     void changeCurrentToolPage(int index);

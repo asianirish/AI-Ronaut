@@ -3,6 +3,9 @@
 
 #include "util/gfunc.h"
 
+#include <oaic/Manager.h>
+#include <oaic/Image.h>
+
 #include <QNetworkReply>
 #include <QKeyEvent>
 #include <QMessageBox>
@@ -52,6 +55,14 @@ void PageImagePage::updateCntx(AppContext *cntx)
     // TODO: add your code here
 }
 
+void PageImagePage::updateClient(oaic::Manager *client)
+{
+    connect(client->image(), &oaic::Image::urlResponse, this, &PageImagePage::onUrlResponse);
+    connect(client->image(), &oaic::Component::networkError, this, &PageImagePage::onNetworkError);
+    connect(client->image(), &oaic::Component::responseError, this, &PageImagePage::onResponseError);
+    connect(client->image(), &oaic::Component::replyDestroyed, this, &PageImagePage::onReplyDestroyed);
+}
+
 void PageImagePage::on_requestButton_clicked()
 {
     auto text = ui->requestEdit->toPlainText();
@@ -65,7 +76,7 @@ void PageImagePage::on_requestButton_clicked()
     ui->requestButton->setEnabled(false);
 
     auto size = ui->imageSizeComboBox->currentText();
-
+/*
     QString err;
     auto urlStr = this->cntx()->loadImage(text, size, &err);
 
@@ -79,6 +90,10 @@ void PageImagePage::on_requestButton_clicked()
     const QUrl url = QUrl(urlStr);
     QNetworkRequest request(url);
     _nam->get(request);
+*/
+
+    // TODO: delete the deprecated code above
+    client()->image()->sendGenImageRequest(text, size); // TODO: now causes QNetworkReply::AuthenticationRequiredError
 }
 
 void PageImagePage::onDownloadFinished(QNetworkReply *reply)
@@ -114,5 +129,32 @@ void PageImagePage::on_actionSave_Image_as_File_triggered()
         fileName += ".png";
     }
     pm.save(fileName);
+}
+
+void PageImagePage::onUrlResponse(const QStringList &urls)
+{
+    auto url = urls.at(0);
+
+    ui->requestButton->setEnabled(true);
+    ui->imgLabel->setEnabled(true);
+
+    QNetworkRequest request(url);
+    _nam->get(request);
+
+}
+
+void PageImagePage::onNetworkError(const QString &errMsg, int errCode)
+{
+    qDebug() << "NETWORK ERROR:" << errMsg << errCode;
+}
+
+void PageImagePage::onResponseError(const QString &errMsg)
+{
+    qDebug() << "RESPONSE ERROR:" << errMsg;
+}
+
+void PageImagePage::onReplyDestroyed(QObject *)
+{
+    // TODO: ?
 }
 

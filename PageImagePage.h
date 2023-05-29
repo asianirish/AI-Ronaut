@@ -20,6 +20,7 @@ protected:
     void keyPressEvent(QKeyEvent *event) override;
 
     void updateCntx(AppContext *cntx) override;
+    void updateClient(oaic::Manager *_client) override;
 
 private slots:
     void on_requestButton_clicked();
@@ -27,6 +28,12 @@ private slots:
     void onDownloadFinished(QNetworkReply *reply);
 
     void on_actionSave_Image_as_File_triggered();
+
+    // oaic::Manager slots
+    void onUrlResponse(const QStringList &urls);
+    void onNetworkError(const QString &errMsg, int errCode);
+    void onResponseError(const QString &errMsg);
+    void onReplyDestroyed(QObject * = nullptr);
 
 private:
     Ui::PageImagePage *ui;
