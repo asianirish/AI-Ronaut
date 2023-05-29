@@ -4,10 +4,14 @@
 #include <QDebug>
 #include <iostream>
 
+#include <QDateTime>
+#include <QFile>
+
 namespace oaic {
 
 TestChatConsumer::TestChatConsumer(QObject *parent)
-    : QObject{parent}
+    : QObject{parent},
+    _useSession(true)
 {
     _client = new Manager(this);
     EnvVar env("OPENAI_API_KEY");
@@ -36,8 +40,19 @@ void TestChatConsumer::requestChat()
            useStream = true;
         }
 
-        std::string x;
-        std::getline(std::cin,x); // According to authoritative sources (in particular, my opinion ;), this is an acceptable way to solve this well-known issue.
+        {
+            std::string x;
+            std::getline(std::cin,x); // According to authoritative sources (in particular, my opinion ;), this is an acceptable way to solve this well-known issue.
+        }
+
+        {
+            std::string userPrompt;
+            std::cout << "\nsystem message: ";
+            std::getline(std::cin, userPrompt);
+            QString userPromptStr = QString::fromUtf8(userPrompt.c_str());
+
+            setSystemMessage(userPromptStr); // add to _msgs
+        }
 
         firstTime = false;
     }
@@ -51,11 +66,67 @@ void TestChatConsumer::requestChat()
 
     if (userPrompt == "exit") {
         exit(0);
+    } else if (userPrompt == "save") {
+        save();
+        exit(0);
+    } else if (userPrompt == "history") {
+        history();
+        requestChat();
+    } else if (_useSession) {
+        MsgData curData("user", userPromptStr);
+        _msgs.append(curData);
+        ModelContext cntx; // default values, model == gpt-3.5-turbo
+        //        cntx.setModelName("gpt-4");
+        _client->chat()->sendChatRequest(cntx, _msgs, useStream);
     } else {
+        qDebug() << "SENDING:" << userPromptStr;
         ModelContext cntx; // default values, model == gpt-3.5-turbo
 //        cntx.setModelName("gpt-4");
-        _client->chat()->sendChatRequest(cntx, userPromptStr, useStream); // "gpt-4"
+        _client->chat()->sendChatRequest(cntx, userPromptStr, useStream);
     }
+}
+
+void TestChatConsumer::save()
+{
+    QDateTime date = QDateTime::currentDateTime();
+    QString formattedTime = date.toString("yyyyMMddhhmmss");
+    QByteArray formattedTimeMsg = formattedTime.toLocal8Bit();
+
+    QFile file(formattedTimeMsg);
+
+    if (!file.open(QIODevice::WriteOnly | QIODevice::Text)) {
+        return;
+    }
+
+    for (auto &msg : _msgs) {
+        file.write(msg.role().toLatin1() + ": ");
+        file.write(msg.content().toUtf8());
+        file.write("\n");
+    }
+
+    file.close();
+
+}
+
+void TestChatConsumer::history()
+{
+    qDebug() << "\n..........History:.........\n";
+    for (auto &msg : _msgs) {
+        qDebug() << msg.role() + ": " << msg.content();
+    }
+    qDebug() << "\n............................\n";
+}
+
+void TestChatConsumer::setSystemMessage(const QString &content)
+{
+    QString contentCp(content);
+
+    if (content.isEmpty()) {
+        contentCp = "Use your creativity to inspire positivity and promote well-being in your response";
+    }
+
+    MsgData curData("system", contentCp);
+    _msgs.append(curData);
 }
 
 void TestChatConsumer::onMessageResponse(const QStringList &messages)
@@ -68,6 +139,11 @@ void TestChatConsumer::onMessageResponse(const QStringList &messages)
 void TestChatConsumer::onMessageResponseStream(const QStringList &messages)
 {
     for (auto &msg : messages) {
+
+        if (_useSession) {
+            _currentAssistantMessage += msg;
+        }
+
         std::cout << msg.toStdString();
         std::cout.flush();
     }
@@ -75,6 +151,14 @@ void TestChatConsumer::onMessageResponseStream(const QStringList &messages)
 
 void TestChatConsumer::onReplyDestroyed(QObject *)
 {
+    if (_useSession) {
+        MsgData curData;
+        curData.setRole("assistant");
+        curData.setContent(_currentAssistantMessage);
+        _msgs.append(curData);
+        _currentAssistantMessage.clear();
+    }
+
     requestChat();
 }
 

@@ -16,6 +16,15 @@ public:
 
 private:
     Manager *_client;
+    QList<MsgData> _msgs;
+    QString _currentAssistantMessage;
+    bool _useSession = true;
+
+private:
+    void save();
+    void history();
+
+    void setSystemMessage(const QString &content);
 
 private slots:
     void onMessageResponse(const QStringList &messages);
