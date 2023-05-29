@@ -16,7 +16,7 @@ namespace oaic {
 class ModelContext;
 }
 
-class AppContext
+class [[deprecated("use oaic::Manager instead")]] AppContext
 {
 public:
     static const int32_t DEFAULT_TIMEOUT_MS;
