@@ -19,6 +19,7 @@ public:
     void sendSimpleChatRequest(const QString &model, const QList<MsgData> messages, bool stream) const;
 
     void sendChatRequest(const ModelContext &modelCntx, const QString &content, bool stream) const;
+    void sendChatRequest(const ModelContext &modelCntx, const QList<MsgData> messages, bool stream) const;
 
 private:
     QStringList extractMessages(const QString &response, const QString &msgKey);
