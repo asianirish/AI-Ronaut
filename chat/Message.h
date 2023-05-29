@@ -1,6 +1,8 @@
 #ifndef CHAT_MESSAGE_H
 #define CHAT_MESSAGE_H
 
+#include <oaic/MsgData.h>
+
 #include <QString>
 #include <QSharedPointer>
 #include <QMap>
@@ -27,6 +29,8 @@ public:
     void setText(const QString &newText);
 
     QString roleAsString() const;
+
+    oaic::MsgData msgData() const;
 
 private:
     QString _text;

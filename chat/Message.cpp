@@ -30,4 +30,9 @@ QString Message::roleAsString() const
     return ROLE_TO_STRING.value(rl);
 }
 
+oaic::MsgData Message::msgData() const
+{
+    return oaic::MsgData(roleAsString(), text());
+}
+
 } // namespace chat
