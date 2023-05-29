@@ -1,6 +1,8 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include <oaic/Manager.h>
+
 #include <QMainWindow>
 
 QT_BEGIN_NAMESPACE
@@ -28,5 +30,8 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
+
+    oaic::Manager _client;
+
 };
 #endif // MAINWINDOW_H

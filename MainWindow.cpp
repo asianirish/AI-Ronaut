@@ -20,6 +20,8 @@ MainWindow::MainWindow(QWidget *parent)
 
     auto mainPage = ui->tabWidget->widget(0);
     auto welcomePage = qobject_cast<PageWelcomePage *>(mainPage);
+
+    welcomePage->setClient(&_client); // checks the env key
     
     connect(welcomePage, &PageWelcomePage::openImageAction, this, &MainWindow::onOpenImage);
     connect(welcomePage, &PageWelcomePage::openChatAction, this, &MainWindow::onOpenChat);
@@ -44,6 +46,9 @@ void MainWindow::onOpenImage()
 
     int index = ui->tabWidget->addTab(imagePage, tr("Image"));
     ui->tabWidget->setCurrentIndex(index);
+
+    // TODO: delete the code above
+    imagePage->setClient(&_client); // connect the client here
 }
 
 void MainWindow::onOpenChat()
