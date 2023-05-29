@@ -47,7 +47,13 @@ SOURCES += \
     chat/UserMessage.cpp \
     main.cpp \
     MainWindow.cpp \
+    oaic/Auth.cpp \
+    oaic/Chat.cpp \
+    oaic/Component.cpp \
+    oaic/Image.cpp \
+    oaic/Manager.cpp \
     oaic/ModelContext.cpp \
+    oaic/MsgData.cpp \
     third/liboai/components/audio.cpp \
     third/liboai/components/chat.cpp \
     third/liboai/components/completions.cpp \
@@ -90,7 +96,13 @@ HEADERS += \
     chat/SessionManager.h \
     chat/SystemMessage.h \
     chat/UserMessage.h \
+    oaic/Auth.h \
+    oaic/Chat.h \
+    oaic/Component.h \
+    oaic/Image.h \
+    oaic/Manager.h \
     oaic/ModelContext.h \
+    oaic/MsgData.h \
     third/liboai/include/components/audio.h \
     third/liboai/include/components/chat.h \
     third/liboai/include/components/completions.h \
