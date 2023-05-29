@@ -6,13 +6,16 @@
 
 namespace oaic {
 
+using Role = QString; // TODO: protected class instead of QString (with operator QString)
+
 class MsgData
 {
 public:
     MsgData();
+    MsgData(const Role &role, const QString &content);
 
-    QString role() const;
-    void setRole(const QString &newRole);
+    Role role() const;
+    void setRole(const Role &newRole);
 
     QString content() const;
     void setContent(const QString &newContent);
@@ -22,7 +25,7 @@ public:
     QJsonObject toJson() const;
 
 private:
-    QString _role;
+    Role _role;
     QString _content;
 };
 

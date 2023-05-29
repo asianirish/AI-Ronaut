@@ -4,17 +4,24 @@
 
 namespace oaic {
 
-MsgData::MsgData()
+MsgData::MsgData()  : MsgData(Role(), QString())
 {
 
 }
 
-QString MsgData::role() const
+MsgData::MsgData(const Role &role, const QString &content) :
+    _role(role),
+    _content(content)
+{
+
+}
+
+Role MsgData::role() const
 {
     return _role;
 }
 
-void MsgData::setRole(const QString &newRole)
+void MsgData::setRole(const Role &newRole)
 {
     _role = newRole;
 }
