@@ -107,7 +107,8 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 DISTFILES += \
     LICENSE  \
-    README.md
+    README.md \
+    oaic/README.md
 
 RESOURCES += \
     air.qrc
