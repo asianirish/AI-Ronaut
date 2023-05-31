@@ -13,6 +13,7 @@ SOURCES += \
         Image.cpp \
         Manager.cpp \
         ModelContext.cpp \
+        Models.cpp \
         MsgData.cpp \
         TestChatConsumer.cpp \
         TestImageConsumer.cpp \
@@ -30,6 +31,7 @@ HEADERS += \
     Image.h \
     Manager.h \
     ModelContext.h \
+    Models.h \
     MsgData.h \
     TestChatConsumer.h \
     TestImageConsumer.h
