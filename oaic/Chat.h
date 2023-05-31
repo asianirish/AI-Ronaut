@@ -24,6 +24,9 @@ public:
 private:
     QStringList extractMessages(const QString &response, const QString &msgKey);
 
+public slots:
+    void onRequest(const ModelContext &modelCntx, const QString &content);
+
 private slots:
     void handleResponse(const QString &response);
     void handleResponseStream(const QString &response);

@@ -189,6 +189,11 @@ QStringList Chat::extractMessages(const QString &response, const QString &msgKey
     return messages;
 }
 
+void Chat::onRequest(const ModelContext &modelCntx, const QString &content)
+{
+    sendChatRequest(modelCntx, content, true);
+}
+
 void Chat::handleResponse(const QString &response)
 {
     QStringList messages = extractMessages(response, "message");
