@@ -38,7 +38,7 @@
            <height>32</height>
           </size>
          </property>
-         <widget class="ChatConfigWidget" name="chatConfigWidget" native="true">
+         <widget class="ChatConfigWidget" name="chatConfigWidget">
           <attribute name="icon">
            <iconset resource="air.qrc">
             <normaloff>:/img/ModelConfigurationIcon.png</normaloff>:/img/ModelConfigurationIcon.png</iconset>
@@ -50,7 +50,7 @@
            <string>Chat Configuration</string>
           </attribute>
          </widget>
-         <widget class="SystemMessageWidget" name="systemMessageWidget" native="true">
+         <widget class="SystemMessageWidget" name="systemMessageWidget">
           <attribute name="icon">
            <iconset resource="air.qrc">
             <normaloff>:/img/AISystemMessageIcon.png</normaloff>:/img/AISystemMessageIcon.png</iconset>
@@ -61,9 +61,8 @@
           <attribute name="toolTip">
            <string>Assistant System Message</string>
           </attribute>
-          <layout class="QGridLayout" name="gridLayout_3"/>
          </widget>
-         <widget class="ChatSessionWidget" name="chatSessionWidget" native="true">
+         <widget class="ChatSessionWidget" name="chatSessionWidget">
           <attribute name="icon">
            <iconset resource="air.qrc">
             <normaloff>:/img/AIChatSessionListIcon.png</normaloff>:/img/AIChatSessionListIcon.png</iconset>
