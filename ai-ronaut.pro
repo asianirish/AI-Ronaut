@@ -4,15 +4,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 CONFIG += c++17
 
-
-INCLUDEPATH += third/liboai/include
-INCLUDEPATH += third/
 INCLUDEPATH += oaic/
-
-
-LIBS += -lcurl
-
-
 
 
 # You can make your code fail to compile if it uses deprecated APIs.
@@ -21,14 +13,12 @@ LIBS += -lcurl
 
 SOURCES += \
     AIMessageItemWidget.cpp \
-    AppContext.cpp \
     ChatConfigWidget.cpp \
     ChatItemWidget.cpp \
     ChatSessionWidget.cpp \
     ChatWidget.cpp \
     ErrorMessageItemWidget.cpp \
     NetworkConfiWidget.cpp \
-    OpenAIApiHandler.cpp \
     PageAboutPage.cpp \
     PageDonatePage.cpp \
     PageGeneralChatPage.cpp \
@@ -53,25 +43,12 @@ SOURCES += \
     oaic/Image.cpp \
     oaic/Manager.cpp \
     oaic/ModelContext.cpp \
+    oaic/Models.cpp \
     oaic/MsgData.cpp \
-    third/liboai/components/audio.cpp \
-    third/liboai/components/chat.cpp \
-    third/liboai/components/completions.cpp \
-    third/liboai/components/edits.cpp \
-    third/liboai/components/embeddings.cpp \
-    third/liboai/components/files.cpp \
-    third/liboai/components/fine_tunes.cpp \
-    third/liboai/components/images.cpp \
-    third/liboai/components/models.cpp \
-    third/liboai/components/moderations.cpp \
-    third/liboai/core/authorization.cpp \
-    third/liboai/core/netimpl.cpp \
-    third/liboai/core/response.cpp \
     util/gfunc.cpp
 
 HEADERS += \
     AIMessageItemWidget.h \
-    AppContext.h \
     ChatConfigWidget.h \
     ChatItemWidget.h \
     ChatSessionWidget.h \
@@ -79,7 +56,6 @@ HEADERS += \
     ErrorMessageItemWidget.h \
     MainWindow.h \
     NetworkConfiWidget.h \
-    OpenAIApiHandler.h \
     PageAboutPage.h \
     PageDonatePage.h \
     PageGeneralChatPage.h \
@@ -102,24 +78,8 @@ HEADERS += \
     oaic/Image.h \
     oaic/Manager.h \
     oaic/ModelContext.h \
+    oaic/Models.h \
     oaic/MsgData.h \
-    third/liboai/include/components/audio.h \
-    third/liboai/include/components/chat.h \
-    third/liboai/include/components/completions.h \
-    third/liboai/include/components/edits.h \
-    third/liboai/include/components/embeddings.h \
-    third/liboai/include/components/files.h \
-    third/liboai/include/components/fine_tunes.h \
-    third/liboai/include/components/images.h \
-    third/liboai/include/components/models.h \
-    third/liboai/include/components/moderations.h \
-    third/liboai/include/core/authorization.h \
-    third/liboai/include/core/exception.h \
-    third/liboai/include/core/netimpl.h \
-    third/liboai/include/core/network.h \
-    third/liboai/include/core/response.h \
-    third/liboai/include/liboai.h \
-    third/nlohmann/json.hpp \
     util/OrderedMap.h \
     util/gfunc.h
 
