@@ -1,6 +1,8 @@
 #ifndef NETWORKCONFIWIDGET_H
 #define NETWORKCONFIWIDGET_H
 
+#include <Manager.h>
+
 #include <QWidget>
 
 namespace Ui {
@@ -19,7 +21,7 @@ public:
     explicit NetworkConfiWidget(QWidget *parent = nullptr);
     ~NetworkConfiWidget();
 
-    void updateCntx(AppContext *cntx);
+    void updateClient(oaic::Manager *client);
 
 private slots:
     void on_timeOutBox_valueChanged(int timeoutSec);
@@ -30,7 +32,7 @@ private slots:
 
 private:
     Ui::NetworkConfiWidget *ui;
-    AppContext *_cntx;
+    oaic::Manager *_client;
 };
 
 #endif // NETWORKCONFIWIDGET_H
