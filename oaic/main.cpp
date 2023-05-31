@@ -1,5 +1,4 @@
 #include "Manager.h"
-#include "TestImageConsumer.h"
 #include "TestChatConsumer.h"
 
 #include <QCoreApplication>
@@ -48,27 +47,11 @@ void sendChatRequest() {
     client.chat()->sendSimpleChatRequest("gpt-4", qmsg, isStream);
 }
 
+void setModelListRequest() {
+    Manager &client = authorize();
 
-// TODO: make it async!
-//void sendMultiChatRequest() {
-//    Manager &client = authorize();
-
-//    while (1) {
-//        std::string userImagePrompt;
-//        std::cout << "user image prompt: ";
-//        std::getline(std::cin, userImagePrompt);
-
-//        if (userImagePrompt == "exit") {
-//            return;
-//        }
-
-//        QString qmsg(userImagePrompt.data());
-
-
-//        client.chat()->sendSimpleChatRequest("gpt-4", qmsg, false);
-
-//    }
-//}
+    client.models()->modelList();
+}
 
 int main(int argc, char *argv[])
 {
@@ -77,8 +60,10 @@ int main(int argc, char *argv[])
 //    TestImageConsumer *consumer = new TestImageConsumer();
 //    consumer->requestImage();
 
-    TestChatConsumer *consumer = new TestChatConsumer();
-    consumer->requestChat();
+//    TestChatConsumer *consumer = new TestChatConsumer();
+//    consumer->requestChat();
+
+    setModelListRequest();
 
 //    sendImgRequest();
 //    sendChatRequest();

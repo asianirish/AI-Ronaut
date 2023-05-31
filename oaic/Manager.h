@@ -4,6 +4,7 @@
 #include "Auth.h"
 #include "Image.h"
 #include "Chat.h"
+#include "Models.h"
 
 namespace oaic {
 
@@ -19,6 +20,8 @@ public:
 
     Chat *chat();
 
+    Models *models();
+
 
     QNetworkAccessManager *networkAccessManager() const;
 
@@ -26,6 +29,7 @@ private:
     Auth _auth;
     Image *_image;
     Chat *_chat;
+    Models *_models;
 
 
     QNetworkAccessManager *_networkAccessManager;

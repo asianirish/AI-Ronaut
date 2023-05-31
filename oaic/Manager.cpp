@@ -4,7 +4,8 @@ namespace oaic {
 
 Manager::Manager(QObject *parent) : QObject(parent),
     _image(nullptr),
-    _chat(nullptr)
+    _chat(nullptr),
+    _models(nullptr)
 {
     _networkAccessManager = new QNetworkAccessManager(this);
 }
@@ -32,6 +33,16 @@ Chat *Manager::chat()
 
     _chat = new Chat(&_auth, this);
     return _chat;
+}
+
+Models *Manager::models()
+{
+    if (_models) {
+        return _models;
+    }
+
+    _models = new Models(&_auth, this);
+    return _models;
 }
 
 QNetworkAccessManager *Manager::networkAccessManager() const
