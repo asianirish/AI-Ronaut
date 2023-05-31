@@ -49,7 +49,6 @@ private slots:
     void onMessageResponseComplete(QObject *); // onReplyDestroyed instead of onReplyComplete
 
 signals:
-    [[deprecated("use requestStreamChat instead")]] void queryAiModelPlease(const QString &input, const QString &key, const oaic::ModelContext &modelCntx);
     void requestStreamChat(const oaic::ModelContext &modelCntx, const QString &input);
 
 private:
