@@ -1,6 +1,8 @@
 #include "ChatConfigWidget.h"
 #include "ui_ChatConfigWidget.h"
 
+#include <Models.h>
+
 #include <QSettings>
 
 using namespace oaic;
@@ -26,22 +28,8 @@ void ChatConfigWidget::updateClient(Manager *client)
 {
     _client = client;
 
-    QStringList lst;
-// TODO:    _client->modelList(lst);
-
-    ui->modelComboBox->blockSignals(true);
-    ui->modelComboBox->addItems(lst); // sets current index to 0
-    ui->modelComboBox->model()->sort(0);
-    ui->modelComboBox->blockSignals(false);
-
-    QSettings settings;
-    auto defaultModel = settings.value("model/default").toString();
-
-    if (defaultModel.isEmpty()) {
-        ui->modelComboBox->setCurrentIndex(-1);
-    } else {
-        ui->modelComboBox->setCurrentText(defaultModel);
-    }
+    connect(_client->models(), &oaic::Models::models, this, &ChatConfigWidget::onModels);
+    _client->models()->modelList();
 }
 
 void ChatConfigWidget::on_modelComboBox_currentTextChanged(const QString &modelName)
@@ -158,6 +146,23 @@ void ChatConfigWidget::on_temperatureSlider_valueChanged(int value)
     if (_modelCntx) {
         _modelCntx->setTemperature(fPosition);
         qDebug() << "temperature" << fPosition;
+    }
+}
+
+void ChatConfigWidget::onModels(const QStringList &mdls)
+{
+    ui->modelComboBox->blockSignals(true);
+    ui->modelComboBox->addItems(mdls); // sets current index to 0
+    ui->modelComboBox->model()->sort(0);
+    ui->modelComboBox->blockSignals(false);
+
+    QSettings settings;
+    auto defaultModel = settings.value("model/default").toString();
+
+    if (defaultModel.isEmpty()) {
+        ui->modelComboBox->setCurrentIndex(-1);
+    } else {
+        ui->modelComboBox->setCurrentText(defaultModel);
     }
 }
 

@@ -47,6 +47,8 @@ private slots:
 
     void on_temperatureSlider_valueChanged(int value);
 
+    void onModels(const QStringList &mdls);
+
 private:
     Ui::ChatConfigWidget *ui;
 
