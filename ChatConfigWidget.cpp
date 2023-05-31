@@ -8,7 +8,7 @@ using namespace oaic;
 ChatConfigWidget::ChatConfigWidget(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::ChatConfigWidget),
-    _cntx(nullptr),
+    _client(nullptr),
     _modelCntx(nullptr)
 {
     ui->setupUi(this);
@@ -22,12 +22,12 @@ ChatConfigWidget::~ChatConfigWidget()
     delete ui;
 }
 
-void ChatConfigWidget::updateCntx(AppContext *cntx)
+void ChatConfigWidget::updateClient(Manager *client)
 {
-    _cntx = cntx;
+    _client = client;
 
     QStringList lst;
-    _cntx->modelList(lst);
+// TODO:    _client->modelList(lst);
 
     ui->modelComboBox->blockSignals(true);
     ui->modelComboBox->addItems(lst); // sets current index to 0

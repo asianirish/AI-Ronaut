@@ -1,7 +1,7 @@
 #ifndef CHATCONFIGWIDGET_H
 #define CHATCONFIGWIDGET_H
 
-#include "AppContext.h"
+#include "Manager.h"
 
 #include <ModelContext.h>
 
@@ -19,7 +19,7 @@ public:
     explicit ChatConfigWidget(QWidget *parent = nullptr);
     ~ChatConfigWidget();
 
-    void updateCntx(AppContext *cntx);
+    void updateClient(oaic::Manager *client);
 
     oaic::ModelContext *modelCntx() const;
     void setModelCntx(oaic::ModelContext *newModelCntx);
@@ -50,7 +50,7 @@ private slots:
 private:
     Ui::ChatConfigWidget *ui;
 
-    AppContext *_cntx;
+    oaic::Manager *_client;
     oaic::ModelContext *_modelCntx;
 };
 
