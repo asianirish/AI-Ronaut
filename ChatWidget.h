@@ -2,10 +2,10 @@
 #define CHATWIDGET_H
 
 #include "ChatItemWidget.h"
-#include "AppContext.h"
 #include "ui_ChatWidget.h"
 
 #include <ModelContext.h>
+#include <Manager.h>
 
 #include <QWidget>
 #include <QThread>
@@ -25,8 +25,8 @@ public:
     oaic::ModelContext *modelCntx() const;
     void setModelCntx(oaic::ModelContext *newModelCntx);
 
-    AppContext *appCntx() const;
-    void setAppCntx(AppContext *newAppCntx);
+    oaic::Manager *client() const;
+    void setClient(oaic::Manager *newClient);
 
 protected:
     void resizeEvent(QResizeEvent *event) override;
@@ -40,24 +40,23 @@ private slots:
     void adjustLastItem();
     void queryAiModel();
 
-    void onDeltaReady(const QString &deltaData);
-
-    void onReplyComplete();
-
     void onDeltaError(const QString &deltaError);
+    // TODO: onNetworkError connected with Component::networkError
 
     void on_isSessionBox_stateChanged(int isSession);
 
+    void onMessageResponseStream(const QStringList &deltaMessages);
+    void onMessageResponseComplete(QObject *); // onReplyDestroyed instead of onReplyComplete
+
 signals:
-    void queryAiModelPlease(const QString &input, const QString &key, const oaic::ModelContext &modelCntx);
+    [[deprecated("use requestStreamChat instead")]] void queryAiModelPlease(const QString &input, const QString &key, const oaic::ModelContext &modelCntx);
+    void requestStreamChat(const oaic::ModelContext &modelCntx, const QString &input);
 
 private:
     Ui::ChatWidget *ui;
 
     oaic::ModelContext *_modelCntx;
-    AppContext *_appCntx;
-
-    QThread _chatThread;
+    oaic::Manager *_client;
 
 private:
     void updateItemsHeight();
@@ -80,6 +79,8 @@ private:
 
         return nullptr;
     }
+
+    void onDeltaReady(const QString &deltaData);
 };
 
 #endif // CHATWIDGET_H

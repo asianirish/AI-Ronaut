@@ -2,7 +2,6 @@
 
 #include "ErrorMessageItemWidget.h"
 #include "UserMessageItemWidget.h"
-#include "OpenAIApiHandler.h"
 #include "AIMessageItemWidget.h"
 
 #include "chat/SessionManager.h"
@@ -11,6 +10,7 @@
 
 #include "util/gfunc.h"
 
+#include <QDebug>
 #include <QListWidgetItem>
 #include <QTimer>
 #include <QKeyEvent>
@@ -21,7 +21,7 @@ ChatWidget::ChatWidget(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::ChatWidget),
     _modelCntx(nullptr),
-    _appCntx(nullptr)
+    _client(nullptr)
 {
     ui->setupUi(this);
 
@@ -30,9 +30,6 @@ ChatWidget::ChatWidget(QWidget *parent) :
 
 ChatWidget::~ChatWidget()
 {
-    _chatThread.quit();
-    _chatThread.wait();
-
     delete ui;
 }
 
@@ -101,37 +98,9 @@ void ChatWidget::queryAiModel()
 
     qDebug() << "MODEL_NAME:" << _modelCntx->modelName();
 
-    OpenAIApiHandler *handler = new OpenAIApiHandler();
 
-    handler->moveToThread(&_chatThread);
-    connect(&_chatThread, &QThread::finished, handler, &QObject::deleteLater);
-    connect(this, &ChatWidget::queryAiModelPlease, handler, &OpenAIApiHandler::queryAiModel);
-    connect(handler, &OpenAIApiHandler::delta, this, &ChatWidget::onDeltaReady);
-    connect(handler, &OpenAIApiHandler::complete, this, &ChatWidget::onReplyComplete);
-    connect(handler, &OpenAIApiHandler::error, this, &ChatWidget::onDeltaError);
-    _chatThread.start();
-
-
-    QString key = _appCntx->key();
-    emit queryAiModelPlease(input, key, *_modelCntx);
-//    handler->queryAiModel(input, *_appCntx, *_modelCntx);
-
-//    if (_appCntx) {
-//        QString err;
-//        auto response = _appCntx->queryAiModel(input, *_modelCntx, &err);
-//        if (err.isEmpty()) {
-//            qDebug() << "RESPONSE:" << response;
-//            AIMessageItemWidget *itemWidget = new AIMessageItemWidget(this);
-//            addMessageItem(itemWidget, response);
-//        } else {
-//            qDebug() << "ERROR:" << err;
-//            ErrorMessageItemWidget *itemWidget = new ErrorMessageItemWidget(this);
-//            addMessageItem(itemWidget, err);
-//        }
-
-//        ui->listWidget->scrollToBottom();
-//    }
-
+    // good request
+    emit requestStreamChat(*_modelCntx, input);
 }
 
 void ChatWidget::onDeltaReady(const QString &deltaData)
@@ -150,31 +119,11 @@ void ChatWidget::onDeltaReady(const QString &deltaData)
     QTimer::singleShot(1, this, &ChatWidget::adjustLastItem);
 }
 
-void ChatWidget::onReplyComplete()
-{
-    qDebug() << "REPLY COMPLETE";
-    _chatThread.quit();
-
-    ui->textEdit->setFocus();
-}
-
 void ChatWidget::onDeltaError(const QString &deltaError)
 {
-    _chatThread.quit();
-
     qDebug() << "ERROR:" << deltaError;
     ErrorMessageItemWidget *itemWidget = new ErrorMessageItemWidget(this);
     addMessageItem(itemWidget, deltaError);
-}
-
-AppContext *ChatWidget::appCntx() const
-{
-    return _appCntx;
-}
-
-void ChatWidget::setAppCntx(AppContext *newAppCntx)
-{
-    _appCntx = newAppCntx;
 }
 
 ModelContext *ChatWidget::modelCntx() const
@@ -257,5 +206,36 @@ void ChatWidget::on_isSessionBox_stateChanged(int isSession)
         // TODO: set system message
         ui->textEdit->setFocus();
     }
+}
+
+void ChatWidget::onMessageResponseStream(const QStringList &deltaMessages)
+{
+    for (auto &delta : deltaMessages) {
+        onDeltaReady(delta);
+    }
+}
+
+void ChatWidget::onMessageResponseComplete(QObject *)
+{
+     // TODO: if (_useSession) ?
+
+    qDebug() << "MESSAGE RESPONSE COMPLETE";
+    ui->textEdit->setFocus();
+}
+
+oaic::Manager *ChatWidget::client() const
+{
+    return _client;
+}
+
+void ChatWidget::setClient(oaic::Manager *newClient)
+{
+    _client = newClient;
+
+    // good place to connect the _client
+    connect(this, &ChatWidget::requestStreamChat, _client->chat(), &oaic::Chat::onRequest);
+    connect(_client->chat(), &oaic::Chat::messageResponseStream, this, &ChatWidget::onMessageResponseStream);
+    connect(_client->chat(), &oaic::Component::replyDestroyed, this, &ChatWidget::onMessageResponseComplete);
+    connect(_client->chat(), &oaic::Component::responseError, this, &ChatWidget::onDeltaError);
 }
 
