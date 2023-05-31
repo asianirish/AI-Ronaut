@@ -6,7 +6,23 @@
 
 This is an **unofficial** client QT based application with a graphical user interface (GUI) for interacting with the OpenAI API
 
-To access the OpenAI API, this application utilizes a modified third-party library by [D7EAD](https://github.com/D7EAD/liboai) (**thank you, D7EAD**)
+To access the Openal API, this application uses our OAIC libraries. Currently, OAIC is part of the AI-Ronaut project and is distributed under the same license. In the future, we plan to create a separate project for OAIC and use OAIC as a static library subproject.
+
+The project no longer uses third-party libraries by [D7EAD](https://github.com/D7EAD/liboai) (**thank you, D7EAD**)
+
+### Prerequisites
+
+- Qt development environment
+
+### Installation
+
+1. Clone the repository
+2. Open the project in the Qt development environment
+3. Build the project
+
+## Usage
+
+After successfully building the project, you need to set an environment variable called **OPENAI_API_KEY** with the value of the key obtained from the OpenAI API.
 
 ## Efficient Client-Side Computations
 
