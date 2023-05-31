@@ -7,6 +7,7 @@ namespace oaic {
 
 class Models : public Component
 {
+    Q_OBJECT
 public:
     explicit Models(Auth *auth, Manager *parent = nullptr);
 
@@ -14,6 +15,9 @@ public:
 
 private slots:
     void handleResponse(const QString &response);
+
+signals:
+    void models(const QStringList &mdls);
 };
 
 } // namespace oaic
