@@ -32,11 +32,14 @@ private slots:
 
 protected:
     QNetworkReply *sendJsonRequest(const QString &endpoint, const QJsonObject &jData, bool stream) const;
+    QNetworkReply *sendGetRequest(const QString &endpoint) const;
 
 private:
     Auth *_auth;
 
     QNetworkRequest request(const QString &endpoint, const QString &contentType) const;
+    QNetworkRequest request(const QString &endpoint, const Headers &rawHeaders) const;
+
 
     QNetworkAccessManager *networkAccessManager() const;
 

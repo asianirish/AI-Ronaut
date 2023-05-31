@@ -91,6 +91,30 @@ QNetworkReply *Component::sendJsonRequest(const QString &endpoint, const QJsonOb
     return reply;
 }
 
+QNetworkReply *Component::sendGetRequest(const QString &endpoint) const
+{
+    Headers headers;
+    headers.insert("Accept", "application/json"); // always?
+
+    QNetworkRequest rqst = request(endpoint, headers);
+
+    auto nam = networkAccessManager();
+
+    QNetworkReply *reply = nam->get(rqst);
+
+    connect(reply, &QNetworkReply::finished, this, &Component::onJsonRequestFinished);
+
+    // connect error...
+    connect(reply, &QNetworkReply::errorOccurred, this, &Component::onNetworkError);
+
+    connect(reply, &QNetworkReply::destroyed, this, &Component::replyDestroyed);
+
+    return reply;
+
+
+
+}
+
 QNetworkRequest Component::request(const QString &endpoint, const QString &contentType) const
 {
     QNetworkRequest rqst;
@@ -100,6 +124,24 @@ QNetworkRequest Component::request(const QString &endpoint, const QString &conte
     auto headers = _auth->headers();
 
     for (auto &[key, value] : headers.toStdMap()) {
+        rqst.setRawHeader(key, value);
+    }
+
+    return rqst;
+}
+
+QNetworkRequest Component::request(const QString &endpoint, const Headers &rawHeaders) const
+{
+    QNetworkRequest rqst;
+    rqst.setUrl(QUrl(THE_URL + endpoint));
+
+    auto headers = _auth->headers();
+
+    for (auto &[key, value] : headers.toStdMap()) {
+        rqst.setRawHeader(key, value);
+    }
+
+    for (auto &[key, value] : rawHeaders.toStdMap()) {
         rqst.setRawHeader(key, value);
     }
 
