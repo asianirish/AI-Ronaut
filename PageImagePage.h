@@ -19,7 +19,6 @@ public:
 protected:
     void keyPressEvent(QKeyEvent *event) override;
 
-    void updateCntx(AppContext *cntx) override;
     void updateClient(oaic::Manager *_client) override;
 
 private slots:

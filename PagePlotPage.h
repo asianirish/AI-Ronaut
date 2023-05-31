@@ -17,7 +17,6 @@ public:
     ~PagePlotPage();
 
 protected:
-    void updateCntx(AppContext *cntx) override;
     void updateClient(oaic::Manager *_client) override;
 
 private:

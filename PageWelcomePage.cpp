@@ -8,8 +8,6 @@
 #include <QSettings>
 #include <QProcessEnvironment>
 
-using namespace liboai;
-
 const QString PageWelcomePage::IMAGE_ACTION("image");
 const QString PageWelcomePage::CHAT_ACTION("chat");
 const QString PageWelcomePage::PLOT_ACTION("plot");
@@ -36,10 +34,6 @@ PageWelcomePage::PageWelcomePage(QWidget *parent) :
     ui->activityComboBox->setCurrentIndex(-1);
 
     displayWait();
-
-    if (!checkKeyFromEnv()) {
-        QMessageBox::warning(this, "OpenAI Key", "Please set OPENAI_API_KEY as an environment variable with your OpenAI API key");
-    }
 }
 
 PageWelcomePage::~PageWelcomePage()
@@ -59,7 +53,8 @@ void PageWelcomePage::on_browseKeyButton_clicked()
 
     QString key;
     QString err;
-    bool ok = _appContext.openKeyFile(fileName, key, &err);
+    bool ok = true; // _appContext.openKeyFile(fileName, key, &err);
+    // TODO: _client.openKeyFile
 
     if (!ok) {
         QMessageBox::warning(this, "error", err);
@@ -131,39 +126,14 @@ void PageWelcomePage::openAction(const QString &actionData)
     }
 }
 
-bool PageWelcomePage::checkKeyFromEnv()
-{
-    QProcessEnvironment env = QProcessEnvironment::systemEnvironment();
-
-    QString envKey("OPENAI_API_KEY");
-
-    if (env.contains(envKey)) { // OPENAI_API_KEY
-        QString value = env.value(envKey);
-        qDebug() << "OPENAI_API_KEY =" << value;
-
-        QString err;
-        bool ok = _appContext.setKeyEnv(envKey, &err);
-
-        if (ok) {
-            onKeySuccess();
-            return true;
-        } else {
-            qDebug() << "ERROR:" << err;
-        }
-    }
-
-    return false;
-}
-
 void PageWelcomePage::onKeySuccess()
 {
     // read other app context settings here
     QSettings settings;
-    int32_t timeout = settings.value("oai/timeout", AppContext::DEFAULT_TIMEOUT_MS).toInt();
+    int32_t timeout = settings.value("oai/timeout", 30000).toInt(); // TODO: oaic::Manager::DEFAULT_TIMEOUT_MS
 
-    _appContext.setTimeOutMs(timeout);
+    (void)timeout; // TODO: _client->setTimeout(timeout);
 
-    setCntx(&_appContext);
     displaySuccess();
 }
 
@@ -173,19 +143,14 @@ void PageWelcomePage::on_activityComboBox_currentIndexChanged(int index)
     on_openActivityButton_clicked();
 }
 
-void PageWelcomePage::updateCntx(AppContext *cntx)
-{
-    Q_UNUSED(cntx); // nothing to do
-}
-
-void PageWelcomePage::updateClient(oaic::Manager *_client)
+void PageWelcomePage::updateClient(oaic::Manager *client)
 {
     QProcessEnvironment env = QProcessEnvironment::systemEnvironment();
 
     QString envKey("OPENAI_API_KEY");
 
     if (env.contains(envKey)) { // OPENAI_API_KEY
-        bool ok = client()->auth().setKeyEnv(envKey);
+        bool ok = client->auth().setKeyEnv(envKey);
 
         if (ok) {
             onKeySuccess();

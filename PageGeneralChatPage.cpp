@@ -16,15 +16,10 @@ PageGeneralChatPage::~PageGeneralChatPage()
     delete ui;
 }
 
-void PageGeneralChatPage::updateCntx(AppContext *cntx)
+void PageGeneralChatPage::updateClient(oaic::Manager *client)
 {
-    ui->chatConfigWidget->updateCntx(cntx);
-    ui->chatWidget->setAppCntx(cntx);
-}
-
-void PageGeneralChatPage::updateClient(oaic::Manager *_client)
-{
-
+    ui->chatWidget->setClient(client);
+    ui->chatConfigWidget->updateClient(client);
 }
 
 void PageGeneralChatPage::changeCurrentToolPage(int index)

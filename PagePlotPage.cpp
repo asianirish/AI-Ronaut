@@ -13,12 +13,6 @@ PagePlotPage::~PagePlotPage()
     delete ui;
 }
 
-void PagePlotPage::updateCntx(AppContext *cntx)
-{
-    Q_UNUSED(cntx)
-    // TODO: do nothing?
-}
-
 void PagePlotPage::updateClient(oaic::Manager *_client)
 {
     Q_UNUSED(_client)

@@ -2,7 +2,6 @@
 #define PAGEWELCOMEPAGE_H
 
 #include "PageWidget.h"
-#include "AppContext.h"
 
 
 namespace Ui {
@@ -43,14 +42,10 @@ signals:
     void openNetworkConfigAction();
 
 protected:
-    void updateCntx(AppContext *cntx) override;
     void updateClient(oaic::Manager *_client) override;
 
 private:
     Ui::PageWelcomePage *ui;
-
-    [[deprecated("use _client instead")]]
-    AppContext _appContext;
 
 private:
     void displaySuccess();
@@ -59,12 +54,7 @@ private:
 
     void openAction(const QString &actionData);
 
-    [[deprecated("use updateClient instead of this")]]
-    bool checkKeyFromEnv();
-
     void onKeySuccess();
-
-
 
 };
 

@@ -37,30 +37,23 @@ MainWindow::~MainWindow()
 }
 
 void MainWindow::onOpenImage()
-{
-    auto mainPage = ui->tabWidget->widget(0);
-    auto welcomePage = qobject_cast<PageWelcomePage *>(mainPage);
-    
+{ 
     PageWidget *imagePage = new PageImagePage(this);
-    imagePage->setCntx(welcomePage->cntx());
 
     int index = ui->tabWidget->addTab(imagePage, tr("Image"));
     ui->tabWidget->setCurrentIndex(index);
 
-    // TODO: delete the code above
     imagePage->setClient(&_client); // connect the client here
 }
 
 void MainWindow::onOpenChat()
 {
-    auto mainPage = ui->tabWidget->widget(0);
-    auto page = qobject_cast<PageWelcomePage *>(mainPage);
-
     PageWidget *specificPage = new PageGeneralChatPage(this);
-    specificPage->setCntx(page->cntx());
 
     int index = ui->tabWidget->addTab(specificPage, tr("Chat"));
     ui->tabWidget->setCurrentIndex(index);
+
+    specificPage->setClient(&_client); // connect the client here
 }
 
 void MainWindow::onOpenDonate()
@@ -81,11 +74,7 @@ void MainWindow::onOpenAbout()
 
 void MainWindow::onOpenPlot()
 {
-    auto mainPage = ui->tabWidget->widget(0);
-    auto page = qobject_cast<PageWelcomePage *>(mainPage);
-
     PageWidget *specificPage = new PagePlotPage(this);
-    specificPage->setCntx(page->cntx());
 
     int index = ui->tabWidget->addTab(specificPage, tr("Plot"));
     ui->tabWidget->setCurrentIndex(index);
@@ -93,11 +82,8 @@ void MainWindow::onOpenPlot()
 
 void MainWindow::onOpenNetworkConfig()
 {
-    auto mainPage = ui->tabWidget->widget(0);
-    auto page = qobject_cast<PageWelcomePage *>(mainPage);
-
     NetworkConfiWidget *wdt = new NetworkConfiWidget(this);
-    wdt->updateCntx(page->cntx());
+//    wdt->updateCntx(page->cntx()); // TODO: updateClient
 
     int index = ui->tabWidget->addTab(wdt, tr("Network Config"));
     ui->tabWidget->setCurrentIndex(index);

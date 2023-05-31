@@ -49,12 +49,6 @@ void PageImagePage::keyPressEvent(QKeyEvent *event)
     QWidget::keyPressEvent(event);
 }
 
-void PageImagePage::updateCntx(AppContext *cntx)
-{
-    Q_UNUSED(cntx)
-    // TODO: add your code here
-}
-
 void PageImagePage::updateClient(oaic::Manager *client)
 {
     connect(client->image(), &oaic::Image::urlResponse, this, &PageImagePage::onUrlResponse);
@@ -76,24 +70,9 @@ void PageImagePage::on_requestButton_clicked()
     ui->requestButton->setEnabled(false);
 
     auto size = ui->imageSizeComboBox->currentText();
-/*
-    QString err;
-    auto urlStr = this->cntx()->loadImage(text, size, &err);
-
-    if (urlStr.isEmpty() && !err.isEmpty()) {
-        QMessageBox::warning(this, "error", err);
-        ui->requestButton->setEnabled(true);
-        ui->imgLabel->setEnabled(true);
-        return;
-    }
-
-    const QUrl url = QUrl(urlStr);
-    QNetworkRequest request(url);
-    _nam->get(request);
-*/
 
     // TODO: delete the deprecated code above
-    client()->image()->sendGenImageRequest(text, size); // TODO: now causes QNetworkReply::AuthenticationRequiredError
+    client()->image()->sendGenImageRequest(text, size);
 }
 
 void PageImagePage::onDownloadFinished(QNetworkReply *reply)
@@ -114,11 +93,6 @@ void PageImagePage::on_actionSave_Image_as_File_triggered()
         qDebug() << "nothing to save";
         return;
     }
-
-//    QDateTime date = QDateTime::currentDateTime();
-//    QString formattedTime = date.toString("yyyyMMddhhmmss");
-//    QByteArray formattedTimeMsg = formattedTime.toLocal8Bit();
-//    auto fileName = QFileDialog::getSaveFileName(this, tr("Save Image"), formattedTimeMsg + ".png", tr("Image Files (*.png *.jpg *.bmp)"));
 
     auto text = ui->requestEdit->toPlainText();
     auto ftext = potato_util::phraseToCamelCase(text, 7);
