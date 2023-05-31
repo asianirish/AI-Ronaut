@@ -17,8 +17,6 @@ public:
     ~ChatSessionWidget();
 
 private slots:
-    void on_startSessionBox_stateChanged(int state);
-
     void onSessionCreated(const QString &sessionId);
 
     void on_sessionListWidget_itemActivated(QListWidgetItem *item);
