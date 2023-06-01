@@ -27,6 +27,8 @@ public:
 
     bool isSession() const;
 
+    SessionPtr currentSession() const;
+
 private:
     OrderedMap<QString, SessionPtr> _sessions;
 

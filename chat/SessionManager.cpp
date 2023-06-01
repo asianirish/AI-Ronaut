@@ -82,6 +82,11 @@ bool SessionManager::isSession() const
     return !_currentSessionId.isEmpty();
 }
 
+SessionPtr SessionManager::currentSession() const
+{
+    return session(currentSessionId());
+}
+
 SessionManager::SessionManager(QObject *parent)
     : QObject{parent}
 {
