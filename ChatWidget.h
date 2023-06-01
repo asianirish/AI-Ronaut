@@ -49,8 +49,7 @@ private slots:
     void onMessageResponseComplete(QObject *); // onReplyDestroyed instead of onReplyComplete
 
 signals:
-    void sendSingleMessage(const oaic::ModelContext &modelCntx, const QString &input);
-    void sendSessionMessages(const oaic::ModelContext &modelCntx, const QString &input); // TODO: use if a session mode is activated
+    void sendMessage(const oaic::ModelContext &modelCntx, const QString &input);
 
 private:
     Ui::ChatWidget *ui;

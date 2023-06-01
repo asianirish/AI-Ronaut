@@ -18,8 +18,10 @@ PageGeneralChatPage::~PageGeneralChatPage()
 
 void PageGeneralChatPage::updateClient(oaic::Manager *client)
 {
+    qDebug() << "SYSTEM_MESSAGE:" << ui->systemMessageWidget->systemMessage();
+
     // TODO: connect to SystemMEssageWidget and resend with a system message, not directly with oaic::Chat
-    connect(ui->chatWidget, &ChatWidget::sendSingleMessage, client->chat(), &oaic::Chat::onSingleMessageSent);
+    connect(ui->chatWidget, &ChatWidget::sendMessage, client->chat(), &oaic::Chat::onSingleMessageSent);
 
     // TODO: ui->systemMessageWidget
     // TODO: connect(ui->chatWidget, &ChatWidget::sendSingleMessage, ui->systemMessageWidget, ...

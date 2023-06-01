@@ -98,8 +98,8 @@ void ChatWidget::queryAiModel()
 
     qDebug() << "MODEL_NAME:" << _modelCntx->modelName();
 
-    // direct non-session request // TODO: if (!useSession)
-    emit sendSingleMessage(*_modelCntx, input);
+    // ChatWidget don't care about sessions & the system message
+    emit sendMessage(*_modelCntx, input);
 }
 
 void ChatWidget::onDeltaReady(const QString &deltaData)
