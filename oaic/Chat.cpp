@@ -194,7 +194,7 @@ void Chat::onSingleMessageSent(const ModelContext &modelCntx, const QString &con
     sendChatRequest(modelCntx, content, sysMsg, true);
 }
 
-void Chat::onMultiRequest(const ModelContext &modelCntx, const QList<MsgData> messages)
+void Chat::onSessionMessagesSent(const ModelContext &modelCntx, const QList<MsgData> messages)
 {
     sendChatRequest(modelCntx, messages, true);
 }

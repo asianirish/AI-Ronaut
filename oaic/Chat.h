@@ -26,7 +26,7 @@ private:
 
 public slots:
     void onSingleMessageSent(const ModelContext &modelCntx, const QString &content, const QString &sysMsg);
-    void onMultiRequest(const ModelContext &modelCntx, const QList<MsgData> messages);
+    void onSessionMessagesSent(const ModelContext &modelCntx, const QList<MsgData> messages);
 
 private slots:
     void handleResponse(const QString &response);
