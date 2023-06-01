@@ -19,9 +19,8 @@ NetworkConfiWidget::~NetworkConfiWidget()
 void NetworkConfiWidget::updateClient(oaic::Manager *client)
 {
     _client = client;
-// TODO:
-//    int32_t timeOutSec = _client->timeOutMs() / 1000;
-//    ui->timeOutBox->setValue(timeOutSec);
+    int timeOutSec = _client->timeout() / 1000;
+    ui->timeOutBox->setValue(timeOutSec);
 }
 
 void NetworkConfiWidget::on_timeOutBox_valueChanged(int timeoutSec)
@@ -36,7 +35,7 @@ void NetworkConfiWidget::on_applyButton_clicked()
     int32_t timeoutSec = ui->timeOutBox->value();
     int32_t timeoutMs = timeoutSec * 1000;
 
-// TODO:    _client->setTimeOutMs(timeoutMs);
+    _client->setTimeout(timeoutMs);
 
     QSettings settings;
     settings.setValue("oai/timeout", timeoutMs);
