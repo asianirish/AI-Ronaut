@@ -18,13 +18,10 @@ PageGeneralChatPage::~PageGeneralChatPage()
 
 void PageGeneralChatPage::updateClient(oaic::Manager *client)
 {
-    qDebug() << "SYSTEM_MESSAGE:" << ui->systemMessageWidget->systemMessage();
-
-    // TODO: connect to SystemMEssageWidget and resend with a system message, not directly with oaic::Chat
-    connect(ui->chatWidget, &ChatWidget::sendMessage, client->chat(), &oaic::Chat::onSingleMessageSent);
-
-    // TODO: ui->systemMessageWidget
-    // TODO: connect(ui->chatWidget, &ChatWidget::sendSingleMessage, ui->systemMessageWidget, ...
+//    connect(ui->chatWidget, &ChatWidget::sendMessage, client->chat(), &oaic::Chat::onSingleMessageSent);
+    connect(ui->chatWidget, &ChatWidget::sendMessage, this, &PageGeneralChatPage::onUserMessage);
+    connect(this, &PageGeneralChatPage::sendSingleMessage, client->chat(), &oaic::Chat::onSingleMessageSent);
+    // TODO: connect sendSessionMessages
 
 
     ui->chatWidget->setClient(client);
@@ -34,5 +31,14 @@ void PageGeneralChatPage::updateClient(oaic::Manager *client)
 void PageGeneralChatPage::changeCurrentToolPage(int index)
 {
     ui->tabWidget->setCurrentIndex(index);
+}
+
+void PageGeneralChatPage::onUserMessage(const oaic::ModelContext &modelCntx, const QString &message)
+{
+    QString systemMessage = ui->systemMessageWidget->systemMessage();
+    qDebug() << "SYSTEM_MESSAGE:" << systemMessage;
+// TODO:    if (!SessionManager::instance()->isSession()) {
+
+    emit sendSingleMessage(modelCntx, message, systemMessage);
 }
 

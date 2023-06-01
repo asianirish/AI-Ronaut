@@ -22,6 +22,11 @@ protected:
 
 private slots:
     void changeCurrentToolPage(int index);
+    void onUserMessage(const oaic::ModelContext &modelCntx, const QString &message);
+
+signals:
+    void sendSingleMessage(const oaic::ModelContext &modelCntx, const QString &message, const QString &systemMessage);
+    // TODO: sendSessionMessages();
 
 private:
     Ui::PageGeneralChatPage *ui;

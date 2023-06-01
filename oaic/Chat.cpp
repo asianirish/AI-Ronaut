@@ -88,10 +88,10 @@ void Chat::sendSimpleChatRequest(const QString &model, const QList<MsgData> mess
     (void)resp;
 }
 
-void Chat::sendChatRequest(const ModelContext &modelCntx, const QString &content, bool stream) const
+void Chat::sendChatRequest(const ModelContext &modelCntx, const QString &content, const QString &sysMsg, bool stream) const
 {
-    MsgData systemMsg("system",
-                      "Use your creativity to inspire positivity and promote well-being in your response");
+    // "Use your creativity to inspire positivity and promote well-being in your response"
+    MsgData systemMsg("system", sysMsg);
 
     MsgData userMsg("user", content);
     QList<MsgData> messages{systemMsg, userMsg};
@@ -189,9 +189,9 @@ QStringList Chat::extractMessages(const QString &response, const QString &msgKey
     return messages;
 }
 
-void Chat::onSingleMessageSent(const ModelContext &modelCntx, const QString &content)
+void Chat::onSingleMessageSent(const ModelContext &modelCntx, const QString &content, const QString &sysMsg)
 {
-    sendChatRequest(modelCntx, content, true);
+    sendChatRequest(modelCntx, content, sysMsg, true);
 }
 
 void Chat::onMultiRequest(const ModelContext &modelCntx, const QList<MsgData> messages)
