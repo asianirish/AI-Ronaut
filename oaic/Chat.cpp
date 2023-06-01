@@ -68,7 +68,7 @@ void Chat::sendSimpleChatRequest(const QString &model, const QString &content, b
     (void)resp;
 }
 
-void Chat::sendSimpleChatRequest(const QString &model, const QList<MsgData> messages, bool stream) const
+void Chat::sendSimpleChatRequest(const QString &model, const MsgDataList messages, bool stream) const
 {
     QJsonObject obj;
     obj.insert("model", model); // "gpt-4"
@@ -100,7 +100,7 @@ void Chat::sendChatRequest(const ModelContext &modelCntx, const QString &content
 
 }
 
-void Chat::sendChatRequest(const ModelContext &modelCntx, const QList<MsgData> messages, bool stream) const
+void Chat::sendChatRequest(const ModelContext &modelCntx, const MsgDataList messages, bool stream) const
 {
     QJsonObject obj;
     obj.insert("model", modelCntx.modelName());
@@ -194,7 +194,7 @@ void Chat::onSingleMessageSent(const ModelContext &modelCntx, const QString &con
     sendChatRequest(modelCntx, content, sysMsg, true);
 }
 
-void Chat::onSessionMessagesSent(const ModelContext &modelCntx, const QList<MsgData> messages)
+void Chat::onSessionMessagesSent(const ModelContext &modelCntx, const MsgDataList messages)
 {
     sendChatRequest(modelCntx, messages, true);
 }
