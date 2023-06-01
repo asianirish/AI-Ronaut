@@ -25,6 +25,7 @@ public:
     void selectSession(const QString &sessionId); // synonim of setCurrentSessionId
     void deselectSession();
 
+    bool isSession() const;
 
 private:
     OrderedMap<QString, SessionPtr> _sessions;

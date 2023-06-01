@@ -77,6 +77,11 @@ void SessionManager::deselectSession()
     _currentSessionId.clear();
 }
 
+bool SessionManager::isSession() const
+{
+    return !_currentSessionId.isEmpty();
+}
+
 SessionManager::SessionManager(QObject *parent)
     : QObject{parent}
 {
