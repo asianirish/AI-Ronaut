@@ -27,23 +27,23 @@ TestChatConsumer::TestChatConsumer(QObject *parent)
 void TestChatConsumer::requestChat()
 {
     static bool firstTime = true;
-    static bool useStream = false;
+    static bool useStream = true;
 
 
     if (firstTime) {
-        std::string useStreamStr;
+//        std::string useStreamStr;
 
-        std::cout << "Would you like to use a stream response (y/n):";
-        std::cin >> useStreamStr;
+//        std::cout << "Would you like to use a stream response (y/n):";
+//        std::cin >> useStreamStr;
 
-        if (useStreamStr == "y" || useStreamStr == "yes") {
-           useStream = true;
-        }
+//        if (useStreamStr == "y" || useStreamStr == "yes") {
+//           useStream = true;
+//        }
 
-        {
-            std::string x;
-            std::getline(std::cin,x); // According to authoritative sources (in particular, my opinion ;), this is an acceptable way to solve this well-known issue.
-        }
+//        {
+//            std::string x;
+//            std::getline(std::cin,x); // According to authoritative sources (in particular, my opinion ;), this is an acceptable way to solve this well-known issue.
+//        }
 
         {
             std::string userPrompt;
