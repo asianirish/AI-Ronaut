@@ -51,13 +51,14 @@ void PageWelcomePage::on_browseKeyButton_clicked()
 
     displayWait();
 
-    QString key;
-    QString err;
-    bool ok = true; // _appContext.openKeyFile(fileName, key, &err);
-    // TODO: _client.openKeyFile
+    qDebug() << "FILE_NAME:" << fileName;
+
+    bool ok = client()->auth().setKeyFile(fileName); // _appContext.openKeyFile(fileName, key, &err);
+
+    // TODO: error and check if the file is correct
 
     if (!ok) {
-        QMessageBox::warning(this, "error", err);
+        QMessageBox::warning(this, "error", "Unable to read the key file");
         displayError();
         return;
     }
