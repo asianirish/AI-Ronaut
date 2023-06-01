@@ -83,7 +83,7 @@ void MainWindow::onOpenPlot()
 void MainWindow::onOpenNetworkConfig()
 {
     NetworkConfiWidget *wdt = new NetworkConfiWidget(this);
-//    wdt->updateCntx(page->cntx()); // TODO: updateClient
+    wdt->updateClient(&_client);
 
     int index = ui->tabWidget->addTab(wdt, tr("Network Config"));
     ui->tabWidget->setCurrentIndex(index);
