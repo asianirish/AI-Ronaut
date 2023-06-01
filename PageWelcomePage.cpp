@@ -131,9 +131,9 @@ void PageWelcomePage::onKeySuccess()
 {
     // read other app context settings here
     QSettings settings;
-    int32_t timeout = settings.value("oai/timeout", 30000).toInt(); // TODO: oaic::Manager::DEFAULT_TIMEOUT_MS
+    int timeout = settings.value("oai/timeout", oaic::Manager::DEFAULT_TIMEOUT).toInt();
 
-    (void)timeout; // TODO: _client->setTimeout(timeout);
+    client()->setTimeout(timeout);
 
     displaySuccess();
 }
