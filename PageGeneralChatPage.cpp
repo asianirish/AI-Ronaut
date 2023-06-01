@@ -1,6 +1,8 @@
 #include "PageGeneralChatPage.h"
 #include "ui_PageGeneralChatPage.h"
 
+#include "chat/SessionManager.h"
+
 PageGeneralChatPage::PageGeneralChatPage(QWidget *parent) :
     PageWidget(parent),
     ui(new Ui::PageGeneralChatPage)
@@ -37,8 +39,14 @@ void PageGeneralChatPage::onUserMessage(const oaic::ModelContext &modelCntx, con
 {
     QString systemMessage = ui->systemMessageWidget->systemMessage();
     qDebug() << "SYSTEM_MESSAGE:" << systemMessage;
-// TODO:    if (!SessionManager::instance()->isSession()) {
+    auto sm = chat::SessionManager::instance();
 
-    emit sendSingleMessage(modelCntx, message, systemMessage);
+    if (sm->isSession()) {
+        auto session = sm->currentSession();
+        auto messages = session->msgDataList();
+        emit sendSessionMessages(modelCntx, messages);
+    } else {
+        emit sendSingleMessage(modelCntx, message, systemMessage);
+    }
 }
 

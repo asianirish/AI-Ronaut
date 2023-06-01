@@ -3,6 +3,8 @@
 
 #include "PageWidget.h"
 
+#include <Chat.h>
+
 #include <ModelContext.h>
 
 namespace Ui {
@@ -26,7 +28,7 @@ private slots:
 
 signals:
     void sendSingleMessage(const oaic::ModelContext &modelCntx, const QString &message, const QString &systemMessage);
-    // TODO: sendSessionMessages();
+    void sendSessionMessages(const oaic::ModelContext &modelCntx, oaic::MsgDataList &messages);
 
 private:
     Ui::PageGeneralChatPage *ui;
