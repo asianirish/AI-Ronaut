@@ -1,5 +1,7 @@
 #include "Session.h"
 
+using namespace oaic;
+
 namespace chat {
 
 Session::Session() : _isPersistent(false)
@@ -91,6 +93,20 @@ SessionData Session::data() const
 QDateTime Session::accessed() const
 {
     return _accessed;
+}
+
+oaic::MsgDataList Session::msgDataList() const
+{
+    MsgDataList lst;
+
+    lst.append(_systemMessage.msgData());
+
+    for (auto msg : _messageList) {
+        auto msgData = msg->msgData();
+        lst.append(msgData);
+    }
+
+    return lst;
 }
 
 } // namespace chat

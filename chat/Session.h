@@ -3,6 +3,8 @@
 
 #include "SystemMessage.h"
 
+#include <Chat.h>
+
 #include <QList>
 #include <QUuid>
 #include <QDateTime>
@@ -43,6 +45,8 @@ public:
     SessionData data() const;
 
     QDateTime accessed() const;
+
+    oaic::MsgDataList msgDataList() const;
 
 private:
     SystemMessage _systemMessage;
