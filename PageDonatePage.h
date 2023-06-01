@@ -20,6 +20,8 @@ private slots:
 
     void on_clipComboBox_currentIndexChanged(int index);
 
+    void on_copyAllTextButton_clicked();
+
 private:
     Ui::PageDonatePage *ui;
 };

@@ -44,3 +44,11 @@ void PageDonatePage::on_clipComboBox_currentIndexChanged(int index)
     on_copyButton_clicked();
 }
 
+
+void PageDonatePage::on_copyAllTextButton_clicked()
+{
+    QString data = ui->textBrowser->toPlainText();
+    QClipboard *clipboard = QGuiApplication::clipboard();
+    clipboard->setText(data);
+}
+
