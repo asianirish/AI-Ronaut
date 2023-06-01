@@ -15,6 +15,8 @@ public:
     explicit SystemMessageWidget(QWidget *parent = nullptr);
     ~SystemMessageWidget();
 
+    QString systemMessage() const;
+
 protected:
     void showEvent(QShowEvent *event) override;
 

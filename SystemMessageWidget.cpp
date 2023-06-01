@@ -13,6 +13,15 @@ SystemMessageWidget::~SystemMessageWidget()
     delete ui;
 }
 
+QString SystemMessageWidget::systemMessage() const
+{
+    QString msg = ui->textEdit->toPlainText();
+    if (msg.isEmpty()) {
+        msg = ui->textEdit->placeholderText();
+    }
+    return msg;
+}
+
 void SystemMessageWidget::showEvent(QShowEvent *event)
 {
     QWidget::showEvent(event);
