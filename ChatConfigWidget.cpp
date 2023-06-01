@@ -55,6 +55,28 @@ ModelContext *ChatConfigWidget::modelCntx() const
 void ChatConfigWidget::setModelCntx(ModelContext *newModelCntx)
 {
     _modelCntx = newModelCntx;
+
+    // update elements
+    int temperatureInt = _modelCntx->temperature() * 100;
+    ui->temperatureSlider->setValue(temperatureInt);
+    on_temperatureSlider_valueChanged(temperatureInt); // call directly because the value can be the same
+
+    int maxTokens = _modelCntx->maxTokens();
+    ui->maxTokensSlider->setValue(maxTokens);
+    on_maxTokensSlider_valueChanged(maxTokens);
+
+    int topPInt = _modelCntx->topP() * 100;
+    ui->topPSlider->setValue(topPInt);
+    on_topPSlider_valueChanged(topPInt);
+
+    int frequencyInt = _modelCntx->frequencyPenalty() * 100;
+    ui->frequencyPenaltySlider->setValue(frequencyInt);
+    on_frequencyPenaltySlider_valueChanged(frequencyInt);
+
+    int presenceInt = _modelCntx->presencePenalty() * 100;
+    ui->presencePenaltySlider->setValue(presenceInt);
+    on_presencePenaltySlider_valueChanged(presenceInt);
+
 }
 
 void ChatConfigWidget::on_maxTokensSlider_sliderMoved(int position)
