@@ -31,8 +31,12 @@ bool Auth::setKeyFile(const std::filesystem::__cxx11::path &path)
 {
     if (std::filesystem::exists(path) && std::filesystem::is_regular_file(path) && std::filesystem::file_size(path) > 0) {
         QFile file(path);
+
+        file.open(QIODeviceBase::ReadOnly| QIODevice::Text);
+
         if (file.isOpen()) {
             _key = file.readLine();
+            _key = _key.trimmed();
             return setAuthorizationHeader();
         }
     }
