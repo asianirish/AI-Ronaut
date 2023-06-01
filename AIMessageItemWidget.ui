@@ -26,7 +26,7 @@
       </sizepolicy>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-color: rgb(255, 255, 255);</string>
+      <string notr="true">background-color: #F0F8FF;</string>
      </property>
      <property name="frameShape">
       <enum>QFrame::NoFrame</enum>
