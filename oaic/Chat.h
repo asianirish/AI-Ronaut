@@ -25,7 +25,8 @@ private:
     QStringList extractMessages(const QString &response, const QString &msgKey);
 
 public slots:
-    void onRequest(const ModelContext &modelCntx, const QString &content);
+    void onSingleMessageSent(const ModelContext &modelCntx, const QString &content); // TODO: add a systemMessage argument
+    void onMultiRequest(const ModelContext &modelCntx, const QList<MsgData> messages);
 
 private slots:
     void handleResponse(const QString &response);
