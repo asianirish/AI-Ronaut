@@ -117,31 +117,31 @@ QNetworkReply *Component::sendGetRequest(const QString &endpoint) const
 
 QNetworkRequest Component::request(const QString &endpoint, const QString &contentType) const
 {
-    QNetworkRequest rqst;
-    rqst.setUrl(QUrl(THE_URL + endpoint));
+    QNetworkRequest rqst = this->request(endpoint);
+
     rqst.setHeader(QNetworkRequest::ContentTypeHeader, contentType);
-
-    auto headers = _auth->headers();
-
-    for (auto &[key, value] : headers.toStdMap()) {
-        rqst.setRawHeader(key, value);
-    }
 
     return rqst;
 }
 
 QNetworkRequest Component::request(const QString &endpoint, const Headers &rawHeaders) const
 {
-    QNetworkRequest rqst;
-    rqst.setUrl(QUrl(THE_URL + endpoint));
+    QNetworkRequest rqst = this->request(endpoint);
 
-    auto headers = _auth->headers();
-
-    for (auto &[key, value] : headers.toStdMap()) {
+    for (auto &[key, value] : rawHeaders.toStdMap()) {
         rqst.setRawHeader(key, value);
     }
 
-    for (auto &[key, value] : rawHeaders.toStdMap()) {
+    return rqst;
+}
+
+QNetworkRequest Component::request(const QString &endpoint) const
+{
+    QNetworkRequest rqst;
+    rqst.setUrl(QUrl(THE_URL + endpoint));
+    auto headers = _auth->headers();
+
+    for (auto &[key, value] : headers.toStdMap()) {
         rqst.setRawHeader(key, value);
     }
 
@@ -153,10 +153,7 @@ QNetworkAccessManager *Component::networkAccessManager() const
     auto mngr = parentManager();
     auto nam = mngr->networkAccessManager();
 
-    // refresh timeout every time before using
-    nam->setTransferTimeout(_auth->timeout());
-
-    // TODO: set other settings from _auth
+    // QNetworkAccessManager timeout already set in Manager
 
     return nam;
 }

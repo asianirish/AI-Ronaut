@@ -22,7 +22,6 @@ public:
     explicit Component(Auth *auth, Manager *parent);
 
     virtual ~Component() = default;
-
 private slots:
 
     void onJsonRequestFinished();
@@ -39,7 +38,7 @@ private:
 
     QNetworkRequest request(const QString &endpoint, const QString &contentType) const;
     QNetworkRequest request(const QString &endpoint, const Headers &rawHeaders) const;
-
+    QNetworkRequest request(const QString &endpoint) const;
 
     QNetworkAccessManager *networkAccessManager() const;
 
