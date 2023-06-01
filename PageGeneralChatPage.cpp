@@ -18,6 +18,13 @@ PageGeneralChatPage::~PageGeneralChatPage()
 
 void PageGeneralChatPage::updateClient(oaic::Manager *client)
 {
+    // TODO: connect to SystemMEssageWidget and resend with a system message, not directly with oaic::Chat
+    connect(ui->chatWidget, &ChatWidget::sendSingleMessage, client->chat(), &oaic::Chat::onSingleMessageSent);
+
+    // TODO: ui->systemMessageWidget
+    // TODO: connect(ui->chatWidget, &ChatWidget::sendSingleMessage, ui->systemMessageWidget, ...
+
+
     ui->chatWidget->setClient(client);
     ui->chatConfigWidget->updateClient(client);
 }

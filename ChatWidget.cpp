@@ -98,9 +98,8 @@ void ChatWidget::queryAiModel()
 
     qDebug() << "MODEL_NAME:" << _modelCntx->modelName();
 
-
-    // good request
-    emit requestStreamChat(*_modelCntx, input);
+    // direct non-session request // TODO: if (!useSession)
+    emit sendSingleMessage(*_modelCntx, input);
 }
 
 void ChatWidget::onDeltaReady(const QString &deltaData)
@@ -233,7 +232,6 @@ void ChatWidget::setClient(oaic::Manager *newClient)
     _client = newClient;
 
     // good place to connect the _client
-    connect(this, &ChatWidget::requestStreamChat, _client->chat(), &oaic::Chat::onRequest);
     connect(_client->chat(), &oaic::Chat::messageResponseStream, this, &ChatWidget::onMessageResponseStream);
     connect(_client->chat(), &oaic::Component::replyDestroyed, this, &ChatWidget::onMessageResponseComplete);
     connect(_client->chat(), &oaic::Component::responseError, this, &ChatWidget::onDeltaError);
