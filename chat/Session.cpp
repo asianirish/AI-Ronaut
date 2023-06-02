@@ -30,7 +30,13 @@ QList<MessagePtr> Session::messageList() const
 
 void Session::addMessage(const MessagePtr &msgPtr)
 {
-    _messageList.append(msgPtr);
+    auto sysMsgPtr = qSharedPointerDynamicCast<SystemMessage>(msgPtr);
+
+    if (sysMsgPtr) {
+        _systemMessage.setText(msgPtr->text());
+    } else {
+        _messageList.append(msgPtr);
+    }
     _accessed = QDateTime::currentDateTime();
 }
 
