@@ -57,6 +57,7 @@ private:
     oaic::ModelContext *_modelCntx;
     oaic::Manager *_client;
 
+    // TODO: Assign a separate instance of MessagePtr to each MessageItemWidget instead
     QString _currentResponse;
 
 private:
