@@ -9,6 +9,10 @@
 
 namespace chat {
 
+class Message;
+
+using MessagePtr = QSharedPointer<Message>;
+
 class Message
 {
 public:
@@ -32,13 +36,15 @@ public:
 
     oaic::MsgData msgData() const;
 
+    static MessagePtr createMessage(const oaic::MsgData &msgData);
+    static MessagePtr createMessage(const oaic::Role &role, const QString &content);
+
 private:
     QString _text;
 
     static const QMap<ROLE, QString> ROLE_TO_STRING;
 };
 
-using MessagePtr = QSharedPointer<Message>;
 
 } // namespace chat
 
