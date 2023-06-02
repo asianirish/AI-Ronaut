@@ -111,6 +111,7 @@ void ChatWidget::onDeltaReady(const QString &deltaData)
 
     if (aiWidget == nullptr) {
         aiWidget = new AIMessageItemWidget(this);
+        _currentResponse = deltaData;
         addMessageItem(aiWidget, deltaData);
         QTimer::singleShot(1, this, &ChatWidget::adjustLastItem);
         return;
