@@ -207,7 +207,9 @@ void ChatWidget::on_isSessionBox_stateChanged(int isSession)
         gSessions->createSession(camelMsg);
 
         // add last two messages to the current session
-        gSessions->addMessage<chat::UserMessage>(msg);
+        if (!msg.isEmpty()) {
+            gSessions->addMessage<chat::UserMessage>(msg);
+        }
         if (!_currentResponse.isEmpty()) {
             qDebug() << "_currentResponse:" << _currentResponse;
             gSessions->addMessage<chat::AssistantMessage>(_currentResponse); // TODO: already empty after _currentResponse.clear();
