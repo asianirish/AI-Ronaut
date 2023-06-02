@@ -29,6 +29,17 @@ public:
 
     SessionPtr currentSession() const;
 
+    template<typename T>
+    void addMessage(const QString &message) {
+        if (isSession()) {
+            chat::MessagePtr msgPtr = chat::MessagePtr(new T());
+            msgPtr->setText(message);
+            currentSession()->addMessage(msgPtr);
+        }
+    }
+
+    void saveAsTextFile() const;
+
 private:
     OrderedMap<QString, SessionPtr> _sessions;
 
