@@ -21,6 +21,8 @@ AIMessageItemWidget::~AIMessageItemWidget()
 void AIMessageItemWidget::appendText(const QString &deltaText)
 {
     QString prevText = textBrowser()->toPlainText();
+    qDebug() << "PREV_TEXT:" << prevText;
+    qDebug() << "DELTA_TEXT:" << deltaText;
     textBrowser()->setPlainText(prevText + deltaText);
 }
 
