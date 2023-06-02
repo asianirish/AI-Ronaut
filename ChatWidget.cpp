@@ -4,6 +4,8 @@
 #include "UserMessageItemWidget.h"
 #include "AIMessageItemWidget.h"
 
+#include "chat/UserMessage.h"
+#include "chat/AssistantMessage.h"
 #include "chat/SessionManager.h"
 
 #include "ui_ChatWidget.h"
@@ -114,6 +116,10 @@ void ChatWidget::onDeltaReady(const QString &deltaData)
         return;
     }
 
+    _currentResponse += deltaData;
+    qDebug() << "DELTA:" << deltaData;
+    qDebug() << "SUM:" << _currentResponse;
+
     aiWidget->appendText(deltaData);
     QTimer::singleShot(1, this, &ChatWidget::adjustLastItem);
 }
@@ -173,10 +179,8 @@ QWidget *ChatWidget::lastChatItemMessageWidget() const
 
 void ChatWidget::on_isSessionBox_stateChanged(int isSession)
 {
-    auto sm = chat::SessionManager::instance();
-
     if (isSession == Qt::Unchecked) {
-        sm->deselectSession();
+        gSessions->deselectSession();
 //        ui->isSessionPersistentBox->setCheckState(Qt::Unchecked);
         ui->isSessionPersistentBox->setEnabled(false);
     } else {
@@ -194,15 +198,23 @@ void ChatWidget::on_isSessionBox_stateChanged(int isSession)
             msg = ui->textEdit->toPlainText();
         }
 
+        QString camelMsg;
         if (!msg.isNull()) {
-            msg = potato_util::phraseToCamelCase(msg, 7);
+            camelMsg = potato_util::phraseToCamelCase(msg, 7);
         }
 
-        sm->createSession(msg);
+        gSessions->createSession(camelMsg);
+
+        // add last two messages to the current session
+        gSessions->addMessage<chat::UserMessage>(msg);
+        if (!_currentResponse.isEmpty()) {
+            qDebug() << "_currentResponse:" << _currentResponse;
+            gSessions->addMessage<chat::AssistantMessage>(_currentResponse); // TODO: already empty after _currentResponse.clear();
+        }
 
         ui->isSessionPersistentBox->setEnabled(true);
 
-        // TODO: set system message
+        // TODO: set system message?
         ui->textEdit->setFocus();
     }
 }
@@ -216,7 +228,10 @@ void ChatWidget::onMessageResponseStream(const QStringList &deltaMessages)
 
 void ChatWidget::onMessageResponseComplete(QObject *)
 {
-     // TODO: if (_useSession) ?
+    if (gSessions->isSession()) {
+        gSessions->addMessage<chat::AssistantMessage>(_currentResponse);
+        _currentResponse.clear();
+    }
 
     qDebug() << "MESSAGE RESPONSE COMPLETE";
     ui->textEdit->setFocus();

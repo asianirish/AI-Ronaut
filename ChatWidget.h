@@ -57,6 +57,8 @@ private:
     oaic::ModelContext *_modelCntx;
     oaic::Manager *_client;
 
+    QString _currentResponse;
+
 private:
     void updateItemsHeight();
     void addMessageItem(ChatItemWidget *itemWidget, const QString &text);
