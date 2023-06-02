@@ -52,3 +52,9 @@ void ChatSessionWidget::on_sessionListWidget_currentTextChanged(const QString &c
     ui->sessionNameEdit->setText(currentText);
 }
 
+
+void ChatSessionWidget::on_saveAsTextFileButton_clicked()
+{
+    gSessions->saveAsTextFile();
+}
+

@@ -23,6 +23,8 @@ private slots:
 
     void on_sessionListWidget_currentTextChanged(const QString &currentText);
 
+    void on_saveAsTextFileButton_clicked();
+
 private:
     Ui::ChatSessionWidget *ui;
 };
