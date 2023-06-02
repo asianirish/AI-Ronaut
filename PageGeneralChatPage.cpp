@@ -23,6 +23,8 @@ void PageGeneralChatPage::updateClient(oaic::Manager *client)
 {
 //    connect(ui->chatWidget, &ChatWidget::sendMessage, client->chat(), &oaic::Chat::onSingleMessageSent);
     connect(ui->chatWidget, &ChatWidget::sendMessage, this, &PageGeneralChatPage::onUserMessage);
+
+    // TODO: do not connect to to oaic::Chat but call SessionManager functions
     connect(this, &PageGeneralChatPage::sendSingleMessage, client->chat(), &oaic::Chat::onSingleMessageSent);
     connect(this, &PageGeneralChatPage::sendSessionMessages, client->chat(), &oaic::Chat::onSessionMessagesSent);
 
@@ -39,20 +41,17 @@ void PageGeneralChatPage::onUserMessage(const oaic::ModelContext &modelCntx, con
 {
     QString systemMessage = ui->systemMessageWidget->systemMessage();
     qDebug() << "SYSTEM_MESSAGE:" << systemMessage;
-    auto sm = chat::SessionManager::instance();
 
-    if (sm->isSession()) {
-        auto session = sm->currentSession();
 
-        // add new message at the end of current session's message list
-        chat::MessagePtr msgPtr = chat::MessagePtr(new chat::UserMessage());
-        msgPtr->setText(message);
-        session->addMessage(msgPtr);
+    // TODO: call oaic::Chat from SessionManager
+    if (gSessions->isSession()) {
+
+        gSessions->addMessage<chat::SystemMessage>(systemMessage); // special case
+
+        gSessions->addMessage<chat::UserMessage>(message);
         // TODO: move to ChatWidget (?)
-        // TODO: add the response
-        // TODO: add the first message that was sent before the session was opened
 
-        auto messages = session->msgDataList();
+        auto messages = gSessions->currentSession()->msgDataList();
         emit sendSessionMessages(modelCntx, messages);
     } else {
         emit sendSingleMessage(modelCntx, message, systemMessage);
