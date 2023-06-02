@@ -1,0 +1,3 @@
+
+* The first letter of the message is lost when saving
+* Assign a separate instance of MessagePtr to each MessageItemWidget

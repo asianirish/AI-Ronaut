@@ -108,6 +108,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 DISTFILES += \
     LICENSE  \
     README.md \
+    TODO \
     oaic/README.md
 
 RESOURCES += \
