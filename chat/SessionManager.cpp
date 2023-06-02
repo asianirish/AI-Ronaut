@@ -87,6 +87,13 @@ SessionPtr SessionManager::currentSession() const
     return session(currentSessionId());
 }
 
+void SessionManager::saveAsTextFile() const
+{
+    if (isSession()) {
+        currentSession()->saveAsTextFile();
+    }
+}
+
 SessionManager::SessionManager(QObject *parent)
     : QObject{parent}
 {
