@@ -12,8 +12,7 @@ ChatSessionWidget::ChatSessionWidget(QWidget *parent) :
 
     ui->sessionListWidget->setSortingEnabled(true);
 
-    auto sm = chat::SessionManager::instance();
-    connect(sm, &chat::SessionManager::sessionCreated, this, &ChatSessionWidget::onSessionCreated);
+    connect(gSessions, &chat::SessionManager::sessionCreated, this, &ChatSessionWidget::onSessionCreated);
 }
 
 ChatSessionWidget::~ChatSessionWidget()
@@ -23,8 +22,7 @@ ChatSessionWidget::~ChatSessionWidget()
 
 void ChatSessionWidget::onSessionCreated(const QString &sessionId)
 {
-    auto sm = chat::SessionManager::instance();
-    auto session = sm->session(sessionId);
+    auto session = gSessions->session(sessionId);
 
     chat::SessionItem *item = new chat::SessionItem();
     item->setSessionData(session->data());
