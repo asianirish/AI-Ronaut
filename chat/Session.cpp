@@ -1,5 +1,7 @@
 #include "Session.h"
 
+#include <QFile>
+
 using namespace oaic;
 
 namespace chat {
@@ -107,12 +109,29 @@ oaic::MsgDataList Session::msgDataList() const
 
     lst.append(_systemMessage.msgData());
 
-    for (auto msg : _messageList) {
+    for (auto &msg : _messageList) {
         auto msgData = msg->msgData();
         lst.append(msgData);
     }
 
     return lst;
+}
+
+void Session::saveAsTextFile() const
+{
+    QFile file(_name);
+
+    if (file.open(QIODevice::WriteOnly | QIODevice::Text)) {
+        file.write(_systemMessage.roleAsString().toLatin1() + ": "); // write "system: "
+        file.write(_systemMessage.text().toUtf8() + "\n"); // can be in different languages
+
+        for (auto &msg : _messageList) {
+            file.write(msg->roleAsString().toLatin1() + ": "); // write "user: " or "assistant"
+            file.write(msg->text().toUtf8() + "\n"); // can be in different languages
+        }
+    }
+
+    file.close();
 }
 
 } // namespace chat

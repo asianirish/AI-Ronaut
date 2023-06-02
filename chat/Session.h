@@ -48,6 +48,8 @@ public:
 
     oaic::MsgDataList msgDataList() const;
 
+    void saveAsTextFile() const;
+
 private:
     SystemMessage _systemMessage;
     QList<MessagePtr> _messageList;
