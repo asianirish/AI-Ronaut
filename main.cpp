@@ -15,7 +15,7 @@ int main(int argc, char *argv[])
 
     qRegisterMetaType<oaic::ModelContext>();
 
-    QObject::connect(&a, &QApplication::aboutToQuit, chat::SessionManager::instance(), &chat::SessionManager::onQuit);
+    QObject::connect(&a, &QApplication::aboutToQuit, gSessions, &chat::SessionManager::onQuit);
 
     MainWindow w;
     w.show();
