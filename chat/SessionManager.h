@@ -61,4 +61,6 @@ private:
 
 } // namespace chat
 
+#define gSessions chat::SessionManager::instance()
+
 #endif // SESSIONMANAGER_H
