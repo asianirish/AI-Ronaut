@@ -1,6 +1,7 @@
 TODO:
 
 * Assign a separate instance of MessagePtr to each MessageItemWidget
+* Always make use of sessions
 
 DONE:
 
