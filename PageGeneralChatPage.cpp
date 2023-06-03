@@ -10,6 +10,9 @@ PageGeneralChatPage::PageGeneralChatPage(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    // good place to create a session (TODO: rename on the first message using CamelCase)
+    gSessions->createSession();
+
     ui->chatConfigWidget->setModelCntx(&_modelCntx);
     ui->chatWidget->setModelCntx(&_modelCntx);
 }
@@ -25,7 +28,6 @@ void PageGeneralChatPage::updateClient(oaic::Manager *client)
     connect(ui->chatWidget, &ChatWidget::sendMessage, this, &PageGeneralChatPage::onUserMessage);
 
     // TODO: do not connect to to oaic::Chat but call SessionManager functions
-    connect(this, &PageGeneralChatPage::sendSingleMessage, client->chat(), &oaic::Chat::onSingleMessageSent);
     connect(this, &PageGeneralChatPage::sendSessionMessages, client->chat(), &oaic::Chat::onSessionMessagesSent);
 
     ui->chatWidget->setClient(client);
@@ -44,17 +46,16 @@ void PageGeneralChatPage::onUserMessage(const oaic::ModelContext &modelCntx, con
 
 
     // TODO: call oaic::Chat from SessionManager
-    if (gSessions->isSession()) {
+    gSessions->addMessage<chat::SystemMessage>(systemMessage); // special case
 
-        gSessions->addMessage<chat::SystemMessage>(systemMessage); // special case
+    gSessions->addMessage<chat::UserMessage>(message);
+    // TODO: move to ChatWidget (?)
 
-        gSessions->addMessage<chat::UserMessage>(message);
-        // TODO: move to ChatWidget (?)
+    auto messages = gSessions->currentSession()->msgDataList();
+    emit sendSessionMessages(modelCntx, messages);
 
-        auto messages = gSessions->currentSession()->msgDataList();
-        emit sendSessionMessages(modelCntx, messages);
-    } else {
-        emit sendSingleMessage(modelCntx, message, systemMessage);
-    }
+//    else {
+//        emit sendSingleMessage(modelCntx, message, systemMessage);
+//    }
 }
 

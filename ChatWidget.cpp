@@ -176,51 +176,49 @@ QWidget *ChatWidget::lastChatItemMessageWidget() const
 //    auto chatWidget = qobject_cast<ChatItemWidget*>(widget);
 }
 
+//void ChatWidget::on_isSessionBox_stateChanged(int isSession)
+//{
+//    if (isSession == Qt::Unchecked) {
+////         gSessions->deselectSession();
+//        ui->isSessionPersistentBox->setEnabled(false);
+//    } else {
 
+//        QString msg;
 
-void ChatWidget::on_isSessionBox_stateChanged(int isSession)
-{
-    if (isSession == Qt::Unchecked) {
-        gSessions->deselectSession();
-//        ui->isSessionPersistentBox->setCheckState(Qt::Unchecked);
-        ui->isSessionPersistentBox->setEnabled(false);
-    } else {
+//        if (ui->listWidget->count()) {
+//            UserMessageItemWidget *userWidget = lastChatItemMessageWidgetByType<UserMessageItemWidget>();
 
-        QString msg;
+//            if (userWidget) {
+//                msg = userWidget->text();
+//            }
 
-        if (ui->listWidget->count()) {
-            UserMessageItemWidget *userWidget = lastChatItemMessageWidgetByType<UserMessageItemWidget>();
+//        } else {
+//            msg = ui->textEdit->toPlainText();
+//        }
 
-            if (userWidget) {
-                msg = userWidget->text();
-            }
+//        QString camelMsg;
+//        if (!msg.isNull()) {
+//            camelMsg = potato_util::phraseToCamelCase(msg, 7);
+//        }
 
-        } else {
-            msg = ui->textEdit->toPlainText();
-        }
+//        // TODO: from the beginning
+//        gSessions->createSession(camelMsg);
 
-        QString camelMsg;
-        if (!msg.isNull()) {
-            camelMsg = potato_util::phraseToCamelCase(msg, 7);
-        }
+//        // add last two messages to the current session
+//        if (!msg.isEmpty()) {
+//            gSessions->addMessage<chat::UserMessage>(msg);
+//        }
+//        if (!_currentResponse.isEmpty()) {
+//            qDebug() << "_currentResponse:" << _currentResponse;
+//            gSessions->addMessage<chat::AssistantMessage>(_currentResponse); // TODO: already empty after _currentResponse.clear();
+//        }
 
-        gSessions->createSession(camelMsg);
+//        ui->isSessionPersistentBox->setEnabled(true);
 
-        // add last two messages to the current session
-        if (!msg.isEmpty()) {
-            gSessions->addMessage<chat::UserMessage>(msg);
-        }
-        if (!_currentResponse.isEmpty()) {
-            qDebug() << "_currentResponse:" << _currentResponse;
-            gSessions->addMessage<chat::AssistantMessage>(_currentResponse); // TODO: already empty after _currentResponse.clear();
-        }
-
-        ui->isSessionPersistentBox->setEnabled(true);
-
-        // TODO: set system message?
-        ui->textEdit->setFocus();
-    }
-}
+//        // TODO: set system message?
+//        ui->textEdit->setFocus();
+//    }
+//}
 
 void ChatWidget::onMessageResponseStream(const QStringList &deltaMessages)
 {
@@ -231,10 +229,8 @@ void ChatWidget::onMessageResponseStream(const QStringList &deltaMessages)
 
 void ChatWidget::onMessageResponseComplete(QObject *)
 {
-    if (gSessions->isSession()) {
-        gSessions->addMessage<chat::AssistantMessage>(_currentResponse);
-        _currentResponse.clear();
-    }
+    gSessions->addMessage<chat::AssistantMessage>(_currentResponse);
+    _currentResponse.clear();
 
     qDebug() << "MESSAGE RESPONSE COMPLETE";
     ui->textEdit->setFocus();
@@ -253,5 +249,14 @@ void ChatWidget::setClient(oaic::Manager *newClient)
     connect(_client->chat(), &oaic::Chat::messageResponseStream, this, &ChatWidget::onMessageResponseStream);
     connect(_client->chat(), &oaic::Component::replyDestroyed, this, &ChatWidget::onMessageResponseComplete);
     connect(_client->chat(), &oaic::Component::responseError, this, &ChatWidget::onDeltaError);
+}
+
+
+void ChatWidget::on_newSessionButton_clicked()
+{
+    gSessions->createSession();
+    ui->listWidget->clear();
+
+    ui->textEdit->setFocus();
 }
 

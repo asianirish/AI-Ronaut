@@ -27,7 +27,6 @@ private slots:
     void onUserMessage(const oaic::ModelContext &modelCntx, const QString &message);
 
 signals:
-    void sendSingleMessage(const oaic::ModelContext &modelCntx, const QString &message, const QString &systemMessage);
     void sendSessionMessages(const oaic::ModelContext &modelCntx, oaic::MsgDataList &messages);
 
 private:

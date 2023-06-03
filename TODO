@@ -1,8 +1,11 @@
 TODO:
 
 * Assign a separate instance of MessagePtr to each MessageItemWidget
-* Always make use of sessions
+* Add the current time and extension to the file name (chat)
+* Make the input area narrower horizontally (chat)
+* Every page should have its own currentSession (delete from SessionManager)
 
 DONE:
 
 * The first letter of the message is lost when saving
+* Always make use of sessions

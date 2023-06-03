@@ -72,16 +72,6 @@ void SessionManager::selectSession(const QString &sessionId)
     setCurrentSessionId(sessionId);
 }
 
-void SessionManager::deselectSession()
-{
-    _currentSessionId.clear();
-}
-
-bool SessionManager::isSession() const
-{
-    return !_currentSessionId.isEmpty();
-}
-
 SessionPtr SessionManager::currentSession() const
 {
     return session(currentSessionId());
@@ -89,9 +79,7 @@ SessionPtr SessionManager::currentSession() const
 
 void SessionManager::saveAsTextFile() const
 {
-    if (isSession()) {
-        currentSession()->saveAsTextFile();
-    }
+    currentSession()->saveAsTextFile();
 }
 
 SessionManager::SessionManager(QObject *parent)

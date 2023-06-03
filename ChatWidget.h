@@ -38,15 +38,15 @@ protected:
 private slots:
     void on_sendButton_clicked();
     void adjustLastItem();
-    void queryAiModel();
+    void queryAiModel(); // TODO: rename
 
     void onDeltaError(const QString &deltaError);
     // TODO: onNetworkError connected with Component::networkError
 
-    void on_isSessionBox_stateChanged(int isSession);
-
     void onMessageResponseStream(const QStringList &deltaMessages);
     void onMessageResponseComplete(QObject *); // onReplyDestroyed instead of onReplyComplete
+
+    void on_newSessionButton_clicked();
 
 signals:
     void sendMessage(const oaic::ModelContext &modelCntx, const QString &input);
@@ -58,7 +58,7 @@ private:
     oaic::Manager *_client;
 
     // TODO: Assign a separate instance of MessagePtr to each MessageItemWidget instead
-    QString _currentResponse;
+    [[deprecated("Assign a separate instance of MessagePtr to each MessageItemWidget instead")]]QString _currentResponse;
 
 private:
     void updateItemsHeight();

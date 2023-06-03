@@ -23,19 +23,14 @@ public:
     QString currentSessionId() const;
     void setCurrentSessionId(const QString &sessionId);
     void selectSession(const QString &sessionId); // synonim of setCurrentSessionId
-    void deselectSession();
-
-    bool isSession() const;
 
     SessionPtr currentSession() const;
 
     template<typename T>
     void addMessage(const QString &message) {
-        if (isSession()) {
-            chat::MessagePtr msgPtr = chat::MessagePtr(new T());
-            msgPtr->setText(message);
-            currentSession()->addMessage(msgPtr);
-        }
+        chat::MessagePtr msgPtr = chat::MessagePtr(new T());
+        msgPtr->setText(message);
+        currentSession()->addMessage(msgPtr);
     }
 
     void saveAsTextFile() const;

@@ -23,7 +23,7 @@
       <property name="sizePolicy">
        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
         <horstretch>0</horstretch>
-        <verstretch>8</verstretch>
+        <verstretch>7</verstretch>
        </sizepolicy>
       </property>
       <property name="styleSheet">
@@ -77,50 +77,27 @@
           <property name="bottomMargin">
            <number>0</number>
           </property>
-          <item row="0" column="1">
-           <widget class="QCheckBox" name="isSessionPersistentBox">
-            <property name="enabled">
-             <bool>false</bool>
-            </property>
-            <property name="text">
-             <string>Persistent</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="0">
-           <widget class="QCheckBox" name="isSessionBox">
-            <property name="text">
-             <string>Session</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="2">
-           <spacer name="horizontalSpacer">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>40</width>
-              <height>20</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
          </layout>
-        </widget>
-       </item>
-       <item row="1" column="0">
-        <widget class="QTextEdit" name="textEdit">
-         <property name="styleSheet">
-          <string notr="true">border-radius: 10px;</string>
-         </property>
         </widget>
        </item>
        <item row="1" column="1">
         <widget class="QPushButton" name="sendButton">
          <property name="text">
           <string>Send</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <widget class="QPushButton" name="newSessionButton">
+         <property name="text">
+          <string>New Session</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0" rowspan="2">
+        <widget class="QTextEdit" name="textEdit">
+         <property name="styleSheet">
+          <string notr="true">border-radius: 10px;</string>
          </property>
         </widget>
        </item>
