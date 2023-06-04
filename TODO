@@ -10,4 +10,4 @@ DONE:
 * Always make use of sessions
 * Make the input area narrower horizontally (chat)
 * Every page should have its own currentSession (delete from SessionManager)
-* Rename update* functins
+* Rename update* functions
