@@ -20,20 +20,14 @@ public:
 
     OrderedMap<QString, SessionPtr> sessions() const;
 
-    QString currentSessionId() const;
-    void setCurrentSessionId(const QString &sessionId);
-    void selectSession(const QString &sessionId); // synonim of setCurrentSessionId
-
-    SessionPtr currentSession() const;
-
     template<typename T>
-    void addMessage(const QString &message) {
+    void addMessage(const QString &message, const QString &sessionId) {
         chat::MessagePtr msgPtr = chat::MessagePtr(new T());
         msgPtr->setText(message);
-        currentSession()->addMessage(msgPtr);
+        session(sessionId)->addMessage(msgPtr);
     }
 
-    void saveAsTextFile() const;
+    void saveAsTextFile(const QString &sessionId) const;
 
 private:
     OrderedMap<QString, SessionPtr> _sessions;
@@ -43,9 +37,6 @@ signals:
 
 public slots:
     void onQuit();
-
-private:
-    QString _currentSessionId;
 
 private:
     explicit SessionManager(QObject *parent = nullptr);

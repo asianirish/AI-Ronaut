@@ -33,10 +33,10 @@ QString SessionManager::createSession(const QString &sessionName)
 
     _sessions.insert(sessionId.toString(), session);
 
-    _currentSessionId = sessionId.toString();
-    emit sessionCreated(_currentSessionId);
+    auto sessionIdStr = sessionId.toString();
+    emit sessionCreated(sessionIdStr);
 
-    return _currentSessionId;
+    return sessionIdStr;
 }
 
 SessionPtr SessionManager::session(const QString &sessionId) const
@@ -55,31 +55,9 @@ void SessionManager::onQuit()
     _sessions.clear();
 }
 
-QString SessionManager::currentSessionId() const
+void SessionManager::saveAsTextFile(const QString &sessionId) const
 {
-    return _currentSessionId;
-}
-
-void SessionManager::setCurrentSessionId(const QString &sessionId)
-{
-    if (_sessions.contains(sessionId)) {
-        _currentSessionId = sessionId;
-    }
-}
-
-void SessionManager::selectSession(const QString &sessionId)
-{
-    setCurrentSessionId(sessionId);
-}
-
-SessionPtr SessionManager::currentSession() const
-{
-    return session(currentSessionId());
-}
-
-void SessionManager::saveAsTextFile() const
-{
-    currentSession()->saveAsTextFile();
+    session(sessionId)->saveAsTextFile();
 }
 
 SessionManager::SessionManager(QObject *parent)

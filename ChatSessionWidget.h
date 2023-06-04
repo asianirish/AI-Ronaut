@@ -1,20 +1,24 @@
 #ifndef CHATSESSIONWIDGET_H
 #define CHATSESSIONWIDGET_H
 
-#include <QWidget>
+#include "ChatToolWidget.h"
+
 #include <QListWidgetItem>
 
 namespace Ui {
 class ChatSessionWidget;
 }
 
-class ChatSessionWidget : public QWidget
+class ChatSessionWidget : public ChatToolWidget
 {
     Q_OBJECT
 
 public:
     explicit ChatSessionWidget(QWidget *parent = nullptr);
     ~ChatSessionWidget();
+
+protected:
+    void updateCurrentSession(const QString &sessionId) override;
 
 private slots:
     void onSessionCreated(const QString &sessionId);

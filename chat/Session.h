@@ -60,6 +60,8 @@ private:
     QDateTime _accessed;
 
     bool _isPersistent;
+
+    // TODO: oaic::ModelContext _modelCntx;
 };
 
 using SessionPtr = QSharedPointer<Session>;

@@ -5,12 +5,13 @@
 #include "chat/SessionItem.h"
 
 ChatSessionWidget::ChatSessionWidget(QWidget *parent) :
-    QWidget(parent),
+    ChatToolWidget(parent),
     ui(new Ui::ChatSessionWidget)
 {
     ui->setupUi(this);
 
     ui->sessionListWidget->setSortingEnabled(true);
+    // TODO: initialize the sessino list from gSessions
 
     connect(gSessions, &chat::SessionManager::sessionCreated, this, &ChatSessionWidget::onSessionCreated);
 }
@@ -20,8 +21,15 @@ ChatSessionWidget::~ChatSessionWidget()
     delete ui;
 }
 
+void ChatSessionWidget::updateCurrentSession(const QString &sessionId)
+{
+    Q_UNUSED(sessionId);
+    qWarning() << "ChatSessionWidget::updateCurrentSession should not be called";
+}
+
 void ChatSessionWidget::onSessionCreated(const QString &sessionId)
 {
+    // TODO: NOT every session creation should cause this page current session changing!
     auto session = gSessions->session(sessionId);
 
     chat::SessionItem *item = new chat::SessionItem();
@@ -53,6 +61,6 @@ void ChatSessionWidget::on_sessionListWidget_currentTextChanged(const QString &c
 
 void ChatSessionWidget::on_saveAsTextFileButton_clicked()
 {
-    gSessions->saveAsTextFile();
+    gSessions->saveAsTextFile(currentSessionId());
 }
 

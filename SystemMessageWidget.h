@@ -1,13 +1,13 @@
 #ifndef SYSTEMMESSAGEWIDGET_H
 #define SYSTEMMESSAGEWIDGET_H
 
-#include <QWidget>
+#include "ChatToolWidget.h"
 
 namespace Ui {
 class SystemMessageWidget;
 }
 
-class SystemMessageWidget : public QWidget
+class SystemMessageWidget : public ChatToolWidget
 {
     Q_OBJECT
 
@@ -16,6 +16,9 @@ public:
     ~SystemMessageWidget();
 
     QString systemMessage() const;
+
+protected:
+    void updateCurrentSession(const QString &sessionId) override;
 
 protected:
     void showEvent(QShowEvent *event) override;

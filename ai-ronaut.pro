@@ -16,6 +16,7 @@ SOURCES += \
     ChatConfigWidget.cpp \
     ChatItemWidget.cpp \
     ChatSessionWidget.cpp \
+    ChatToolWidget.cpp \
     ChatWidget.cpp \
     ErrorMessageItemWidget.cpp \
     NetworkConfiWidget.cpp \
@@ -52,6 +53,7 @@ HEADERS += \
     ChatConfigWidget.h \
     ChatItemWidget.h \
     ChatSessionWidget.h \
+    ChatToolWidget.h \
     ChatWidget.h \
     ErrorMessageItemWidget.h \
     MainWindow.h \

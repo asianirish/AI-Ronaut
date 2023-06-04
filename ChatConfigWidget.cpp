@@ -8,7 +8,7 @@
 using namespace oaic;
 
 ChatConfigWidget::ChatConfigWidget(QWidget *parent) :
-    QWidget(parent),
+    ChatToolWidget(parent),
     ui(new Ui::ChatConfigWidget),
     _client(nullptr),
     _modelCntx(nullptr)
@@ -77,6 +77,12 @@ void ChatConfigWidget::setModelCntx(ModelContext *newModelCntx)
     ui->presencePenaltySlider->setValue(presenceInt);
     on_presencePenaltySlider_valueChanged(presenceInt);
 
+}
+
+void ChatConfigWidget::updateCurrentSession(const QString &sessionId)
+{
+    Q_UNUSED(sessionId);
+    // TODO: copy the model context data from the given session's ModelContext (if _modelCntx exist)
 }
 
 void ChatConfigWidget::on_maxTokensSlider_sliderMoved(int position)

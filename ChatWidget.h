@@ -1,20 +1,21 @@
 #ifndef CHATWIDGET_H
 #define CHATWIDGET_H
 
+#include "ChatToolWidget.h"
+
 #include "ChatItemWidget.h"
 #include "ui_ChatWidget.h"
 
 #include <ModelContext.h>
 #include <Manager.h>
 
-#include <QWidget>
 #include <QThread>
 
 namespace Ui {
 class ChatWidget;
 }
 
-class ChatWidget : public QWidget
+class ChatWidget : public ChatToolWidget
 {
     Q_OBJECT
 
@@ -27,6 +28,9 @@ public:
 
     oaic::Manager *client() const;
     void setClient(oaic::Manager *newClient);
+
+protected:
+    void updateCurrentSession(const QString &sessionId) override;
 
 protected:
     void resizeEvent(QResizeEvent *event) override;
@@ -48,8 +52,11 @@ private slots:
 
     void on_newSessionButton_clicked();
 
+    void onSessionCreated(const QString &sessionId);
+
 signals:
     void sendMessage(const oaic::ModelContext &modelCntx, const QString &input);
+    void sessionChaged(const QString &sessionId);
 
 private:
     Ui::ChatWidget *ui;

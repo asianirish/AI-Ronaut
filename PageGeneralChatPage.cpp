@@ -11,7 +11,23 @@ PageGeneralChatPage::PageGeneralChatPage(QWidget *parent) :
     ui->setupUi(this);
 
     // good place to create a session (TODO: rename on the first message using CamelCase)
-    gSessions->createSession();
+    _currentSessionId = gSessions->createSession();
+    ui->chatWidget->setCurrentSessionId(_currentSessionId);
+    ui->chatSessionWidget->setCurrentSessionId(_currentSessionId);
+    ui->systemMessageWidget->setCurrentSessionId(_currentSessionId);
+    ui->chatConfigWidget->setCurrentSessionId(_currentSessionId); // TODO: tries to read model context from the session!
+
+    // connect sessionChage with onSessionChage
+    // ChatSessionWidget::onSessionChanged does nothing because ChatSessionWidget changes sessions itself
+    // ChatSessionWidget::onSessionCreated connected with chat::SessionManager::sessionCreated
+    connect(ui->chatWidget, &ChatWidget::sessionChaged, ui->systemMessageWidget, &SystemMessageWidget::onCurrentSessionChange);
+    connect(ui->chatWidget, &ChatWidget::sessionChaged, ui->chatConfigWidget, &ChatConfigWidget::onCurrentSessionChange);
+
+    connect(ui->chatWidget, &ChatWidget::sessionChaged, this, &PageGeneralChatPage::onCurrentSessionChange);
+
+    // TODO: implement & connect ChatSessionWidget signals
+
+    // TODO: connect to change _currentSessionId of this
 
     ui->chatConfigWidget->setModelCntx(&_modelCntx);
     ui->chatWidget->setModelCntx(&_modelCntx);
@@ -46,16 +62,21 @@ void PageGeneralChatPage::onUserMessage(const oaic::ModelContext &modelCntx, con
 
 
     // TODO: call oaic::Chat from SessionManager
-    gSessions->addMessage<chat::SystemMessage>(systemMessage); // special case
+    gSessions->addMessage<chat::SystemMessage>(systemMessage, _currentSessionId); // special case
 
-    gSessions->addMessage<chat::UserMessage>(message);
+    gSessions->addMessage<chat::UserMessage>(message, _currentSessionId);
     // TODO: move to ChatWidget (?)
 
-    auto messages = gSessions->currentSession()->msgDataList();
+    auto messages = gSessions->session(_currentSessionId)->msgDataList();
     emit sendSessionMessages(modelCntx, messages);
 
 //    else {
 //        emit sendSingleMessage(modelCntx, message, systemMessage);
-//    }
+    //    }
+}
+
+void PageGeneralChatPage::onCurrentSessionChange(const QString &sessionId)
+{
+    _currentSessionId = sessionId;
 }
 

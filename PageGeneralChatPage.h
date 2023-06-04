@@ -26,6 +26,8 @@ private slots:
     void changeCurrentToolPage(int index);
     void onUserMessage(const oaic::ModelContext &modelCntx, const QString &message);
 
+    void onCurrentSessionChange(const QString &sessionId);
+
 signals:
     void sendSessionMessages(const oaic::ModelContext &modelCntx, oaic::MsgDataList &messages);
 
@@ -33,6 +35,8 @@ private:
     Ui::PageGeneralChatPage *ui;
 
     oaic::ModelContext _modelCntx;
+
+    QString _currentSessionId;
 };
 
 #endif // PAGEGENERALCHATPAGE_H

@@ -1,17 +1,16 @@
 #ifndef CHATCONFIGWIDGET_H
 #define CHATCONFIGWIDGET_H
 
+#include "ChatToolWidget.h"
 #include "Manager.h"
 
 #include <ModelContext.h>
-
-#include <QWidget>
 
 namespace Ui {
 class ChatConfigWidget;
 }
 
-class ChatConfigWidget : public QWidget
+class ChatConfigWidget : public ChatToolWidget
 {
     Q_OBJECT
 
@@ -23,6 +22,9 @@ public:
 
     oaic::ModelContext *modelCntx() const;
     void setModelCntx(oaic::ModelContext *newModelCntx);
+
+protected:
+    void updateCurrentSession(const QString &sessionId) override;
 
 private slots:
     void on_modelComboBox_currentTextChanged(const QString &modelName);

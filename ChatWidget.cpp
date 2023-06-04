@@ -20,7 +20,7 @@
 using namespace oaic;
 
 ChatWidget::ChatWidget(QWidget *parent) :
-    QWidget(parent),
+    ChatToolWidget(parent),
     ui(new Ui::ChatWidget),
     _modelCntx(nullptr),
     _client(nullptr)
@@ -229,7 +229,7 @@ void ChatWidget::onMessageResponseStream(const QStringList &deltaMessages)
 
 void ChatWidget::onMessageResponseComplete(QObject *)
 {
-    gSessions->addMessage<chat::AssistantMessage>(_currentResponse);
+    gSessions->addMessage<chat::AssistantMessage>(_currentResponse, currentSessionId());
     _currentResponse.clear();
 
     qDebug() << "MESSAGE RESPONSE COMPLETE";
@@ -249,14 +249,34 @@ void ChatWidget::setClient(oaic::Manager *newClient)
     connect(_client->chat(), &oaic::Chat::messageResponseStream, this, &ChatWidget::onMessageResponseStream);
     connect(_client->chat(), &oaic::Component::replyDestroyed, this, &ChatWidget::onMessageResponseComplete);
     connect(_client->chat(), &oaic::Component::responseError, this, &ChatWidget::onDeltaError);
+
+    connect(gSessions, &chat::SessionManager::sessionCreated, this, &ChatWidget::onSessionCreated);
 }
 
+void ChatWidget::updateCurrentSession(const QString &sessionId)
+{
+    Q_UNUSED(sessionId);
+    // TODO: display session(sessionId) messages
+}
 
 void ChatWidget::on_newSessionButton_clicked()
 {
-    gSessions->createSession();
+    QString sessionId = gSessions->createSession();
+
+    setCurrentSessionId(sessionId);
+
     ui->listWidget->clear();
 
     ui->textEdit->setFocus();
+
+    emit sessionChaged(sessionId);
 }
+
+void ChatWidget::onSessionCreated(const QString &sessionId)
+{
+    Q_UNUSED(sessionId);
+    // TODO: NOT every session creation should cause this page current session changing!
+}
+
+
 
