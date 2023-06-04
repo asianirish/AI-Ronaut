@@ -144,7 +144,7 @@ void PageWelcomePage::on_activityComboBox_currentIndexChanged(int index)
     on_openActivityButton_clicked();
 }
 
-void PageWelcomePage::updateClient(oaic::Manager *client)
+void PageWelcomePage::synchronizeClient(oaic::Manager *client)
 {
     QProcessEnvironment env = QProcessEnvironment::systemEnvironment();
 

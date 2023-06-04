@@ -19,7 +19,7 @@ public:
 signals:
 
 protected:
-    virtual void updateClient(oaic::Manager *_client) = 0;
+    virtual void synchronizeClient(oaic::Manager *_client) = 0;
 
 private:
     oaic::Manager *_client;

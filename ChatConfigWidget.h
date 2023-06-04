@@ -18,13 +18,13 @@ public:
     explicit ChatConfigWidget(QWidget *parent = nullptr);
     ~ChatConfigWidget();
 
-    void updateClient(oaic::Manager *client);
+    void synchronizeClient(oaic::Manager *client);
 
     oaic::ModelContext *modelCntx() const;
     void setModelCntx(oaic::ModelContext *newModelCntx);
 
 protected:
-    void updateCurrentSession(const QString &sessionId) override;
+    void synchronizeCurrentSession(const QString &sessionId) override;
 
 private slots:
     void on_modelComboBox_currentTextChanged(const QString &modelName);

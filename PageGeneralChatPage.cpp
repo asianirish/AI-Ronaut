@@ -38,7 +38,7 @@ PageGeneralChatPage::~PageGeneralChatPage()
     delete ui;
 }
 
-void PageGeneralChatPage::updateClient(oaic::Manager *client)
+void PageGeneralChatPage::synchronizeClient(oaic::Manager *client)
 {
 //    connect(ui->chatWidget, &ChatWidget::sendMessage, client->chat(), &oaic::Chat::onSingleMessageSent);
     connect(ui->chatWidget, &ChatWidget::sendMessage, this, &PageGeneralChatPage::onUserMessage);
@@ -47,7 +47,7 @@ void PageGeneralChatPage::updateClient(oaic::Manager *client)
     connect(this, &PageGeneralChatPage::sendSessionMessages, client->chat(), &oaic::Chat::onSessionMessagesSent);
 
     ui->chatWidget->setClient(client);
-    ui->chatConfigWidget->updateClient(client);
+    ui->chatConfigWidget->synchronizeClient(client);
 }
 
 void PageGeneralChatPage::changeCurrentToolPage(int index)

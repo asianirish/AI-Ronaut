@@ -49,7 +49,7 @@ void PageImagePage::keyPressEvent(QKeyEvent *event)
     QWidget::keyPressEvent(event);
 }
 
-void PageImagePage::updateClient(oaic::Manager *client)
+void PageImagePage::synchronizeClient(oaic::Manager *client)
 {
     connect(client->image(), &oaic::Image::urlResponse, this, &PageImagePage::onUrlResponse);
     connect(client->image(), &oaic::Component::networkError, this, &PageImagePage::onNetworkError);

@@ -13,7 +13,7 @@ public:
     void setCurrentSessionId(const QString &newCurrentSessionId);
 
 protected:
-    virtual void updateCurrentSession(const QString &sessionId) = 0;
+    virtual void synchronizeCurrentSession(const QString &sessionId) = 0;
 
 private:
     QString _currentSessionId;

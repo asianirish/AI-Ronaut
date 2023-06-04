@@ -15,7 +15,7 @@ void ChatToolWidget::setCurrentSessionId(const QString &newCurrentSessionId)
 {
     _currentSessionId = newCurrentSessionId;
 
-    updateCurrentSession(_currentSessionId);
+    synchronizeCurrentSession(_currentSessionId);
 }
 
 void ChatToolWidget::onCurrentSessionChange(const QString &sessionId)

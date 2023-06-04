@@ -42,7 +42,7 @@ signals:
     void openNetworkConfigAction();
 
 protected:
-    void updateClient(oaic::Manager *_client) override;
+    void synchronizeClient(oaic::Manager *_client) override;
 
 private:
     Ui::PageWelcomePage *ui;

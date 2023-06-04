@@ -253,7 +253,7 @@ void ChatWidget::setClient(oaic::Manager *newClient)
     connect(gSessions, &chat::SessionManager::sessionCreated, this, &ChatWidget::onSessionCreated);
 }
 
-void ChatWidget::updateCurrentSession(const QString &sessionId)
+void ChatWidget::synchronizeCurrentSession(const QString &sessionId)
 {
     Q_UNUSED(sessionId);
     // TODO: display session(sessionId) messages

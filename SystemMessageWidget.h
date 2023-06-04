@@ -18,7 +18,7 @@ public:
     QString systemMessage() const;
 
 protected:
-    void updateCurrentSession(const QString &sessionId) override;
+    void synchronizeCurrentSession(const QString &sessionId) override;
 
 protected:
     void showEvent(QShowEvent *event) override;

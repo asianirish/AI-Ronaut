@@ -21,10 +21,10 @@ ChatSessionWidget::~ChatSessionWidget()
     delete ui;
 }
 
-void ChatSessionWidget::updateCurrentSession(const QString &sessionId)
+void ChatSessionWidget::synchronizeCurrentSession(const QString &sessionId)
 {
     Q_UNUSED(sessionId);
-    qWarning() << "ChatSessionWidget::updateCurrentSession should not be called";
+    qWarning() << "ChatSessionWidget::synchronize should not be called";
 }
 
 void ChatSessionWidget::onSessionCreated(const QString &sessionId)

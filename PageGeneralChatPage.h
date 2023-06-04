@@ -20,7 +20,7 @@ public:
     ~PageGeneralChatPage();
 
 protected:
-    void updateClient(oaic::Manager *client) override;
+    void synchronizeClient(oaic::Manager *client) override;
 
 private slots:
     void changeCurrentToolPage(int index);

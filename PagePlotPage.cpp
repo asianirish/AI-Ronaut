@@ -13,7 +13,7 @@ PagePlotPage::~PagePlotPage()
     delete ui;
 }
 
-void PagePlotPage::updateClient(oaic::Manager *_client)
+void PagePlotPage::synchronizeClient(oaic::Manager *_client)
 {
     Q_UNUSED(_client)
     // TODO: do nothing?

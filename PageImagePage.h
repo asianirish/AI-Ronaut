@@ -19,7 +19,7 @@ public:
 protected:
     void keyPressEvent(QKeyEvent *event) override;
 
-    void updateClient(oaic::Manager *_client) override;
+    void synchronizeClient(oaic::Manager *_client) override;
 
 private slots:
     void on_requestButton_clicked();

@@ -24,7 +24,7 @@ QString SystemMessageWidget::systemMessage() const
     return msg;
 }
 
-void SystemMessageWidget::updateCurrentSession(const QString &sessionId)
+void SystemMessageWidget::synchronizeCurrentSession(const QString &sessionId)
 {
     auto session = gSessions->session(sessionId);
     auto msg = session->systemMessage();

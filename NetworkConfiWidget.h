@@ -21,7 +21,7 @@ public:
     explicit NetworkConfiWidget(QWidget *parent = nullptr);
     ~NetworkConfiWidget();
 
-    void updateClient(oaic::Manager *client);
+    void synchronizeClient(oaic::Manager *client);
 
 private slots:
     void on_timeOutBox_valueChanged(int timeoutSec);

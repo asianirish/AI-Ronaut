@@ -18,7 +18,7 @@ public:
     ~ChatSessionWidget();
 
 protected:
-    void updateCurrentSession(const QString &sessionId) override;
+    void synchronizeCurrentSession(const QString &sessionId) override;
 
 private slots:
     void onSessionCreated(const QString &sessionId);

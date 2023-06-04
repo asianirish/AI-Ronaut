@@ -16,7 +16,7 @@ NetworkConfiWidget::~NetworkConfiWidget()
     delete ui;
 }
 
-void NetworkConfiWidget::updateClient(oaic::Manager *client)
+void NetworkConfiWidget::synchronizeClient(oaic::Manager *client)
 {
     _client = client;
     int timeOutSec = _client->timeout() / 1000;

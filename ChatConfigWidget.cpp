@@ -24,7 +24,7 @@ ChatConfigWidget::~ChatConfigWidget()
     delete ui;
 }
 
-void ChatConfigWidget::updateClient(Manager *client)
+void ChatConfigWidget::synchronizeClient(Manager *client)
 {
     _client = client;
 
@@ -79,7 +79,7 @@ void ChatConfigWidget::setModelCntx(ModelContext *newModelCntx)
 
 }
 
-void ChatConfigWidget::updateCurrentSession(const QString &sessionId)
+void ChatConfigWidget::synchronizeCurrentSession(const QString &sessionId)
 {
     Q_UNUSED(sessionId);
     // TODO: copy the model context data from the given session's ModelContext (if _modelCntx exist)

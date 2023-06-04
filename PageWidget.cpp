@@ -18,5 +18,5 @@ void PageWidget::setClient(oaic::Manager *newClient)
 {
     _client = newClient;
 
-    updateClient(newClient);
+    synchronizeClient(newClient);
 }
