@@ -167,7 +167,7 @@
              </sizepolicy>
             </property>
             <property name="styleSheet">
-             <string notr="true">border-radius: 10px;</string>
+             <string notr="true">border-radius: 10px; background-color: #EFFDDE;</string>
             </property>
            </widget>
           </item>
