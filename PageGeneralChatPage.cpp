@@ -64,7 +64,6 @@ void PageGeneralChatPage::onUserMessage(const oaic::ModelContext &modelCntx, con
     // TODO: call oaic::Chat from SessionManager
     gSessions->addMessage<chat::SystemMessage>(systemMessage, _currentSessionId); // special case
 
-    gSessions->addMessage<chat::UserMessage>(message, _currentSessionId);
     // TODO: move to ChatWidget (?)
 
     auto messages = gSessions->session(_currentSessionId)->msgDataList();

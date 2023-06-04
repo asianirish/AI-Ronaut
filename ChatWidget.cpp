@@ -68,8 +68,12 @@ void ChatWidget::on_sendButton_clicked()
         return; // do not send an empty string
     }
 
+    auto input = ui->textEdit->toPlainText();
 
     UserMessageItemWidget *itemWidget = new UserMessageItemWidget(this);
+
+    auto msgPtr = gSessions->addMessage<chat::UserMessage>(input, currentSessionId());
+    // TODO: itemWidget->setMessagePtr(msgPtr);
     addMessageItem(itemWidget, ui->textEdit->toPlainText());
 }
 
@@ -89,7 +93,7 @@ void ChatWidget::adjustLastItem()
     auto userWidget = qobject_cast<UserMessageItemWidget*>(widget);
 
     if (userWidget) {
-        QTimer::singleShot(1, this, &ChatWidget::queryAiModel);
+        queryAiModel();
     }
 }
 
@@ -98,9 +102,7 @@ void ChatWidget::queryAiModel()
     auto input = ui->textEdit->toPlainText();
     ui->textEdit->clear();
 
-    qDebug() << "MODEL_NAME:" << _modelCntx->modelName();
-
-    // ChatWidget don't care about sessions & the system message
+     // TODO: call without input (already set in
     emit sendMessage(*_modelCntx, input);
 }
 
@@ -112,14 +114,13 @@ void ChatWidget::onDeltaReady(const QString &deltaData)
     if (aiWidget == nullptr) {
         aiWidget = new AIMessageItemWidget(this);
         _currentResponse = deltaData;
+        // TODO: aiWidget->setMessagePtr(msgPtr);
         addMessageItem(aiWidget, deltaData);
         QTimer::singleShot(1, this, &ChatWidget::adjustLastItem);
         return;
     }
 
     _currentResponse += deltaData;
-    qDebug() << "DELTA:" << deltaData;
-    qDebug() << "SUM:" << _currentResponse;
 
     aiWidget->appendText(deltaData);
     QTimer::singleShot(1, this, &ChatWidget::adjustLastItem);
