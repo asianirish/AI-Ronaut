@@ -53,6 +53,9 @@ public:
     void saveAsTextFile() const;
 
 private:
+    QString fileName() const;
+
+private:
     SystemMessage _systemMessage;
     QList<MessagePtr> _messageList;
 

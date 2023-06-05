@@ -100,7 +100,7 @@ QDateTime Session::created() const
 
 SessionData Session::data() const
 {
-    return SessionData{_uuid.toString(), _name, _created, _accessed, _isPersistent};
+    return SessionData{_uuid.toString(), fileName(), _created, _accessed, _isPersistent};
 }
 
 QDateTime Session::accessed() const
@@ -124,7 +124,7 @@ oaic::MsgDataList Session::msgDataList() const
 
 void Session::saveAsTextFile() const
 {
-    QFile file(_name);
+    QFile file(fileName());
 
     if (file.open(QIODevice::WriteOnly | QIODevice::Text)) {
         file.write(_systemMessage.roleAsString().toLatin1() + ": "); // write "system: "
@@ -137,6 +137,16 @@ void Session::saveAsTextFile() const
     }
 
     file.close();
+}
+
+QString Session::fileName() const
+{
+    QString createdStr(_created.toString("yyyyMMddhhmmss"));
+    if (name().isEmpty()) {
+        return createdStr;
+    } else {
+        return name() + "_" + createdStr;
+    }
 }
 
 } // namespace chat
