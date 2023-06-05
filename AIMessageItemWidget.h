@@ -12,7 +12,7 @@ class AIMessageItemWidget : public ChatSessionItemWidget
     Q_OBJECT
 
 public:
-    explicit AIMessageItemWidget(QWidget *parent = nullptr);
+    explicit AIMessageItemWidget(const QString &sessionId, QWidget *parent = nullptr);
     ~AIMessageItemWidget();
 
     void appendText(const QString &deltaText);
@@ -20,6 +20,8 @@ public:
 protected:
     QTextBrowser *textBrowser() const override;
     int extraSpaceHeight() const override;
+
+    chat::Message *createMessage() const override;
 
 private slots:
     void on_actionCopy_triggered();

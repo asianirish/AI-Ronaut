@@ -42,6 +42,11 @@ void Session::addMessage(const MessagePtr &msgPtr)
     _accessed = QDateTime::currentDateTime();
 }
 
+void Session::addSystemMessage(const QString &messageText)
+{
+    _systemMessage.setText(messageText);
+}
+
 QUuid Session::uuid() const
 {
     return _uuid;

@@ -20,13 +20,17 @@ public:
 
     OrderedMap<QString, SessionPtr> sessions() const;
 
-    template<typename T>
-    MessagePtr addMessage(const QString &message, const QString &sessionId) {
-        MessagePtr msgPtr = chat::MessagePtr(new T());
-        msgPtr->setText(message);
-        session(sessionId)->addMessage(msgPtr);
-        return msgPtr;
-    }
+//    template<typename T>
+//    [[deprecated("just use addSystemMessage instead")]]MessagePtr addMessage(const QString &text, const QString &sessionId) {
+//        MessagePtr msgPtr = chat::MessagePtr(new T());
+//        msgPtr->setText(text);
+//        addMessage(msgPtr, sessionId);
+//        return msgPtr;
+//    }
+
+    void addMessage(MessagePtr msgPtr, const QString &sessionId);
+
+    void addSystemMessage(const QString &messageText, const QString &sessionId);
 
     void saveAsTextFile(const QString &sessionId) const;
 

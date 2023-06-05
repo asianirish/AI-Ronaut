@@ -55,7 +55,8 @@ private slots:
     void onSessionCreated(const QString &sessionId);
 
 signals:
-    void sendMessage(const oaic::ModelContext &modelCntx, const QString &input);
+     // TODO: take a model context from the current session
+    void sendCurrentSessionMessages(const oaic::ModelContext &modelCntx);
     void sessionChaged(const QString &sessionId);
 
 private:
@@ -63,9 +64,6 @@ private:
 
     oaic::ModelContext *_modelCntx;
     oaic::Manager *_client;
-
-    // TODO: Assign a separate instance of MessagePtr to each MessageItemWidget instead
-    [[deprecated("Assign a separate instance of MessagePtr to each MessageItemWidget instead")]]QString _currentResponse;
 
 private:
     void updateItemsHeight();

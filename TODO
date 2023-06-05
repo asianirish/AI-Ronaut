@@ -1,6 +1,5 @@
 TODO:
 
-* Assign a separate instance of MessagePtr to each MessageItemWidget
 * Add the current time and extension to the file name (chat)
 * ModelContext per a Session instead ModelContext per a Page
 
@@ -11,3 +10,4 @@ DONE:
 * Make the input area narrower horizontally (chat)
 * Every page should have its own currentSession (delete from SessionManager)
 * Rename update* functions
+* Assign a separate instance of MessagePtr to each MessageItemWidget

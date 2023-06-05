@@ -4,13 +4,11 @@
 #include "UserMessageItemWidget.h"
 #include "AIMessageItemWidget.h"
 
-#include "chat/UserMessage.h"
-#include "chat/AssistantMessage.h"
 #include "chat/SessionManager.h"
 
 #include "ui_ChatWidget.h"
 
-#include "util/gfunc.h"
+//#include "util/gfunc.h"
 
 #include <QDebug>
 #include <QListWidgetItem>
@@ -70,11 +68,9 @@ void ChatWidget::on_sendButton_clicked()
 
     auto input = ui->textEdit->toPlainText();
 
-    UserMessageItemWidget *itemWidget = new UserMessageItemWidget(this);
-
-    auto msgPtr = gSessions->addMessage<chat::UserMessage>(input, currentSessionId());
-    // TODO: itemWidget->setMessagePtr(msgPtr);
-    addMessageItem(itemWidget, ui->textEdit->toPlainText());
+    UserMessageItemWidget *itemWidget = new UserMessageItemWidget(currentSessionId(), this);
+    addMessageItem(itemWidget, input); // sets itemWidget text here
+    itemWidget->refreshMsg(); // do not refresh in addMessageItem not to refresh after every delta!
 }
 
 void ChatWidget::adjustLastItem()
@@ -99,11 +95,9 @@ void ChatWidget::adjustLastItem()
 
 void ChatWidget::queryAiModel()
 {
-    auto input = ui->textEdit->toPlainText();
     ui->textEdit->clear();
 
-     // TODO: call without input (already set in
-    emit sendMessage(*_modelCntx, input);
+    emit sendCurrentSessionMessages(*_modelCntx);
 }
 
 void ChatWidget::onDeltaReady(const QString &deltaData)
@@ -112,16 +106,11 @@ void ChatWidget::onDeltaReady(const QString &deltaData)
     auto aiWidget = qobject_cast<AIMessageItemWidget*>(lastWidget);
 
     if (aiWidget == nullptr) {
-        aiWidget = new AIMessageItemWidget(this);
-        _currentResponse = deltaData;
-        // TODO: aiWidget->setMessagePtr(msgPtr);
+        aiWidget = new AIMessageItemWidget(currentSessionId(), this);
         addMessageItem(aiWidget, deltaData);
         QTimer::singleShot(1, this, &ChatWidget::adjustLastItem);
         return;
     }
-
-    _currentResponse += deltaData;
-
     aiWidget->appendText(deltaData);
     QTimer::singleShot(1, this, &ChatWidget::adjustLastItem);
 }
@@ -177,50 +166,6 @@ QWidget *ChatWidget::lastChatItemMessageWidget() const
 //    auto chatWidget = qobject_cast<ChatItemWidget*>(widget);
 }
 
-//void ChatWidget::on_isSessionBox_stateChanged(int isSession)
-//{
-//    if (isSession == Qt::Unchecked) {
-////         gSessions->deselectSession();
-//        ui->isSessionPersistentBox->setEnabled(false);
-//    } else {
-
-//        QString msg;
-
-//        if (ui->listWidget->count()) {
-//            UserMessageItemWidget *userWidget = lastChatItemMessageWidgetByType<UserMessageItemWidget>();
-
-//            if (userWidget) {
-//                msg = userWidget->text();
-//            }
-
-//        } else {
-//            msg = ui->textEdit->toPlainText();
-//        }
-
-//        QString camelMsg;
-//        if (!msg.isNull()) {
-//            camelMsg = potato_util::phraseToCamelCase(msg, 7);
-//        }
-
-//        // TODO: from the beginning
-//        gSessions->createSession(camelMsg);
-
-//        // add last two messages to the current session
-//        if (!msg.isEmpty()) {
-//            gSessions->addMessage<chat::UserMessage>(msg);
-//        }
-//        if (!_currentResponse.isEmpty()) {
-//            qDebug() << "_currentResponse:" << _currentResponse;
-//            gSessions->addMessage<chat::AssistantMessage>(_currentResponse); // TODO: already empty after _currentResponse.clear();
-//        }
-
-//        ui->isSessionPersistentBox->setEnabled(true);
-
-//        // TODO: set system message?
-//        ui->textEdit->setFocus();
-//    }
-//}
-
 void ChatWidget::onMessageResponseStream(const QStringList &deltaMessages)
 {
     for (auto &delta : deltaMessages) {
@@ -230,8 +175,12 @@ void ChatWidget::onMessageResponseStream(const QStringList &deltaMessages)
 
 void ChatWidget::onMessageResponseComplete(QObject *)
 {
-    gSessions->addMessage<chat::AssistantMessage>(_currentResponse, currentSessionId());
-    _currentResponse.clear();
+    auto lastItemWidget = lastChatItemMessageWidget();
+    auto aiItemWidget = qobject_cast<AIMessageItemWidget*>(lastItemWidget);
+
+    if (aiItemWidget) {
+        aiItemWidget->refreshMsg();
+    }
 
     qDebug() << "MESSAGE RESPONSE COMPLETE";
     ui->textEdit->setFocus();

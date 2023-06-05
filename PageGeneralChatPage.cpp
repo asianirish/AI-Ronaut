@@ -2,7 +2,7 @@
 #include "ui_PageGeneralChatPage.h"
 
 #include "chat/SessionManager.h"
-#include "chat/UserMessage.h"
+
 
 PageGeneralChatPage::PageGeneralChatPage(QWidget *parent) :
     PageWidget(parent),
@@ -41,7 +41,7 @@ PageGeneralChatPage::~PageGeneralChatPage()
 void PageGeneralChatPage::synchronizeClient(oaic::Manager *client)
 {
 //    connect(ui->chatWidget, &ChatWidget::sendMessage, client->chat(), &oaic::Chat::onSingleMessageSent);
-    connect(ui->chatWidget, &ChatWidget::sendMessage, this, &PageGeneralChatPage::onUserMessage);
+    connect(ui->chatWidget, &ChatWidget::sendCurrentSessionMessages, this, &PageGeneralChatPage::onUserMessage);
 
     // TODO: do not connect to to oaic::Chat but call SessionManager functions
     connect(this, &PageGeneralChatPage::sendSessionMessages, client->chat(), &oaic::Chat::onSessionMessagesSent);
@@ -55,23 +55,15 @@ void PageGeneralChatPage::changeCurrentToolPage(int index)
     ui->tabWidget->setCurrentIndex(index);
 }
 
-void PageGeneralChatPage::onUserMessage(const oaic::ModelContext &modelCntx, const QString &message)
+void PageGeneralChatPage::onUserMessage(const oaic::ModelContext &modelCntx)
 {
     QString systemMessage = ui->systemMessageWidget->systemMessage();
-    qDebug() << "SYSTEM_MESSAGE:" << systemMessage;
-
-
-    // TODO: call oaic::Chat from SessionManager
-    gSessions->addMessage<chat::SystemMessage>(systemMessage, _currentSessionId); // special case
+    gSessions->addSystemMessage(systemMessage, _currentSessionId); // special case
 
     // TODO: move to ChatWidget (?)
 
     auto messages = gSessions->session(_currentSessionId)->msgDataList();
     emit sendSessionMessages(modelCntx, messages);
-
-//    else {
-//        emit sendSingleMessage(modelCntx, message, systemMessage);
-    //    }
 }
 
 void PageGeneralChatPage::onCurrentSessionChange(const QString &sessionId)

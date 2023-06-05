@@ -24,7 +24,9 @@ protected:
 
 private slots:
     void changeCurrentToolPage(int index);
-    void onUserMessage(const oaic::ModelContext &modelCntx, const QString &message);
+
+    // TODO: take a model context from the current session
+    void onUserMessage(const oaic::ModelContext &modelCntx);
 
     void onCurrentSessionChange(const QString &sessionId);
 

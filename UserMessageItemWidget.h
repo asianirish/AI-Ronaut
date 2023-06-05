@@ -14,12 +14,14 @@ class UserMessageItemWidget : public ChatSessionItemWidget
     Q_OBJECT
 
 public:
-    explicit UserMessageItemWidget(QWidget *parent = nullptr);
+    explicit UserMessageItemWidget(const QString &sessionId,QWidget *parent = nullptr);
     ~UserMessageItemWidget();
 
 protected:
     QTextBrowser *textBrowser() const override;
     int extraSpaceHeight() const override;
+
+    chat::Message *createMessage() const;
 
 private slots:
     void on_actionCopy_triggered();

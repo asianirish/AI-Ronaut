@@ -1,31 +1,29 @@
 #include "ChatSessionItemWidget.h"
+#include "chat/SessionManager.h"
 
-ChatSessionItemWidget::ChatSessionItemWidget(QWidget *parent) :
-    ChatItemWidget{parent}
+ChatSessionItemWidget::ChatSessionItemWidget(const QString &sessionId, QWidget *parent) :
+    ChatItemWidget{parent},
+    _sessionId(sessionId)
 {
 
 }
 
-chat::MessagePtr ChatSessionItemWidget::msgPtr() const
+chat::MessagePtr ChatSessionItemWidget::msgPtr()
 {
+    if (!_msgPtr) {
+        _msgPtr = chat::MessagePtr(createMessage());
+        gSessions->addMessage(_msgPtr, _sessionId);
+    }
+
     return _msgPtr;
-}
-
-void ChatSessionItemWidget::setMsgPtr(chat::MessagePtr newMsgPtr)
-{
-    _msgPtr = newMsgPtr;
 }
 
 void ChatSessionItemWidget::refreshMsg()
 {
-    if (_msgPtr) {
-        _msgPtr->setText(text());
-    }
+    msgPtr()->setText(text());
 }
 
 void ChatSessionItemWidget::refreshTextBrowser()
 {
-    if (_msgPtr) {
-        setText(_msgPtr->text());
-    }
+    setText(msgPtr()->text());
 }

@@ -49,6 +49,16 @@ OrderedMap<QString, SessionPtr> SessionManager::sessions() const
     return _sessions;
 }
 
+void SessionManager::addMessage(MessagePtr msgPtr, const QString &sessionId)
+{
+    session(sessionId)->addMessage(msgPtr);
+}
+
+void SessionManager::addSystemMessage(const QString &messageText, const QString &sessionId)
+{
+    session(sessionId)->addSystemMessage(messageText);
+}
+
 void SessionManager::onQuit()
 {
     qDebug() << "cleaning sessions";

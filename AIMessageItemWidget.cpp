@@ -1,8 +1,10 @@
 #include "AIMessageItemWidget.h"
 #include "ui_AIMessageItemWidget.h"
 
-AIMessageItemWidget::AIMessageItemWidget(QWidget *parent) :
-    ChatSessionItemWidget(parent),
+#include "chat/AssistantMessage.h"
+
+AIMessageItemWidget::AIMessageItemWidget(const QString &sessionId, QWidget *parent) :
+    ChatSessionItemWidget(sessionId, parent),
     ui(new Ui::AIMessageItemWidget)
 {
     ui->setupUi(this);
@@ -39,6 +41,11 @@ int AIMessageItemWidget::extraSpaceHeight() const
 
     // TODO: what is the magic number for?
     return topMargin + bottomMargin + 4; // TODO: other controls
+}
+
+chat::Message *AIMessageItemWidget::createMessage() const
+{
+    return new chat::AssistantMessage();
 }
 
 void AIMessageItemWidget::on_actionCopy_triggered()

@@ -26,6 +26,8 @@ public:
     QList<MessagePtr> messageList() const;
     void addMessage(const MessagePtr &msgPtr);
 
+    void addSystemMessage(const QString &messageText);
+
     QUuid uuid() const;
     void setUuid(const QUuid &newUuid);
 
