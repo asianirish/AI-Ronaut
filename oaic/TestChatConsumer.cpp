@@ -10,8 +10,7 @@
 namespace oaic {
 
 TestChatConsumer::TestChatConsumer(QObject *parent)
-    : QObject{parent},
-    _useSession(true)
+    : QObject{parent}
 {
     _client = new Manager(this);
     EnvVar env("OPENAI_API_KEY");
@@ -31,20 +30,6 @@ void TestChatConsumer::requestChat()
 
 
     if (firstTime) {
-//        std::string useStreamStr;
-
-//        std::cout << "Would you like to use a stream response (y/n):";
-//        std::cin >> useStreamStr;
-
-//        if (useStreamStr == "y" || useStreamStr == "yes") {
-//           useStream = true;
-//        }
-
-//        {
-//            std::string x;
-//            std::getline(std::cin,x); // According to authoritative sources (in particular, my opinion ;), this is an acceptable way to solve this well-known issue.
-//        }
-
         {
             std::string userPrompt;
             std::cout << "\nsystem message: ";
@@ -72,17 +57,12 @@ void TestChatConsumer::requestChat()
     } else if (userPrompt == "history") {
         history();
         requestChat();
-    } else if (_useSession) {
+    } else {
         MsgData curData("user", userPromptStr);
         _msgs.append(curData);
         ModelContext cntx; // default values, model == gpt-3.5-turbo
         //        cntx.setModelName("gpt-4");
         _client->chat()->sendChatRequest(cntx, _msgs, useStream);
-    } else {
-        qDebug() << "SENDING:" << userPromptStr;
-        ModelContext cntx; // default values, model == gpt-3.5-turbo
-//        cntx.setModelName("gpt-4");
-        _client->chat()->sendChatRequest(cntx, userPromptStr, useStream);
     }
 }
 
@@ -139,11 +119,7 @@ void TestChatConsumer::onMessageResponse(const QStringList &messages)
 void TestChatConsumer::onMessageResponseStream(const QStringList &messages)
 {
     for (auto &msg : messages) {
-
-        if (_useSession) {
-            _currentAssistantMessage += msg;
-        }
-
+        _currentAssistantMessage += msg;
         std::cout << msg.toStdString();
         std::cout.flush();
     }
@@ -151,13 +127,11 @@ void TestChatConsumer::onMessageResponseStream(const QStringList &messages)
 
 void TestChatConsumer::onReplyDestroyed(QObject *)
 {
-    if (_useSession) {
-        MsgData curData;
-        curData.setRole("assistant");
-        curData.setContent(_currentAssistantMessage);
-        _msgs.append(curData);
-        _currentAssistantMessage.clear();
-    }
+    MsgData curData;
+    curData.setRole("assistant");
+    curData.setContent(_currentAssistantMessage);
+    _msgs.append(curData);
+    _currentAssistantMessage.clear();
 
     requestChat();
 }
