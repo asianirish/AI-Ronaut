@@ -15,6 +15,7 @@ SOURCES += \
     AIMessageItemWidget.cpp \
     ChatConfigWidget.cpp \
     ChatItemWidget.cpp \
+    ChatSessionItemWidget.cpp \
     ChatSessionWidget.cpp \
     ChatToolWidget.cpp \
     ChatWidget.cpp \
@@ -52,6 +53,7 @@ HEADERS += \
     AIMessageItemWidget.h \
     ChatConfigWidget.h \
     ChatItemWidget.h \
+    ChatSessionItemWidget.h \
     ChatSessionWidget.h \
     ChatToolWidget.h \
     ChatWidget.h \

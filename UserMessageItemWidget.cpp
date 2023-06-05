@@ -4,7 +4,7 @@
 #include <QAbstractTextDocumentLayout>
 
 UserMessageItemWidget::UserMessageItemWidget(QWidget *parent) :
-    ChatItemWidget(parent),
+    ChatSessionItemWidget(parent),
     ui(new Ui::UserMessageItemWidget)
 {
     ui->setupUi(this);

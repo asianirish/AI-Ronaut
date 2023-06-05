@@ -1,7 +1,7 @@
 #ifndef USERMESSAGEITEMWIDGET_H
 #define USERMESSAGEITEMWIDGET_H
 
-#include "ChatItemWidget.h"
+#include "ChatSessionItemWidget.h"
 
 #include <QTextBrowser>
 
@@ -9,7 +9,7 @@ namespace Ui {
 class UserMessageItemWidget;
 }
 
-class UserMessageItemWidget : public ChatItemWidget
+class UserMessageItemWidget : public ChatSessionItemWidget
 {
     Q_OBJECT
 

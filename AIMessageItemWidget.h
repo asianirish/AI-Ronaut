@@ -1,13 +1,13 @@
 #ifndef AIMESSAGEITEMWIDGET_H
 #define AIMESSAGEITEMWIDGET_H
 
-#include "ChatItemWidget.h"
+#include "ChatSessionItemWidget.h"
 
 namespace Ui {
 class AIMessageItemWidget;
 }
 
-class AIMessageItemWidget : public ChatItemWidget
+class AIMessageItemWidget : public ChatSessionItemWidget
 {
     Q_OBJECT
 

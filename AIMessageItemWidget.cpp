@@ -2,7 +2,7 @@
 #include "ui_AIMessageItemWidget.h"
 
 AIMessageItemWidget::AIMessageItemWidget(QWidget *parent) :
-    ChatItemWidget(parent),
+    ChatSessionItemWidget(parent),
     ui(new Ui::AIMessageItemWidget)
 {
     ui->setupUi(this);
