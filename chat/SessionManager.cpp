@@ -22,12 +22,7 @@ QString SessionManager::createSession(const QString &sessionName)
     QUuid sessionId = QUuid::createUuid();
     session->setUuid(sessionId);
 
-    if (sessionName.isEmpty()) {
-        QDateTime date = QDateTime::currentDateTime();
-        QString formattedTime = date.toString("yyyyMMddhhmmss");
-        QByteArray formattedTimeMsg = formattedTime.toLocal8Bit();
-        session->setName(formattedTimeMsg);
-    } else {
+    if (!sessionName.isEmpty()) {
         session->setName(sessionName);
     }
 
