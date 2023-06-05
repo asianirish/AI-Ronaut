@@ -57,6 +57,9 @@
          <property name="styleSheet">
           <string notr="true">background-color: rgb(141, 186, 132);</string>
          </property>
+         <property name="verticalScrollMode">
+          <enum>QAbstractItemView::ScrollPerPixel</enum>
+         </property>
         </widget>
        </item>
        <item row="0" column="2">
