@@ -62,11 +62,17 @@ void Models::handleResponse(const QString &response)
         auto modelId = partObj.value("id").toString();
 
         mdls.append(modelId);
+
+//        qDebug() << modelId;
+        if (modelId.left(4) == "gpt-" || modelId == "text-davinci-002") {
+            QJsonDocument doc(part.toObject());
+            qDebug().noquote() << doc.toJson() << "\n";
+        }
     }
 
     emit models(mdls);
 
-    qDebug() << "MODELS:" << mdls;
+//    qDebug() << "MODELS:" << mdls;
 }
 
 } // namespace oaic
