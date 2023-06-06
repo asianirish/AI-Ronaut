@@ -162,7 +162,7 @@ void ChatWidget::addMessageItem(ChatItemWidget *itemWidget, const QString &text)
     itemWidget->stylize();
     itemWidget->setText(text);
 
-// TODO: send the list item to the item widget:   itemWidget->setListItem(listItem);
+    itemWidget->setListItem(listItem);
 
     listItem->setSizeHint(itemWidget->sizeHint());
 
