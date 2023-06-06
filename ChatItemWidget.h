@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <QTextBrowser>
+#include <QListWidgetItem>
 
 class ChatItemWidget : public QWidget
 {
@@ -18,6 +19,9 @@ public:
 
     QString text() const;
 
+    QListWidgetItem *listItem() const;
+    void setListItem(QListWidgetItem *newListItem);
+
 protected:
     virtual QTextBrowser *textBrowser() const = 0;
     virtual int extraSpaceHeight() const = 0;
@@ -25,6 +29,11 @@ protected:
 protected:
     // call from parent actions:
     void onCopyAction() const;
+
+    void adjustHeight();
+
+private:
+    QListWidgetItem *_listItem;
 
 signals:
 

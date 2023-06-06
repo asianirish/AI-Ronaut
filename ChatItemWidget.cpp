@@ -6,7 +6,8 @@
 #include <QGuiApplication>
 
 ChatItemWidget::ChatItemWidget(QWidget *parent)
-    : QWidget{parent}
+    : QWidget{parent},
+    _listItem(nullptr)
 {
 
 }
@@ -29,7 +30,6 @@ int ChatItemWidget::textHeight() const
 void ChatItemWidget::stylize() const
 {
     QString currentStyle = textBrowser()->styleSheet();
-    qDebug() << "style:" << currentStyle;
     textBrowser()->setStyleSheet(currentStyle + " border-radius: 10px;"); // border: 1px solid gray;
 }
 
@@ -43,4 +43,22 @@ void ChatItemWidget::onCopyAction() const
     QClipboard *clipboard = QGuiApplication::clipboard();
     auto text = textBrowser()->toPlainText();
     clipboard->setText(text);
+}
+
+void ChatItemWidget::adjustHeight()
+{
+    if (_listItem) {
+        int idealHeight = textHeight();
+        _listItem->setSizeHint({sizeHint().width(), int(idealHeight)});
+    }
+}
+
+QListWidgetItem *ChatItemWidget::listItem() const
+{
+    return _listItem;
+}
+
+void ChatItemWidget::setListItem(QListWidgetItem *newListItem)
+{
+    _listItem = newListItem;
 }

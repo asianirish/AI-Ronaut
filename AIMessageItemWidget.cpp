@@ -23,8 +23,6 @@ AIMessageItemWidget::~AIMessageItemWidget()
 void AIMessageItemWidget::appendText(const QString &deltaText)
 {
     QString prevText = textBrowser()->toPlainText();
-    qDebug() << "PREV_TEXT:" << prevText;
-    qDebug() << "DELTA_TEXT:" << deltaText;
     textBrowser()->setPlainText(prevText + deltaText);
 }
 
@@ -56,7 +54,13 @@ void AIMessageItemWidget::on_actionCopy_triggered()
 
 void AIMessageItemWidget::on_actionEdit_triggered()
 {
-    // TODO: add you edit code here
     qDebug() << "ACTION EDIT";
+    ui->textBrowser->setReadOnly(false);
+}
+
+
+void AIMessageItemWidget::on_textBrowser_textChanged()
+{
+    adjustHeight();
 }
 
