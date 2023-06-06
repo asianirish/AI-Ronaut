@@ -21,7 +21,7 @@ protected:
     QTextBrowser *textBrowser() const override;
     int extraSpaceHeight() const override;
 
-    chat::Message *createMessage() const;
+    chat::Message *createMessage() const override;
 
 private slots:
     void on_actionCopy_triggered();
