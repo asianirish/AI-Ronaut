@@ -59,6 +59,8 @@ signals:
     void sendCurrentSessionMessages(const oaic::ModelContext &modelCntx);
     void sessionChaged(const QString &sessionId);
 
+    void renameSession(const QString &name);
+
 private:
     Ui::ChatWidget *ui;
 

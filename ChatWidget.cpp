@@ -8,7 +8,7 @@
 
 #include "ui_ChatWidget.h"
 
-//#include "util/gfunc.h"
+#include <gfunc.h>
 
 #include <QDebug>
 #include <QListWidgetItem>
@@ -62,6 +62,7 @@ void ChatWidget::showEvent(QShowEvent *event)
 void ChatWidget::on_sendButton_clicked()
 {
     if (ui->textEdit->document()->isEmpty()) {
+        // TODO: just forward the entire array of messages again in this case
         ui->textEdit->setFocus(Qt::OtherFocusReason);
         return; // do not send an empty string
     }
@@ -71,6 +72,13 @@ void ChatWidget::on_sendButton_clicked()
     UserMessageItemWidget *itemWidget = new UserMessageItemWidget(currentSessionId(), this);
     addMessageItem(itemWidget, input); // sets itemWidget text here
     itemWidget->refreshMsg(); // do not refresh in addMessageItem not to refresh after every delta!
+
+    if (ui->listWidget->count() == 1) {
+        auto camelInput = potato_util::phraseToCamelCase(input, 7);
+        camelInput = camelInput.left(64);
+        emit renameSession(camelInput);
+        qDebug() << "LIST ITEM COUNT:" << ui->listWidget->count() << camelInput;
+    }
 }
 
 void ChatWidget::adjustLastItem()

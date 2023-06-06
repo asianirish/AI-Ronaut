@@ -10,7 +10,7 @@ PageGeneralChatPage::PageGeneralChatPage(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    // good place to create a session (TODO: rename on the first message using CamelCase)
+    // good place to create a session
     _currentSessionId = gSessions->createSession();
     ui->chatWidget->setCurrentSessionId(_currentSessionId);
     ui->chatSessionWidget->setCurrentSessionId(_currentSessionId);
@@ -24,6 +24,9 @@ PageGeneralChatPage::PageGeneralChatPage(QWidget *parent) :
     connect(ui->chatWidget, &ChatWidget::sessionChaged, ui->chatConfigWidget, &ChatConfigWidget::onCurrentSessionChange);
 
     connect(ui->chatWidget, &ChatWidget::sessionChaged, this, &PageGeneralChatPage::onCurrentSessionChange);
+
+    // connection between widgets
+    connect(ui->chatWidget, &ChatWidget::renameSession, ui->chatSessionWidget, &ChatSessionWidget::onRenameSession);
 
     // TODO: implement & connect ChatSessionWidget signals
 

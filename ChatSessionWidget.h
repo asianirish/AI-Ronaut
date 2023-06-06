@@ -29,6 +29,9 @@ private slots:
 
     void on_saveAsTextFileButton_clicked();
 
+public slots:
+    void onRenameSession(const QString &name);
+
 private:
     Ui::ChatSessionWidget *ui;
 };

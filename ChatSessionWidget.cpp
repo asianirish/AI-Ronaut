@@ -64,3 +64,23 @@ void ChatSessionWidget::on_saveAsTextFileButton_clicked()
     gSessions->saveAsTextFile(currentSessionId());
 }
 
+void ChatSessionWidget::onRenameSession(const QString &name)
+{
+    auto session = gSessions->session(currentSessionId());
+
+    session->setName(name);
+    ui->sessionNameEdit->setText(session->name());
+
+    auto item = ui->sessionListWidget->currentItem();
+    auto sessionItem = dynamic_cast<chat::SessionItem *>(item);
+
+    if (sessionItem) {
+        auto sd = sessionItem->sessionData();
+        sd.name = name;
+        sessionItem->setSessionData(sd);
+
+        // changes the list item's text
+        sessionItem->setText(name);
+    }
+}
+

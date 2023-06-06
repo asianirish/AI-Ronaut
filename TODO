@@ -1,7 +1,10 @@
 TODO:
 
-* Add the current time and extension to the file name (chat)
 * ModelContext per a Session instead ModelContext per a Page
+* Cancel sending an Assistant message
+* Error parsing JSON:unterminated array
+* Ensure that ChatWidget::onMessageResponseStream does not accept data from unrelated sessions
+* If the input field is empty, just forward the entire array of messages again
 
 DONE:
 
@@ -11,3 +14,4 @@ DONE:
 * Every page should have its own currentSession (delete from SessionManager)
 * Rename update* functions
 * Assign a separate instance of MessagePtr to each MessageItemWidget
+* Add the current time and extension to the file name (chat)

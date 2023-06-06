@@ -124,7 +124,7 @@ oaic::MsgDataList Session::msgDataList() const
 
 void Session::saveAsTextFile() const
 {
-    QFile file(fileName());
+    QFile file(fileName() + ".log");
 
     if (file.open(QIODevice::WriteOnly | QIODevice::Text)) {
         file.write(_systemMessage.roleAsString().toLatin1() + ": "); // write "system: "
