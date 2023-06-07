@@ -241,3 +241,10 @@ void ChatWidget::onSessionCreated(const QString &sessionId)
 
 
 
+
+void ChatWidget::on_abortChatButton_clicked()
+{
+    // TODO: place your chat abort code here (of current session!)
+    qDebug() << "CHAT ABORT BUTTON CLICKED";
+}
+

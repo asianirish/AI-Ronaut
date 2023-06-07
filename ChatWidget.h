@@ -54,6 +54,8 @@ private slots:
 
     void onSessionCreated(const QString &sessionId);
 
+    void on_abortChatButton_clicked();
+
 signals:
      // TODO: take a model context from the current session
     void sendCurrentSessionMessages(const oaic::ModelContext &modelCntx);
