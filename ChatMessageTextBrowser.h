@@ -17,6 +17,7 @@ public:
 
 protected:
     void focusOutEvent(QFocusEvent *e) override;
+    void mouseDoubleClickEvent(QMouseEvent *e) override;
 
 private:
     chat::MessagePtr _msgPtr;
