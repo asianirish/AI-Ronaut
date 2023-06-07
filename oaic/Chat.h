@@ -23,6 +23,8 @@ public:
     void sendChatRequest(const ModelContext &modelCntx, const QString &content, const QString &sysMsg, bool stream) const;
     void sendChatRequest(const ModelContext &modelCntx, const MsgDataList messages, bool stream) const;
 
+    void abortCurrentResponse();
+
 private:
     QStringList extractMessages(const QString &response, const QString &msgKey);
 

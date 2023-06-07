@@ -135,8 +135,16 @@ void Chat::sendChatRequest(const ModelContext &modelCntx, const MsgDataList mess
 
     auto resp = sendJsonRequest("/chat/completions", obj, stream);
 
+
+
     // TODO: use resp
     (void)resp;
+}
+
+void Chat::abortCurrentResponse()
+{
+    // TODO: if (postResponse()) { postResponse()->abort()
+    qDebug() << "ABORT CHAT RESPONSE";
 }
 
 QStringList Chat::extractMessages(const QString &response, const QString &msgKey)
@@ -147,7 +155,7 @@ QStringList Chat::extractMessages(const QString &response, const QString &msgKey
     auto jDoc = QJsonDocument::fromJson(response.toUtf8(), &jerr);
 
     if (jerr.error != QJsonParseError::NoError) {
-        emit responseError(QString("Error parsing JSON:") + jerr.errorString());
+        emit responseError(QString("Error parsing JSON:") + jerr.errorString() + "\n" + response);
         return QStringList();
     }
     if (!jDoc.isObject()) {
