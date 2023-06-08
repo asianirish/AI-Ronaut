@@ -2,9 +2,6 @@ TODO:
 
 * ModelContext per a Session instead ModelContext per a Page
 
-
-    * Add the ability to cancel sending an Assistant message for each session individually, without affecting messages being sent in other sessions.
-
 DONE:
 
 * The first letter of the message is lost when saving
@@ -17,7 +14,7 @@ DONE:
 * Error parsing JSON:unterminated array
 * use chat::Manager as a Manager per Page
     * Ensure that ChatWidget::onMessageResponseStream does not accept data from unrelated sessions
-
+    * Add the ability to cancel sending an Assistant message for each session individually, without affecting messages being sent in other sessions.
 
 CANCELED:
 

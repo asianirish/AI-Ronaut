@@ -33,8 +33,11 @@ protected:
     QNetworkReply *sendJsonRequest(const QString &endpoint, const QJsonObject &jData, bool stream) const;
     QNetworkReply *sendGetRequest(const QString &endpoint) const;
 
+    QNetworkReply *postReply() const;
+
 private:
     Auth *_auth;
+    mutable QNetworkReply *_postReply;
 
     QNetworkRequest request(const QString &endpoint, const QString &contentType) const;
     QNetworkRequest request(const QString &endpoint, const Headers &rawHeaders) const;

@@ -143,8 +143,10 @@ void Chat::sendChatRequest(const ModelContext &modelCntx, const MsgDataList mess
 
 void Chat::abortCurrentResponse()
 {
-    // TODO: if (postResponse()) { postResponse()->abort()
-    qDebug() << "ABORT CHAT RESPONSE";
+    auto reply = postReply();
+    if (reply) {
+        reply->abort();
+    }
 }
 
 QStringList Chat::extractMessages(const QString &response, const QString &msgKey)
