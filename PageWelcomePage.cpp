@@ -146,22 +146,8 @@ void PageWelcomePage::on_activityComboBox_currentIndexChanged(int index)
 
 void PageWelcomePage::synchronizeClient(oaic::Manager *client)
 {
-    QProcessEnvironment env = QProcessEnvironment::systemEnvironment();
-
-    QString envKey("OPENAI_API_KEY");
-
-    if (env.contains(envKey)) { // OPENAI_API_KEY
-        bool ok = client->auth().setKeyEnv(envKey);
-
-        if (ok) {
-            onKeySuccess();
-        } else {
-            qDebug() << "AUTH ERROR";
-            QMessageBox::warning(this, "OpenAI Key", "Please set OPENAI_API_KEY as an environment variable with your OpenAI API key");
-        }
-    } else {
-        qDebug() << "AUTH ERROR";
-        QMessageBox::warning(this, "OpenAI Key", "Please set OPENAI_API_KEY as an environment variable with your OpenAI API key");
+    if (!client->auth().key().isEmpty()) {
+        onKeySuccess();
     }
 }
 

@@ -7,6 +7,7 @@ class Manager;
 }
 
 #include <QWidget>
+
 class PageWidget : public QWidget
 {
     Q_OBJECT
@@ -14,7 +15,7 @@ public:
     explicit PageWidget(QWidget *parent = nullptr);
 
     oaic::Manager *client() const;
-    void setClient(oaic::Manager *newClient);
+    void initClient(); // TODO: use NetworkContext * as an arg
 
 signals:
 
