@@ -28,6 +28,8 @@ private slots:
 
     void on_actionEdit_triggered();
 
+    void on_textBrowser_textChanged();
+
 private:
     Ui::UserMessageItemWidget *ui;
 
