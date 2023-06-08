@@ -2,8 +2,7 @@ TODO:
 
 * ModelContext per a Session instead ModelContext per a Page
 
-* convert chat::Manager to a non-singleton class and use it as a Manager per Page instead
-    * Ensure that ChatWidget::onMessageResponseStream does not accept data from unrelated sessions
+
     * Add the ability to cancel sending an Assistant message for each session individually, without affecting messages being sent in other sessions.
 
 DONE:
@@ -16,6 +15,9 @@ DONE:
 * Assign a separate instance of MessagePtr to each MessageItemWidget
 * Add the current time and extension to the file name (chat)
 * Error parsing JSON:unterminated array
+* use chat::Manager as a Manager per Page
+    * Ensure that ChatWidget::onMessageResponseStream does not accept data from unrelated sessions
+
 
 CANCELED:
 

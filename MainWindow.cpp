@@ -21,7 +21,7 @@ MainWindow::MainWindow(QWidget *parent)
     auto mainPage = ui->tabWidget->widget(0);
     auto welcomePage = qobject_cast<PageWelcomePage *>(mainPage);
 
-    welcomePage->setClient(&_client); // checks the env key
+    welcomePage->initClient(); // checks the env key
     
     connect(welcomePage, &PageWelcomePage::openImageAction, this, &MainWindow::onOpenImage);
     connect(welcomePage, &PageWelcomePage::openChatAction, this, &MainWindow::onOpenChat);
@@ -43,7 +43,7 @@ void MainWindow::onOpenImage()
     int index = ui->tabWidget->addTab(imagePage, tr("Image"));
     ui->tabWidget->setCurrentIndex(index);
 
-    imagePage->setClient(&_client); // connect the client here
+    imagePage->initClient(); // connect the client here
 }
 
 void MainWindow::onOpenChat()
@@ -53,7 +53,7 @@ void MainWindow::onOpenChat()
     int index = ui->tabWidget->addTab(specificPage, tr("Chat"));
     ui->tabWidget->setCurrentIndex(index);
 
-    specificPage->setClient(&_client); // connect the client here
+    specificPage->initClient(); // connect the client here
 }
 
 void MainWindow::onOpenDonate()
@@ -82,11 +82,12 @@ void MainWindow::onOpenPlot()
 
 void MainWindow::onOpenNetworkConfig()
 {
-    NetworkConfiWidget *wdt = new NetworkConfiWidget(this);
-    wdt->synchronizeClient(&_client);
+    // TODO: use NetworkContext instead of _client
+//    NetworkConfiWidget *wdt = new NetworkConfiWidget(this);
+//    wdt->synchronizeClient(&_client);
 
-    int index = ui->tabWidget->addTab(wdt, tr("Network Config"));
-    ui->tabWidget->setCurrentIndex(index);
+//    int index = ui->tabWidget->addTab(wdt, tr("Network Config"));
+//    ui->tabWidget->setCurrentIndex(index);
 }
 
 void MainWindow::on_tabWidget_tabCloseRequested(int index)

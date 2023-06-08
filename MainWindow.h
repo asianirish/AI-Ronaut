@@ -30,8 +30,5 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-
-    oaic::Manager _client;
-
 };
 #endif // MAINWINDOW_H

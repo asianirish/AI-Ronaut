@@ -32,6 +32,8 @@ private slots:
 
 private:
     Ui::NetworkConfiWidget *ui;
+
+    [[deprecated("use NetworkContext instead of _client")]]
     oaic::Manager *_client;
 };
 
