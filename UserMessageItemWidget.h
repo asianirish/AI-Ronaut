@@ -26,6 +26,8 @@ protected:
 private slots:
     void on_actionCopy_triggered();
 
+    void on_actionEdit_triggered();
+
 private:
     Ui::UserMessageItemWidget *ui;
 
