@@ -239,12 +239,8 @@ void ChatWidget::onSessionCreated(const QString &sessionId)
     // TODO: NOT every session creation should cause this page current session changing!
 }
 
-
-
-
 void ChatWidget::on_abortChatButton_clicked()
 {
-    // TODO: place your chat abort code here (of current session!)
-    qDebug() << "CHAT ABORT BUTTON CLICKED";
+    _client->chat()->abortCurrentResponse();
 }
 

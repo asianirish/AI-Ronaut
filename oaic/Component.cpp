@@ -9,7 +9,8 @@ namespace oaic {
 const QString Component::THE_URL("https://api.openai.com/v1");
 
 Component::Component(Auth *auth, Manager *parent): QObject(parent),
-    _auth(auth)
+    _auth(auth),
+    _postReply(nullptr)
 {
 
 }
@@ -26,6 +27,10 @@ void Component::onJsonRequestFinished()
         }
 
         reply->deleteLater();
+
+        if (reply == _postReply) {
+            _postReply = nullptr;
+        }
     }
 }
 
@@ -63,6 +68,10 @@ void Component::onNetworkError(QNetworkReply::NetworkError code)
         emit networkError(msg, code);
 
         reply->deleteLater();
+
+        if (reply == _postReply) {
+            _postReply = nullptr;
+        }
     }
 }
 
@@ -75,20 +84,20 @@ QNetworkReply *Component::sendJsonRequest(const QString &endpoint, const QJsonOb
 
     auto nam = networkAccessManager();
 
-    QNetworkReply *reply = nam->post(rqst, data);
+    _postReply = nam->post(rqst, data);
 
-    connect(reply, &QNetworkReply::finished, this, &Component::onJsonRequestFinished);
+    connect(_postReply, &QNetworkReply::finished, this, &Component::onJsonRequestFinished);
 
     // connect error...
-    connect(reply, &QNetworkReply::errorOccurred, this, &Component::onNetworkError);
+    connect(_postReply, &QNetworkReply::errorOccurred, this, &Component::onNetworkError);
 
     if (stream) {
-        connect(reply, &QNetworkReply::readyRead, this, &Component::onJsonRequestReadyRead);
+        connect(_postReply, &QNetworkReply::readyRead, this, &Component::onJsonRequestReadyRead);
     }
 
-    connect(reply, &QNetworkReply::destroyed, this, &Component::replyDestroyed);
+    connect(_postReply, &QNetworkReply::destroyed, this, &Component::replyDestroyed);
 
-    return reply;
+    return _postReply;
 }
 
 QNetworkReply *Component::sendGetRequest(const QString &endpoint) const
@@ -110,9 +119,11 @@ QNetworkReply *Component::sendGetRequest(const QString &endpoint) const
     connect(reply, &QNetworkReply::destroyed, this, &Component::replyDestroyed);
 
     return reply;
+}
 
-
-
+QNetworkReply *Component::postReply() const
+{
+    return _postReply;
 }
 
 QNetworkRequest Component::request(const QString &endpoint, const QString &contentType) const
