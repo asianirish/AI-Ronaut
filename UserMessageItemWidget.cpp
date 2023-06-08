@@ -53,3 +53,9 @@ void UserMessageItemWidget::on_actionEdit_triggered()
     ui->textBrowser->setFocus();
 }
 
+
+void UserMessageItemWidget::on_textBrowser_textChanged()
+{
+    adjustHeight();
+}
+
