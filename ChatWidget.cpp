@@ -141,6 +141,9 @@ void ChatWidget::enableOrDisableControls(bool isSending)
 {
     ui->textEdit->setDisabled(isSending);
     ui->sendButton->setDisabled(isSending);
+    ui->newSessionButton->setDisabled(isSending);
+
+    ui->abortChatButton->setEnabled(isSending);
 
     // TODO: emit for other widgets of this page
 }
