@@ -68,6 +68,11 @@ QString Session::uuidToString() const
     return _uuid.toString();
 }
 
+QString Session::id() const
+{
+    return uuidToString();
+}
+
 void Session::setUuid(const QByteArray &uuid)
 {
     _uuid = QUuid::fromString(uuid);

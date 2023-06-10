@@ -33,6 +33,7 @@ public:
 
     QByteArray uuidToByteArray() const;
     QString uuidToString() const;
+    QString id() const; // same as uuidToString
 
     void setUuid(const QByteArray &uuid);
 
