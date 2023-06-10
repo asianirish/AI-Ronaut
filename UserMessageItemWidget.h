@@ -30,6 +30,8 @@ private slots:
 
     void on_textBrowser_textChanged();
 
+    void on_actionDelete_triggered();
+
 private:
     Ui::UserMessageItemWidget *ui;
 

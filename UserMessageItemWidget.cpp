@@ -13,6 +13,7 @@ UserMessageItemWidget::UserMessageItemWidget(const QString &sessionId, QWidget *
 
     addAction(ui->actionCopy);
     addAction(ui->actionEdit);
+    addAction(ui->actionDelete);
 }
 
 UserMessageItemWidget::~UserMessageItemWidget()
@@ -57,5 +58,11 @@ void UserMessageItemWidget::on_actionEdit_triggered()
 void UserMessageItemWidget::on_textBrowser_textChanged()
 {
     adjustHeight();
+}
+
+
+void UserMessageItemWidget::on_actionDelete_triggered()
+{
+    emit deleteMe();
 }
 
