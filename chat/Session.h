@@ -86,6 +86,6 @@ struct SessionData {
 
 } // namespace chat
 
-Q_DECLARE_METATYPE(chat::SessionData);
+Q_DECLARE_METATYPE(chat::SessionData)
 
 #endif // CHAT_SESSION_H
