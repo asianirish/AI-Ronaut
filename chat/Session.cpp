@@ -12,6 +12,7 @@ Session::Session() : _isPersistent(false)
     _accessed = _created;
 
     _uuid = QUuid::createUuid();
+    _name = _created.toString("yyyyMMddhhmmss");
 }
 
 SystemMessage Session::systemMessage() const
