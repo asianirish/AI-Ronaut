@@ -14,10 +14,7 @@ public:
 
     SessionItem();
 
-    void setSessionData(const SessionData &sessionData);
-
     QVariant data(int role) const override;
-    SessionData sessionData() const;
 
     bool operator<(const QListWidgetItem &other) const override;
 
@@ -27,7 +24,6 @@ public:
     QString name() const;
 
 private:
-    [[deprecated]]SessionData _sessionData;
     QString _sessionId;
 
     chat::SessionPtr session() const;

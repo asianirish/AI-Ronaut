@@ -16,7 +16,7 @@ ChatSessionWidget::ChatSessionWidget(QWidget *parent) :
 
     for (auto session : lst) {
         chat::SessionItem *item = new chat::SessionItem();
-        item->setSessionData(session->data());
+        item->setSessionId(session->id());
         ui->sessionListWidget->addItem(item);
     }
 
@@ -42,7 +42,7 @@ void ChatSessionWidget::onSessionCreated(const QString &sessionId)
     auto session = gSessions->session(sessionId);
 
     chat::SessionItem *item = new chat::SessionItem();
-    item->setSessionData(session->data());
+    item->setSessionId(session->id());
 
     ui->sessionListWidget->insertItem(0, item);
 
@@ -84,9 +84,7 @@ void ChatSessionWidget::onRenameSession(const QString &name)
     auto sessionItem = dynamic_cast<chat::SessionItem *>(item);
 
     if (sessionItem) {
-        auto sd = sessionItem->sessionData();
-        sd.name = name;
-        sessionItem->setSessionData(sd);
+        sessionItem->setSessionId(currentSessionId());
 
         // changes the list item's text
         sessionItem->setText(name);

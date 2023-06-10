@@ -11,25 +11,10 @@ SessionItem::SessionItem() : QListWidgetItem(nullptr, SESSION_ITEM_TYPE)
 QVariant SessionItem::data(int role) const
 {
     if (role == Qt::DisplayRole) {
-        return _sessionData.name;
+        return session()->name();
     }
 
-//    if (role == Qt::InitialSortOrderRole) {
-//        return QVariant::fromValue(_sessionData);
-//    }
-
     return QListWidgetItem::data(role);
-}
-
-SessionData SessionItem::sessionData() const
-{
-    return _sessionData;
-}
-
-void SessionItem::setSessionData(const SessionData &sessionData)
-{
-    _sessionData = sessionData;
-//    setData(Qt::InitialSortOrderRole, QVariant::fromValue(sessionData));
 }
 
 bool SessionItem::operator<(const QListWidgetItem &other) const

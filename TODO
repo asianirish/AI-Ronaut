@@ -1,8 +1,6 @@
 TODO:
 
 * ModelContext per a Session instead ModelContext per a Page
-* Update session name across all tabs upon renaming
-    * use SessionItem::_sessionId instead of SessionItem::_sessionData
 
 DONE:
 
@@ -18,6 +16,8 @@ DONE:
     * Ensure that ChatWidget::onMessageResponseStream does not accept data from unrelated sessions
     * Add the ability to cancel sending an Assistant message for each session individually, without affecting messages being sent in other sessions.
 * If the input field is empty, just forward the entire array of messages again
+* Update session name across all tabs upon renaming
+    * use SessionItem::_sessionId instead of SessionItem::_sessionData
 
 CANCELED:
 
