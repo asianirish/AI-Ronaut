@@ -43,3 +43,9 @@ void ChatSessionItemWidget::deleteMessage()
         gSessions->deleteMessage(_sessionId, _msgPtr);
     }
 }
+
+void ChatSessionItemWidget::editMessage()
+{
+    textBrowser()->setReadOnly(false);
+    textBrowser()->setFocus();
+}
