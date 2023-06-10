@@ -11,7 +11,16 @@ ChatSessionWidget::ChatSessionWidget(QWidget *parent) :
     ui->setupUi(this);
 
     ui->sessionListWidget->setSortingEnabled(true);
-    // TODO: initialize the sessino list from gSessions
+
+    auto lst = gSessions->sessions();
+
+    for (auto session : lst) {
+        chat::SessionItem *item = new chat::SessionItem();
+        item->setSessionData(session->data());
+        ui->sessionListWidget->addItem(item);
+    }
+
+    ui->sessionListWidget->sortItems(Qt::DescendingOrder);
 
     connect(gSessions, &chat::SessionManager::sessionCreated, this, &ChatSessionWidget::onSessionCreated);
 }
