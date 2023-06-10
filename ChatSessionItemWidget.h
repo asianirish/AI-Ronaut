@@ -15,6 +15,7 @@ public:
     void refreshMsg();
     void refreshTextBrowser();
 
+    void deleteMessage();
 protected:
     virtual chat::Message *createMessage() const = 0;
 

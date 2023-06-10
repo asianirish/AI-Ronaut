@@ -36,3 +36,10 @@ void ChatSessionItemWidget::refreshTextBrowser()
 {
     setText(msgPtr()->text());
 }
+
+void ChatSessionItemWidget::deleteMessage()
+{
+    if (_msgPtr) {
+        gSessions->deleteMessage(_sessionId, _msgPtr);
+    }
+}
