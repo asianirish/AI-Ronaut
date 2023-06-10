@@ -100,7 +100,7 @@ QDateTime Session::created() const
 
 SessionData Session::data() const
 {
-    return SessionData{_uuid.toString(), fileName(), _created, _accessed, _isPersistent};
+    return SessionData{_uuid.toString(), name(), _created, _accessed, _isPersistent};
 }
 
 QDateTime Session::accessed() const
