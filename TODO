@@ -15,7 +15,7 @@ DONE:
 * use chat::Manager as a Manager per Page
     * Ensure that ChatWidget::onMessageResponseStream does not accept data from unrelated sessions
     * Add the ability to cancel sending an Assistant message for each session individually, without affecting messages being sent in other sessions.
+* If the input field is empty, just forward the entire array of messages again
 
 CANCELED:
 
-* If the input field is empty, just forward the entire array of messages again

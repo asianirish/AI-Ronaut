@@ -26,6 +26,9 @@ ChatWidget::ChatWidget(QWidget *parent) :
     ui->setupUi(this);
 
     ui->textEdit->setTabChangesFocus(true);
+
+    addAction(ui->actionDelete_Item);
+    addAction(ui->actionEditItem);
 }
 
 ChatWidget::~ChatWidget()
@@ -39,18 +42,18 @@ void ChatWidget::resizeEvent(QResizeEvent *event)
     updateItemsHeight();
 }
 
-void ChatWidget::keyPressEvent(QKeyEvent *event)
-{
-    if (event->key() == Qt::Key_Enter || event->key() == Qt::Key_Return) {
+//void ChatWidget::keyPressEvent(QKeyEvent *event)
+//{
+//    if (event->key() == Qt::Key_Enter || event->key() == Qt::Key_Return) {
 
-        if (event->modifiers() & Qt::ControlModifier) {
-            on_sendButton_clicked();
-            return;
-        }
-    }
+//        if (event->modifiers() & Qt::ControlModifier) {
+//            on_sendButton_clicked();
+//            return;
+//        }
+//    }
 
-    QWidget::keyPressEvent(event);
-}
+//    QWidget::keyPressEvent(event);
+//}
 
 void ChatWidget::showEvent(QShowEvent *event)
 {
@@ -62,14 +65,20 @@ void ChatWidget::showEvent(QShowEvent *event)
 void ChatWidget::on_sendButton_clicked()
 {
     if (ui->textEdit->document()->isEmpty()) {
-        // TODO: just forward the entire array of messages again in this case
-        ui->textEdit->setFocus(Qt::OtherFocusReason);
+        if (ui->textEdit->hasFocus() || ui->sendButton->hasFocus()) {
+            continueChat();
+        } else {
+            ui->textEdit->setFocus(Qt::OtherFocusReason);
+        }
         return; // do not send an empty string
     }
 
     auto input = ui->textEdit->toPlainText();
 
     UserMessageItemWidget *itemWidget = new UserMessageItemWidget(currentSessionId(), this);
+
+    connect(itemWidget, &UserMessageItemWidget::deleteMe, this, &ChatWidget::onDeleteItemRequest);
+
     addMessageItem(itemWidget, input); // sets itemWidget text here
     itemWidget->refreshMsg(); // do not refresh in addMessageItem not to refresh after every delta!
 
@@ -79,6 +88,8 @@ void ChatWidget::on_sendButton_clicked()
         emit renameSession(camelInput);
         qDebug() << "LIST ITEM COUNT:" << ui->listWidget->count() << camelInput;
     }
+
+    enableOrDisableControls(true);
 }
 
 void ChatWidget::adjustLastItem()
@@ -115,12 +126,29 @@ void ChatWidget::onDeltaReady(const QString &deltaData)
 
     if (aiWidget == nullptr) {
         aiWidget = new AIMessageItemWidget(currentSessionId(), this);
+
+        connect(aiWidget, &AIMessageItemWidget::deleteMe, this, &ChatWidget::onDeleteItemRequest);
+
         addMessageItem(aiWidget, deltaData);
         QTimer::singleShot(1, this, &ChatWidget::adjustLastItem);
         return;
     }
     aiWidget->appendText(deltaData);
     QTimer::singleShot(1, this, &ChatWidget::adjustLastItem);
+}
+
+void ChatWidget::enableOrDisableControls(bool isSending)
+{
+    ui->textEdit->setDisabled(isSending);
+    ui->sendButton->setDisabled(isSending);
+
+    // TODO: emit for other widgets of this page
+}
+
+void ChatWidget::continueChat()
+{
+    enableOrDisableControls(true);
+    queryAiModel();
 }
 
 void ChatWidget::onDeltaError(const QString &deltaError)
@@ -194,6 +222,7 @@ void ChatWidget::onMessageResponseComplete(QObject *)
     }
 
     qDebug() << "MESSAGE RESPONSE COMPLETE";
+    enableOrDisableControls(false);
     ui->textEdit->setFocus();
 }
 
@@ -242,5 +271,42 @@ void ChatWidget::onSessionCreated(const QString &sessionId)
 void ChatWidget::on_abortChatButton_clicked()
 {
     _client->chat()->abortCurrentResponse();
+}
+
+void ChatWidget::onDeleteItemRequest()
+{
+    on_actionDelete_Item_triggered();
+}
+
+
+void ChatWidget::on_actionDelete_Item_triggered()
+{
+    auto item = ui->listWidget->currentItem();
+    if (item) {
+        auto itemWidget = ui->listWidget->itemWidget(item);
+        auto chatItemWidget = qobject_cast<ChatSessionItemWidget *>(itemWidget);
+
+        if (chatItemWidget) {
+            chatItemWidget->deleteMessage();
+        }
+
+        ui->listWidget->removeItemWidget(item);
+        delete item;
+    }
+}
+
+
+void ChatWidget::on_actionEditItem_triggered()
+{
+    auto item = ui->listWidget->currentItem();
+    if (item) {
+        auto itemWidget = ui->listWidget->itemWidget(item);
+        auto chatItemWidget = qobject_cast<ChatSessionItemWidget *>(itemWidget);
+
+        if (chatItemWidget) {
+            chatItemWidget->editMessage();
+        }
+
+    }
 }
 

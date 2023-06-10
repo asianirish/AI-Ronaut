@@ -35,8 +35,6 @@ protected:
 protected:
     void resizeEvent(QResizeEvent *event) override;
 
-    void keyPressEvent(QKeyEvent *event) override;
-
     void showEvent(QShowEvent *event) override;
 
 private slots:
@@ -55,6 +53,12 @@ private slots:
     void onSessionCreated(const QString &sessionId);
 
     void on_abortChatButton_clicked();
+
+    void onDeleteItemRequest();
+
+    void on_actionDelete_Item_triggered();
+
+    void on_actionEditItem_triggered();
 
 signals:
      // TODO: take a model context from the current session
@@ -92,6 +96,10 @@ private:
     }
 
     void onDeltaReady(const QString &deltaData);
+
+    void enableOrDisableControls(bool isSending);
+
+    void continueChat();
 };
 
 #endif // CHATWIDGET_H
