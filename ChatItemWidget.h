@@ -36,6 +36,7 @@ private:
     QListWidgetItem *_listItem;
 
 signals:
+    void deleteMe();
 
 };
 
