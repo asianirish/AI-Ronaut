@@ -34,6 +34,8 @@ public:
 
     void saveAsTextFile(const QString &sessionId) const;
 
+    void deleteMessage(const QString &sessionId, MessagePtr msgPtr);
+
 private:
     OrderedMap<QString, SessionPtr> _sessions;
 

@@ -65,6 +65,12 @@ void SessionManager::saveAsTextFile(const QString &sessionId) const
     session(sessionId)->saveAsTextFile();
 }
 
+void SessionManager::deleteMessage(const QString &sessionId, MessagePtr msgPtr)
+{
+    auto sssn = session(sessionId);
+    sssn->deleteMessage(msgPtr);
+}
+
 SessionManager::SessionManager(QObject *parent)
     : QObject{parent}
 {
