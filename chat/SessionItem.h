@@ -21,9 +21,16 @@ public:
 
     bool operator<(const QListWidgetItem &other) const override;
 
-private:
-    SessionData _sessionData;
+    QString sessionId() const;
+    void setSessionId(const QString &newSessinId);
 
+    QString name() const;
+
+private:
+    [[deprecated]]SessionData _sessionData;
+    QString _sessionId;
+
+    chat::SessionPtr session() const;
 };
 
 } // namespace chat

@@ -1,4 +1,5 @@
 #include "SessionItem.h"
+#include "SessionManager.h"
 
 namespace chat {
 
@@ -42,6 +43,26 @@ bool SessionItem::operator<(const QListWidgetItem &other) const
     }
 
     return QListWidgetItem::operator<(other);
+}
+
+QString SessionItem::sessionId() const
+{
+    return _sessionId;
+}
+
+void SessionItem::setSessionId(const QString &newSessinId)
+{
+    _sessionId = newSessinId;
+}
+
+QString SessionItem::name() const
+{
+    session()->name();
+}
+
+SessionPtr SessionItem::session() const
+{
+    return gSessions->session(_sessionId);
 }
 
 } // namespace chat
