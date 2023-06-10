@@ -50,8 +50,7 @@ void UserMessageItemWidget::on_actionCopy_triggered()
 
 void UserMessageItemWidget::on_actionEdit_triggered()
 {
-    ui->textBrowser->setReadOnly(false);
-    ui->textBrowser->setFocus();
+    editMessage();
 }
 
 
