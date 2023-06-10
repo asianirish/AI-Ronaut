@@ -76,6 +76,11 @@
     <string>Save to file</string>
    </property>
   </action>
+  <action name="actionDelete">
+   <property name="text">
+    <string>Delete</string>
+   </property>
+  </action>
  </widget>
  <customwidgets>
   <customwidget>

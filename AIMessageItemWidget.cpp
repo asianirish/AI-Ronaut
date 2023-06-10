@@ -1,4 +1,5 @@
 #include "AIMessageItemWidget.h"
+
 #include "ui_AIMessageItemWidget.h"
 
 #include "chat/AssistantMessage.h"
@@ -11,8 +12,9 @@ AIMessageItemWidget::AIMessageItemWidget(const QString &sessionId, QWidget *pare
 
     addAction(ui->actionCopy);
     addAction(ui->actionEdit);
-    addAction(ui->actionSave_to_list);
-    addAction(ui->actionSave_to_file);
+//    addAction(ui->actionSave_to_list);
+//    addAction(ui->actionSave_to_file);
+    addAction(ui->actionDelete);
 }
 
 AIMessageItemWidget::~AIMessageItemWidget()
@@ -61,5 +63,11 @@ void AIMessageItemWidget::on_actionEdit_triggered()
 void AIMessageItemWidget::on_textBrowser_textChanged()
 {
     adjustHeight();
+}
+
+
+void AIMessageItemWidget::on_actionDelete_triggered()
+{
+    emit deleteMe();
 }
 
