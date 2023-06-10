@@ -13,8 +13,6 @@
 
 namespace chat {
 
-struct SessionData;
-
 class Session
 {
 public:
@@ -45,8 +43,6 @@ public:
 
     QDateTime created() const;
 
-    SessionData data() const;
-
     QDateTime accessed() const;
 
     oaic::MsgDataList msgDataList() const;
@@ -74,19 +70,6 @@ private:
 
 using SessionPtr = QSharedPointer<Session>;
 
-struct SessionData {
-    QString id;
-    QString name;
-    QDateTime created;
-    QDateTime accessed;
-
-    bool isPersistent = false;
-};
-
-
-
 } // namespace chat
-
-Q_DECLARE_METATYPE(chat::SessionData)
 
 #endif // CHAT_SESSION_H

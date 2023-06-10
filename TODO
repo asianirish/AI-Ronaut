@@ -1,7 +1,6 @@
 TODO:
 
 * ModelContext per a Session instead ModelContext per a Page
-* delete struct chat::SessionData
 
 DONE:
 
@@ -19,6 +18,7 @@ DONE:
 * If the input field is empty, just forward the entire array of messages again
 * Update session name across all tabs upon renaming
     * use SessionItem::_sessionId instead of SessionItem::_sessionData
+* Delete struct chat::SessionData
 
 CANCELED:
 

@@ -104,11 +104,6 @@ QDateTime Session::created() const
     return _created;
 }
 
-SessionData Session::data() const
-{
-    return SessionData{_uuid.toString(), name(), _created, _accessed, _isPersistent};
-}
-
 QDateTime Session::accessed() const
 {
     return _accessed;
