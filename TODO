@@ -1,6 +1,7 @@
 TODO:
 
 * ModelContext per a Session instead ModelContext per a Page
+* delete struct chat::SessionData
 
 DONE:
 
