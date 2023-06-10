@@ -1,6 +1,8 @@
 TODO:
 
 * ModelContext per a Session instead ModelContext per a Page
+* Update session name across all tabs upon renaming
+    * use SessionItem::_sessionId instead of SessionItem::_sessionData
 
 DONE:
 
