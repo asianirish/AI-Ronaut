@@ -54,9 +54,7 @@ void AIMessageItemWidget::on_actionCopy_triggered()
 
 void AIMessageItemWidget::on_actionEdit_triggered()
 {
-    qDebug() << "ACTION EDIT";
-    ui->textBrowser->setReadOnly(false);
-    ui->textBrowser->setFocus();
+    editMessage();
 }
 
 
