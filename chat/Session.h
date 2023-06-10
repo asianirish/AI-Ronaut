@@ -52,6 +52,8 @@ public:
 
     void saveAsTextFile() const;
 
+    void deleteMessage(MessagePtr msgPtr);
+
 private:
     QString fileName() const;
 

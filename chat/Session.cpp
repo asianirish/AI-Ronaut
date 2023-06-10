@@ -139,6 +139,11 @@ void Session::saveAsTextFile() const
     file.close();
 }
 
+void Session::deleteMessage(MessagePtr msgPtr)
+{
+    _messageList.removeAll(msgPtr);
+}
+
 QString Session::fileName() const
 {
     QString createdStr(_created.toString("yyyyMMddhhmmss"));
