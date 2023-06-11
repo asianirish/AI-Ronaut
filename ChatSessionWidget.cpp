@@ -36,6 +36,21 @@ void ChatSessionWidget::synchronizeCurrentSession(const QString &sessionId)
     qWarning() << "ChatSessionWidget::synchronize should not be called";
 }
 
+QModelIndexList ChatSessionWidget::findModelIndexesBySessionId(const QString &sessionId)
+{
+    QModelIndex start = ui->sessionListWidget->model()->index(0, 0);
+    return ui->sessionListWidget->model()->match(start, chat::SessionItem::SessionIdRole, sessionId, 1, Qt::MatchExactly);
+}
+
+chat::SessionItem* ChatSessionWidget::findItemBySessionId(const QString &sessionId)
+{
+    QModelIndexList indexes = findModelIndexesBySessionId(sessionId);
+    if (!indexes.isEmpty()) {
+        return static_cast<chat::SessionItem*>(ui->sessionListWidget->itemFromIndex(indexes.first()));
+    }
+    return nullptr;
+}
+
 void ChatSessionWidget::onSessionCreated(const QString &sessionId)
 {
     // TODO: NOT every session creation should cause this page current session changing!
@@ -80,7 +95,8 @@ void ChatSessionWidget::onRenameSession(const QString &name)
     session->setName(name);
     ui->sessionNameEdit->setText(session->name());
 
-    auto item = ui->sessionListWidget->currentItem();
+    auto item = findItemBySessionId(currentSessionId());
+
     auto sessionItem = dynamic_cast<chat::SessionItem *>(item);
 
     if (sessionItem) {

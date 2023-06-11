@@ -2,6 +2,7 @@ TODO:
 
 * ModelContext per a Session instead ModelContext per a Page
 
+
 DONE:
 
 * The first letter of the message is lost when saving
@@ -19,6 +20,8 @@ DONE:
 * Update session name across all tabs upon renaming
     * use SessionItem::_sessionId instead of SessionItem::_sessionData
 * Delete struct chat::SessionData
+* Fix the issue: Rename not the selected session in the list widget, but the current one for this tab
+(See ChatSessionWidget::onRenameSession)
 
 CANCELED:
 

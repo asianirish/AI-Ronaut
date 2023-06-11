@@ -9,6 +9,10 @@ namespace Ui {
 class ChatSessionWidget;
 }
 
+namespace chat {
+class SessionItem;
+}
+
 class ChatSessionWidget : public ChatToolWidget
 {
     Q_OBJECT
@@ -19,6 +23,12 @@ public:
 
 protected:
     void synchronizeCurrentSession(const QString &sessionId) override;
+
+private:
+    QModelIndexList findModelIndexesBySessionId(const QString& sessionId);/* {
+    }*/
+
+    chat::SessionItem *findItemBySessionId(const QString& sessionId);
 
 private slots:
     void onSessionCreated(const QString &sessionId);

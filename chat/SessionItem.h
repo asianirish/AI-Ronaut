@@ -12,6 +12,10 @@ class SessionItem : public QListWidgetItem
 public:
     static const int SESSION_ITEM_TYPE = ItemType::UserType + 1;
 
+    enum SessionItemRoles {
+        SessionIdRole = Qt::UserRole + 1
+    };
+
     SessionItem();
 
     QVariant data(int role) const override;

@@ -14,6 +14,10 @@ QVariant SessionItem::data(int role) const
         return session()->name();
     }
 
+    if (role == SessionIdRole) {
+        return _sessionId;
+    }
+
     return QListWidgetItem::data(role);
 }
 
