@@ -13,20 +13,14 @@ PageGeneralChatPage::PageGeneralChatPage(QWidget *parent) :
     ui->setupUi(this);
 
     // good place to create a session
-    _currentSessionId = gSessions->createSession();
-    _pageContext = new PageContext(pageNumber, _currentSessionId);
+    auto currentSessionId = gSessions->createSession();
+    _pageContext = new PageContext(pageNumber, currentSessionId);
     pageNumber++;
 
     ui->chatWidget->setPageContext(_pageContext);
     ui->chatSessionWidget->setPageContext(_pageContext);
     ui->systemMessageWidget->setPageContext(_pageContext);
     ui->chatConfigWidget->setPageContext(_pageContext);
-
-    // TODO: deprecated:
-    ui->chatWidget->setCurrentSessionId(_currentSessionId);
-    ui->chatSessionWidget->setCurrentSessionId(_currentSessionId);
-    ui->systemMessageWidget->setCurrentSessionId(_currentSessionId);
-    ui->chatConfigWidget->setCurrentSessionId(_currentSessionId); // TODO: tries to read model context from the session!
 
     // connect sessionChage with onSessionChage
     // ChatSessionWidget::onSessionChanged does nothing because ChatSessionWidget changes sessions itself
@@ -72,17 +66,19 @@ void PageGeneralChatPage::changeCurrentToolPage(int index)
 
 void PageGeneralChatPage::onUserMessage(const oaic::ModelContext &modelCntx)
 {
+    auto currentSessionId = _pageContext->currentSessionId();
+
     QString systemMessage = ui->systemMessageWidget->systemMessage();
-    gSessions->addSystemMessage(systemMessage, _currentSessionId); // special case
+    gSessions->addSystemMessage(systemMessage, currentSessionId); // special case
 
     // TODO: move to ChatWidget (?)
 
-    auto messages = gSessions->session(_currentSessionId)->msgDataList();
+    auto messages = gSessions->session(currentSessionId)->msgDataList();
     emit sendSessionMessages(modelCntx, messages);
 }
 
-void PageGeneralChatPage::onCurrentSessionChange(const QString &sessionId)
+void PageGeneralChatPage::onCurrentSessionChange()
 {
-    _currentSessionId = sessionId;
+//    _currentSessionId = sessionId;
 }
 

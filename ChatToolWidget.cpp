@@ -9,14 +9,12 @@ ChatToolWidget::ChatToolWidget(QWidget *parent)
 
 QString ChatToolWidget::currentSessionId() const
 {
-    return _currentSessionId;
+    return _pageContext->currentSessionId();
 }
 
-void ChatToolWidget::setCurrentSessionId(const QString &newCurrentSessionId)
+int ChatToolWidget::pageIndex() const
 {
-    _currentSessionId = newCurrentSessionId;
-
-    synchronizeCurrentSession(_currentSessionId);
+    return _pageContext->pageIndex();
 }
 
 PageContext *ChatToolWidget::pageContext() const
@@ -27,9 +25,11 @@ PageContext *ChatToolWidget::pageContext() const
 void ChatToolWidget::setPageContext(PageContext *newPageContext)
 {
     _pageContext = newPageContext;
+
+    synchronizeCurrentSession(_pageContext->currentSessionId());
 }
 
-void ChatToolWidget::onCurrentSessionChange(const QString &sessionId)
+void ChatToolWidget::onCurrentSessionChange()
 {
-    setCurrentSessionId(sessionId);
+// TODO: syncronizePageContext(); // (virtual)
 }

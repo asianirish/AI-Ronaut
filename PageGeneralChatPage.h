@@ -29,7 +29,7 @@ private slots:
     // TODO: take a model context from the current session
     void onUserMessage(const oaic::ModelContext &modelCntx);
 
-    void onCurrentSessionChange(const QString &sessionId);
+    void onCurrentSessionChange();
 
 signals:
     void sendSessionMessages(const oaic::ModelContext &modelCntx, oaic::MsgDataList &messages);
@@ -38,8 +38,6 @@ private:
     Ui::PageGeneralChatPage *ui;
 
     oaic::ModelContext _modelCntx;
-
-    QString _currentSessionId;
 
     PageContext *_pageContext;
 };

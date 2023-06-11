@@ -12,7 +12,7 @@ public:
     explicit ChatToolWidget(QWidget *parent = nullptr);
 
     QString currentSessionId() const;
-    void setCurrentSessionId(const QString &newCurrentSessionId);
+    int pageIndex() const;
 
     PageContext *pageContext() const;
     void setPageContext(PageContext *newPageContext);
@@ -21,11 +21,10 @@ protected:
     virtual void synchronizeCurrentSession(const QString &sessionId) = 0;
 
 private:
-    QString _currentSessionId;
     PageContext *_pageContext;
 
 public slots:
-    void onCurrentSessionChange(const QString &sessionId);
+    void onCurrentSessionChange();
 
 signals:
 

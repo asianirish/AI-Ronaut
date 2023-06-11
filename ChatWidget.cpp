@@ -243,6 +243,7 @@ void ChatWidget::setClient(oaic::Manager *newClient)
     connect(_client->chat(), &oaic::Component::replyDestroyed, this, &ChatWidget::onMessageResponseComplete);
     connect(_client->chat(), &oaic::Component::responseError, this, &ChatWidget::onDeltaError);
 
+    // TODO: add a pageIngex arg (how?)
     connect(gSessions, &chat::SessionManager::sessionCreated, this, &ChatWidget::onSessionCreated);
 }
 
@@ -256,13 +257,13 @@ void ChatWidget::on_newSessionButton_clicked()
 {
     QString sessionId = gSessions->createSession();
 
-    setCurrentSessionId(sessionId);
+    pageContext()->setCurrentSessionId(sessionId);
 
     ui->listWidget->clear();
 
     ui->textEdit->setFocus();
 
-    emit sessionChaged(sessionId);
+    emit sessionChaged();
 }
 
 void ChatWidget::onSessionCreated(const QString &sessionId)

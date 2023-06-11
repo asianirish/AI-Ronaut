@@ -63,7 +63,7 @@ private slots:
 signals:
      // TODO: take a model context from the current session
     void sendCurrentSessionMessages(const oaic::ModelContext &modelCntx);
-    void sessionChaged(const QString &sessionId);
+    void sessionChaged();
 
     void renameSession(const QString &name);
 

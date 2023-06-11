@@ -22,6 +22,7 @@ ChatSessionWidget::ChatSessionWidget(QWidget *parent) :
 
     ui->sessionListWidget->sortItems(Qt::DescendingOrder);
 
+    // TODO: add a pageIngex arg (how?)
     connect(gSessions, &chat::SessionManager::sessionCreated, this, &ChatSessionWidget::onSessionCreated);
 }
 
