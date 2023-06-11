@@ -8,10 +8,6 @@ ChatSessionWidget::ChatSessionWidget(QWidget *parent) :
     ChatToolWidget(parent),
     ui(new Ui::ChatSessionWidget)
 {
-    static int currentPageNumber = 1;
-    _myPageNumber = currentPageNumber;
-    currentPageNumber++;
-
     ui->setupUi(this);
 
     ui->sessionListWidget->setSortingEnabled(true);
@@ -53,11 +49,6 @@ chat::SessionItem* ChatSessionWidget::findItemBySessionId(const QString &session
         return static_cast<chat::SessionItem*>(ui->sessionListWidget->itemFromIndex(indexes.first()));
     }
     return nullptr;
-}
-
-int ChatSessionWidget::myPageNumber() const
-{
-    return _myPageNumber;
 }
 
 void ChatSessionWidget::onSessionCreated(const QString &sessionId)

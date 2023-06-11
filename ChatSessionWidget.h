@@ -21,8 +21,6 @@ public:
     explicit ChatSessionWidget(QWidget *parent = nullptr);
     ~ChatSessionWidget();
 
-    int myPageNumber() const;
-
 protected:
     void synchronizeCurrentSession(const QString &sessionId) override;
 
@@ -32,8 +30,6 @@ private:
     chat::SessionItem *findItemBySessionId(const QString& sessionId);
 
 private:
-    // TODO: Implement a method to distinguish sessions created on this page or other pages
-    int _myPageNumber;
 
 private slots:
     void onSessionCreated(const QString &sessionId);

@@ -8,10 +8,21 @@ PageGeneralChatPage::PageGeneralChatPage(QWidget *parent) :
     PageWidget(parent),
     ui(new Ui::PageGeneralChatPage)
 {
+    static int pageNumber = 1;
+
     ui->setupUi(this);
 
     // good place to create a session
     _currentSessionId = gSessions->createSession();
+    _pageContext = new PageContext(pageNumber, _currentSessionId);
+    pageNumber++;
+
+    ui->chatWidget->setPageContext(_pageContext);
+    ui->chatSessionWidget->setPageContext(_pageContext);
+    ui->systemMessageWidget->setPageContext(_pageContext);
+    ui->chatConfigWidget->setPageContext(_pageContext);
+
+    // TODO: deprecated:
     ui->chatWidget->setCurrentSessionId(_currentSessionId);
     ui->chatSessionWidget->setCurrentSessionId(_currentSessionId);
     ui->systemMessageWidget->setCurrentSessionId(_currentSessionId);
@@ -39,6 +50,7 @@ PageGeneralChatPage::PageGeneralChatPage(QWidget *parent) :
 PageGeneralChatPage::~PageGeneralChatPage()
 {
     delete ui;
+    delete _pageContext;
 }
 
 void PageGeneralChatPage::synchronizeClient(oaic::Manager *client)

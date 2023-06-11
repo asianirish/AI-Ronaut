@@ -2,6 +2,7 @@
 #define PAGEGENERALCHATPAGE_H
 
 #include "PageWidget.h"
+#include "PageContext.h"
 
 #include <Chat.h>
 
@@ -39,6 +40,8 @@ private:
     oaic::ModelContext _modelCntx;
 
     QString _currentSessionId;
+
+    PageContext *_pageContext;
 };
 
 #endif // PAGEGENERALCHATPAGE_H
