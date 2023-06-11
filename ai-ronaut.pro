@@ -22,6 +22,7 @@ SOURCES += \
     ChatWidget.cpp \
     ErrorMessageItemWidget.cpp \
     NetworkConfiWidget.cpp \
+    NetworkContext.cpp \
     PageAboutPage.cpp \
     PageContext.cpp \
     PageDonatePage.cpp \
@@ -63,6 +64,7 @@ HEADERS += \
     ErrorMessageItemWidget.h \
     MainWindow.h \
     NetworkConfiWidget.h \
+    NetworkContext.h \
     PageAboutPage.h \
     PageContext.h \
     PageDonatePage.h \

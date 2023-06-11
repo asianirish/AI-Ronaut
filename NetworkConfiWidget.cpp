@@ -5,8 +5,7 @@
 
 NetworkConfiWidget::NetworkConfiWidget(QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::NetworkConfiWidget),
-    _client(nullptr)
+    ui(new Ui::NetworkConfiWidget)
 {
     ui->setupUi(this);
 }
@@ -14,13 +13,6 @@ NetworkConfiWidget::NetworkConfiWidget(QWidget *parent) :
 NetworkConfiWidget::~NetworkConfiWidget()
 {
     delete ui;
-}
-
-void NetworkConfiWidget::synchronizeClient(oaic::Manager *client)
-{
-    _client = client;
-    int timeOutSec = _client->timeout() / 1000;
-    ui->timeOutBox->setValue(timeOutSec);
 }
 
 void NetworkConfiWidget::on_timeOutBox_valueChanged(int timeoutSec)
@@ -35,7 +27,7 @@ void NetworkConfiWidget::on_applyButton_clicked()
     int32_t timeoutSec = ui->timeOutBox->value();
     int32_t timeoutMs = timeoutSec * 1000;
 
-    _client->setTimeout(timeoutMs);
+    _context.setTimeout(timeoutMs);
 
     QSettings settings;
     settings.setValue("oai/timeout", timeoutMs);
@@ -51,5 +43,17 @@ void NetworkConfiWidget::on_useProxyBox_stateChanged(int isProxy)
     } else {
         ui->proxyFrame->setEnabled(false);
     }
+}
+
+NetworkContext NetworkConfiWidget::context() const
+{
+    return _context;
+}
+
+void NetworkConfiWidget::setContext(const NetworkContext &newContext)
+{
+    _context = newContext;
+    int timeOutSec = _context.timeout() / 1000;
+    ui->timeOutBox->setValue(timeOutSec);
 }
 

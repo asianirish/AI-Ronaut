@@ -1,7 +1,7 @@
 #ifndef NETWORKCONFIWIDGET_H
 #define NETWORKCONFIWIDGET_H
 
-#include <Manager.h>
+#include "NetworkContext.h"
 
 #include <QWidget>
 
@@ -9,10 +9,6 @@ namespace Ui {
 class NetworkConfiWidget;
 }
 
-class AppContext;
-
-
-// TODO: rename to page and inherit from PageWidget
 class NetworkConfiWidget : public QWidget
 {
     Q_OBJECT
@@ -21,7 +17,8 @@ public:
     explicit NetworkConfiWidget(QWidget *parent = nullptr);
     ~NetworkConfiWidget();
 
-    void synchronizeClient(oaic::Manager *client);
+    NetworkContext context() const;
+    void setContext(const NetworkContext &newContext);
 
 private slots:
     void on_timeOutBox_valueChanged(int timeoutSec);
@@ -33,8 +30,7 @@ private slots:
 private:
     Ui::NetworkConfiWidget *ui;
 
-    [[deprecated("use NetworkContext instead of _client")]]
-    oaic::Manager *_client;
+    NetworkContext _context;
 };
 
 #endif // NETWORKCONFIWIDGET_H
