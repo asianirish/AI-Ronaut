@@ -1,7 +1,7 @@
 TODO:
 
 * ModelContext per a Session instead ModelContext per a Page
-
+* Do not select a new session if a session has already been created on another page
 
 DONE:
 
