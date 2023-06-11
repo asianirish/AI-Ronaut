@@ -44,7 +44,7 @@ void SessionItem::setSessionId(const QString &newSessinId)
 
 QString SessionItem::name() const
 {
-    session()->name();
+    return session()->name();
 }
 
 SessionPtr SessionItem::session() const
