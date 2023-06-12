@@ -14,7 +14,7 @@ ChatSessionWidget::ChatSessionWidget(QWidget *parent) :
 
     auto lst = gSessions->sessions();
 
-    for (auto session : lst) {
+    for (auto &session : lst) {
         chat::SessionItem *item = new chat::SessionItem();
         item->setSessionId(session->id());
         ui->sessionListWidget->addItem(item);
