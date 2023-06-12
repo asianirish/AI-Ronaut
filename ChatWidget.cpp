@@ -86,9 +86,6 @@ void ChatWidget::on_sendButton_clicked()
         auto camelInput = potato_util::phraseToCamelCase(input, 7);
         camelInput = camelInput.left(64);
         emit renameSession(camelInput);
-        qDebug() << "LIST ITEM COUNT:" << ui->listWidget->count() << camelInput;
-    } else {
-        qDebug() << "LIST ITEM COUNT:" << ui->listWidget->count();
     }
 
     enableOrDisableControls(true);
