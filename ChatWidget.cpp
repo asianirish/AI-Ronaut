@@ -82,11 +82,13 @@ void ChatWidget::on_sendButton_clicked()
     addMessageItem(itemWidget, input); // sets itemWidget text here
     itemWidget->refreshMsg(); // do not refresh in addMessageItem not to refresh after every delta!
 
-    if (ui->listWidget->count() == 1) {
+    if (ui->listWidget->count() <= 2) {
         auto camelInput = potato_util::phraseToCamelCase(input, 7);
         camelInput = camelInput.left(64);
         emit renameSession(camelInput);
         qDebug() << "LIST ITEM COUNT:" << ui->listWidget->count() << camelInput;
+    } else {
+        qDebug() << "LIST ITEM COUNT:" << ui->listWidget->count();
     }
 
     enableOrDisableControls(true);
