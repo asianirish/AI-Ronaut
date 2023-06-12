@@ -111,3 +111,18 @@ void ChatSessionWidget::onRenameSession(const QString &name)
     }
 }
 
+
+void ChatSessionWidget::on_sessionNameEdit_textEdited(const QString &arg1)
+{
+    Q_UNUSED(arg1);
+    ui->applyEditedButton->setEnabled(true);
+}
+
+
+void ChatSessionWidget::on_applyEditedButton_clicked()
+{
+    auto name = ui->sessionNameEdit->text();
+    onRenameSession(name);
+    ui->applyEditedButton->setEnabled(false);
+}
+

@@ -40,6 +40,10 @@ private slots:
 
     void on_saveAsTextFileButton_clicked();
 
+    void on_sessionNameEdit_textEdited(const QString &arg1);
+
+    void on_applyEditedButton_clicked();
+
 public slots:
     void onRenameSession(const QString &name);
 
