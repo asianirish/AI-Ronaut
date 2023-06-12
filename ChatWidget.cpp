@@ -257,7 +257,7 @@ void ChatWidget::synchronizeCurrentSession(const QString &sessionId)
 
 void ChatWidget::on_newSessionButton_clicked()
 {
-    QString sessionId = gSessions->createSession();
+    QString sessionId = gSessions->createSession(pageContext()->pageIndex());
 
     pageContext()->setCurrentSessionId(sessionId);
 
@@ -268,9 +268,10 @@ void ChatWidget::on_newSessionButton_clicked()
     emit sessionChaged();
 }
 
-void ChatWidget::onSessionCreated(const QString &sessionId)
+void ChatWidget::onSessionCreated(int pageIndex, const QString &sessionId)
 {
     Q_UNUSED(sessionId);
+    Q_UNUSED(pageIndex);
     // TODO: NOT every session creation should cause this page current session changing!
 }
 

@@ -13,7 +13,7 @@ PageGeneralChatPage::PageGeneralChatPage(QWidget *parent) :
     ui->setupUi(this);
 
     // good place to create a session
-    auto currentSessionId = gSessions->createSession();
+    auto currentSessionId = gSessions->createSession(pageNumber);
     _pageContext = new PageContext(pageNumber, currentSessionId);
     pageNumber++;
 

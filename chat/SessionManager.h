@@ -14,7 +14,7 @@ class SessionManager : public QObject
 public:
     static SessionManager *instance();
 
-    QString createSession(const QString &sessionName = QString()); // TODO: isPersistent?
+    QString createSession(int pageIndex, const QString &sessionName = QString());
 
     SessionPtr session(const QString &sessionId) const;
 
@@ -40,7 +40,7 @@ private:
     OrderedMap<QString, SessionPtr> _sessions;
 
 signals:
-    void sessionCreated(const QString currentSessionId);
+    void sessionCreated(int pageIndex, const QString currentSessionId);
 
 public slots:
     void onQuit();

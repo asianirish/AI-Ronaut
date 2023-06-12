@@ -50,7 +50,7 @@ private slots:
 
     void on_newSessionButton_clicked();
 
-    void onSessionCreated(const QString &sessionId);
+    void onSessionCreated(int pageIndex, const QString &sessionId);
 
     void on_abortChatButton_clicked();
 

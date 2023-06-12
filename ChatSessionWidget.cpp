@@ -52,7 +52,7 @@ chat::SessionItem* ChatSessionWidget::findItemBySessionId(const QString &session
     return nullptr;
 }
 
-void ChatSessionWidget::onSessionCreated(const QString &sessionId)
+void ChatSessionWidget::onSessionCreated(int pageIndex, const QString &sessionId)
 {
     // TODO: NOT every session creation should cause this page current session changing!
     auto session = gSessions->session(sessionId);
@@ -60,11 +60,14 @@ void ChatSessionWidget::onSessionCreated(const QString &sessionId)
     chat::SessionItem *item = new chat::SessionItem();
     item->setSessionId(session->id());
 
-    ui->sessionListWidget->insertItem(0, item);
-
-    ui->sessionListWidget->sortItems(Qt::DescendingOrder);
-
-    ui->sessionListWidget->setCurrentItem(item);
+    if (pageContext() && pageContext()->pageIndex() != pageIndex) {
+        ui->sessionListWidget->addItem(item);
+        ui->sessionListWidget->sortItems(Qt::DescendingOrder);
+    } else {
+        ui->sessionListWidget->insertItem(0, item);
+        ui->sessionListWidget->sortItems(Qt::DescendingOrder);
+        ui->sessionListWidget->setCurrentItem(item);
+    }
 }
 
 void ChatSessionWidget::on_sessionListWidget_itemActivated(QListWidgetItem *item)

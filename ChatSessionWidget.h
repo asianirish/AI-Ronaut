@@ -32,7 +32,7 @@ private:
 private:
 
 private slots:
-    void onSessionCreated(const QString &sessionId);
+    void onSessionCreated(int pageIndex, const QString &sessionId);
 
     void on_sessionListWidget_itemActivated(QListWidgetItem *item);
 

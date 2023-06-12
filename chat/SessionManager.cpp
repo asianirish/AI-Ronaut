@@ -16,7 +16,7 @@ SessionManager *SessionManager::instance()
     return _instance;
 }
 
-QString SessionManager::createSession(const QString &sessionName)
+QString SessionManager::createSession(int pageIndex, const QString &sessionName)
 {
     SessionPtr session = SessionPtr(new Session());
     QUuid sessionId = QUuid::createUuid();
@@ -29,7 +29,7 @@ QString SessionManager::createSession(const QString &sessionName)
     _sessions.insert(sessionId.toString(), session);
 
     auto sessionIdStr = sessionId.toString();
-    emit sessionCreated(sessionIdStr);
+    emit sessionCreated(pageIndex, sessionIdStr);
 
     return sessionIdStr;
 }
