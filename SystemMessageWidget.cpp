@@ -87,6 +87,8 @@ void SystemMessageWidget::on_saveRoleButton_clicked()
         return;
     }
 
-    // TODO: update the roleBox
+    _model->setQuery("SELECT name, message FROM roles");
+    ui->roleBox->setCurrentText(name);
+    ui->textEdit->setText(message);
 }
 
