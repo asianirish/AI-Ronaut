@@ -3,6 +3,8 @@
 
 #include "ChatToolWidget.h"
 
+#include "SqlQueryModelExt.h"
+
 namespace Ui {
 class SystemMessageWidget;
 }
@@ -23,8 +25,16 @@ protected:
 protected:
     void showEvent(QShowEvent *event) override;
 
+private slots:
+    void on_roleBox_currentIndexChanged(int index);
+
+    void on_saveRoleButton_clicked();
+
 private:
     Ui::SystemMessageWidget *ui;
+    SqlQueryModelExt *_model; // TODO: Custom model
+
+    void initRoleList();
 };
 
 #endif // SYSTEMMESSAGEWIDGET_H
