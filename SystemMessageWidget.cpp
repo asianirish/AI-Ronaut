@@ -92,3 +92,23 @@ void SystemMessageWidget::on_saveRoleButton_clicked()
     ui->textEdit->setText(message);
 }
 
+
+void SystemMessageWidget::on_deleteRoleButton_clicked()
+{
+    QSqlQuery query;
+    QString name(ui->roleBox->currentText());
+
+    query.prepare("DELETE FROM roles WHERE name=:name");
+
+    query.bindValue(":name", name);
+
+    if (!query.exec()) {
+        qDebug() << "error deliting role:" << query.lastError().text();
+        return;
+    }
+
+    _model->setQuery("SELECT name, message FROM roles");
+    ui->roleBox->setCurrentIndex(-1);
+    ui->textEdit->clear();
+}
+

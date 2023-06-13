@@ -30,6 +30,8 @@ private slots:
 
     void on_saveRoleButton_clicked();
 
+    void on_deleteRoleButton_clicked();
+
 private:
     Ui::SystemMessageWidget *ui;
     SqlQueryModelExt *_model; // TODO: Custom model

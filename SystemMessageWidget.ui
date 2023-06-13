@@ -21,17 +21,14 @@
      </property>
     </widget>
    </item>
-   <item row="1" column="0">
-    <widget class="QComboBox" name="roleBox">
-     <property name="editable">
-      <bool>true</bool>
-     </property>
-     <property name="currentIndex">
-      <number>-1</number>
+   <item row="3" column="0">
+    <widget class="QPushButton" name="saveRoleButton">
+     <property name="text">
+      <string>Save</string>
      </property>
     </widget>
    </item>
-   <item row="4" column="0">
+   <item row="5" column="0">
     <spacer name="verticalSpacer">
      <property name="orientation">
       <enum>Qt::Vertical</enum>
@@ -44,6 +41,16 @@
      </property>
     </spacer>
    </item>
+   <item row="1" column="0">
+    <widget class="QComboBox" name="roleBox">
+     <property name="editable">
+      <bool>true</bool>
+     </property>
+     <property name="currentIndex">
+      <number>-1</number>
+     </property>
+    </widget>
+   </item>
    <item row="2" column="0">
     <widget class="QTextEdit" name="textEdit">
      <property name="placeholderText">
@@ -51,10 +58,10 @@
      </property>
     </widget>
    </item>
-   <item row="3" column="0">
-    <widget class="QPushButton" name="saveRoleButton">
+   <item row="4" column="0">
+    <widget class="QPushButton" name="deleteRoleButton">
      <property name="text">
-      <string>Save</string>
+      <string>Delete</string>
      </property>
     </widget>
    </item>
