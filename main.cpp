@@ -23,7 +23,7 @@ bool maybeCreateDb() {
 
     if (!query.exec("CREATE TABLE IF NOT EXISTS roles ("
                     "id INTEGER PRIMARY KEY AUTOINCREMENT, "
-                    "name TEXT NOT NULL UNIQUE, "
+                    "name VARCHAR(64) NOT NULL UNIQUE, "
                     "message TEXT NOT NULL"
                     ")")) {
         qDebug() << "error creating roles:" << query.lastError().text();
@@ -50,10 +50,30 @@ bool maybeCreateDb() {
         }
     }
 
+    if (!query.exec("CREATE TABLE IF NOT EXISTS sessions ("
+                    "id INTEGER PRIMARY KEY AUTOINCREMENT, "
+                    "role_id INTEGER, " // Убираем ограничение NOT NULL
+                    "session_data TEXT NOT NULL, "
+                    "FOREIGN KEY (role_id) REFERENCES roles (id) ON DELETE SET NULL"
+                    ")")) {
+        qDebug() << "error creating sessions:" << query.lastError().text();
+        return false;
+    }
+
+    if (!query.exec("CREATE TABLE IF NOT EXISTS messages ("
+                    "id INTEGER PRIMARY KEY AUTOINCREMENT, "
+                    "session_id INTEGER NOT NULL, "
+                    "order_num INTEGER NOT NULL, "
+                    "content TEXT NOT NULL, "
+                    "FOREIGN KEY (session_id) REFERENCES sessions (id) ON DELETE CASCADE, "
+                    "UNIQUE (session_id, order_num)"
+                    ")")) {
+        qDebug() << "error creating messages:" << query.lastError().text();
+        return false;
+    }
+
     qDebug() << "db success";
 
-    // TODO: where to close?
-//    db.close();
     return true;
 }
 
@@ -74,5 +94,13 @@ int main(int argc, char *argv[])
 
     MainWindow w;
     w.show();
-    return a.exec();
+    int result = a.exec();
+
+    QSqlDatabase db = QSqlDatabase::database();
+
+    qDebug() << "DATABASE:" << db.databaseName() << "is closing...";
+
+    db.close();
+
+    return result;
 }
