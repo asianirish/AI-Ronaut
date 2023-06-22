@@ -46,6 +46,9 @@
      <property name="verticalScrollBarPolicy">
       <enum>Qt::ScrollBarAlwaysOff</enum>
      </property>
+     <property name="undoRedoEnabled">
+      <bool>true</bool>
+     </property>
      <property name="lineWrapColumnOrWidth">
       <number>400</number>
      </property>
