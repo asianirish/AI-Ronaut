@@ -25,6 +25,7 @@ ChatWidget::ChatWidget(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    ui->abortChatButton->setHidden(true);
     ui->textEdit->setTabChangesFocus(true);
 
     addAction(ui->actionDelete_Item);
@@ -139,10 +140,10 @@ void ChatWidget::onDeltaReady(const QString &deltaData)
 void ChatWidget::enableOrDisableControls(bool isSending)
 {
     ui->textEdit->setDisabled(isSending);
-    ui->sendButton->setDisabled(isSending);
+    ui->sendButton->setHidden(isSending);
     ui->newSessionButton->setDisabled(isSending);
 
-    ui->abortChatButton->setEnabled(isSending);
+    ui->abortChatButton->setVisible(isSending);
 
     // TODO: emit for other widgets of this page
 }
