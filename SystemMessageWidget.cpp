@@ -29,10 +29,13 @@ QString SystemMessageWidget::systemMessage() const
     QString name = ui->roleBox->currentText();
     QString role = ui->textEdit->toPlainText();
 
-    if (!name.isEmpty()) {
-        sysMsg = tr("Name: ") + name + ". ";
+    if (name.isEmpty() && role.isEmpty()) {
+        return QString();
+    } else if (name.isEmpty()) {
+        sysMsg = role;
+    } else {
+        sysMsg = name + ", " + role;
     }
-    sysMsg += tr("Role: ") + role;
 
     return sysMsg;
 }
