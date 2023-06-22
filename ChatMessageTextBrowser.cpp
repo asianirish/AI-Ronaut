@@ -7,7 +7,7 @@ ChatMessageTextBrowser::ChatMessageTextBrowser(QWidget *parent) : QTextBrowser(p
 
 void ChatMessageTextBrowser::focusOutEvent(QFocusEvent *e)
 {
-    Q_UNUSED(e);
+//    Q_UNUSED(e);
 
     if (!this->isReadOnly()) {
         auto text = this->toPlainText();
@@ -18,6 +18,8 @@ void ChatMessageTextBrowser::focusOutEvent(QFocusEvent *e)
             _msgPtr->setText(text);
         }
     }
+
+    QTextBrowser::focusOutEvent(e);
 }
 
 void ChatMessageTextBrowser::mouseDoubleClickEvent(QMouseEvent *e)
