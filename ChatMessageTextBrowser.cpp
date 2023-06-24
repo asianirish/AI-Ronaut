@@ -24,9 +24,20 @@ void ChatMessageTextBrowser::focusOutEvent(QFocusEvent *e)
 
 void ChatMessageTextBrowser::mouseDoubleClickEvent(QMouseEvent *e)
 {
-//    Q_UNUSED(e);
     setReadOnly(false);
     QTextBrowser::mouseDoubleClickEvent(e);
+}
+
+void ChatMessageTextBrowser::contextMenuEvent(QContextMenuEvent *e)
+{
+    if (textCursor().hasSelection() || !this->isReadOnly())
+    {
+        QTextBrowser::contextMenuEvent(e);
+    }
+    else
+    {
+        e->ignore();
+    }
 }
 
 chat::MessagePtr ChatMessageTextBrowser::msgPtr() const

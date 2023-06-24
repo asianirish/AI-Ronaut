@@ -19,6 +19,8 @@ protected:
     void focusOutEvent(QFocusEvent *e) override;
     void mouseDoubleClickEvent(QMouseEvent *e) override;
 
+    void contextMenuEvent(QContextMenuEvent *e) override;
+
 private:
     chat::MessagePtr _msgPtr;
 signals:
