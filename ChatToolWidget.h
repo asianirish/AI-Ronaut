@@ -16,6 +16,7 @@ public:
 
     PageContext *pageContext() const;
     void setPageContext(PageContext *newPageContext);
+    void changeSessionId(const QString &sessionId);
 
 protected:
     virtual void synchronizeCurrentSession(const QString &sessionId) = 0;
