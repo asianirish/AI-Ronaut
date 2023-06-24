@@ -1,5 +1,7 @@
 #include "ChatMessageTextBrowser.h"
 
+#include <QFocusEvent>
+
 ChatMessageTextBrowser::ChatMessageTextBrowser(QWidget *parent) : QTextBrowser(parent)
 {
 
@@ -7,12 +9,15 @@ ChatMessageTextBrowser::ChatMessageTextBrowser(QWidget *parent) : QTextBrowser(p
 
 void ChatMessageTextBrowser::focusOutEvent(QFocusEvent *e)
 {
-//    Q_UNUSED(e);
-
     if (!this->isReadOnly()) {
+
         auto text = this->toPlainText();
         qDebug() << "THE TEXT IS:" << text;
-        setReadOnly(true);
+
+        if (e->reason() != Qt::PopupFocusReason) {
+            setReadOnly(true);
+            qDebug() << "SET READONLY" << e->reason();
+        }
 
         if (_msgPtr) {
             _msgPtr->setText(text);
