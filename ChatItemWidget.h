@@ -10,6 +10,7 @@ class ChatItemWidget : public QWidget
     Q_OBJECT
 public:
     explicit ChatItemWidget(QWidget *parent = nullptr);
+    virtual ~ChatItemWidget();
 
     void setText(const QString &text);
 

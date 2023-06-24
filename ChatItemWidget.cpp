@@ -12,6 +12,11 @@ ChatItemWidget::ChatItemWidget(QWidget *parent)
 
 }
 
+ChatItemWidget::~ChatItemWidget()
+{
+    qDebug() << "DELETING CHAT ITEM WIDGET" << this << "...";
+}
+
 void ChatItemWidget::setText(const QString &text)
 {
     textBrowser()->setText(text);
