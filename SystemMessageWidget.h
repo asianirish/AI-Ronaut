@@ -20,7 +20,7 @@ public:
     QString systemMessage() const;
 
 protected:
-    void synchronizeCurrentSession(const QString &sessionId) override;
+    void synchronizeCurrentSession() override;
 
 protected:
     void showEvent(QShowEvent *event) override;

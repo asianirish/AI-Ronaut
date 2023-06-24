@@ -79,9 +79,9 @@ void ChatConfigWidget::setModelCntx(ModelContext *newModelCntx)
 
 }
 
-void ChatConfigWidget::synchronizeCurrentSession(const QString &sessionId)
+void ChatConfigWidget::synchronizeCurrentSession()
 {
-    Q_UNUSED(sessionId);
+    qDebug() << "CHAT CONFIG SESSION ID:" << pageContext()->currentSessionId();
     // TODO: copy the model context data from the given session's ModelContext (if _modelCntx exist)
 }
 

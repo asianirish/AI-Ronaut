@@ -22,7 +22,7 @@ public:
     ~ChatSessionWidget();
 
 protected:
-    void synchronizeCurrentSession(const QString &sessionId) override;
+    void synchronizeCurrentSession() override;
 
 private:
     QModelIndexList findModelIndexesBySessionId(const QString& sessionId);

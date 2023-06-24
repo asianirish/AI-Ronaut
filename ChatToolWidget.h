@@ -19,7 +19,7 @@ public:
     void changeSessionId(const QString &sessionId);
 
 protected:
-    virtual void synchronizeCurrentSession(const QString &sessionId) = 0;
+    virtual void synchronizeCurrentSession() = 0;
 
 private:
     PageContext *_pageContext;

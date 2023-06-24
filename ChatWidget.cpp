@@ -243,14 +243,22 @@ void ChatWidget::setClient(oaic::Manager *newClient)
     connect(_client->chat(), &oaic::Component::replyDestroyed, this, &ChatWidget::onMessageResponseComplete);
     connect(_client->chat(), &oaic::Component::responseError, this, &ChatWidget::onDeltaError);
 
-    // TODO: add a pageIngex arg (how?)
     connect(gSessions, &chat::SessionManager::sessionCreated, this, &ChatWidget::onSessionCreated);
 }
 
-void ChatWidget::synchronizeCurrentSession(const QString &sessionId)
+void ChatWidget::synchronizeCurrentSession()
 {
-    Q_UNUSED(sessionId);
-    // TODO: display session(sessionId) messages
+    auto sessionId = pageContext()->currentSessionId();
+    qDebug() << "CHAT WIDGET SESSION ID:" << sessionId;
+
+    auto session = gSessions->session(sessionId);
+
+    auto lst = session->messageList();
+
+    for (auto &msgPtr : lst) {
+        qDebug() << msgPtr->role() << ":" << msgPtr->text();
+    }
+
 }
 
 void ChatWidget::on_newSessionButton_clicked()

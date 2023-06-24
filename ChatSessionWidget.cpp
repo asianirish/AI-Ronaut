@@ -22,7 +22,6 @@ ChatSessionWidget::ChatSessionWidget(QWidget *parent) :
 
     ui->sessionListWidget->sortItems(Qt::DescendingOrder);
 
-    // TODO: add a pageIngex arg (how?)
     connect(gSessions, &chat::SessionManager::sessionCreated, this, &ChatSessionWidget::onSessionCreated);
 }
 
@@ -31,10 +30,10 @@ ChatSessionWidget::~ChatSessionWidget()
     delete ui;
 }
 
-void ChatSessionWidget::synchronizeCurrentSession(const QString &sessionId)
+void ChatSessionWidget::synchronizeCurrentSession()
 {
-    Q_UNUSED(sessionId);
-    qWarning() << "ChatSessionWidget::synchronize should not be called";
+    qDebug() << "CHAT SESSION SESSION ID:" << pageContext()->currentSessionId();
+    qWarning() << "ChatSessionWidget::synchronize should not be called (?)";
 }
 
 QModelIndexList ChatSessionWidget::findModelIndexesBySessionId(const QString &sessionId)

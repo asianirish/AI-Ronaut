@@ -40,10 +40,18 @@ QString SystemMessageWidget::systemMessage() const
     return sysMsg;
 }
 
-void SystemMessageWidget::synchronizeCurrentSession(const QString &sessionId)
+void SystemMessageWidget::synchronizeCurrentSession()
 {
+    auto sessionId = pageContext()->currentSessionId();
+
+    qDebug() << "SYSTEM MESSAGE SESSION ID:" << sessionId;
+
     auto session = gSessions->session(sessionId);
     auto msg = session->systemMessage();
+
+    qDebug() << "SYSTEM MESSAGE:" << msg.text();
+
+    // TODO: role attrs (not only just a message text)
     ui->textEdit->setText(msg.text());
 }
 

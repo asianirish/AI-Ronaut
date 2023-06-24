@@ -24,7 +24,7 @@ public:
     void setModelCntx(oaic::ModelContext *newModelCntx);
 
 protected:
-    void synchronizeCurrentSession(const QString &sessionId) override;
+    void synchronizeCurrentSession() override;
 
 private slots:
     void on_modelComboBox_currentTextChanged(const QString &modelName);

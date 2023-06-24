@@ -30,7 +30,7 @@ public:
     void setClient(oaic::Manager *newClient);
 
 protected:
-    void synchronizeCurrentSession(const QString &sessionId) override;
+    void synchronizeCurrentSession() override;
 
 protected:
     void resizeEvent(QResizeEvent *event) override;
