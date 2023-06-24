@@ -91,21 +91,11 @@ void ChatWidget::on_sendButton_clicked()
 
 void ChatWidget::adjustLastItemAndSendRequest()
 {
-    auto cnt = ui->listWidget->count();
-    auto item = ui->listWidget->item(cnt - 1);
-    auto widget = ui->listWidget->itemWidget(item);
-    auto chatWidget = qobject_cast<ChatItemWidget*>(widget);
-
-    if (chatWidget) {
-        int idealHeight = chatWidget->textHeight();
-        item->setSizeHint({chatWidget->sizeHint().width(), idealHeight});
-        ui->listWidget->scrollToBottom();
-    }
-
-    auto userWidget = qobject_cast<UserMessageItemWidget*>(widget);
+    auto chatWidget = adjustLastItem();
+    auto userWidget = qobject_cast<UserMessageItemWidget*>(chatWidget);
 
     if (userWidget) {
-        sendAiModelRequest(); // HERE!
+        sendAiModelRequest();
     }
 }
 
@@ -146,6 +136,22 @@ void ChatWidget::continueChat()
 {
     enableOrDisableControls(true);
     sendAiModelRequest();
+}
+
+ChatItemWidget *ChatWidget::adjustLastItem()
+{
+    auto cnt = ui->listWidget->count();
+    auto item = ui->listWidget->item(cnt - 1);
+    auto widget = ui->listWidget->itemWidget(item);
+    auto chatWidget = qobject_cast<ChatItemWidget *>(widget);
+
+    if (chatWidget) {
+        int idealHeight = chatWidget->textHeight();
+        item->setSizeHint({chatWidget->sizeHint().width(), idealHeight});
+        ui->listWidget->scrollToBottom();
+    }
+
+    return chatWidget;
 }
 
 void ChatWidget::onDeltaError(const QString &deltaError)
@@ -258,7 +264,7 @@ void ChatWidget::synchronizeCurrentSession()
         } else if (msgPtr->role() == chat::Message::ASSISTANT) {
             createMessageItemWidget<AIMessageItemWidget>(msgPtr->text());
         }
-        adjustLastItemAndSendRequest();
+        adjustLastItem();
     }
 
     ui->textEdit->setFocus();

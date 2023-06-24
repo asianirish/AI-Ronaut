@@ -112,7 +112,7 @@ private:
         return itemWidget;
     }
 
-// TODO:    void adjustLastItem();
+    ChatItemWidget *adjustLastItem();
 };
 
 #endif // CHATWIDGET_H
