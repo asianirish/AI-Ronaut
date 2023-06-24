@@ -115,3 +115,10 @@ void SystemMessageWidget::on_deleteRoleButton_clicked()
     ui->textEdit->clear();
 }
 
+
+void SystemMessageWidget::on_clearButton_clicked()
+{
+    ui->roleBox->clearEditText();
+    ui->textEdit->clear();
+}
+

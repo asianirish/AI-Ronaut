@@ -22,6 +22,7 @@ DONE:
 * Fix the issue: Rename not the selected session in the list widget, but the current one for this tab
 (See ChatSessionWidget::onRenameSession)
 * Do not select a new session if a session has already been created on another page
+* The menu leads to a loss of focus and, as a result, the loss of the ability to edit (in ChatSessionItem)
 
 CANCELED:
 
