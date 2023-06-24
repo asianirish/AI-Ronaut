@@ -40,7 +40,7 @@ protected:
 private slots:
     void on_sendButton_clicked();
     void adjustLastItem();
-    void queryAiModel(); // TODO: rename
+    void sendAiModelRequest();
 
     void onDeltaError(const QString &deltaError);
     // TODO: onNetworkError connected with Component::networkError

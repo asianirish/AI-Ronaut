@@ -105,11 +105,11 @@ void ChatWidget::adjustLastItem()
     auto userWidget = qobject_cast<UserMessageItemWidget*>(widget);
 
     if (userWidget) {
-        queryAiModel(); // HERE!
+        sendAiModelRequest(); // HERE!
     }
 }
 
-void ChatWidget::queryAiModel()
+void ChatWidget::sendAiModelRequest()
 {
     ui->textEdit->clear();
 
@@ -145,7 +145,7 @@ void ChatWidget::enableOrDisableControls(bool isSending)
 void ChatWidget::continueChat()
 {
     enableOrDisableControls(true);
-    queryAiModel();
+    sendAiModelRequest();
 }
 
 void ChatWidget::onDeltaError(const QString &deltaError)
