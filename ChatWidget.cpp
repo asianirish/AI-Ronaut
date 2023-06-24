@@ -105,7 +105,7 @@ void ChatWidget::adjustLastItem()
     auto userWidget = qobject_cast<UserMessageItemWidget*>(widget);
 
     if (userWidget) {
-        queryAiModel();
+        queryAiModel(); // HERE!
     }
 }
 
@@ -245,13 +245,23 @@ void ChatWidget::synchronizeCurrentSession()
     auto sessionId = pageContext()->currentSessionId();
     qDebug() << "CHAT WIDGET SESSION ID:" << sessionId;
 
+    ui->listWidget->clear();
+
     auto session = gSessions->session(sessionId);
 
     auto lst = session->messageList();
 
     for (auto &msgPtr : lst) {
         qDebug() << msgPtr->role() << ":" << msgPtr->text();
+        if (msgPtr->role() == chat::Message::USER) {
+            createMessageItemWidget<UserMessageItemWidget>(msgPtr->text());
+        } else if (msgPtr->role() == chat::Message::ASSISTANT) {
+            createMessageItemWidget<AIMessageItemWidget>(msgPtr->text());
+        }
+        adjustLastItem();
     }
+
+    ui->textEdit->setFocus();
 
 }
 
