@@ -29,7 +29,8 @@ private:
 
     chat::SessionItem *findItemBySessionId(const QString& sessionId);
 
-private:
+signals:
+    void currentSessionChanged();
 
 private slots:
     void onSessionCreated(int pageIndex, const QString &sessionId);
