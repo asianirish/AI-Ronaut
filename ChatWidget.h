@@ -100,6 +100,17 @@ private:
     void enableOrDisableControls(bool isSending);
 
     void continueChat();
+
+    template<typename T>
+    T *createMessageItemWidget(const QString &text) {
+        T *itemWidget = new T(currentSessionId(), this);
+
+        connect(itemWidget, &T::deleteMe, this, &ChatWidget::onDeleteItemRequest);
+
+        addMessageItem(itemWidget, text);
+
+        return itemWidget;
+    }
 };
 
 #endif // CHATWIDGET_H

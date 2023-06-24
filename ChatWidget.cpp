@@ -76,11 +76,8 @@ void ChatWidget::on_sendButton_clicked()
 
     auto input = ui->textEdit->toPlainText();
 
-    UserMessageItemWidget *itemWidget = new UserMessageItemWidget(currentSessionId(), this);
+    UserMessageItemWidget *itemWidget = createMessageItemWidget<UserMessageItemWidget>(input);
 
-    connect(itemWidget, &UserMessageItemWidget::deleteMe, this, &ChatWidget::onDeleteItemRequest);
-
-    addMessageItem(itemWidget, input); // sets itemWidget text here
     itemWidget->refreshMsg(); // do not refresh in addMessageItem not to refresh after every delta!
 
     if (ui->listWidget->count() <= 2) {
@@ -125,11 +122,8 @@ void ChatWidget::onDeltaReady(const QString &deltaData)
     auto aiWidget = qobject_cast<AIMessageItemWidget*>(lastWidget);
 
     if (aiWidget == nullptr) {
-        aiWidget = new AIMessageItemWidget(currentSessionId(), this);
+        createMessageItemWidget<AIMessageItemWidget>(deltaData);
 
-        connect(aiWidget, &AIMessageItemWidget::deleteMe, this, &ChatWidget::onDeleteItemRequest);
-
-        addMessageItem(aiWidget, deltaData);
         QTimer::singleShot(1, this, &ChatWidget::adjustLastItem);
         return;
     }
