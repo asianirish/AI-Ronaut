@@ -74,8 +74,10 @@ void ChatSessionWidget::on_sessionListWidget_itemActivated(QListWidgetItem *item
     chat::SessionItem *sessionItem = dynamic_cast<chat::SessionItem *>(item);
 
     if (sessionItem) {
-
-        // TODO: gSessionManager->selectSession(sessionId);
+        auto sessionId = sessionItem->sessionId();
+        qDebug() << "SESSION NAME:" << sessionItem->name() << sessionId;
+        changeSessionId(sessionId);
+        emit currentSessionChanged();
     }
 }
 
