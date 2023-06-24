@@ -89,7 +89,7 @@ void ChatWidget::on_sendButton_clicked()
     enableOrDisableControls(true);
 }
 
-void ChatWidget::adjustLastItem()
+void ChatWidget::adjustLastItemAndSendRequest()
 {
     auto cnt = ui->listWidget->count();
     auto item = ui->listWidget->item(cnt - 1);
@@ -124,11 +124,11 @@ void ChatWidget::onDeltaReady(const QString &deltaData)
     if (aiWidget == nullptr) {
         createMessageItemWidget<AIMessageItemWidget>(deltaData);
 
-        QTimer::singleShot(1, this, &ChatWidget::adjustLastItem);
+        QTimer::singleShot(1, this, &ChatWidget::adjustLastItemAndSendRequest);
         return;
     }
     aiWidget->appendText(deltaData);
-    QTimer::singleShot(1, this, &ChatWidget::adjustLastItem);
+    QTimer::singleShot(1, this, &ChatWidget::adjustLastItemAndSendRequest);
 }
 
 void ChatWidget::enableOrDisableControls(bool isSending)
@@ -191,7 +191,7 @@ void ChatWidget::addMessageItem(ChatItemWidget *itemWidget, const QString &text)
 
     listItem->setSizeHint(itemWidget->sizeHint());
 
-    QTimer::singleShot(1, this, &ChatWidget::adjustLastItem);
+    QTimer::singleShot(1, this, &ChatWidget::adjustLastItemAndSendRequest);
 }
 
 QWidget *ChatWidget::lastChatItemMessageWidget() const
@@ -258,7 +258,7 @@ void ChatWidget::synchronizeCurrentSession()
         } else if (msgPtr->role() == chat::Message::ASSISTANT) {
             createMessageItemWidget<AIMessageItemWidget>(msgPtr->text());
         }
-        adjustLastItem();
+        adjustLastItemAndSendRequest();
     }
 
     ui->textEdit->setFocus();

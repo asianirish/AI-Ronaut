@@ -39,7 +39,7 @@ protected:
 
 private slots:
     void on_sendButton_clicked();
-    void adjustLastItem();
+    void adjustLastItemAndSendRequest();
     void sendAiModelRequest();
 
     void onDeltaError(const QString &deltaError);
