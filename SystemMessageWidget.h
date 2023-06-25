@@ -3,7 +3,8 @@
 
 #include "ChatToolWidget.h"
 
-#include "SqlQueryModelExt.h"
+//#include "SqlQueryModelExt.h"
+#include "chat/RolesModel.h"
 
 namespace Ui {
 class SystemMessageWidget;
@@ -36,7 +37,7 @@ private slots:
 
 private:
     Ui::SystemMessageWidget *ui;
-    SqlQueryModelExt *_model; // TODO: Custom model
+    chat::RolesModel *_model;
 
     void initRoleList();
 };

@@ -2,6 +2,7 @@
 #include "ui_SystemMessageWidget.h"
 
 #include "chat/SessionManager.h"
+#include "chat/AssistantRole.h"
 
 #include <QSqlDatabase>
 #include <QSqlQuery>
@@ -64,11 +65,10 @@ void SystemMessageWidget::showEvent(QShowEvent *event)
 
 void SystemMessageWidget::initRoleList()
 {
-    _model = new SqlQueryModelExt(this);
-    _model->setQuery("SELECT name, message FROM roles");
+    _model = new chat::RolesModel(this);
 
     ui->roleBox->setModel(_model);
-    ui->roleBox->setModelColumn(0);
+    ui->roleBox->setModelColumn(1); // TODO: inside the model class
 
     ui->roleBox->setCurrentIndex(-1);
 
@@ -76,8 +76,9 @@ void SystemMessageWidget::initRoleList()
 
 void SystemMessageWidget::on_roleBox_currentIndexChanged(int index)
 {
-    QVariant data = _model->data(_model->index(index, 0), SqlQueryModelExt::SecondColumnRole);
-    ui->textEdit->setText(data.toString());
+//    QVariant data = _model->data(_model->index(index, 2));
+    auto role = _model->assistantRole(index);
+    ui->textEdit->setText(role.message());
 }
 
 
@@ -87,6 +88,7 @@ void SystemMessageWidget::on_saveRoleButton_clicked()
     QString name(ui->roleBox->currentText());
     QString message(ui->textEdit->toPlainText());
 
+    // TODO: inside the model class
     query.prepare("INSERT OR REPLACE INTO roles (name, message) "
                   "VALUES(:name, :message)");
 
@@ -98,7 +100,7 @@ void SystemMessageWidget::on_saveRoleButton_clicked()
         return;
     }
 
-    _model->setQuery("SELECT name, message FROM roles");
+    _model->select();
     ui->roleBox->setCurrentText(name);
     ui->textEdit->setText(message);
 }
@@ -109,6 +111,7 @@ void SystemMessageWidget::on_deleteRoleButton_clicked()
     QSqlQuery query;
     QString name(ui->roleBox->currentText());
 
+    // TODO: inside the model class
     query.prepare("DELETE FROM roles WHERE name=:name");
 
     query.bindValue(":name", name);
@@ -118,7 +121,7 @@ void SystemMessageWidget::on_deleteRoleButton_clicked()
         return;
     }
 
-    _model->setQuery("SELECT name, message FROM roles");
+    _model->select();
     ui->roleBox->setCurrentIndex(-1);
     ui->textEdit->clear();
 }
