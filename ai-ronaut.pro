@@ -35,6 +35,7 @@ SOURCES += \
     SystemMessageWidget.cpp \
     UserMessageItemWidget.cpp \
     chat/AssistantMessage.cpp \
+    chat/AssistantRole.cpp \
     chat/Message.cpp \
     chat/Session.cpp \
     chat/SessionItem.cpp \
@@ -78,6 +79,7 @@ HEADERS += \
     SystemMessageWidget.h \
     UserMessageItemWidget.h \
     chat/AssistantMessage.h \
+    chat/AssistantRole.h \
     chat/Message.h \
     chat/Session.h \
     chat/SessionItem.h \
