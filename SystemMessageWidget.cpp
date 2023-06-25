@@ -84,23 +84,11 @@ void SystemMessageWidget::on_roleBox_currentIndexChanged(int index)
 
 void SystemMessageWidget::on_saveRoleButton_clicked()
 {
-    QSqlQuery query;
     QString name(ui->roleBox->currentText());
     QString message(ui->textEdit->toPlainText());
 
-    // TODO: inside the model class
-    query.prepare("INSERT OR REPLACE INTO roles (name, message) "
-                  "VALUES(:name, :message)");
+    _model->insertOrReplaceRecord(name, message);
 
-    query.bindValue(":name", name);
-    query.bindValue(":message", message);
-
-    if (!query.exec()) {
-        qDebug() << "error creating role:" << query.lastError().text();
-        return;
-    }
-
-    _model->select();
     ui->roleBox->setCurrentText(name);
     ui->textEdit->setText(message);
 }

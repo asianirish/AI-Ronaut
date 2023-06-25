@@ -1,6 +1,8 @@
 #include "RolesModel.h"
 
 #include <QSqlRecord>
+#include <QSqlQuery>
+#include <QSqlError>
 
 namespace chat {
 
@@ -54,6 +56,45 @@ AssistantRole RolesModel::assistantRole(int row) const
     role.setMessage(message);
 
     return role;
+}
+
+bool RolesModel::insertOrReplaceRecord(const QString &name, const QString &message)
+{
+    QSqlQuery query(database());
+    QString queryString;
+    QString dbType = database().driverName();
+
+    if (dbType == "QSQLITE") {
+        queryString = "INSERT OR REPLACE INTO roles (name, message) VALUES(:name, :message)";
+    } else if (dbType == "QMYSQL") {
+        queryString = "INSERT INTO roles (name, message) VALUES(:name, :message) "
+                      "ON DUPLICATE KEY UPDATE name = VALUES(name), message = VALUES(message)";
+    } else if (dbType == "QPSQL") {
+        queryString = "INSERT INTO roles (name, message) VALUES(:name, :message) "
+                      "ON CONFLICT (name) DO UPDATE SET message = EXCLUDED.message";
+    } else {
+        // TODO: use model functions
+        qDebug() << "Unsupported database type:" << dbType;
+        return false;
+    }
+
+    query.prepare(queryString);
+    query.bindValue(":name", name);
+    query.bindValue(":message", message);
+
+    if (query.exec()) {
+        qDebug() << "Record successfully added or updated.";
+        select(); // Update the model after changes in the database
+        return true;
+    } else {
+        qDebug() << "Query execution error: " << query.lastError().text();
+        return false;
+    }
+}
+
+bool RolesModel::insertOrReplaceRecord(const AssistantRole &role)
+{
+    return insertOrReplaceRecord(role.name(), role.message());
 }
 
 } // namespace chat
