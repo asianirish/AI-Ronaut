@@ -183,7 +183,7 @@ void ChatWidget::updateItemsHeight()
     }
 }
 
-void ChatWidget::addMessageItem(ChatItemWidget *itemWidget, const QString &text)
+void ChatWidget::addMessageItem(ChatItemWidget *itemWidget, const QString &text, bool adjust)
 {
     QListWidgetItem *listItem = new QListWidgetItem(ui->listWidget);
 
@@ -197,7 +197,9 @@ void ChatWidget::addMessageItem(ChatItemWidget *itemWidget, const QString &text)
 
     listItem->setSizeHint(itemWidget->sizeHint());
 
-    QTimer::singleShot(1, this, &ChatWidget::adjustLastItemAndSendRequest);
+    if (adjust) {
+        QTimer::singleShot(1, this, &ChatWidget::adjustLastItemAndSendRequest);
+    }
 }
 
 QWidget *ChatWidget::lastChatItemMessageWidget() const

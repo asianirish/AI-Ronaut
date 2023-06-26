@@ -75,7 +75,7 @@ private:
 
 private:
     void updateItemsHeight();
-    void addMessageItem(ChatItemWidget *itemWidget, const QString &text);
+    void addMessageItem(ChatItemWidget *itemWidget, const QString &text, bool adjust = true);
 
     QWidget *lastChatItemMessageWidget() const;
 
@@ -107,7 +107,7 @@ private:
 
         connect(itemWidget, &T::deleteMe, this, &ChatWidget::onDeleteItemRequest);
 
-        addMessageItem(itemWidget, text);
+        addMessageItem(itemWidget, text); // TODO: calls adjustLastItemAndSendRequest
 
         return itemWidget;
     }
