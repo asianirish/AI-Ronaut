@@ -2,6 +2,7 @@ TODO:
 
 * ModelContext per a Session instead ModelContext per a Page
 * One session in two different pages
+* rename role as AssistantRole to Character or Bot
 
 DONE:
 
