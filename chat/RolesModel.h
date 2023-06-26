@@ -18,6 +18,8 @@ public:
 
     bool insertOrReplaceRecord(const QString &name, const QString &message);
     bool insertOrReplaceRecord(const AssistantRole &role);
+
+    bool removeRowByName(const QString &name);
 };
 
 } // namespace chat

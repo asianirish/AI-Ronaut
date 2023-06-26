@@ -97,4 +97,44 @@ bool RolesModel::insertOrReplaceRecord(const AssistantRole &role)
     return insertOrReplaceRecord(role.name(), role.message());
 }
 
+bool RolesModel::removeRowByName(const QString &name)
+{
+    QSqlQuery query(database());
+    query.prepare("DELETE FROM roles WHERE name = :name");
+    query.bindValue(":name", name);
+
+    if (!query.exec()) {
+        qDebug() << "Error deleting row by name:" << query.lastError();
+        return false;
+    }
+
+    select();
+    return true;
+
+/* native methods:
+    int nameColumn = fieldIndex("name");
+    if (nameColumn == -1) {
+        qDebug() << "Error: column 'name' not found";
+        return false;
+    }
+
+    QModelIndexList matches = match(index(0, nameColumn), Qt::DisplayRole, name, 1, Qt::MatchExactly);
+    if (!matches.isEmpty()) {
+        int row = matches.first().row();
+
+        if (removeRow(row)) {
+            submitAll();
+            select();
+            return true;
+        } else {
+            qDebug() << "Error deleting row by name";
+            return false;
+        }
+    } else {
+        qDebug() << "Error: name not found";
+        return false;
+    }
+*/
+}
+
 } // namespace chat
