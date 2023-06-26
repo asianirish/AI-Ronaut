@@ -30,7 +30,7 @@ public:
 
     void addMessage(MessagePtr msgPtr, const QString &sessionId);
 
-    void addSystemMessage(const QString &messageText, const QString &sessionId);
+    void addRole(const AssistantRole &role, const QString &sessionId);
 
     void saveAsTextFile(const QString &sessionId) const;
 

@@ -1,4 +1,5 @@
 #include "Session.h"
+#include "SystemMessage.h"
 
 #include <QFile>
 
@@ -15,17 +16,6 @@ Session::Session() : _isPersistent(false)
     _name = _created.toString("yyyyMMddhhmmss");
 }
 
-SystemMessage Session::systemMessage() const
-{
-    return _systemMessage;
-}
-
-void Session::setSystemMessage(const SystemMessage &newSystemMessage)
-{
-    _systemMessage = newSystemMessage;
-    _accessed = QDateTime::currentDateTime();
-}
-
 QList<MessagePtr> Session::messageList() const
 {
     return _messageList;
@@ -36,16 +26,11 @@ void Session::addMessage(const MessagePtr &msgPtr)
     auto sysMsgPtr = qSharedPointerDynamicCast<SystemMessage>(msgPtr);
 
     if (sysMsgPtr) {
-        _systemMessage.setText(msgPtr->text());
+        _role.setMessage(msgPtr->text());
     } else {
         _messageList.append(msgPtr);
     }
     _accessed = QDateTime::currentDateTime();
-}
-
-void Session::addSystemMessage(const QString &messageText)
-{
-    _systemMessage.setText(messageText);
 }
 
 QUuid Session::uuid() const
@@ -113,7 +98,7 @@ oaic::MsgDataList Session::msgDataList() const
 {
     MsgDataList lst;
 
-    lst.append(_systemMessage.msgData());
+    lst.append(_role.msgData());
 
     for (auto &msg : _messageList) {
         auto msgData = msg->msgData();
@@ -128,8 +113,8 @@ void Session::saveAsTextFile() const
     QFile file(fileName() + ".log");
 
     if (file.open(QIODevice::WriteOnly | QIODevice::Text)) {
-        file.write(_systemMessage.roleAsString().toLatin1() + ": "); // write "system: "
-        file.write(_systemMessage.text().toUtf8() + "\n"); // can be in different languages
+        file.write(_role.msgData().role().toLatin1() + ": "); // write "system: "
+        file.write(_role.fullMessage().toUtf8() + "\n"); // can be in different languages
 
         for (auto &msg : _messageList) {
             file.write(msg->roleAsString().toLatin1() + ": "); // write "user: " or "assistant"
@@ -153,6 +138,17 @@ QString Session::fileName() const
     } else {
         return name() + "_" + createdStr;
     }
+}
+
+AssistantRole Session::role() const
+{
+    return _role;
+}
+
+void Session::setRole(const AssistantRole &newRole)
+{
+    _role = newRole;
+    _accessed = QDateTime::currentDateTime();
 }
 
 } // namespace chat

@@ -23,22 +23,12 @@ SystemMessageWidget::~SystemMessageWidget()
     delete ui;
 }
 
-QString SystemMessageWidget::systemMessage() const
+chat::AssistantRole SystemMessageWidget::role() const
 {
-    QString sysMsg;
-
     QString name = ui->roleBox->currentText();
-    QString role = ui->textEdit->toPlainText();
+    QString message = ui->textEdit->toPlainText();
 
-    if (name.isEmpty() && role.isEmpty()) {
-        return QString();
-    } else if (name.isEmpty()) {
-        sysMsg = role;
-    } else {
-        sysMsg = name + ", " + role;
-    }
-
-    return sysMsg;
+    return chat::AssistantRole(name, message);
 }
 
 void SystemMessageWidget::synchronizeCurrentSession()
@@ -48,12 +38,13 @@ void SystemMessageWidget::synchronizeCurrentSession()
     qDebug() << "SYSTEM MESSAGE SESSION ID:" << sessionId;
 
     auto session = gSessions->session(sessionId);
-    auto msg = session->systemMessage();
+//    auto msg = session->systemMessage();
+    auto role = session->role();
 
-    qDebug() << "SYSTEM MESSAGE:" << msg.text();
+    qDebug() << "SYSTEM MESSAGE:" << role.fullMessage();
 
-    // TODO: role attrs (not only just a message text)
-    ui->textEdit->setText(msg.text());
+    ui->textEdit->setText(role.message());
+    ui->roleBox->setEditText(role.name());
 }
 
 void SystemMessageWidget::showEvent(QShowEvent *event)

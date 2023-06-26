@@ -1,7 +1,8 @@
 #ifndef CHAT_SESSION_H
 #define CHAT_SESSION_H
 
-#include "SystemMessage.h"
+#include "Message.h"
+#include "AssistantRole.h"
 
 #include <Chat.h>
 
@@ -18,13 +19,8 @@ class Session
 public:
     Session();
 
-    SystemMessage systemMessage() const;
-    void setSystemMessage(const SystemMessage &newSystemMessage);
-
     QList<MessagePtr> messageList() const;
     void addMessage(const MessagePtr &msgPtr);
-
-    void addSystemMessage(const QString &messageText);
 
     QUuid uuid() const;
     void setUuid(const QUuid &newUuid);
@@ -51,11 +47,15 @@ public:
 
     void deleteMessage(MessagePtr msgPtr);
 
+    AssistantRole role() const;
+    void setRole(const AssistantRole &newRole);
+
 private:
     QString fileName() const;
 
 private:
-    SystemMessage _systemMessage;
+    AssistantRole _role;
+
     QList<MessagePtr> _messageList;
 
     QUuid _uuid;

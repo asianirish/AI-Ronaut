@@ -18,7 +18,7 @@ public:
     explicit SystemMessageWidget(QWidget *parent = nullptr);
     ~SystemMessageWidget();
 
-    QString systemMessage() const;
+    chat::AssistantRole role() const;
 
 protected:
     void synchronizeCurrentSession() override;
