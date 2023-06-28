@@ -13,7 +13,7 @@ public:
     chat::MessagePtr msgPtr();
 
     void refreshMsg();
-    void refreshTextBrowser();
+    void refreshTextBrowser(); // TODO: delete?
 
     void deleteMessage();
 
