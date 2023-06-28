@@ -273,6 +273,7 @@ void ChatWidget::synchronizeCurrentSession()
         }
     }
 
+    ui->listWidget->scrollToBottom();
     ui->textEdit->setFocus();
 
 }
