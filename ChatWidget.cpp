@@ -197,9 +197,8 @@ void ChatWidget::addMessageItem(ChatItemWidget *itemWidget, const QString &text,
 
     listItem->setSizeHint(itemWidget->sizeHint());
 
-    if (adjust) {
-        QTimer::singleShot(1, this, &ChatWidget::adjustLastItemAndSendRequest);
-    }
+    itemWidget->callAdjustHeight();
+    ui->listWidget->scrollToBottom();
 }
 
 QWidget *ChatWidget::lastChatItemMessageWidget() const
@@ -261,12 +260,17 @@ void ChatWidget::synchronizeCurrentSession()
 
     for (auto &msgPtr : lst) {
         qDebug() << msgPtr->role() << ":" << msgPtr->text();
+        ChatSessionItemWidget *itemWidget = nullptr;
         if (msgPtr->role() == chat::Message::USER) {
-            createMessageItemWidget<UserMessageItemWidget>(msgPtr->text());
+            itemWidget = createMessageItemWidget<UserMessageItemWidget>(msgPtr->text(), msgPtr);
         } else if (msgPtr->role() == chat::Message::ASSISTANT) {
-            createMessageItemWidget<AIMessageItemWidget>(msgPtr->text());
+            itemWidget = createMessageItemWidget<AIMessageItemWidget>(msgPtr->text(), msgPtr);
         }
-        adjustLastItem();
+
+        if (itemWidget) {
+            itemWidget->refreshMsg();
+            itemWidget->callAdjustHeight();
+        }
     }
 
     ui->textEdit->setFocus();
