@@ -183,7 +183,7 @@ void ChatWidget::updateItemsHeight()
     }
 }
 
-void ChatWidget::addMessageItem(ChatItemWidget *itemWidget, const QString &text, bool adjust)
+void ChatWidget::addMessageItem(ChatItemWidget *itemWidget, const QString &text)
 {
     QListWidgetItem *listItem = new QListWidgetItem(ui->listWidget);
 

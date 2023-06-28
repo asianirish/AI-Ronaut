@@ -75,7 +75,7 @@ private:
 
 private:
     void updateItemsHeight();
-    void addMessageItem(ChatItemWidget *itemWidget, const QString &text, bool adjust = true);
+    void addMessageItem(ChatItemWidget *itemWidget, const QString &text);
 
     QWidget *lastChatItemMessageWidget() const;
 
