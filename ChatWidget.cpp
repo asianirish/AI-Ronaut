@@ -225,7 +225,6 @@ void ChatWidget::onMessageResponseComplete(QObject *)
         aiItemWidget->refreshMsg();
     }
 
-    qDebug() << "MESSAGE RESPONSE COMPLETE";
     enableOrDisableControls(false);
     ui->textEdit->setFocus();
 }
