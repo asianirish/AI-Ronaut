@@ -1,6 +1,8 @@
 #include "NetworkConfiWidget.h"
 #include "ui_NetworkConfiWidget.h"
 
+#include <Component.h>
+
 #include <QSettings>
 
 NetworkConfiWidget::NetworkConfiWidget(QWidget *parent) :
@@ -8,6 +10,9 @@ NetworkConfiWidget::NetworkConfiWidget(QWidget *parent) :
     ui(new Ui::NetworkConfiWidget)
 {
     ui->setupUi(this);
+
+    on_useProxyBox_stateChanged(false);
+    ui->apiUrlEdit->setText(oaic::Component::DEFAULT_URL);
 }
 
 NetworkConfiWidget::~NetworkConfiWidget()
@@ -38,11 +43,10 @@ void NetworkConfiWidget::on_applyButton_clicked()
 
 void NetworkConfiWidget::on_useProxyBox_stateChanged(int isProxy)
 {
-    if (isProxy) {
-        ui->proxyFrame->setEnabled(true);
-    } else {
-        ui->proxyFrame->setEnabled(false);
-    }
+    ui->httpEdit->setEnabled(isProxy);
+    ui->httpPortEdit->setEnabled(isProxy);
+    ui->httpsEdit->setEnabled(isProxy);
+    ui->httpsPortEdit->setEnabled(isProxy);
 }
 
 NetworkContext NetworkConfiWidget::context() const
