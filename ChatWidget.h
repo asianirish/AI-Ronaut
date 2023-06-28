@@ -102,12 +102,12 @@ private:
     void continueChat();
 
     template<typename T>
-    T *createMessageItemWidget(const QString &text) {
-        T *itemWidget = new T(currentSessionId(), this);
+    T *createMessageItemWidget(const QString &text, chat::MessagePtr msgPtr = {}) {
+        T *itemWidget = new T(currentSessionId(), msgPtr, this);
 
         connect(itemWidget, &T::deleteMe, this, &ChatWidget::onDeleteItemRequest);
 
-        addMessageItem(itemWidget, text); // TODO: calls adjustLastItemAndSendRequest
+        addMessageItem(itemWidget, text);
 
         return itemWidget;
     }
