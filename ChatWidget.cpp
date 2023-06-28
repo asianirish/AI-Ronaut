@@ -88,6 +88,7 @@ void ChatWidget::on_sendButton_clicked()
 
     enableOrDisableControls(true);
 
+    sendAiModelRequest();
 }
 
 void ChatWidget::sendAiModelRequest()
@@ -129,7 +130,6 @@ void ChatWidget::continueChat()
     enableOrDisableControls(true);
     sendAiModelRequest();
 }
-
 
 void ChatWidget::onDeltaError(const QString &deltaError)
 {
