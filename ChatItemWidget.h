@@ -23,6 +23,8 @@ public:
     QListWidgetItem *listItem() const;
     void setListItem(QListWidgetItem *newListItem);
 
+    void callAdjustHeight();
+
 protected:
     virtual QTextBrowser *textBrowser() const = 0;
     virtual int extraSpaceHeight() const = 0;

@@ -4,6 +4,7 @@
 #include <QLayout>
 #include <QClipboard>
 #include <QGuiApplication>
+#include <QTimer>
 
 ChatItemWidget::ChatItemWidget(QWidget *parent)
     : QWidget{parent},
@@ -56,6 +57,11 @@ void ChatItemWidget::adjustHeight()
         int idealHeight = textHeight();
         _listItem->setSizeHint({sizeHint().width(), int(idealHeight)});
     }
+}
+
+void ChatItemWidget::callAdjustHeight()
+{
+    QTimer::singleShot(1, this, &ChatItemWidget::adjustHeight);
 }
 
 QListWidgetItem *ChatItemWidget::listItem() const
