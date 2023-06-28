@@ -87,16 +87,7 @@ void ChatWidget::on_sendButton_clicked()
     }
 
     enableOrDisableControls(true);
-}
 
-void ChatWidget::adjustLastItemAndSendRequest()
-{
-    auto chatWidget = adjustLastItem();
-    auto userWidget = qobject_cast<UserMessageItemWidget*>(chatWidget);
-
-    if (userWidget) {
-        sendAiModelRequest();
-    }
 }
 
 void ChatWidget::sendAiModelRequest()
@@ -139,21 +130,6 @@ void ChatWidget::continueChat()
     sendAiModelRequest();
 }
 
-ChatItemWidget *ChatWidget::adjustLastItem()
-{
-    auto cnt = ui->listWidget->count();
-    auto item = ui->listWidget->item(cnt - 1);
-    auto widget = ui->listWidget->itemWidget(item);
-    auto chatWidget = qobject_cast<ChatItemWidget *>(widget);
-
-    if (chatWidget) {
-        int idealHeight = chatWidget->textHeight();
-        item->setSizeHint({chatWidget->sizeHint().width(), idealHeight});
-        ui->listWidget->scrollToBottom();
-    }
-
-    return chatWidget;
-}
 
 void ChatWidget::onDeltaError(const QString &deltaError)
 {

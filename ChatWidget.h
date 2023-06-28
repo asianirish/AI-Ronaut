@@ -6,6 +6,8 @@
 #include "ChatItemWidget.h"
 #include "ui_ChatWidget.h"
 
+#include "chat/Message.h"
+
 #include <ModelContext.h>
 #include <Manager.h>
 
@@ -39,7 +41,6 @@ protected:
 
 private slots:
     void on_sendButton_clicked();
-    void adjustLastItemAndSendRequest();
     void sendAiModelRequest();
 
     void onDeltaError(const QString &deltaError);
@@ -111,8 +112,6 @@ private:
 
         return itemWidget;
     }
-
-    ChatItemWidget *adjustLastItem();
 };
 
 #endif // CHATWIDGET_H
