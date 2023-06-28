@@ -112,13 +112,14 @@ void ChatWidget::onDeltaReady(const QString &deltaData)
     auto aiWidget = qobject_cast<AIMessageItemWidget*>(lastWidget);
 
     if (aiWidget == nullptr) {
-        createMessageItemWidget<AIMessageItemWidget>(deltaData);
+        aiWidget = createMessageItemWidget<AIMessageItemWidget>(deltaData);
 
-        QTimer::singleShot(1, this, &ChatWidget::adjustLastItemAndSendRequest);
+        aiWidget->callAdjustHeight();
         return;
     }
     aiWidget->appendText(deltaData);
-    QTimer::singleShot(1, this, &ChatWidget::adjustLastItemAndSendRequest);
+    aiWidget->callAdjustHeight();
+    ui->listWidget->scrollToBottom();
 }
 
 void ChatWidget::enableOrDisableControls(bool isSending)
