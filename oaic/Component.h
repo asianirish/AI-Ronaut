@@ -15,13 +15,16 @@ class Component : public QObject
 {
     Q_OBJECT
 public:
-    static const QString THE_URL;
+    static const QString DEFAULT_URL;
 
     Component() = delete;
     Component(QObject *parent) = delete;
     explicit Component(Auth *auth, Manager *parent);
 
     virtual ~Component() = default;
+    QString apiUrl() const;
+    void setApiUrl(const QString &newApiUrl);
+
 private slots:
 
     void onJsonRequestFinished();
@@ -38,6 +41,7 @@ protected:
 private:
     Auth *_auth;
     mutable QNetworkReply *_postReply;
+    QString _apiUrl;
 
     QNetworkRequest request(const QString &endpoint, const QString &contentType) const;
     QNetworkRequest request(const QString &endpoint, const Headers &rawHeaders) const;

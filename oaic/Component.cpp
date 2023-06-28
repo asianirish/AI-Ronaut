@@ -6,11 +6,12 @@
 
 namespace oaic {
 
-const QString Component::THE_URL("https://api.openai.com/v1");
+const QString Component::DEFAULT_URL("https://api.openai.com/v1");
 
 Component::Component(Auth *auth, Manager *parent): QObject(parent),
     _auth(auth),
-    _postReply(nullptr)
+    _postReply(nullptr),
+    _apiUrl(DEFAULT_URL)
 {
 
 }
@@ -126,6 +127,16 @@ QNetworkReply *Component::postReply() const
     return _postReply;
 }
 
+QString Component::apiUrl() const
+{
+    return _apiUrl;
+}
+
+void Component::setApiUrl(const QString &newApiUrl)
+{
+    _apiUrl = newApiUrl;
+}
+
 QNetworkRequest Component::request(const QString &endpoint, const QString &contentType) const
 {
     QNetworkRequest rqst = this->request(endpoint);
@@ -149,7 +160,7 @@ QNetworkRequest Component::request(const QString &endpoint, const Headers &rawHe
 QNetworkRequest Component::request(const QString &endpoint) const
 {
     QNetworkRequest rqst;
-    rqst.setUrl(QUrl(THE_URL + endpoint));
+    rqst.setUrl(QUrl(_apiUrl + endpoint));
     auto headers = _auth->headers();
 
     for (auto &[key, value] : headers.toStdMap()) {
