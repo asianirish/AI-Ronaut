@@ -2,8 +2,9 @@
 #include "ChatMessageTextBrowser.h"
 #include "chat/SessionManager.h"
 
-ChatSessionItemWidget::ChatSessionItemWidget(const QString &sessionId, QWidget *parent) :
+ChatSessionItemWidget::ChatSessionItemWidget(const QString &sessionId, chat::MessagePtr msgPtr, QWidget *parent) :
     ChatItemWidget{parent},
+    _msgPtr(msgPtr),
     _sessionId(sessionId)
 {
 

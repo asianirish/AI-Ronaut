@@ -12,7 +12,7 @@ class AIMessageItemWidget : public ChatSessionItemWidget
     Q_OBJECT
 
 public:
-    explicit AIMessageItemWidget(const QString &sessionId, QWidget *parent = nullptr);
+    explicit AIMessageItemWidget(const QString &sessionId, chat::MessagePtr msgPtr = {}, QWidget *parent = nullptr);
     ~AIMessageItemWidget();
 
     void appendText(const QString &deltaText);

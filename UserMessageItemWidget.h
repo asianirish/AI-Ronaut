@@ -14,7 +14,7 @@ class UserMessageItemWidget : public ChatSessionItemWidget
     Q_OBJECT
 
 public:
-    explicit UserMessageItemWidget(const QString &sessionId,QWidget *parent = nullptr);
+    explicit UserMessageItemWidget(const QString &sessionId, chat::MessagePtr msgPtr = {}, QWidget *parent = nullptr);
     ~UserMessageItemWidget();
 
 protected:

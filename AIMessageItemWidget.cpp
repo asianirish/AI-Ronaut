@@ -4,8 +4,8 @@
 
 #include "chat/AssistantMessage.h"
 
-AIMessageItemWidget::AIMessageItemWidget(const QString &sessionId, QWidget *parent) :
-    ChatSessionItemWidget(sessionId, parent),
+AIMessageItemWidget::AIMessageItemWidget(const QString &sessionId, chat::MessagePtr msgPtr, QWidget *parent) :
+    ChatSessionItemWidget(sessionId, msgPtr, parent),
     ui(new Ui::AIMessageItemWidget)
 {
     ui->setupUi(this);

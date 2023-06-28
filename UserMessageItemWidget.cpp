@@ -5,8 +5,8 @@
 
 #include <QAbstractTextDocumentLayout>
 
-UserMessageItemWidget::UserMessageItemWidget(const QString &sessionId, QWidget *parent) :
-    ChatSessionItemWidget(sessionId, parent),
+UserMessageItemWidget::UserMessageItemWidget(const QString &sessionId, chat::MessagePtr msgPtr, QWidget *parent) :
+    ChatSessionItemWidget(sessionId, msgPtr, parent),
     ui(new Ui::UserMessageItemWidget)
 {
     ui->setupUi(this);

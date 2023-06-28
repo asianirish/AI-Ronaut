@@ -8,7 +8,7 @@ class ChatSessionItemWidget : public ChatItemWidget
 {
     Q_OBJECT
 public:
-    explicit ChatSessionItemWidget(const QString &sessionId, QWidget *parent = nullptr);
+    explicit ChatSessionItemWidget(const QString &sessionId, chat::MessagePtr msgPtr = {}, QWidget *parent = nullptr);
 
     chat::MessagePtr msgPtr();
 
