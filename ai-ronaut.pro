@@ -31,7 +31,6 @@ SOURCES += \
     PagePlotPage.cpp \
     PageWelcomePage.cpp \
     PageWidget.cpp \
-    SqlQueryModelExt.cpp \
     SystemMessageWidget.cpp \
     UserMessageItemWidget.cpp \
     chat/AssistantMessage.cpp \
@@ -76,7 +75,6 @@ HEADERS += \
     PagePlotPage.h \
     PageWelcomePage.h \
     PageWidget.h \
-    SqlQueryModelExt.h \
     SystemMessageWidget.h \
     UserMessageItemWidget.h \
     chat/AssistantMessage.h \
