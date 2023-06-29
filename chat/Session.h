@@ -2,7 +2,7 @@
 #define CHAT_SESSION_H
 
 #include "Message.h"
-#include "AssistantRole.h"
+#include "Character.h"
 
 #include <Chat.h>
 
@@ -46,15 +46,15 @@ public:
     void saveAsTextFile() const;
 
     void deleteMessage(MessagePtr msgPtr);
-
-    AssistantRole role() const;
-    void setRole(const AssistantRole &newRole);
+    
+    Character character() const;
+    void setCharacter(const Character &newCharacter);
 
 private:
     QString fileName() const;
 
 private:
-    AssistantRole _role;
+    Character _character;
 
     QList<MessagePtr> _messageList;
 

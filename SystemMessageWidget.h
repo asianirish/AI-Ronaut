@@ -4,7 +4,7 @@
 #include "ChatToolWidget.h"
 
 //#include "SqlQueryModelExt.h"
-#include "chat/RolesModel.h"
+#include "chat/CharactersModel.h"
 
 namespace Ui {
 class SystemMessageWidget;
@@ -17,8 +17,8 @@ class SystemMessageWidget : public ChatToolWidget
 public:
     explicit SystemMessageWidget(QWidget *parent = nullptr);
     ~SystemMessageWidget();
-
-    chat::AssistantRole role() const;
+    
+    chat::Character character() const;
 
 protected:
     void synchronizeCurrentSession() override;
@@ -27,19 +27,19 @@ protected:
     void showEvent(QShowEvent *event) override;
 
 private slots:
-    void on_roleBox_currentIndexChanged(int index);
+    void on_characterBox_currentIndexChanged(int index);
 
-    void on_saveRoleButton_clicked();
+    void on_saveCharacterButton_clicked();
 
-    void on_deleteRoleButton_clicked();
+    void on_deleteCharacterButton_clicked();
 
     void on_clearButton_clicked();
 
 private:
     Ui::SystemMessageWidget *ui;
-    chat::RolesModel *_model;
+    chat::CharactersModel *_model;
 
-    void initRoleList();
+    void initCharacterList();
 };
 
 #endif // SYSTEMMESSAGEWIDGET_H

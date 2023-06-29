@@ -2,7 +2,7 @@
 #include "ui_SystemMessageWidget.h"
 
 #include "chat/SessionManager.h"
-#include "chat/AssistantRole.h"
+#include "chat/Character.h"
 
 #include <QSqlDatabase>
 #include <QSqlQuery>
@@ -15,7 +15,7 @@ SystemMessageWidget::SystemMessageWidget(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    initRoleList();
+    initCharacterList();
 }
 
 SystemMessageWidget::~SystemMessageWidget()
@@ -23,12 +23,12 @@ SystemMessageWidget::~SystemMessageWidget()
     delete ui;
 }
 
-chat::AssistantRole SystemMessageWidget::role() const
+chat::Character SystemMessageWidget::character() const
 {
-    QString name = ui->roleBox->currentText();
+    QString name = ui->characterBox->currentText();
     QString message = ui->textEdit->toPlainText();
 
-    return chat::AssistantRole(name, message);
+    return chat::Character(name, message);
 }
 
 void SystemMessageWidget::synchronizeCurrentSession()
@@ -39,12 +39,12 @@ void SystemMessageWidget::synchronizeCurrentSession()
 
     auto session = gSessions->session(sessionId);
 //    auto msg = session->systemMessage();
-    auto role = session->role();
+    auto character = session->character();
 
-    qDebug() << "SYSTEM MESSAGE:" << role.fullMessage();
+    qDebug() << "SYSTEM MESSAGE:" << character.fullMessage();
 
-    ui->textEdit->setText(role.message());
-    ui->roleBox->setEditText(role.name());
+    ui->textEdit->setText(character.message());
+    ui->characterBox->setEditText(character.name());
 }
 
 void SystemMessageWidget::showEvent(QShowEvent *event)
@@ -54,51 +54,51 @@ void SystemMessageWidget::showEvent(QShowEvent *event)
     ui->textEdit->setFocus();
 }
 
-void SystemMessageWidget::initRoleList()
+void SystemMessageWidget::initCharacterList()
 {
-    _model = new chat::RolesModel(this);
-
-    ui->roleBox->setModel(_model);
-    ui->roleBox->setModelColumn(1); // TODO: inside the model class
-
-    ui->roleBox->setCurrentIndex(-1);
+    _model = new chat::CharactersModel(this);
+    
+    ui->characterBox->setModel(_model);
+    ui->characterBox->setModelColumn(1); // TODO: inside the model class
+    
+    ui->characterBox->setCurrentIndex(-1);
 
 }
 
-void SystemMessageWidget::on_roleBox_currentIndexChanged(int index)
+void SystemMessageWidget::on_characterBox_currentIndexChanged(int index)
 {
 //    QVariant data = _model->data(_model->index(index, 2));
-    auto role = _model->assistantRole(index);
-    ui->textEdit->setText(role.message());
+    auto character = _model->character(index);
+    ui->textEdit->setText(character.message());
 }
 
 
-void SystemMessageWidget::on_saveRoleButton_clicked()
+void SystemMessageWidget::on_saveCharacterButton_clicked()
 {
-    QString name(ui->roleBox->currentText());
+    QString name(ui->characterBox->currentText());
     QString message(ui->textEdit->toPlainText());
 
     _model->insertOrReplaceRecord(name, message);
-
-    ui->roleBox->setCurrentText(name);
+    
+    ui->characterBox->setCurrentText(name);
     ui->textEdit->setText(message);
 }
 
 
-void SystemMessageWidget::on_deleteRoleButton_clicked()
+void SystemMessageWidget::on_deleteCharacterButton_clicked()
 {
-    QString name(ui->roleBox->currentText());
+    QString name(ui->characterBox->currentText());
 
     _model->removeRowByName(name);
-
-    ui->roleBox->setCurrentIndex(-1);
+    
+    ui->characterBox->setCurrentIndex(-1);
     ui->textEdit->clear();
 }
 
 
 void SystemMessageWidget::on_clearButton_clicked()
 {
-    ui->roleBox->clearEditText();
+    ui->characterBox->clearEditText();
     ui->textEdit->clear();
 }
 

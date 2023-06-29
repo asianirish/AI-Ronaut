@@ -49,9 +49,9 @@ void SessionManager::addMessage(MessagePtr msgPtr, const QString &sessionId)
     session(sessionId)->addMessage(msgPtr);
 }
 
-void SessionManager::addRole(const AssistantRole &role, const QString &sessionId)
+void SessionManager::addCharacter(const Character &character, const QString &sessionId)
 {
-    session(sessionId)->setRole(role);
+    session(sessionId)->setCharacter(character);
 }
 
 void SessionManager::onQuit()

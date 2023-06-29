@@ -74,8 +74,8 @@ void PageGeneralChatPage::onUserMessage(const oaic::ModelContext &modelCntx)
 {
     auto currentSessionId = _pageContext->currentSessionId();
 
-    auto role = ui->systemMessageWidget->role();
-    gSessions->addRole(role, currentSessionId);
+    auto character = ui->systemMessageWidget->character();
+    gSessions->addCharacter(character, currentSessionId);
 
     // TODO: move to ChatWidget (?)
 

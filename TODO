@@ -2,7 +2,6 @@ TODO:
 
 * ModelContext per a Session instead ModelContext per a Page
 * One session in two different pages
-* rename role as AssistantRole to Character or Bot
 
 DONE:
 
@@ -25,6 +24,7 @@ DONE:
 (See ChatSessionWidget::onRenameSession)
 * Do not select a new session if a session has already been created on another page
 * The menu leads to a loss of focus and, as a result, the loss of the ability to edit (in ChatSessionItem)
+* Rename role as AssistantRole to Character or Bot
 
 CANCELED:
 

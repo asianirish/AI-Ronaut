@@ -21,17 +21,17 @@ bool maybeCreateDb() {
 
     QSqlQuery query;
 
-    if (!query.exec("CREATE TABLE IF NOT EXISTS roles ("
+    if (!query.exec("CREATE TABLE IF NOT EXISTS characters ("
                     "id INTEGER PRIMARY KEY AUTOINCREMENT, "
                     "name VARCHAR(64) NOT NULL UNIQUE, "
                     "message TEXT NOT NULL"
                     ")")) {
-        qDebug() << "error creating roles:" << query.lastError().text();
+        qDebug() << "error creating characters:" << query.lastError().text();
         return false;
     }
 
-    if (!query.exec("SELECT COUNT(*) FROM roles")) {
-        qDebug() << "error checking roles count:" << query.lastError().text();
+    if (!query.exec("SELECT COUNT(*) FROM characters")) {
+        qDebug() << "error checking characters count:" << query.lastError().text();
         return false;
     }
 
@@ -41,20 +41,20 @@ bool maybeCreateDb() {
     }
 
     if (rowCount == 0) {
-        if (!query.exec("INSERT INTO roles ('name', 'message') "
+        if (!query.exec("INSERT INTO characters ('name', 'message') "
                         "VALUES('Margaret Bigley', "
                         "'exceptional mathematics professor renowned for your ability "
                         "to articulate complex material in a comprehensible and engaging manner')")) {
-            qDebug() << "error creating a role:" << query.lastError().text();
+            qDebug() << "error creating a character:" << query.lastError().text();
             return false;
         }
     }
 
     if (!query.exec("CREATE TABLE IF NOT EXISTS sessions ("
                     "id INTEGER PRIMARY KEY AUTOINCREMENT, "
-                    "role_id INTEGER, " // Убираем ограничение NOT NULL
+                    "character_id INTEGER, "
                     "session_data TEXT NOT NULL, "
-                    "FOREIGN KEY (role_id) REFERENCES roles (id) ON DELETE SET NULL"
+                    "FOREIGN KEY (character_id) REFERENCES characters (id) ON DELETE SET NULL"
                     ")")) {
         qDebug() << "error creating sessions:" << query.lastError().text();
         return false;
