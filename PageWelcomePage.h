@@ -39,7 +39,7 @@ signals:
     void openDonateAction();
     void openAboutAction();
     void openPlotAction();
-    void openNetworkConfigAction();
+//    void openNetworkConfigAction();
 
 protected:
     void synchronizeClient(oaic::Manager *_client) override;

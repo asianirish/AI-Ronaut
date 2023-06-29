@@ -22,6 +22,8 @@ PageWelcomePage::PageWelcomePage(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    ui->networkConfigWidget->setVisible(false);
+
     ui->activityComboBox->addItem(tr("General сhat сonversation"), CHAT_ACTION);
     ui->activityComboBox->addItem(tr("Image generation"), IMAGE_ACTION);
 //    ui->activityComboBox->addItem(tr("Educational Chat Conversation")); // TODO: second arg
@@ -112,6 +114,7 @@ void PageWelcomePage::displayWait()
 
 void PageWelcomePage::openAction(const QString &actionData)
 {
+    ui->networkConfigWidget->setVisible(false); // ?
     if (actionData == IMAGE_ACTION) {
         emit openImageAction();
     } else if (actionData == CHAT_ACTION) {
@@ -123,7 +126,7 @@ void PageWelcomePage::openAction(const QString &actionData)
     } else if (actionData == PLOT_ACTION) {
         emit openPlotAction();
     } else if (actionData == NETWORK_CONFIG_ACTION) {
-        emit openNetworkConfigAction();
+        ui->networkConfigWidget->setVisible(true);
     }
 }
 

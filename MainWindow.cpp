@@ -28,7 +28,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(welcomePage, &PageWelcomePage::openDonateAction, this, &MainWindow::onOpenDonate);
     connect(welcomePage, &PageWelcomePage::openAboutAction, this, &MainWindow::onOpenAbout);
     connect(welcomePage, &PageWelcomePage::openPlotAction, this, &MainWindow::onOpenPlot);
-    connect(welcomePage, &PageWelcomePage::openNetworkConfigAction, this, &MainWindow::onOpenNetworkConfig);
+//    connect(welcomePage, &PageWelcomePage::openNetworkConfigAction, this, &MainWindow::onOpenNetworkConfig);
 }
 
 MainWindow::~MainWindow()
@@ -78,16 +78,6 @@ void MainWindow::onOpenPlot()
 
     int index = ui->tabWidget->addTab(specificPage, tr("Plot"));
     ui->tabWidget->setCurrentIndex(index);
-}
-
-void MainWindow::onOpenNetworkConfig()
-{
-    // TODO: use NetworkContext instead of _client
-//    NetworkConfiWidget *wdt = new NetworkConfiWidget(this);
-//    wdt->synchronizeClient(&_client);
-
-//    int index = ui->tabWidget->addTab(wdt, tr("Network Config"));
-//    ui->tabWidget->setCurrentIndex(index);
 }
 
 void MainWindow::on_tabWidget_tabCloseRequested(int index)
