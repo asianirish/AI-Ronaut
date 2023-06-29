@@ -47,6 +47,12 @@ void NetworkConfiWidget::on_useProxyBox_stateChanged(int isProxy)
     ui->httpPortEdit->setEnabled(isProxy);
     ui->httpsEdit->setEnabled(isProxy);
     ui->httpsPortEdit->setEnabled(isProxy);
+
+    if (isProxy) {
+        ui->httpEdit->setFocus();
+    }
+
+    ui->applyButton->setEnabled(true);
 }
 
 NetworkContext NetworkConfiWidget::context() const
