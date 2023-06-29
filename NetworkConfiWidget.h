@@ -27,6 +27,8 @@ private slots:
 
     void on_useProxyBox_stateChanged(int isProxy);
 
+    void on_apiUrlEdit_textEdited(const QString &arg1);
+
 private:
     Ui::NetworkConfiWidget *ui;
 

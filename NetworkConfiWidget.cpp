@@ -61,3 +61,10 @@ void NetworkConfiWidget::setContext(const NetworkContext &newContext)
     ui->timeOutBox->setValue(timeOutSec);
 }
 
+
+void NetworkConfiWidget::on_apiUrlEdit_textEdited(const QString &arg1)
+{
+    Q_UNUSED(arg1);
+    ui->applyButton->setEnabled(true);
+}
+
