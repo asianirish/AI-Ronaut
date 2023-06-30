@@ -90,9 +90,14 @@ void SystemMessageWidget::on_saveCharacterButton_clicked()
     QString message(ui->textEdit->toPlainText());
 
     _model->insertOrReplaceRecord(name, message);
-    
+
     ui->characterBox->setCurrentText(name);
     ui->textEdit->setText(message);
+
+    int index = ui->characterBox->findText(name);
+    if (index != -1) {
+        ui->characterBox->setCurrentIndex(index);
+    }
 }
 
 
