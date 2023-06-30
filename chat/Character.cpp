@@ -8,6 +8,7 @@ Character::Character() : Character(QString(), QString())
 }
 
 Character::Character(const QString &name, const QString &message, bool useNameInMessage) :
+    _id(0),
     _name(name),
     _message(message),
     _useNameInMessage(useNameInMessage)
@@ -61,6 +62,16 @@ QString Character::fullMessage() const
 oaic::MsgData Character::msgData() const
 {
     return oaic::MsgData("system", fullMessage());
+}
+
+int Character::id() const
+{
+    return _id;
+}
+
+void Character::setId(int newId)
+{
+    _id = newId;
 }
 
 } // namespace chat

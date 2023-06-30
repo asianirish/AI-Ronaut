@@ -27,7 +27,11 @@ public:
 
     oaic::MsgData msgData() const;
 
+    int id() const;
+    void setId(int newId);
+
 private:
+    int _id;
     QString _name;
     QString _message;
     bool _useNameInMessage;
