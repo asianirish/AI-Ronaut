@@ -25,10 +25,19 @@ SystemMessageWidget::~SystemMessageWidget()
 
 chat::Character SystemMessageWidget::character() const
 {
-    QString name = ui->characterBox->currentText();
-    QString message = ui->textEdit->toPlainText();
+    int index = ui->characterBox->currentIndex();
 
-    return chat::Character(name, message);
+    if (index < 0) {
+        QString name = ui->characterBox->currentText();
+        QString message = ui->textEdit->toPlainText();
+
+        return chat::Character(name, message);
+    }
+
+    qDebug() << "CHARACTER INDEX:" << index;
+    auto character = _model->character(index);
+    qDebug() << "CHARACTER:" << character.name() << character.message();
+    return character;
 }
 
 void SystemMessageWidget::synchronizeCurrentSession()
