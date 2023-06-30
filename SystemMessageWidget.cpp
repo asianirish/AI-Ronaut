@@ -67,9 +67,20 @@ void SystemMessageWidget::initCharacterList()
 
 void SystemMessageWidget::on_characterBox_currentIndexChanged(int index)
 {
-//    QVariant data = _model->data(_model->index(index, 2));
-    auto character = _model->character(index);
-    ui->textEdit->setText(character.message());
+    if (pageContext()) {
+        auto character = _model->character(index);
+        ui->textEdit->setText(character.message());
+
+        auto sessionId = pageContext()->currentSessionId();
+
+        qDebug() << "CHARACTER_BOX: SESSION ID:" << sessionId;
+
+        auto session = gSessions->session(sessionId);
+
+        qDebug() << "CHARACTER_BOX: CHARACTER:" << character.name() << character.message();
+
+        session->setCharacter(character);
+    }
 }
 
 
