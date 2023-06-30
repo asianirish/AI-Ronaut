@@ -45,13 +45,16 @@ Character CharactersModel::character(int row) const
         return Character();
     }
 
+    QModelIndex idIndex = index(row, 0);
     QModelIndex nameIndex = index(row, 1);
     QModelIndex messageIndex = index(row, 2);
 
+    int id = data(idIndex).toInt();
     QString name = data(nameIndex).toString();
     QString message = data(messageIndex).toString();
 
     Character character;
+    character.setId(id);
     character.setName(name);
     character.setMessage(message);
 
