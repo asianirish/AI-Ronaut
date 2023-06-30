@@ -51,9 +51,11 @@ bool maybeCreateDb() {
     }
 
     if (!query.exec("CREATE TABLE IF NOT EXISTS sessions ("
-                    "id INTEGER PRIMARY KEY AUTOINCREMENT, "
+                    "uuid VARCHAR(38) PRIMARY KEY, "
                     "character_id INTEGER, "
-                    "session_data TEXT NOT NULL, "
+                    "name TEXT NOT NULL, "
+                    "created DATETIME, "
+                    "accessed DATETIME, "
                     "FOREIGN KEY (character_id) REFERENCES characters (id) ON DELETE SET NULL"
                     ")")) {
         qDebug() << "error creating sessions:" << query.lastError().text();
