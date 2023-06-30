@@ -127,3 +127,9 @@ void ChatSessionWidget::on_applyEditedButton_clicked()
     ui->applyEditedButton->setEnabled(false);
 }
 
+
+void ChatSessionWidget::on_saveButton_clicked()
+{
+    gSessions->save(currentSessionId());
+}
+

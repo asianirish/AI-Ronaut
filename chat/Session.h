@@ -45,6 +45,8 @@ public:
 
     void saveAsTextFile() const;
 
+    void save() const;
+
     void deleteMessage(MessagePtr msgPtr);
     
     Character character() const;

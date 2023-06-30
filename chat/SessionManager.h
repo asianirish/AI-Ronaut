@@ -33,6 +33,7 @@ public:
     void addCharacter(const Character &character, const QString &sessionId);
 
     void saveAsTextFile(const QString &sessionId) const;
+    void save(const QString &sessionId) const;
 
     void deleteMessage(const QString &sessionId, MessagePtr msgPtr);
 

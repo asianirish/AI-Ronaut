@@ -89,6 +89,13 @@
        </widget>
       </item>
       <item>
+       <widget class="QPushButton" name="saveButton">
+        <property name="text">
+         <string>Save</string>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QPushButton" name="deleteButton">
         <property name="text">
          <string>Delete</string>
@@ -114,9 +121,12 @@
   </layout>
  </widget>
  <tabstops>
+  <tabstop>newSessionButton</tabstop>
   <tabstop>sessionNameEdit</tabstop>
   <tabstop>applyEditedButton</tabstop>
   <tabstop>sessionListWidget</tabstop>
+  <tabstop>saveAsTextFileButton</tabstop>
+  <tabstop>saveButton</tabstop>
   <tabstop>deleteButton</tabstop>
  </tabstops>
  <resources/>

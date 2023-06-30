@@ -125,6 +125,14 @@ void Session::saveAsTextFile() const
     file.close();
 }
 
+void Session::save() const
+{
+    // TODO: _character->save();
+    qDebug() << "SAVING CHARACTER..." << _character.id() << _character.name() << _character.message();
+    qDebug() << "SAVING SESSION..." << _uuid.toString() << _name;
+    // TODO: and messages..
+}
+
 void Session::deleteMessage(MessagePtr msgPtr)
 {
     _messageList.removeAll(msgPtr);

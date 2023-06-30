@@ -45,6 +45,8 @@ private slots:
 
     void on_applyEditedButton_clicked();
 
+    void on_saveButton_clicked();
+
 public slots:
     void onRenameSession(const QString &name);
 
