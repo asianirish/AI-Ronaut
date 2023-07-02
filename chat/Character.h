@@ -30,6 +30,8 @@ public:
     int id() const;
     void setId(int newId);
 
+    bool save() const;
+
 private:
     int _id;
     QString _name;

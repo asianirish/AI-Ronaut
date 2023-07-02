@@ -1,5 +1,11 @@
 #include "Character.h"
 
+#include <QDebug>
+
+#include <QSqlRecord>
+#include <QSqlQuery>
+#include <QSqlError>
+
 namespace chat {
 
 Character::Character() : Character(QString(), QString())
@@ -72,6 +78,40 @@ int Character::id() const
 void Character::setId(int newId)
 {
     _id = newId;
+}
+
+bool Character::save() const
+{
+    QSqlDatabase db = QSqlDatabase::database();
+    QSqlQuery query(db);
+    QString queryString;
+    QString dbType = db.driverName();
+
+    if (dbType == "QSQLITE") {
+        queryString = "INSERT OR REPLACE INTO characters (name, message) VALUES(:name, :message)";
+    } else if (dbType == "QMYSQL") {
+        queryString = "INSERT INTO characters (name, message) VALUES(:name, :message) "
+                      "ON DUPLICATE KEY UPDATE name = VALUES(name), message = VALUES(message)";
+    } else if (dbType == "QPSQL") {
+        queryString = "INSERT INTO characters (name, message) VALUES(:name, :message) "
+                      "ON CONFLICT (name) DO UPDATE SET message = EXCLUDED.message";
+    } else {
+        // TODO: use model functions
+        qDebug() << "Unsupported database type:" << dbType;
+        return false;
+    }
+
+    query.prepare(queryString);
+    query.bindValue(":name", _name);
+    query.bindValue(":message", _message);
+
+    if (query.exec()) {
+        qDebug() << "Record successfully added or updated.";
+        return true;
+    } else {
+        qDebug() << "Query execution error: " << query.lastError().text();
+        return false;
+    }
 }
 
 } // namespace chat
