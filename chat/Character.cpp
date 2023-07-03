@@ -80,7 +80,7 @@ void Character::setId(int newId)
     _id = newId;
 }
 
-bool Character::save() const
+bool Character::save()
 {
     QSqlDatabase db = QSqlDatabase::database();
     QSqlQuery query(db);
@@ -107,6 +107,11 @@ bool Character::save() const
 
     if (query.exec()) {
         qDebug() << "Record successfully added or updated.";
+
+        int lastId = query.lastInsertId().toInt();
+        qDebug() << "LAST CHARACTER ID IS" << lastId;
+
+        setId(lastId);
         return true;
     } else {
         qDebug() << "Query execution error: " << query.lastError().text();

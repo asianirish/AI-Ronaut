@@ -17,7 +17,7 @@ public:
     Character character(int row) const;
 
     bool insertOrReplaceRecord(const QString &name, const QString &message);
-    bool insertOrReplaceRecord(const Character &character);
+    bool insertOrReplaceRecord(Character &character);
 
     bool removeRowByName(const QString &name);
 };

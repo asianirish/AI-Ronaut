@@ -67,7 +67,7 @@ bool CharactersModel::insertOrReplaceRecord(const QString &name, const QString &
     return insertOrReplaceRecord(character);
 }
 
-bool CharactersModel::insertOrReplaceRecord(const Character &character)
+bool CharactersModel::insertOrReplaceRecord(Character &character)
 {
     if (character.save()) {
         select(); // Update the model after changes in the database

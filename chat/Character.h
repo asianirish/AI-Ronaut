@@ -30,7 +30,7 @@ public:
     int id() const;
     void setId(int newId);
 
-    bool save() const;
+    bool save();
 
 private:
     int _id;
