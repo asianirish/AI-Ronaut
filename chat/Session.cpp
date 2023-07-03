@@ -1,6 +1,10 @@
 #include "Session.h"
 #include "SystemMessage.h"
 
+#include <QDebug>
+
+#include <QSqlError>
+
 #include <QFile>
 
 using namespace oaic;
@@ -125,12 +129,36 @@ void Session::saveAsTextFile() const
     file.close();
 }
 
-void Session::save() const
+void Session::save()
 {
-    // TODO: _character->save();
+    QSqlDatabase db = QSqlDatabase::database();
+    QSqlQuery query(db);
+
+    db.transaction();
+
     qDebug() << "SAVING CHARACTER..." << _character.id() << _character.name() << _character.message();
+
+    if (!_character.save()) {
+        db.rollback();
+    }
+
     qDebug() << "SAVING SESSION..." << _uuid.toString() << _name;
-    // TODO: and messages..
+    if (!save(query)) {
+        db.rollback();
+    }
+
+    SystemMessage systemMsg;
+    systemMsg.setText(_character.message());
+    systemMsg.save(_uuid.toString(), 0);
+
+    int i = 10;
+    for (auto &msg : _messageList) {
+        msg->save(_uuid.toString(), i);
+        i += 10;
+    }
+
+
+    db.commit();
 }
 
 void Session::deleteMessage(MessagePtr msgPtr)
@@ -146,6 +174,36 @@ QString Session::fileName() const
     } else {
         return name() + "_" + createdStr;
     }
+}
+
+bool Session::save(QSqlQuery &query)
+{
+    QString queryString;
+
+    // TODO: for other db engines
+    queryString = "INSERT OR REPLACE INTO sessions (uuid, character_id, name, created, accessed) "
+                  "VALUES(:uuid, :character_id, :name, :created, :accessed)";
+
+    query.prepare(queryString);
+    query.bindValue(":uuid", _uuid);
+
+    if (_character.id()) {
+        query.bindValue(":character_id", _character.id());
+    } else {
+        query.bindValue(":character_id", QVariant(QMetaType::fromType<int>()));
+    }
+
+    query.bindValue(":name", _name);
+    query.bindValue(":created", _created);
+    query.bindValue(":accessed", _accessed);
+
+    if (query.exec()) {
+        qDebug() << "Record successfully added or updated.";
+        return true;
+    }
+
+    qDebug() << "Query execution error: " << query.lastError().text();
+    return false;
 }
 
 Character Session::character() const

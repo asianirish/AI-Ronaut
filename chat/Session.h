@@ -11,6 +11,7 @@
 #include <QDateTime>
 
 #include <QSharedPointer>
+#include <QSqlQuery>
 
 namespace chat {
 
@@ -45,7 +46,7 @@ public:
 
     void saveAsTextFile() const;
 
-    void save() const;
+    void save();
 
     void deleteMessage(MessagePtr msgPtr);
     
@@ -54,6 +55,7 @@ public:
 
 private:
     QString fileName() const;
+    bool save(QSqlQuery &query);
 
 private:
     Character _character;
