@@ -64,11 +64,12 @@ bool maybeCreateDb() {
 
     if (!query.exec("CREATE TABLE IF NOT EXISTS messages ("
                     "id INTEGER PRIMARY KEY AUTOINCREMENT, "
-                    "session_id INTEGER NOT NULL, "
+                    "session_uuid VARCHAR(38) NOT NULL, "
                     "order_num INTEGER NOT NULL, "
+                    "role TEXT CHECK (role IN ('system', 'assistant', 'user')) NOT NULL, " // ENUM type for SQLite (use ENUM for other SQL engines)
                     "content TEXT NOT NULL, "
-                    "FOREIGN KEY (session_id) REFERENCES sessions (id) ON DELETE CASCADE, "
-                    "UNIQUE (session_id, order_num)"
+                    "FOREIGN KEY (session_uuid) REFERENCES sessions (uuid) ON DELETE CASCADE, "
+                    "UNIQUE (session_uuid, order_num)"
                     ")")) {
         qDebug() << "error creating messages:" << query.lastError().text();
         return false;
