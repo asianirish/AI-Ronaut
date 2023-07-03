@@ -39,6 +39,8 @@ public:
     static MessagePtr createMessage(const oaic::MsgData &msgData);
     static MessagePtr createMessage(const oaic::Role &role, const QString &content);
 
+    bool save(const QString &sessionUuid, int orderNum);
+
 private:
     QString _text;
 
