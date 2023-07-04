@@ -3,6 +3,7 @@
 
 #include <oaic/MsgData.h>
 
+#include <QMetaType>
 #include <QString>
 
 namespace chat {
@@ -41,5 +42,6 @@ private:
 
 } // namespace chat
 
+Q_DECLARE_METATYPE(chat::Character)
 
 #endif // CHARACTER_H
