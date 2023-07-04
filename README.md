@@ -62,10 +62,9 @@ Our team is committed to realizing these plans and continuously improving the pr
 
 ## Donate
 
-If you appreciate these services, you can show your gratitude by sending...
+If you appreciate these services and would like to show your gratitude, you can support the project by donating through **PayPal** or by sending a direct bank transfer.
 
-**PayPal**: \
-[Donate](https://www.paypal.com/donate/?hosted_button_id=3YRL2X3VBVFLQ)
+**PayPal**: [Donate now](https://www.paypal.com/donate/?hosted_button_id=3YRL2X3VBVFLQ)
 
 **EUR**: \
 IBAN: PL 15 1050 1793 1000 0097 4489 2788 \
