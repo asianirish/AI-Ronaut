@@ -26,16 +26,17 @@ SystemMessageWidget::~SystemMessageWidget()
 chat::Character SystemMessageWidget::character() const
 {
     int index = ui->characterBox->currentIndex();
+     QString message = ui->textEdit->toPlainText();
 
     if (index < 0) {
         QString name = ui->characterBox->currentText();
-        QString message = ui->textEdit->toPlainText();
 
         return chat::Character(name, message);
     }
 
     qDebug() << "CHARACTER INDEX:" << index;
     auto character = _model->character(index);
+    character.setMessage(message);
     qDebug() << "CHARACTER:" << character.name() << character.message();
     return character;
 }
