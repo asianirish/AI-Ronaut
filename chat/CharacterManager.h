@@ -14,6 +14,8 @@ public:
 
     QMap<int, CharacterPtr> characters() const;
 
+    void load();
+
 private:
 
     QMap<int, CharacterPtr> _characters;
