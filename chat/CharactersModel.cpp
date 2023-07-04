@@ -4,13 +4,17 @@
 #include <QSqlQuery>
 #include <QSqlError>
 
+
 namespace chat {
 
-CharactersModel::CharactersModel(QObject *parent) : QSqlTableModel(parent)
+const QString CharactersModel::QUERY_STRING = "SELECT * FROM characters ORDER BY name";
+
+
+CharactersModel::CharactersModel(QObject *parent) : QSqlQueryModel(parent)
 {
-    setTable("characters");
-    setEditStrategy(QSqlTableModel::OnManualSubmit);
-    select();
+    setQuery(QUERY_STRING);
+//    setEditStrategy(QSqlTableModel::OnManualSubmit);
+
 }
 
 QVariant CharactersModel::data(const QModelIndex &index, int role) const
@@ -33,7 +37,7 @@ QVariant CharactersModel::data(const QModelIndex &index, int role) const
     }
 
     if (role == Qt::DisplayRole || role == Qt::EditRole) {
-        return QSqlTableModel::data(index, role);
+        return QSqlQueryModel::data(index, role);
     }
 
     return QVariant();
@@ -70,7 +74,7 @@ bool CharactersModel::insertOrReplaceRecord(const QString &name, const QString &
 bool CharactersModel::insertOrReplaceRecord(Character &character)
 {
     if (character.save()) {
-        select(); // Update the model after changes in the database
+        setQuery(QUERY_STRING); // Update the model after changes in the database
         return true;
     }
 
@@ -79,7 +83,7 @@ bool CharactersModel::insertOrReplaceRecord(Character &character)
 
 bool CharactersModel::removeRowByName(const QString &name)
 {
-    QSqlQuery query(database());
+    QSqlQuery query(QSqlDatabase::database());
     query.prepare("DELETE FROM characters WHERE name = :name");
     query.bindValue(":name", name);
 
@@ -88,7 +92,7 @@ bool CharactersModel::removeRowByName(const QString &name)
         return false;
     }
 
-    select();
+    setQuery(QUERY_STRING); // Update the model after changes in the database
     return true;
 
 /* native methods:

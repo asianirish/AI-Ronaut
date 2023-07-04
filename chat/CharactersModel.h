@@ -3,13 +3,15 @@
 
 #include "Character.h"
 
-#include <QSqlTableModel>
+#include <QSqlQueryModel>
 
 namespace chat {
 
-class CharactersModel : public QSqlTableModel
+class CharactersModel : public QSqlQueryModel
 {
 public:
+    static const QString QUERY_STRING;
+
     explicit CharactersModel(QObject *parent = nullptr);
 
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
