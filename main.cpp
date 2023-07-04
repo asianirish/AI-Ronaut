@@ -24,7 +24,8 @@ bool maybeCreateDb() {
     if (!query.exec("CREATE TABLE IF NOT EXISTS characters ("
                     "id INTEGER PRIMARY KEY AUTOINCREMENT, "
                     "name VARCHAR(64) NOT NULL UNIQUE, "
-                    "message TEXT NOT NULL"
+                    "message TEXT NOT NULL, "
+                    "useNameInMessage BOOLEAN DEFAULT 1"
                     ")")) {
         qDebug() << "error creating characters:" << query.lastError().text();
         return false;
