@@ -68,7 +68,7 @@ void SystemMessageWidget::initCharacterList()
     _model = new chat::CharactersModel(this);
     
     ui->characterBox->setModel(_model);
-    ui->characterBox->setModelColumn(1); // TODO: inside the model class
+    ui->characterBox->setModelColumn(1);
     
     ui->characterBox->setCurrentIndex(-1);
 
