@@ -1,8 +1,9 @@
 #ifndef SESSIONMANAGER_H
 #define SESSIONMANAGER_H
 
-#include "util/OrderedMap.h"
 #include "Session.h"
+
+#include <OrderedMap.h>
 
 #include <QObject>
 
