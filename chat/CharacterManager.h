@@ -8,7 +8,7 @@ namespace chat {
 class CharacterManager
 {
 public:
-    CharacterManager();
+    static CharacterManager *instance();
 
     CharacterPtr character(int id) const;
 
@@ -20,8 +20,14 @@ private:
 
     QMap<int, CharacterPtr> _characters;
 
+private:
+    CharacterManager();
+    static CharacterManager *_instance;
+
 };
 
 } // namespace chat
+
+#define gCharacters chat::CharacterManager::instance()
 
 #endif // CHAT_CHARACTERMANAGER_H

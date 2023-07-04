@@ -4,9 +4,15 @@
 
 namespace chat {
 
-CharacterManager::CharacterManager()
-{
+CharacterManager *CharacterManager::_instance = nullptr;
 
+CharacterManager *CharacterManager::instance()
+{
+    if (_instance == nullptr) {
+        _instance = new CharacterManager();
+    }
+
+    return _instance;
 }
 
 CharacterPtr CharacterManager::character(int id) const
@@ -35,6 +41,12 @@ void CharacterManager::load()
 
         _characters.insert(id, character);
     }
+}
+
+
+CharacterManager::CharacterManager()
+{
+
 }
 
 } // namespace chat
