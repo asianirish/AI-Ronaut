@@ -40,6 +40,8 @@ private:
     bool _useNameInMessage;
 };
 
+using CharacterPtr = QSharedPointer<Character>;
+
 } // namespace chat
 
 Q_DECLARE_METATYPE(chat::Character)
