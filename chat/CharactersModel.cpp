@@ -61,9 +61,9 @@ Character CharactersModel::character(int row) const
     return character;
 }
 
-bool CharactersModel::insertOrReplaceRecord(const QString &name, const QString &message)
+bool CharactersModel::insertOrReplaceRecord(const QString &name, const QString &message, bool useNameInMessage)
 {
-    Character character(name, message);
+    Character character(name, message, useNameInMessage);
     return insertOrReplaceRecord(character);
 }
 

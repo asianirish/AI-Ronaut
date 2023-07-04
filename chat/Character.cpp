@@ -87,6 +87,7 @@ bool Character::save()
     QString queryString;
     QString dbType = db.driverName();
 
+    // TODO: useNameInMessage
     if (dbType == "QSQLITE") {
         queryString = "INSERT OR REPLACE INTO characters (name, message) VALUES(:name, :message)";
     } else if (dbType == "QMYSQL") {
