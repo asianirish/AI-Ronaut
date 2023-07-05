@@ -38,6 +38,10 @@ private:
     QString _name;
     QString _message;
     bool _useNameInMessage;
+
+private:
+    bool insertIntoDb();
+    bool updateInDb();
 };
 
 using CharacterPtr = QSharedPointer<Character>;

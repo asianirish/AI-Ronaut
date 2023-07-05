@@ -82,42 +82,66 @@ void Character::setId(int newId)
 
 bool Character::save()
 {
+    if (_id) {
+        return updateInDb();
+    }
+
+    return insertIntoDb();
+}
+
+bool Character::insertIntoDb()
+{
     QSqlDatabase db = QSqlDatabase::database();
     QSqlQuery query(db);
     QString queryString;
-    QString dbType = db.driverName();
 
-    // TODO: useNameInMessage
-    if (dbType == "QSQLITE") {
-        queryString = "INSERT OR REPLACE INTO characters (name, message) VALUES(:name, :message)";
-    } else if (dbType == "QMYSQL") {
-        queryString = "INSERT INTO characters (name, message) VALUES(:name, :message) "
-                      "ON DUPLICATE KEY UPDATE name = VALUES(name), message = VALUES(message)";
-    } else if (dbType == "QPSQL") {
-        queryString = "INSERT INTO characters (name, message) VALUES(:name, :message) "
-                      "ON CONFLICT (name) DO UPDATE SET message = EXCLUDED.message";
-    } else {
-        // TODO: use model functions
-        qDebug() << "Unsupported database type:" << dbType;
-        return false;
-    }
-
+    queryString = "INSERT INTO characters (name, message, useNameInMessage) VALUES(:name, :message, :useNameInMessage)";
     query.prepare(queryString);
     query.bindValue(":name", _name);
     query.bindValue(":message", _message);
+    query.bindValue(":useNameInMessage", _useNameInMessage);
 
     if (query.exec()) {
-        qDebug() << "Record successfully added or updated.";
+        qDebug() << "Record successfully added.";
 
         int lastId = query.lastInsertId().toInt();
         qDebug() << "LAST CHARACTER ID IS" << lastId;
 
         setId(lastId);
         return true;
-    } else {
-        qDebug() << "Query execution error: " << query.lastError().text();
-        return false;
     }
+
+    qDebug() << "Query execution error: " << query.lastError().text();
+    return false;
+}
+
+bool Character::updateInDb()
+{
+    QSqlDatabase db = QSqlDatabase::database();
+    QSqlQuery query(db);
+    QString queryString;
+
+    queryString = "UPDATE characters "
+                    "SET name = :name, "
+                    "message = :message, "
+                    "useNameInMessage = :useNameInMessage "
+                    "WHERE id = :id";
+
+    query.prepare(queryString);
+    query.bindValue(":name", _name);
+    query.bindValue(":message", _message);
+    query.bindValue(":useNameInMessage", _useNameInMessage);
+    query.bindValue(":id", _id);
+
+    if (query.exec()) {
+        qDebug() << "Record successfully updated.";
+        return true;
+    }
+
+    qDebug() << "Query execution error: " << query.lastError().text();
+    return false;
+
+    return true;
 }
 
 } // namespace chat

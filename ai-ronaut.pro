@@ -36,7 +36,6 @@ SOURCES += \
     chat/AssistantMessage.cpp \
     chat/Character.cpp \
     chat/CharacterManager.cpp \
-    chat/CharactersModel.cpp \
     chat/Message.cpp \
     chat/Session.cpp \
     chat/SessionItem.cpp \
@@ -81,7 +80,6 @@ HEADERS += \
     chat/AssistantMessage.h \
     chat/Character.h \
     chat/CharacterManager.h \
-    chat/CharactersModel.h \
     chat/Message.h \
     chat/Session.h \
     chat/SessionItem.h \

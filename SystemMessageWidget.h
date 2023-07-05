@@ -3,8 +3,7 @@
 
 #include "ChatToolWidget.h"
 
-//#include "SqlQueryModelExt.h"
-#include "chat/CharactersModel.h"
+#include "chat/Character.h"
 
 namespace Ui {
 class SystemMessageWidget;
@@ -37,9 +36,8 @@ private slots:
 
 private:
     Ui::SystemMessageWidget *ui;
-    chat::CharactersModel *_model;
 
-    void initCharacterList();
+    void initCharacterList(int selectCharacter = 0);
 };
 
 #endif // SYSTEMMESSAGEWIDGET_H

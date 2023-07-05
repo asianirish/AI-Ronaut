@@ -3,6 +3,7 @@
 
 #include "chat/SessionManager.h"
 #include "chat/Character.h"
+#include "chat/CharacterManager.h"
 
 #include <QSqlDatabase>
 #include <QSqlQuery>
@@ -34,11 +35,16 @@ chat::Character SystemMessageWidget::character() const
         return chat::Character(name, message);
     }
 
-    qDebug() << "CHARACTER INDEX:" << index;
-    auto character = _model->character(index);
-    character.setMessage(message);
-    qDebug() << "CHARACTER:" << character.name() << character.message();
-    return character;
+    int characterId = ui->characterBox->currentData().toInt();
+    auto pCharacter = gCharacters->character(characterId);
+
+    pCharacter->setMessage(message);
+
+    if (pCharacter) {
+        return *pCharacter;
+    }
+
+    return chat::Character();
 }
 
 void SystemMessageWidget::synchronizeCurrentSession()
@@ -64,22 +70,43 @@ void SystemMessageWidget::showEvent(QShowEvent *event)
     ui->textEdit->setFocus();
 }
 
-void SystemMessageWidget::initCharacterList()
+void SystemMessageWidget::initCharacterList(int selectCharacter)
 {
-    _model = new chat::CharactersModel(this);
-    
-    ui->characterBox->setModel(_model);
-    ui->characterBox->setModelColumn(1);
-    
-    ui->characterBox->setCurrentIndex(-1);
+    ui->characterBox->clear();
+    gCharacters->select();
 
+    auto characters = gCharacters->characters();
+
+    ui->characterBox->blockSignals(true);
+    for (auto &character : characters) {
+        ui->characterBox->addItem(character->name(), character->id());
+    }
+    ui->characterBox->blockSignals(false);
+    
+    if (selectCharacter) {
+        int index = ui->characterBox->findData(selectCharacter);
+        ui->characterBox->setCurrentIndex(index);
+    } else {
+        ui->characterBox->setCurrentIndex(-1);
+    }
 }
 
 void SystemMessageWidget::on_characterBox_currentIndexChanged(int index)
 {
+    if (index < 0) {
+        return;
+    }
+
     if (pageContext()) {
-        auto character = _model->character(index);
-        ui->textEdit->setText(character.message());
+
+        int characterId = ui->characterBox->currentData().toInt();
+        auto pCharacter = gCharacters->character(characterId);
+
+        if (!pCharacter) {
+            return;
+        }
+
+        ui->textEdit->setText(pCharacter->message());
 
         auto sessionId = pageContext()->currentSessionId();
 
@@ -87,43 +114,37 @@ void SystemMessageWidget::on_characterBox_currentIndexChanged(int index)
 
         auto session = gSessions->session(sessionId);
 
-        qDebug() << "CHARACTER_BOX: CHARACTER:" << character.name() << character.message();
+        qDebug() << "CHARACTER_BOX: CHARACTER:" << pCharacter->name() << pCharacter->message();
 
-        session->setCharacter(character);
+        session->setCharacter(*pCharacter);
     }
 }
 
 
 void SystemMessageWidget::on_saveCharacterButton_clicked()
 {
-    QString name(ui->characterBox->currentText());
-    QString message(ui->textEdit->toPlainText());
-
-    _model->insertOrReplaceRecord(name, message); // TODO: useNameInMessage
-
-    ui->characterBox->setCurrentText(name);
-    ui->textEdit->setText(message);
-
-    int index = ui->characterBox->findText(name);
-    if (index != -1) {
-        ui->characterBox->setCurrentIndex(index);
-    }
+    auto character = this->character();
+    character.save();
+    initCharacterList(character.id());
 }
 
 
 void SystemMessageWidget::on_deleteCharacterButton_clicked()
 {
-    QString name(ui->characterBox->currentText());
+    int characterId = ui->characterBox->currentData().toInt();
 
-    _model->removeRowByName(name);
+    gCharacters->deleteCharacter(characterId);
     
     ui->characterBox->setCurrentIndex(-1);
     ui->textEdit->clear();
+
+    initCharacterList();
 }
 
 
 void SystemMessageWidget::on_clearButton_clicked()
 {
+    ui->characterBox->setCurrentIndex(-1);
     ui->characterBox->clearEditText();
     ui->textEdit->clear();
 }

@@ -3,6 +3,8 @@
 
 #include "Character.h"
 
+#include <OrderedMap.h>
+
 namespace chat {
 
 class CharacterManager
@@ -14,7 +16,11 @@ public:
 
     const OrderedMap<int, CharacterPtr> &characters() const;
 
-    void load();
+    void select();
+
+    bool insertOrUpdateCharacter(Character &character);
+
+    bool deleteCharacter(int id);
 
 private:
 
