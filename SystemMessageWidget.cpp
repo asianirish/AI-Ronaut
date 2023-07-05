@@ -26,7 +26,7 @@ SystemMessageWidget::~SystemMessageWidget()
 chat::Character SystemMessageWidget::character() const
 {
     int index = ui->characterBox->currentIndex();
-     QString message = ui->textEdit->toPlainText();
+    QString message = ui->textEdit->toPlainText();
 
     if (index < 0) {
         QString name = ui->characterBox->currentText();
