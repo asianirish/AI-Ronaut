@@ -12,13 +12,13 @@ public:
 
     CharacterPtr character(int id) const;
 
-    QMap<int, CharacterPtr> characters() const;
+    const OrderedMap<int, CharacterPtr> &characters() const;
 
     void load();
 
 private:
 
-    QMap<int, CharacterPtr> _characters;
+    OrderedMap<int, CharacterPtr> _characters;
 
 private:
     CharacterManager();

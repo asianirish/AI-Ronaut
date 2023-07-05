@@ -20,7 +20,7 @@ CharacterPtr CharacterManager::character(int id) const
     return _characters.value(id);
 }
 
-QMap<int, CharacterPtr> CharacterManager::characters() const
+const OrderedMap<int, CharacterPtr> &CharacterManager::characters() const
 {
     return _characters;
 }
