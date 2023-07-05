@@ -1,3 +1,6 @@
+#ifndef UTIL_ORDEREDMAP_H
+#define UTIL_ORDEREDMAP_H
+
 #include <QMap>
 #include <QList>
 
@@ -125,3 +128,5 @@ private:
     QMap<K, V> _map;
     QList<K> _list;
 };
+
+#endif // UTIL_ORDEREDMAP_H
