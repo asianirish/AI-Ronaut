@@ -58,6 +58,7 @@ private:
     bool save(QSqlQuery &query);
 
 private:
+    // TODO: use character_id and gCharacter instead?
     Character _character;
 
     QList<MessagePtr> _messageList;
