@@ -149,11 +149,13 @@ void Session::save()
 
     if (!_character.save()) {
         db.rollback();
+        return;
     }
 
     qDebug() << "SAVING SESSION..." << _uuid.toString() << _name;
     if (!save(query)) {
         db.rollback();
+        return;
     }
 
     SystemMessage systemMsg;
