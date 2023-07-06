@@ -170,6 +170,7 @@ void Session::save()
 
 
     db.commit();
+    setIsPersistent(true);
 }
 
 void Session::deleteMessage(MessagePtr msgPtr)

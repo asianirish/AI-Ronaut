@@ -102,6 +102,8 @@ void SessionManager::select()
         session->setCreated(created);
         session->setAccessed(accessed);
 
+        session->setIsPersistent(true);
+
         _sessions.insert(sessionId, session);
 
         if (characterId) {
