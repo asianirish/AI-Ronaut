@@ -22,6 +22,10 @@ Session::Session() : _isPersistent(false)
 
 QList<MessagePtr> Session::messageList() const
 {
+    if (_messageList.isEmpty()) {
+        selectMessages();
+    }
+
     return _messageList;
 }
 
@@ -51,6 +55,7 @@ void Session::setUuid(const QString &uuidStr)
 {
     setUuid(QUuid(uuidStr));
 }
+
 QByteArray Session::uuidToByteArray() const
 {
     return _uuid.toByteArray();
