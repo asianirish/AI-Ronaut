@@ -55,6 +55,10 @@ public:
     Character character() const;
     void setCharacter(const Character &newCharacter);
 
+    void setCreated(const QDateTime &newCreated);
+
+    void setAccessed(const QDateTime &newAccessed);
+
 private:
     QString fileName() const;
     bool save(QSqlQuery &query);

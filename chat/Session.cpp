@@ -210,6 +210,17 @@ bool Session::save(QSqlQuery &query)
     return false;
 }
 
+
+void Session::setAccessed(const QDateTime &newAccessed)
+{
+    _accessed = newAccessed;
+}
+
+void Session::setCreated(const QDateTime &newCreated)
+{
+    _created = newCreated;
+}
+
 Character Session::character() const
 {
     return _character;
