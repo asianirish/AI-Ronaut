@@ -1,5 +1,7 @@
 #include "SessionManager.h"
 
+#include "CharacterManager.h"
+
 #include <QDebug>
 #include <QDateTime>
 
@@ -74,6 +76,43 @@ void SessionManager::deleteMessage(const QString &sessionId, MessagePtr msgPtr)
 {
     auto sssn = session(sessionId);
     sssn->deleteMessage(msgPtr);
+}
+
+void SessionManager::select()
+{
+    gCharacters->select();
+
+    // Do not clear the _sessions, as it also leads to the removal of values not from the database
+
+    QSqlQuery query("SELECT uuid, character_id, name, created, accessed  FROM sessions ORDER BY created DESC");
+
+    while (query.next()) { // TODO: error?
+        QString sessionId = query.value(0).toString();
+
+        QVariant characterIdVar = query.value(1);
+        int characterId = characterIdVar.isValid() ? query.value(1).toInt() : 0; // if NULL
+
+        QString name = query.value(2).toString();
+        QDateTime created = query.value(3).toDateTime();
+        QDateTime accessed = query.value(4).toDateTime();
+
+        SessionPtr session = SessionPtr(new Session());
+        session->setUuid(sessionId);
+        session->setName(name);
+        session->setCreated(created);
+        session->setAccessed(accessed);
+
+        _sessions.insert(sessionId, session);
+
+        if (characterId) {
+            auto pCharacter = gCharacters->character(characterId);
+
+            if (pCharacter) {
+                addCharacter(*pCharacter, sessionId);
+            }
+        }
+    }
+
 }
 
 SessionManager::SessionManager(QObject *parent)

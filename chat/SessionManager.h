@@ -38,6 +38,8 @@ public:
 
     void deleteMessage(const QString &sessionId, MessagePtr msgPtr);
 
+    void select();
+
 private:
     OrderedMap<QString, SessionPtr> _sessions;
 
