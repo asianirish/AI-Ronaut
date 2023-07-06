@@ -25,6 +25,8 @@ public:
 
     QUuid uuid() const;
     void setUuid(const QUuid &newUuid);
+    void setUuid(const QString &uuidStr);
+
 
     QByteArray uuidToByteArray() const;
     QString uuidToString() const;

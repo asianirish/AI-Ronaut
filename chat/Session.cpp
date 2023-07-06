@@ -47,6 +47,10 @@ void Session::setUuid(const QUuid &newUuid)
     _uuid = newUuid;
 }
 
+void Session::setUuid(const QString &uuidStr)
+{
+    setUuid(QUuid(uuidStr));
+}
 QByteArray Session::uuidToByteArray() const
 {
     return _uuid.toByteArray();
