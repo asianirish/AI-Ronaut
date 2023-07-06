@@ -42,17 +42,23 @@ oaic::MsgData Message::msgData() const
     return oaic::MsgData(roleAsString(), text());
 }
 
-MessagePtr Message::createMessage(const oaic::MsgData &msgData)
+MessagePtr Message::createMessage(const oaic::Role &role)
 {
     MessagePtr msg;
-
-    if (msgData.role() == ROLE_TO_STRING.value(Message::SYSTEM)) {
+    if (role == ROLE_TO_STRING.value(Message::SYSTEM)) {
         msg = MessagePtr(new chat::SystemMessage());
-    } else if (msgData.role() == ROLE_TO_STRING.value(Message::USER)) {
+    } else if (role == ROLE_TO_STRING.value(Message::USER)) {
         msg = MessagePtr(new chat::UserMessage());
-    } else if (msgData.role() == ROLE_TO_STRING.value(Message::ASSISTANT)) {
+    } else if (role == ROLE_TO_STRING.value(Message::ASSISTANT)) {
         msg = MessagePtr(new chat::AssistantMessage());
     }
+
+    return msg;
+}
+
+MessagePtr Message::createMessage(const oaic::MsgData &msgData)
+{
+    MessagePtr msg = createMessage(msgData.role());
 
     if (msg) {
         msg->setText(msgData.content());

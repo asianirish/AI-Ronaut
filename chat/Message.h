@@ -36,6 +36,7 @@ public:
 
     oaic::MsgData msgData() const;
 
+    static MessagePtr createMessage(const oaic::Role &role);
     static MessagePtr createMessage(const oaic::MsgData &msgData);
     static MessagePtr createMessage(const oaic::Role &role, const QString &content);
 
