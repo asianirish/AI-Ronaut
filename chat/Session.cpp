@@ -210,6 +210,26 @@ bool Session::save(QSqlQuery &query)
     return false;
 }
 
+void Session::selectMessages() const
+{
+    QString queryString("SELECT id, order_num, role, content  FROM messages WHERE session_uuid=:session_uuid AND role <> 'system' ORDER BY order_num");
+
+    QSqlQuery query;
+    query.prepare(queryString);
+    query.bindValue(":session_uuid", uuidToString());
+
+    if (query.exec()) {
+        while (query.next()) {
+            // TODO: read and use id
+// TODO: use?            int orderNum = query.value("order_num").toInt();
+            auto role = query.value("role").toString();
+            QString content = query.value("content").toString();
+
+            auto msg = Message::createMessage(role, content);
+            _messageList.append(msg);
+        }
+    } // TODO: error messages
+}
 
 void Session::setAccessed(const QDateTime &newAccessed)
 {

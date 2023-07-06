@@ -63,11 +63,13 @@ private:
     QString fileName() const;
     bool save(QSqlQuery &query);
 
+    void selectMessages() const;
+
 private:
     // TODO: use character_id and gCharacter instead?
     Character _character;
 
-    QList<MessagePtr> _messageList;
+    mutable QList<MessagePtr> _messageList;
 
     QUuid _uuid;
     QString _name;
