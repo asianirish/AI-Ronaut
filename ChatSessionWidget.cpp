@@ -12,6 +12,7 @@ ChatSessionWidget::ChatSessionWidget(QWidget *parent) :
 
     ui->sessionListWidget->setSortingEnabled(true);
 
+    gSessions->select();
     auto lst = gSessions->sessions();
 
     for (auto &session : lst) {
