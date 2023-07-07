@@ -21,6 +21,12 @@ bool maybeCreateDb() {
 
     QSqlQuery query;
 
+    if (!query.exec("PRAGMA foreign_keys = ON")) {
+        qDebug() << "error setting PRAGMA foreign_keys:" << query.lastError().text();
+        return false;
+    }
+
+
     if (!query.exec("CREATE TABLE IF NOT EXISTS characters ("
                     "id INTEGER PRIMARY KEY AUTOINCREMENT, "
                     "name VARCHAR(64) NOT NULL UNIQUE, "
