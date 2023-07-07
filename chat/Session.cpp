@@ -158,10 +158,6 @@ void Session::save()
         return;
     }
 
-    SystemMessage systemMsg;
-    systemMsg.setText(_character.message());
-    systemMsg.save(_uuid.toString(), 0);
-
     int i = 10;
     for (auto &msg : _messageList) {
         msg->save(_uuid.toString(), i);
