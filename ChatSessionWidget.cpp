@@ -134,3 +134,25 @@ void ChatSessionWidget::on_saveButton_clicked()
     gSessions->save(currentSessionId());
 }
 
+
+void ChatSessionWidget::on_deleteButton_clicked()
+{
+    // TODO: do not delete the current session (double clicked)
+    // TODO: emit to other tabs
+    auto item = ui->sessionListWidget->currentItem();
+    auto sessionItem = dynamic_cast<chat::SessionItem *>(item);
+    bool deletePermanently = ui->deletePermanentlyBox->isChecked();
+
+    if (!sessionItem) {
+        return;
+    }
+
+    auto sessionId = sessionItem->sessionId();
+
+    qDebug() << "DELETING SESSION" << sessionId;
+    gSessions->deleteSession(sessionId, deletePermanently);
+
+    ui->sessionListWidget->removeItemWidget(item);
+    delete item;
+}
+
