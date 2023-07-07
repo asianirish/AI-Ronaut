@@ -96,6 +96,16 @@
        </widget>
       </item>
       <item>
+       <widget class="QCheckBox" name="deletePermanentlyBox">
+        <property name="toolTip">
+         <string>Are you sure you want to delete this item permanently? This action cannot be undone.</string>
+        </property>
+        <property name="text">
+         <string>Delete permanently</string>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QPushButton" name="deleteButton">
         <property name="text">
          <string>Delete</string>
@@ -127,6 +137,7 @@
   <tabstop>sessionListWidget</tabstop>
   <tabstop>saveAsTextFileButton</tabstop>
   <tabstop>saveButton</tabstop>
+  <tabstop>deletePermanentlyBox</tabstop>
   <tabstop>deleteButton</tabstop>
  </tabstops>
  <resources/>
