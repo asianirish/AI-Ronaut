@@ -5,6 +5,8 @@
 #include <QDebug>
 #include <QDateTime>
 
+#include <QSqlError>
+
 namespace chat {
 
 SessionManager *SessionManager::_instance = nullptr;
@@ -114,7 +116,40 @@ void SessionManager::select()
             }
         }
     }
+}
 
+void SessionManager::deleteSession(const QString &sessionId, bool deletePermanently)
+{
+    auto session = _sessions.value(sessionId);
+    bool isPersistent = session->isPersistent();
+
+    if (!isPersistent || !deletePermanently) {
+        _sessions.remove(sessionId);
+        return;
+    }
+
+    if (deletePermanently) {
+        if (deleteSessionFromDb(sessionId)) {
+            _sessions.remove(sessionId);
+        }
+    }
+}
+
+bool SessionManager::deleteSessionFromDb(const QString &sessionId)
+{
+    // TODO: transaction
+    // TODO: delete messages
+    QSqlQuery query(QSqlDatabase::database());
+    query.prepare("DELETE FROM sessions WHERE uuid=:uuid");
+    query.bindValue(":uuid", sessionId);
+
+    if (!query.exec()) {
+        qDebug() << "Error deleting row by name:" << query.lastQuery() << query.lastError();
+        return false;
+    }
+
+    select();
+    return true;
 }
 
 SessionManager::SessionManager(QObject *parent)

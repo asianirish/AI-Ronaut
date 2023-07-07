@@ -40,8 +40,13 @@ public:
 
     void select();
 
+    void deleteSession(const QString &sessionId, bool deletePermanently);
+
 private:
     OrderedMap<QString, SessionPtr> _sessions;
+
+private:
+    bool deleteSessionFromDb(const QString &sessionId);
 
 signals:
     void sessionCreated(int pageIndex, const QString currentSessionId);
@@ -52,8 +57,6 @@ public slots:
 private:
     explicit SessionManager(QObject *parent = nullptr);
     static SessionManager *_instance;
-
-
 };
 
 } // namespace chat
