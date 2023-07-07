@@ -3,7 +3,7 @@
 namespace oaic {
 
 const double ModelContext::DEFAULT_TEMPERATURE = 0.70;
-const int ModelContext::DEFAULT_MAX_TOKENS = 256;
+const int ModelContext::DEFAULT_MAX_TOKENS = 512;
 const double ModelContext::DEFAULT_TOP_P = 1.;
 const QString ModelContext::DEFAULT_MODEL("gpt-3.5-turbo");
 
