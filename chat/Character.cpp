@@ -140,8 +140,6 @@ bool Character::updateInDb()
 
     qDebug() << "Query execution error: " << query.lastError().text();
     return false;
-
-    return true;
 }
 
 } // namespace chat
