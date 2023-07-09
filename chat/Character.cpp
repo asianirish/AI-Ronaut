@@ -89,6 +89,11 @@ bool Character::save()
     return insertIntoDb();
 }
 
+Character::operator bool() const
+{
+    return (_id != 0) && !_name.isEmpty();
+}
+
 bool Character::insertIntoDb()
 {
     QSqlDatabase db = QSqlDatabase::database();

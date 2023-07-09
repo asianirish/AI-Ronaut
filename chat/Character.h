@@ -33,6 +33,8 @@ public:
 
     bool save();
 
+    operator bool() const;
+
 private:
     int _id;
     QString _name;
