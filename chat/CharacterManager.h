@@ -18,7 +18,7 @@ public:
 
     void select();
 
-    bool insertOrUpdateCharacter(Character &character);
+    bool insertOrUpdateCharacter(Character &character); // TODO: is not called
 
     bool deleteCharacter(int id);
 
