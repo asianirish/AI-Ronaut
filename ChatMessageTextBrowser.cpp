@@ -4,7 +4,7 @@
 
 ChatMessageTextBrowser::ChatMessageTextBrowser(QWidget *parent) : QTextBrowser(parent)
 {
-
+    connect(this, &QTextEdit::selectionChanged, this, &ChatMessageTextBrowser::onSelectionChanged);
 }
 
 void ChatMessageTextBrowser::focusOutEvent(QFocusEvent *e)
@@ -43,6 +43,11 @@ void ChatMessageTextBrowser::contextMenuEvent(QContextMenuEvent *e)
     {
         e->ignore();
     }
+}
+
+void ChatMessageTextBrowser::onSelectionChanged()
+{
+    setReadOnly(false);
 }
 
 chat::MessagePtr ChatMessageTextBrowser::msgPtr() const

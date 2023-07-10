@@ -25,6 +25,9 @@ private:
     chat::MessagePtr _msgPtr;
 signals:
     void readMyTextRequest(const QString &text);
+
+private slots:
+    void onSelectionChanged();
 };
 
 #endif // CHATMESSAGETEXTBROWSER_H
