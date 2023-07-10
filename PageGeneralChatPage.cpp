@@ -27,9 +27,9 @@ PageGeneralChatPage::PageGeneralChatPage(QWidget *parent) :
     // ChatSessionWidget::onSessionCreated connected with chat::SessionManager::sessionCreated
     connect(ui->chatWidget, &ChatWidget::sessionChaged, ui->systemMessageWidget, &SystemMessageWidget::onCurrentSessionChange);
     connect(ui->chatWidget, &ChatWidget::sessionChaged, ui->chatConfigWidget, &ChatConfigWidget::onCurrentSessionChange);
+    connect(ui->chatWidget, &ChatWidget::sessionChaged, this, &PageGeneralChatPage::onCurrentSessionChange); // TODO: for nothing?
 
-    // TODO: for nothing?
-    connect(ui->chatWidget, &ChatWidget::sessionChaged, this, &PageGeneralChatPage::onCurrentSessionChange);
+
 
     // change current session in chatSessionWidget
     connect(ui->chatSessionWidget, &ChatSessionWidget::currentSessionChanged, ui->chatWidget, &ChatWidget::onCurrentSessionChange);
