@@ -49,6 +49,10 @@ private slots:
 
     void on_deleteButton_clicked();
 
+    void onSessionDeleted(int pageIndex, const QString sessionId);
+
+    void on_newSessionButton_clicked();
+
 public slots:
     void onRenameSession(const QString &name);
 

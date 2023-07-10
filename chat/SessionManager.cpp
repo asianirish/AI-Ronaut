@@ -118,6 +118,12 @@ void SessionManager::select()
     }
 }
 
+void SessionManager::deleteSession(int pageIndex, const QString &sessionId, bool deletePermanently)
+{
+    deleteSession(sessionId, deletePermanently);
+    emit sessionDeleted(pageIndex, sessionId);
+}
+
 void SessionManager::deleteSession(const QString &sessionId, bool deletePermanently)
 {
     auto session = _sessions.value(sessionId);

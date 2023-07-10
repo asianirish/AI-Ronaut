@@ -24,6 +24,7 @@ ChatSessionWidget::ChatSessionWidget(QWidget *parent) :
     ui->sessionListWidget->sortItems(Qt::DescendingOrder);
 
     connect(gSessions, &chat::SessionManager::sessionCreated, this, &ChatSessionWidget::onSessionCreated);
+    connect(gSessions, &chat::SessionManager::sessionDeleted, this, &ChatSessionWidget::onSessionDeleted);
 }
 
 ChatSessionWidget::~ChatSessionWidget()
@@ -150,9 +151,35 @@ void ChatSessionWidget::on_deleteButton_clicked()
     auto sessionId = sessionItem->sessionId();
 
     qDebug() << "DELETING SESSION" << sessionId;
-    gSessions->deleteSession(sessionId, deletePermanently);
+    gSessions->deleteSession(pageContext()->pageIndex(), sessionId, deletePermanently);
 
+    // for this page delete from the list immediately
     ui->sessionListWidget->removeItemWidget(item);
     delete item;
+
+    sessionId = gSessions->createSession(pageContext()->pageIndex());
+
+    pageContext()->setCurrentSessionId(sessionId);
+}
+
+void ChatSessionWidget::onSessionDeleted(int pageIndex, const QString sessionId)
+{
+    if (pageIndex != pageContext()->pageIndex()) {
+        auto item = findItemBySessionId(sessionId);
+
+        ui->sessionListWidget->removeItemWidget(item);
+        delete item;
+
+        on_newSessionButton_clicked();
+    }
+}
+
+
+void ChatSessionWidget::on_newSessionButton_clicked()
+{
+    QString sessionId = gSessions->createSession(pageContext()->pageIndex());
+
+    pageContext()->setCurrentSessionId(sessionId);
+// TODO:    emit sessionChaged();
 }
 

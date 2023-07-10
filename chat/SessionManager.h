@@ -40,16 +40,19 @@ public:
 
     void select();
 
-    void deleteSession(const QString &sessionId, bool deletePermanently);
+    void deleteSession(int pageIndex, const QString &sessionId, bool deletePermanently);
 
 private:
     OrderedMap<QString, SessionPtr> _sessions;
 
 private:
+    void deleteSession(const QString &sessionId, bool deletePermanently);
     bool deleteSessionFromDb(const QString &sessionId);
 
 signals:
     void sessionCreated(int pageIndex, const QString currentSessionId);
+    void sessionDeleted(int pageIndex, const QString sessionId);
+
 
 public slots:
     void onQuit();
