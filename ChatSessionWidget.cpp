@@ -151,24 +151,19 @@ void ChatSessionWidget::on_deleteButton_clicked()
     auto sessionId = sessionItem->sessionId();
 
     qDebug() << "DELETING SESSION" << sessionId;
-    gSessions->deleteSession(pageContext()->pageIndex(), sessionId, deletePermanently);
-
-    // for this page delete from the list immediately
-    ui->sessionListWidget->removeItemWidget(item);
-    delete item;
-
-    sessionId = gSessions->createSession(pageContext()->pageIndex());
-
-    pageContext()->setCurrentSessionId(sessionId);
+    gSessions->deleteSession(pageContext()->pageIndex(), sessionId, deletePermanently); 
 }
 
 void ChatSessionWidget::onSessionDeleted(int pageIndex, const QString sessionId)
 {
-    if (pageIndex != pageContext()->pageIndex()) {
-        auto item = findItemBySessionId(sessionId);
+    auto item = findItemBySessionId(sessionId);
 
-        ui->sessionListWidget->removeItemWidget(item);
-        delete item;
+    ui->sessionListWidget->removeItemWidget(item);
+    delete item;
+
+    if (pageContext() &&
+        pageIndex == pageContext()->pageIndex() &&
+        sessionId == pageContext()->currentSessionId()) {
 
         on_newSessionButton_clicked();
     }
