@@ -11,7 +11,11 @@ SessionItem::SessionItem() : QListWidgetItem(nullptr, SESSION_ITEM_TYPE)
 QVariant SessionItem::data(int role) const
 {
     if (role == Qt::DisplayRole) {
-        return session()->name();
+        if (session()) {
+            return session()->name();
+        }
+
+        return _sessionId;
     }
 
     if (role == SessionIdRole) {
@@ -24,6 +28,14 @@ QVariant SessionItem::data(int role) const
 bool SessionItem::operator<(const QListWidgetItem &other) const
 {
     const SessionItem *pOther = dynamic_cast<const SessionItem *>(&other);
+
+    if (!session()) {
+        return true;
+    }
+
+    if (!pOther->session()) {
+        return false;
+    }
 
     if (pOther) {
         return (session()->created() < pOther->session()->created());
@@ -44,7 +56,11 @@ void SessionItem::setSessionId(const QString &newSessinId)
 
 QString SessionItem::name() const
 {
-    return session()->name();
+    if (session()) {
+        return session()->name();
+    }
+
+    return _sessionId;
 }
 
 SessionPtr SessionItem::session() const
