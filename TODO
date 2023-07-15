@@ -3,6 +3,7 @@ TODO:
 * ModelContext per a Session instead ModelContext per a Page
 * One session in two different pages
 * Update messages problem
+* Make PageContext inherit from QObject and emit a signal on session change
 
 DONE:
 

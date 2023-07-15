@@ -3,7 +3,7 @@
 
 #include <QString>
 
-
+// TODO: Make the following class inherit from QObject and emit a signal on session change
 class PageContext
 {
 public:
