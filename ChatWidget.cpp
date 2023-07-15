@@ -30,6 +30,8 @@ ChatWidget::ChatWidget(QWidget *parent) :
 
     addAction(ui->actionDelete_Item);
     addAction(ui->actionEditItem);
+
+    connect(gSessions, &chat::SessionManager::sessionDeleted, this, &ChatWidget::onSessionDeleted);
 }
 
 ChatWidget::~ChatWidget()
@@ -314,5 +316,19 @@ void ChatWidget::on_actionEditItem_triggered()
         }
 
     }
+}
+
+void ChatWidget::onSessionDeleted(int pageIndex, const QString sessionId)
+{
+    qDebug() << pageIndex << "vs." << pageContext()->pageIndex();
+    qDebug() << sessionId << "vs." << pageContext()->currentSessionId();
+    qDebug() << "......................................................";
+
+    // session id can be just created
+    if (pageIndex == pageContext()->pageIndex()) {
+        ui->listWidget->clear();
+        ui->textEdit->setFocus();
+    }
+
 }
 

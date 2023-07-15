@@ -61,6 +61,7 @@ private slots:
 
     void on_actionEditItem_triggered();
 
+    void onSessionDeleted(int pageIndex, const QString sessionId);
 signals:
      // TODO: take a model context from the current session
     void sendCurrentSessionMessages(const oaic::ModelContext &modelCntx);
