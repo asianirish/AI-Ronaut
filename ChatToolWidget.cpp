@@ -47,8 +47,8 @@ void ChatToolWidget::onCurrentSessionChange()
 void ChatToolWidget::onSessionCreatedGeneral(int pageIndex, const QString &sessionId)
 {
     if (_pageContext) {
-        changeSessionId(sessionId);
         if (_pageContext->pageIndex() == pageIndex) {
+            changeSessionId(sessionId);
             synchronizeCurrentSession();
         }
     }
