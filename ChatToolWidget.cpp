@@ -28,7 +28,9 @@ void ChatToolWidget::setPageContext(PageContext *newPageContext)
 {
     _pageContext = newPageContext;
 
-    synchronizeCurrentSession();
+    if (!_pageContext->currentSessionId().isEmpty()) {
+        synchronizeCurrentSession();
+    }
 }
 
 void ChatToolWidget::changeSessionId(const QString &sessionId)
