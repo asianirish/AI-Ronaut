@@ -19,13 +19,15 @@ public:
     void changeSessionId(const QString &sessionId);
 
 protected:
-    virtual void synchronizeCurrentSession() = 0;
+    virtual void synchronizeCurrentSession() = 0; // TODO: rename to onPageSessionSelected
+    virtual void onSessionCreatedSpecific(int pageIndex, const QString &newSessionId) = 0;
 
 private:
     PageContext *_pageContext;
 
 public slots:
     void onCurrentSessionChange();
+    void onSessionCreatedGeneral(int pageIndex, const QString &sessionId); // TODO: rename
 
 signals:
 

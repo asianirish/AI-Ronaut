@@ -63,6 +63,12 @@ void SystemMessageWidget::synchronizeCurrentSession()
     ui->characterBox->setEditText(character.name());
 }
 
+void SystemMessageWidget::onSessionCreatedSpecific(int pageIndex, const QString &newSessionId)
+{
+    // the character will be changed by synchronizeCurrentSession
+    qDebug() << "SystemMessageWidget CREATE SESSION ON PAGE:" << pageIndex << "NEW SESSION:" << newSessionId;
+}
+
 void SystemMessageWidget::showEvent(QShowEvent *event)
 {
     QWidget::showEvent(event);

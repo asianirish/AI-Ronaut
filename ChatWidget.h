@@ -33,6 +33,7 @@ public:
 
 protected:
     void synchronizeCurrentSession() override;
+    void onSessionCreatedSpecific(int pageIndex, const QString &newSessionId) override;
 
 protected:
     void resizeEvent(QResizeEvent *event) override;
@@ -51,8 +52,6 @@ private slots:
 
     void on_newSessionButton_clicked();
 
-    void onSessionCreated(int pageIndex, const QString &sessionId);
-
     void on_abortChatButton_clicked();
 
     void onDeleteItemRequest();
@@ -62,6 +61,7 @@ private slots:
     void on_actionEditItem_triggered();
 
     void onSessionDeleted(int pageIndex, const QString sessionId);
+
 signals:
      // TODO: take a model context from the current session
     void sendCurrentSessionMessages(const oaic::ModelContext &modelCntx);

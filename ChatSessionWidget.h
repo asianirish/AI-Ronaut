@@ -23,6 +23,7 @@ public:
 
 protected:
     void synchronizeCurrentSession() override;
+    void onSessionCreatedSpecific(int pageIndex, const QString &newSessionId) override;
 
 private:
     QModelIndexList findModelIndexesBySessionId(const QString& sessionId);
@@ -33,8 +34,6 @@ signals:
     void currentSessionChanged();
 
 private slots:
-    void onSessionCreated(int pageIndex, const QString &sessionId);
-
     void on_sessionListWidget_itemActivated(QListWidgetItem *item);
 
     void on_sessionListWidget_currentTextChanged(const QString &currentText);

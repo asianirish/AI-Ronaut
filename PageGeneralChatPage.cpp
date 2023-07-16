@@ -13,7 +13,7 @@ PageGeneralChatPage::PageGeneralChatPage(QWidget *parent) :
     ui->setupUi(this);
 
     // good place to create a session
-    auto currentSessionId = gSessions->createSession(pageNumber);
+    auto currentSessionId = gSessions->createSession(pageNumber); // TODO: emits a signal when _pageContex doesn't exist
     _pageContext = new PageContext(pageNumber, currentSessionId);
     pageNumber++;
 
@@ -22,15 +22,7 @@ PageGeneralChatPage::PageGeneralChatPage(QWidget *parent) :
     ui->systemMessageWidget->setPageContext(_pageContext);
     ui->chatConfigWidget->setPageContext(_pageContext);
 
-    // connect sessionChage with onSessionChage
-    // ChatSessionWidget::onSessionChanged does nothing because ChatSessionWidget changes sessions itself
-    // ChatSessionWidget::onSessionCreated connected with chat::SessionManager::sessionCreated
-    connect(ui->chatWidget, &ChatWidget::sessionChaged, ui->systemMessageWidget, &SystemMessageWidget::onCurrentSessionChange);
-    connect(ui->chatWidget, &ChatWidget::sessionChaged, ui->chatConfigWidget, &ChatConfigWidget::onCurrentSessionChange);
-    connect(ui->chatWidget, &ChatWidget::sessionChaged, this, &PageGeneralChatPage::onCurrentSessionChange); // TODO: for nothing?
-
-
-
+    // TODO: connect with PageContext
     // change current session in chatSessionWidget
     connect(ui->chatSessionWidget, &ChatSessionWidget::currentSessionChanged, ui->chatWidget, &ChatWidget::onCurrentSessionChange);
     connect(ui->chatSessionWidget, &ChatSessionWidget::currentSessionChanged, ui->systemMessageWidget, &SystemMessageWidget::onCurrentSessionChange);

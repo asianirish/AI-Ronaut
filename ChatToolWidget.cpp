@@ -1,10 +1,12 @@
 #include "ChatToolWidget.h"
 
+#include "chat/SessionManager.h"
+
 ChatToolWidget::ChatToolWidget(QWidget *parent)
     : QWidget{parent},
     _pageContext(nullptr)
 {
-
+    connect(gSessions, &chat::SessionManager::sessionCreated, this, &ChatToolWidget::onSessionCreatedGeneral);
 }
 
 QString ChatToolWidget::currentSessionId() const
@@ -37,4 +39,16 @@ void ChatToolWidget::changeSessionId(const QString &sessionId)
 void ChatToolWidget::onCurrentSessionChange()
 {
     synchronizeCurrentSession();
+}
+
+void ChatToolWidget::onSessionCreatedGeneral(int pageIndex, const QString &sessionId)
+{
+    if (_pageContext) {
+        changeSessionId(sessionId);
+        if (_pageContext->pageIndex() == pageIndex) {
+            synchronizeCurrentSession();
+        }
+    }
+
+    onSessionCreatedSpecific(pageIndex, sessionId);
 }

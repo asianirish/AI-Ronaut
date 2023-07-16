@@ -40,6 +40,7 @@ void ChatConfigWidget::on_modelComboBox_currentTextChanged(const QString &modelN
     }
 
     if (_modelCntx) {
+        qDebug() << "MODEL NAME:" << modelName;
         _modelCntx->setModelName(modelName);
     }
 
@@ -83,6 +84,12 @@ void ChatConfigWidget::synchronizeCurrentSession()
 {
     qDebug() << "CHAT CONFIG SESSION ID:" << pageContext()->currentSessionId();
     // TODO: copy the model context data from the given session's ModelContext (if _modelCntx exist)
+}
+
+void ChatConfigWidget::onSessionCreatedSpecific(int pageIndex, const QString &newSessionId)
+{
+    // TODO: implement in case of model per session
+    qDebug() << "ChatConfigWidget CREATE SESSION ON PAGE:" << pageIndex << "NEW SESSION:" << newSessionId;
 }
 
 void ChatConfigWidget::on_maxTokensSlider_sliderMoved(int position)

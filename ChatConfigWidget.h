@@ -25,6 +25,7 @@ public:
 
 protected:
     void synchronizeCurrentSession() override;
+    void onSessionCreatedSpecific(int pageIndex, const QString &newSessionId) override;
 
 private slots:
     void on_modelComboBox_currentTextChanged(const QString &modelName);

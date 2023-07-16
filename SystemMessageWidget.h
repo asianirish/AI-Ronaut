@@ -21,6 +21,7 @@ public:
 
 protected:
     void synchronizeCurrentSession() override;
+    void onSessionCreatedSpecific(int pageIndex, const QString &newSessionId) override;
 
 protected:
     void showEvent(QShowEvent *event) override;

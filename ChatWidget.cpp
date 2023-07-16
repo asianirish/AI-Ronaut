@@ -221,8 +221,6 @@ void ChatWidget::setClient(oaic::Manager *newClient)
     connect(_client->chat(), &oaic::Chat::messageResponseStream, this, &ChatWidget::onMessageResponseStream);
     connect(_client->chat(), &oaic::Component::replyDestroyed, this, &ChatWidget::onMessageResponseComplete);
     connect(_client->chat(), &oaic::Component::responseError, this, &ChatWidget::onDeltaError);
-
-    connect(gSessions, &chat::SessionManager::sessionCreated, this, &ChatWidget::onSessionCreated);
 }
 
 void ChatWidget::synchronizeCurrentSession()
@@ -256,6 +254,11 @@ void ChatWidget::synchronizeCurrentSession()
 
 }
 
+void ChatWidget::onSessionCreatedSpecific(int pageIndex, const QString &newSessionId)
+{
+    qDebug() << "ChatWidget CREATE SESSION ON PAGE:" << pageIndex << "NEW SESSION:" << newSessionId;
+}
+
 void ChatWidget::on_newSessionButton_clicked()
 {
     QString sessionId = gSessions->createSession(pageContext()->pageIndex());
@@ -267,13 +270,6 @@ void ChatWidget::on_newSessionButton_clicked()
     ui->textEdit->setFocus();
 
     emit sessionChaged();
-}
-
-void ChatWidget::onSessionCreated(int pageIndex, const QString &sessionId)
-{
-    Q_UNUSED(sessionId);
-    Q_UNUSED(pageIndex);
-    // TODO: NOT every session creation should cause this page current session changing!
 }
 
 void ChatWidget::on_abortChatButton_clicked()

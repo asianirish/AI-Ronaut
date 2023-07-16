@@ -23,8 +23,7 @@ ChatSessionWidget::ChatSessionWidget(QWidget *parent) :
 
     ui->sessionListWidget->sortItems(Qt::DescendingOrder);
 
-    connect(gSessions, &chat::SessionManager::sessionCreated, this, &ChatSessionWidget::onSessionCreated);
-    connect(gSessions, &chat::SessionManager::sessionDeleted, this, &ChatSessionWidget::onSessionDeleted);
+    connect(gSessions, &chat::SessionManager::sessionDeleted, this, &ChatSessionWidget::onSessionDeleted); // TODO: only in the ChatToolWidget constructor
 }
 
 ChatSessionWidget::~ChatSessionWidget()
@@ -36,6 +35,27 @@ void ChatSessionWidget::synchronizeCurrentSession()
 {
     qDebug() << "CHAT SESSION SESSION ID:" << pageContext()->currentSessionId();
     qWarning() << "ChatSessionWidget::synchronize should not be called (?)";
+}
+
+void ChatSessionWidget::onSessionCreatedSpecific(int pageIndex, const QString &newSessionId)
+{
+    auto session = gSessions->session(newSessionId);
+
+    if (!session) {
+        return;
+    }
+
+    chat::SessionItem *item = new chat::SessionItem();
+    item->setSessionId(session->id());
+
+    if (pageContext() && pageContext()->pageIndex() != pageIndex) {
+        ui->sessionListWidget->addItem(item);
+        ui->sessionListWidget->sortItems(Qt::DescendingOrder);
+    } else {
+        ui->sessionListWidget->insertItem(0, item);
+        ui->sessionListWidget->sortItems(Qt::DescendingOrder);
+        ui->sessionListWidget->setCurrentItem(item);
+    }
 }
 
 QModelIndexList ChatSessionWidget::findModelIndexesBySessionId(const QString &sessionId)
@@ -51,24 +71,6 @@ chat::SessionItem* ChatSessionWidget::findItemBySessionId(const QString &session
         return static_cast<chat::SessionItem*>(ui->sessionListWidget->itemFromIndex(indexes.first()));
     }
     return nullptr;
-}
-
-void ChatSessionWidget::onSessionCreated(int pageIndex, const QString &sessionId)
-{
-    // TODO: NOT every session creation should cause this page current session changing!
-    auto session = gSessions->session(sessionId);
-
-    chat::SessionItem *item = new chat::SessionItem();
-    item->setSessionId(session->id());
-
-    if (pageContext() && pageContext()->pageIndex() != pageIndex) {
-        ui->sessionListWidget->addItem(item);
-        ui->sessionListWidget->sortItems(Qt::DescendingOrder);
-    } else {
-        ui->sessionListWidget->insertItem(0, item);
-        ui->sessionListWidget->sortItems(Qt::DescendingOrder);
-        ui->sessionListWidget->setCurrentItem(item);
-    }
 }
 
 void ChatSessionWidget::on_sessionListWidget_itemActivated(QListWidgetItem *item)
