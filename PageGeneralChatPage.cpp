@@ -12,15 +12,21 @@ PageGeneralChatPage::PageGeneralChatPage(QWidget *parent) :
 
     ui->setupUi(this);
 
-    // good place to create a session
-    auto currentSessionId = gSessions->createSession(pageNumber); // TODO: emits a signal when _pageContex doesn't exist
-    _pageContext = new PageContext(pageNumber, currentSessionId);
-    pageNumber++;
-
+    _pageContext = new PageContext(pageNumber);
     ui->chatWidget->setPageContext(_pageContext);
     ui->chatSessionWidget->setPageContext(_pageContext);
     ui->systemMessageWidget->setPageContext(_pageContext);
     ui->chatConfigWidget->setPageContext(_pageContext);
+
+    // good place to create a session
+    auto currentSessionId = gSessions->createSession(pageNumber);
+    _pageContext->setCurrentSessionId(currentSessionId);
+
+    // synchronization with the newly created and empty session is not required
+
+    pageNumber++;
+
+
 
     // TODO: connect with PageContext
     // change current session in chatSessionWidget

@@ -11,6 +11,7 @@ public:
     PageContext(const PageContext &) = delete;
 
     PageContext(int pageIndex, const QString &sessionId);
+    PageContext(int pageIndex);
 
     int pageIndex() const;
 

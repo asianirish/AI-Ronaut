@@ -9,6 +9,11 @@ PageContext::PageContext(int pageIndex, const QString &sessionId) :
 
 }
 
+PageContext::PageContext(int pageIndex) : PageContext(pageIndex, QString())
+{
+
+}
+
 int PageContext::pageIndex() const
 {
     return _pageIndex;

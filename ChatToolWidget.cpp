@@ -28,6 +28,7 @@ void ChatToolWidget::setPageContext(PageContext *newPageContext)
 {
     _pageContext = newPageContext;
 
+    // synchronization with the newly created and empty session is not required
     if (!_pageContext->currentSessionId().isEmpty()) {
         synchronizeCurrentSession();
     }
