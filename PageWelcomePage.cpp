@@ -27,7 +27,7 @@ PageWelcomePage::PageWelcomePage(QWidget *parent) :
     ui->activityComboBox->addItem(tr("General сhat сonversation"), CHAT_ACTION);
     ui->activityComboBox->addItem(tr("Image generation"), IMAGE_ACTION);
 //    ui->activityComboBox->addItem(tr("Educational Chat Conversation")); // TODO: second arg
-    ui->activityComboBox->addItem(tr("Writing a plot"), PLOT_ACTION);
+//    ui->activityComboBox->addItem(tr("Writing a plot"), PLOT_ACTION);
 
     ui->activityComboBox->addItem(tr("Network Configuration"), NETWORK_CONFIG_ACTION);
     ui->activityComboBox->addItem(tr("Donate"), DONATE_ACTION);
