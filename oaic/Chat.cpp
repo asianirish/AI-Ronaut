@@ -229,7 +229,7 @@ void Chat::handleResponse(const QString &response)
 
 void Chat::handleResponseStream(const QString &response)
 {
-//    qDebug() << "stream:" << response;
+    qDebug() << "stream:" << response;
 
     QStringList messages;
 

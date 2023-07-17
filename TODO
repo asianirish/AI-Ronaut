@@ -2,6 +2,11 @@ TODO:
 
 * ModelContext per a Session instead ModelContext per a Page
 * One session in two different pages
+* Response problem. Parsing error for the string:
+
+stream: "data: {\"warning\":\"This model version is deprecated and a newer version 'gpt-3.5-turbo-0613' is available. Migrate before September 13 to avoid disruption of service. Learn more https://platform.openai.com/docs/deprecations\",\"id\":\"chatcmpl-7dPqYfQ82S9q9nqZDjsxWzBMTBk1S\",\"object\":\"chat.completion.chunk\",\"created\":1689628502,\"model\":\"gpt-3.5-turbo-0301\",\"choices\":[{\"index\":0,\"delta\":{\"role\":\"assistant\",\"content\":\"\"},\"finish_reason\":null}]}\n\ndata: {\"warning\":\"This model version is deprecated and a newer version 'gpt-3.5-turbo-0613' is available. Migrate before September 13 to avoid disruption of service. Learn mor"
+
+stream: "e https://platform.openai.com/docs/deprecations\",\"id\":\"chatcmpl-7dPqYfQ82S9q9nqZDjsxWzBMTBk1S\",\"object\":\"chat.completion.chunk\",\"created\":1689628502,\"model\":\"gpt-3.5-turbo-0301\",\"choices\":[{\"index\":0,\"delta\":{\"content\":\"Hello\"},\"finish_reason\":null}]}\n\n"
 
 DONE:
 
