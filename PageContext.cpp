@@ -2,14 +2,8 @@
 
 #include <QDebug>
 
-PageContext::PageContext(int pageIndex, const QString &sessionId) :
-    _pageIndex(pageIndex),
-    _currentSessionId(sessionId)
-{
 
-}
-
-PageContext::PageContext(int pageIndex) : PageContext(pageIndex, QString())
+PageContext::PageContext(int pageIndex) : _pageIndex(pageIndex)
 {
 
 }
@@ -26,9 +20,8 @@ QString PageContext::currentSessionId() const
 
 void PageContext::setCurrentSessionId(const QString &newCurrentSessionId)
 {
-    // Debug
-    if (_pageIndex == 1) {
-        qDebug() << "...........................PAGE1 SESSION" << newCurrentSessionId;
+    if (_currentSessionId != newCurrentSessionId) {
+        _currentSessionId = newCurrentSessionId;
+        emit currentSessionChanged();
     }
-    _currentSessionId = newCurrentSessionId;
 }

@@ -31,7 +31,7 @@ private:
     chat::SessionItem *findItemBySessionId(const QString& sessionId);
 
 signals:
-    void currentSessionChanged();
+
 
 private slots:
     void on_sessionListWidget_itemActivated(QListWidgetItem *item);

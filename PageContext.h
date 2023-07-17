@@ -1,16 +1,17 @@
 #ifndef PAGECONTEXT_H
 #define PAGECONTEXT_H
 
+#include <QObject>
 #include <QString>
 
-// TODO: Make the following class inherit from QObject and emit a signal on session change
-class PageContext
+
+class PageContext : public QObject
 {
+    Q_OBJECT
 public:
     PageContext() = delete;
     PageContext(const PageContext &) = delete;
 
-    PageContext(int pageIndex, const QString &sessionId);
     PageContext(int pageIndex);
 
     int pageIndex() const;
@@ -21,6 +22,9 @@ public:
 private:
     int _pageIndex;
     QString _currentSessionId;
+
+signals:
+    void currentSessionChanged();
 };
 
 #endif // PAGECONTEXT_H

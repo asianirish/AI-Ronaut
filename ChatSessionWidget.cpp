@@ -80,8 +80,7 @@ void ChatSessionWidget::on_sessionListWidget_itemActivated(QListWidgetItem *item
     if (sessionItem) {
         auto sessionId = sessionItem->sessionId();
         qDebug() << "SESSION NAME:" << sessionItem->name() << sessionId;
-        changeSessionId(sessionId);
-        emit currentSessionChanged();
+        changeSessionId(sessionId); // emits currentSessionChanged
     }
 }
 

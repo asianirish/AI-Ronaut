@@ -27,11 +27,7 @@ PageContext *ChatToolWidget::pageContext() const
 void ChatToolWidget::setPageContext(PageContext *newPageContext)
 {
     _pageContext = newPageContext;
-
-    // synchronization with the newly created and empty session is not required
-    if (!_pageContext->currentSessionId().isEmpty()) {
-        synchronizeCurrentSession();
-    }
+    connect(_pageContext, &PageContext::currentSessionChanged, this, &ChatToolWidget::onCurrentSessionChange);
 }
 
 void ChatToolWidget::changeSessionId(const QString &sessionId)

@@ -26,14 +26,6 @@ PageGeneralChatPage::PageGeneralChatPage(QWidget *parent) :
 
     pageNumber++;
 
-
-
-    // TODO: connect with PageContext
-    // change current session in chatSessionWidget
-    connect(ui->chatSessionWidget, &ChatSessionWidget::currentSessionChanged, ui->chatWidget, &ChatWidget::onCurrentSessionChange);
-    connect(ui->chatSessionWidget, &ChatSessionWidget::currentSessionChanged, ui->systemMessageWidget, &SystemMessageWidget::onCurrentSessionChange);
-    connect(ui->chatSessionWidget, &ChatSessionWidget::currentSessionChanged, ui->chatConfigWidget, &ChatConfigWidget::onCurrentSessionChange);
-
     // connection between widgets
     connect(ui->chatWidget, &ChatWidget::renameSession, ui->chatSessionWidget, &ChatSessionWidget::onRenameSession);
 
