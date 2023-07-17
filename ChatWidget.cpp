@@ -85,7 +85,20 @@ void ChatWidget::on_sendButton_clicked()
     if (ui->listWidget->count() <= 2) {
         auto camelInput = potato_util::phraseToCamelCase(input, 7);
         camelInput = camelInput.left(64);
-        emit renameSession(camelInput);
+
+        auto sessionId = pageContext()->currentSessionId();
+        auto session = gSessions->session(sessionId);
+        auto characterName = session->character().name();
+
+        QString sessionName;
+        if (!characterName.isEmpty()) {
+            characterName = potato_util::phraseToCamelCase(characterName, 7);
+            sessionName = characterName + "_";
+        }
+
+        sessionName += camelInput;
+
+        emit renameSession(sessionName);
     }
 
     enableOrDisableControls(true);
