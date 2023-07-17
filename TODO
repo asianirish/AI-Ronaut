@@ -3,7 +3,6 @@ TODO:
 * ModelContext per a Session instead ModelContext per a Page
 * One session in two different pages
 * Make PageContext inherit from QObject and emit a signal on session change
-* createSession emits a signal when _pageContex doesn't exist (see PageGeneralChatPage::PageGeneralChatPage)
 
 DONE:
 
@@ -27,6 +26,7 @@ DONE:
 * Do not select a new session if a session has already been created on another page
 * The menu leads to a loss of focus and, as a result, the loss of the ability to edit (in ChatSessionItem)
 * Rename role as AssistantRole to Character or Bot
+* createSession emits a signal when _pageContex doesn't exist (see PageGeneralChatPage::PageGeneralChatPage)
 
 CANCELED:
-* Update messages problem (Whate a problem?)
+* Update messages problem (What a problem?)
