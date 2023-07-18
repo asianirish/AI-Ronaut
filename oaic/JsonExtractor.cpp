@@ -8,6 +8,11 @@ JsonExtractor::JsonExtractor() : _isComplete(true)
 QStringList JsonExtractor::parse(const QString &input, bool &isComplete)
 {
     _buffer += input;
+
+    if (_buffer != input) {
+        qDebug() << "2. BUFFER:" << _buffer;
+    }
+
     isComplete = true;
 
     QStringList potentialJsons = extractJSON(_buffer);
@@ -18,9 +23,11 @@ QStringList JsonExtractor::parse(const QString &input, bool &isComplete)
         QJsonDocument::fromJson(potentialJson.toUtf8(), &parseError);
 
         if (parseError.error == QJsonParseError::NoError) {
+            qDebug() << "JSON IS OK:" << potentialJson;
             parsedJsons.append(potentialJson);
         }
         else {
+            qDebug() << "1. BUFFER:" << _buffer;
             isComplete = false;
             break;
         }

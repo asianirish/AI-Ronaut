@@ -195,7 +195,7 @@ void Chat::handleResponse(const QString &response)
 
 void Chat::handleResponseStream(const QString &response)
 {
-    qDebug() << "stream:" << response;
+    qDebug() << "\nstream:" << response;
 
     QStringList messages;
 
@@ -209,7 +209,7 @@ void Chat::handleResponseStream(const QString &response)
 
     for (auto &jsonStr : jsons) {
         QStringList deltas = extractMessages(jsonStr, "delta");
-//        qDebug().noquote() << "JSON STRING:" << deltas;
+        qDebug().noquote() << "JSON STRING:" << deltas;
         if (!deltas.isEmpty()) {
             messages.append(deltas);
         }
