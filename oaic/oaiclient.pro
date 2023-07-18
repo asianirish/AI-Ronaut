@@ -11,6 +11,7 @@ SOURCES += \
         Chat.cpp \
         Component.cpp \
         Image.cpp \
+        JsonExtractor.cpp \
         Manager.cpp \
         ModelContext.cpp \
         Models.cpp \
@@ -29,6 +30,7 @@ HEADERS += \
     Chat.h \
     Component.h \
     Image.h \
+    JsonExtractor.h \
     Manager.h \
     ModelContext.h \
     Models.h \

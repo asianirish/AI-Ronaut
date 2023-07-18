@@ -48,6 +48,7 @@ SOURCES += \
     oaic/Chat.cpp \
     oaic/Component.cpp \
     oaic/Image.cpp \
+    oaic/JsonExtractor.cpp \
     oaic/Manager.cpp \
     oaic/ModelContext.cpp \
     oaic/Models.cpp \
@@ -90,6 +91,7 @@ HEADERS += \
     oaic/Chat.h \
     oaic/Component.h \
     oaic/Image.h \
+    oaic/JsonExtractor.h \
     oaic/Manager.h \
     oaic/ModelContext.h \
     oaic/Models.h \

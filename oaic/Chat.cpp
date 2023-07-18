@@ -233,7 +233,13 @@ void Chat::handleResponseStream(const QString &response)
 
     QStringList messages;
 
-    auto jsons = extractJSON(response);
+    bool ok = false;
+
+    auto jsons = _jx.parse(response, ok);
+
+    if (!ok) {
+        return;
+    }
 
     for (auto &jsonStr : jsons) {
         QStringList deltas = extractMessages(jsonStr, "delta");

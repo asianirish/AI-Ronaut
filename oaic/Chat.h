@@ -5,6 +5,8 @@
 #include "MsgData.h"
 #include "ModelContext.h"
 
+#include "JsonExtractor.h"
+
 #include <QList>
 
 namespace oaic {
@@ -39,6 +41,9 @@ private slots:
 signals:
     void messageResponse(const QStringList &messages);
     void messageResponseStream(const QStringList &messages);
+
+private:
+    JsonExtractor _jx;
 };
 
 } // namespace oaic

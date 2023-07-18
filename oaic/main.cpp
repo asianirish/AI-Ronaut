@@ -60,10 +60,10 @@ int main(int argc, char *argv[])
 //    TestImageConsumer *consumer = new TestImageConsumer();
 //    consumer->requestImage();
 
-//    TestChatConsumer *consumer = new TestChatConsumer();
-//    consumer->requestChat();
+    TestChatConsumer *consumer = new TestChatConsumer();
+    consumer->requestChat();
 
-    setModelListRequest();
+//    setModelListRequest();
 
 //    sendImgRequest();
 //    sendChatRequest();
