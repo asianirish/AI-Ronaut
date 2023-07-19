@@ -16,6 +16,9 @@ public:
 private:
     QStringList extractJSON(const QString& input);
 
+     //TODO: does not take into account that "data:" can be a part of chunks
+    QStringList extractNotOnlyJSON(const QString& input);
+
 private:
     QString _buffer;
     bool _isComplete;

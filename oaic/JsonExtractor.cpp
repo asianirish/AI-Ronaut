@@ -9,13 +9,9 @@ QStringList JsonExtractor::parse(const QString &input, bool &isComplete)
 {
     _buffer += input;
 
-    if (_buffer != input) {
-        qDebug() << "2. BUFFER:" << _buffer;
-    }
-
     isComplete = true;
 
-    QStringList potentialJsons = extractJSON(_buffer);
+    QStringList potentialJsons = extractNotOnlyJSON(_buffer);
     QStringList parsedJsons;
 
     for (auto const& potentialJson : potentialJsons) {
@@ -23,12 +19,12 @@ QStringList JsonExtractor::parse(const QString &input, bool &isComplete)
         QJsonDocument::fromJson(potentialJson.toUtf8(), &parseError);
 
         if (parseError.error == QJsonParseError::NoError) {
-            qDebug() << "JSON IS OK:" << potentialJson;
             parsedJsons.append(potentialJson);
         }
         else {
-            qDebug() << "1. BUFFER:" << _buffer;
-            isComplete = false;
+            if (potentialJson != "[DONE]") { // TODO: const
+                isComplete = false;
+            }
             break;
         }
     }
@@ -73,5 +69,16 @@ QStringList JsonExtractor::extractJSON(const QString &input)
         }
     }
     return jsons;
+}
+
+QStringList JsonExtractor::extractNotOnlyJSON(const QString &input)
+{
+    QStringList chunks = input.split("data:", Qt::SkipEmptyParts);
+
+    for (QString &chunk : chunks) {
+        chunk = chunk.trimmed();
+    }
+
+    return chunks;
 }
 
