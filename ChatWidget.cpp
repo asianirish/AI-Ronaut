@@ -335,7 +335,11 @@ void ChatWidget::onSessionDeleted(int pageIndex, const QString sessionId)
 
     // session id can be just created
     if (pageIndex == pageContext()->pageIndex()) {
-        ui->listWidget->clear();
+
+        if (sessionId == pageContext()->currentSessionId()) {
+            ui->listWidget->clear();
+        }
+
         ui->textEdit->setFocus();
     }
 
