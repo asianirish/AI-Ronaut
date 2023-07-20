@@ -15,6 +15,7 @@ const QString PageWelcomePage::PLOT_ACTION("plot");
 const QString PageWelcomePage::NETWORK_CONFIG_ACTION("network");
 const QString PageWelcomePage::DONATE_ACTION("donate");
 const QString PageWelcomePage::ABOUT_ACTION("about");
+const QString PageWelcomePage::PLUGINS_ACTION("plugins");
 
 PageWelcomePage::PageWelcomePage(QWidget *parent) :
     PageWidget(parent),
@@ -23,6 +24,7 @@ PageWelcomePage::PageWelcomePage(QWidget *parent) :
     ui->setupUi(this);
 
     ui->networkConfigWidget->setVisible(false);
+    ui->pluginListWidget->setVisible(false);
 
     ui->activityComboBox->addItem(tr("General сhat сonversation"), CHAT_ACTION);
     ui->activityComboBox->addItem(tr("Image generation"), IMAGE_ACTION);
@@ -30,6 +32,8 @@ PageWelcomePage::PageWelcomePage(QWidget *parent) :
 //    ui->activityComboBox->addItem(tr("Writing a plot"), PLOT_ACTION);
 
     ui->activityComboBox->addItem(tr("Network Configuration"), NETWORK_CONFIG_ACTION);
+    ui->activityComboBox->addItem(tr("Plugins"), PLUGINS_ACTION);
+
     ui->activityComboBox->addItem(tr("Donate"), DONATE_ACTION);
     ui->activityComboBox->addItem(tr("About"), ABOUT_ACTION);
 
@@ -127,6 +131,10 @@ void PageWelcomePage::openAction(const QString &actionData)
         emit openPlotAction();
     } else if (actionData == NETWORK_CONFIG_ACTION) {
         ui->networkConfigWidget->setVisible(true);
+        ui->pluginListWidget->setVisible(false);
+    } else if (actionData == PLUGINS_ACTION) {
+        ui->pluginListWidget->setVisible(true);
+        ui->networkConfigWidget->setVisible(false);
     }
 }
 

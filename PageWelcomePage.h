@@ -21,6 +21,8 @@ public:
     static const QString DONATE_ACTION;
     static const QString ABOUT_ACTION;
 
+    static const QString PLUGINS_ACTION;
+
 
     explicit PageWelcomePage(QWidget *parent = nullptr);
     ~PageWelcomePage();
