@@ -81,6 +81,39 @@ background-color: rgb(255, 255, 240);</string>
       <property name="verticalSpacing">
        <number>24</number>
       </property>
+      <item row="6" column="0">
+       <spacer name="verticalSpacer">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>40</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item row="2" column="2">
+       <spacer name="horizontalSpacer_2">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item row="3" column="0" colspan="2">
+       <widget class="Line" name="line">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+      </item>
       <item row="2" column="0">
        <widget class="QComboBox" name="activityComboBox">
         <property name="minimumSize">
@@ -91,6 +124,23 @@ background-color: rgb(255, 255, 240);</string>
         </property>
         <property name="focusPolicy">
          <enum>Qt::StrongFocus</enum>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0" colspan="2">
+       <widget class="QLabel" name="label_2">
+        <property name="text">
+         <string>Choose an activity to open:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="0" colspan="2">
+       <widget class="NetworkConfiWidget" name="networkConfigWidget" native="true">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>40</height>
+         </size>
         </property>
        </widget>
       </item>
@@ -107,46 +157,13 @@ background-color: rgb(255, 255, 240);</string>
         </property>
        </widget>
       </item>
-      <item row="2" column="2">
-       <spacer name="horizontalSpacer_2">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
+      <item row="5" column="0" colspan="2">
+       <widget class="PluginListWidget" name="pluginListWidget" native="true">
+        <property name="minimumSize">
          <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item row="5" column="0">
-       <spacer name="verticalSpacer">
-        <property name="orientation">
-         <enum>Qt::Vertical</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>20</width>
+          <width>0</width>
           <height>40</height>
          </size>
-        </property>
-       </spacer>
-      </item>
-      <item row="1" column="0" colspan="2">
-       <widget class="QLabel" name="label_2">
-        <property name="text">
-         <string>Choose an activity to open:</string>
-        </property>
-       </widget>
-      </item>
-      <item row="4" column="0" colspan="2">
-       <widget class="NetworkConfiWidget" name="networkConfigWidget" native="true"/>
-      </item>
-      <item row="3" column="0" colspan="2">
-       <widget class="Line" name="line">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
         </property>
        </widget>
       </item>
@@ -160,6 +177,12 @@ background-color: rgb(255, 255, 240);</string>
    <class>NetworkConfiWidget</class>
    <extends>QWidget</extends>
    <header>NetworkConfiWidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>PluginListWidget</class>
+   <extends>QWidget</extends>
+   <header>PluginListWidget.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

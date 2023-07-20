@@ -31,6 +31,7 @@ SOURCES += \
     PagePlotPage.cpp \
     PageWelcomePage.cpp \
     PageWidget.cpp \
+    PluginListWidget.cpp \
     SystemMessageWidget.cpp \
     UserMessageItemWidget.cpp \
     chat/AssistantMessage.cpp \
@@ -76,6 +77,7 @@ HEADERS += \
     PagePlotPage.h \
     PageWelcomePage.h \
     PageWidget.h \
+    PluginListWidget.h \
     SystemMessageWidget.h \
     UserMessageItemWidget.h \
     chat/AssistantMessage.h \
@@ -113,6 +115,7 @@ FORMS += \
     PageImagePage.ui \
     PagePlotPage.ui \
     PageWelcomePage.ui \
+    PluginListWidget.ui \
     SystemMessageWidget.ui \
     UserMessageItemWidget.ui
 
