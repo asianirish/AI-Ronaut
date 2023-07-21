@@ -36,9 +36,31 @@ UI_DIR = $$OBJECTS_DIR/ui
 
 
 SOURCES += \
+    ../oaic/Auth.cpp \
+    ../oaic/Chat.cpp \
+    ../oaic/Component.cpp \
+    ../oaic/Image.cpp \
+    ../oaic/JsonExtractor.cpp \
+    ../oaic/Manager.cpp \
+    ../oaic/ModelContext.cpp \
+    ../oaic/Models.cpp \
+    ../oaic/MsgData.cpp \
+    ../oaic/TestChatConsumer.cpp \
+    ../oaic/TestImageConsumer.cpp \
     RootObject.cpp
 
 HEADERS += \
+    ../oaic/Auth.h \
+    ../oaic/Chat.h \
+    ../oaic/Component.h \
+    ../oaic/Image.h \
+    ../oaic/JsonExtractor.h \
+    ../oaic/Manager.h \
+    ../oaic/ModelContext.h \
+    ../oaic/Models.h \
+    ../oaic/MsgData.h \
+    ../oaic/TestChatConsumer.h \
+    ../oaic/TestImageConsumer.h \
     ../plg/IRootObject.h \
     RootObject.h
 
