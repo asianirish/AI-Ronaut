@@ -37,23 +37,25 @@ bool maybeCreateDb() {
         return false;
     }
 
-    if (!query.exec("SELECT COUNT(*) FROM characters")) {
-        qDebug() << "error checking characters count:" << query.lastError().text();
-        return false;
-    }
-
-    int rowCount = 0;
-    if (query.next()) {
-        rowCount = query.value(0).toInt();
-    }
-
-    if (rowCount == 0) {
-        if (!query.exec("INSERT INTO characters ('name', 'message') "
-                        "VALUES('Margaret Bigley', "
-                        "'exceptional mathematics professor renowned for your ability "
-                        "to articulate complex material in a comprehensible and engaging manner')")) {
-            qDebug() << "error creating a character:" << query.lastError().text();
+    {
+        if (!query.exec("SELECT COUNT(*) FROM characters")) {
+            qDebug() << "error checking characters count:" << query.lastError().text();
             return false;
+        }
+
+        int rowCount = 0;
+        if (query.next()) {
+            rowCount = query.value(0).toInt();
+        }
+
+        if (rowCount == 0) {
+            if (!query.exec("INSERT INTO characters ('name', 'message') "
+                            "VALUES('Margaret Bigley', "
+                            "'exceptional mathematics professor renowned for your ability "
+                            "to articulate complex material in a comprehensible and engaging manner')")) {
+                qDebug() << "error creating a character:" << query.lastError().text();
+                return false;
+            }
         }
     }
 
@@ -80,6 +82,36 @@ bool maybeCreateDb() {
                     ")")) {
         qDebug() << "error creating messages:" << query.lastError().text();
         return false;
+    }
+
+    if (!query.exec("CREATE TABLE IF NOT EXISTS plugins ("
+                    "id INTEGER PRIMARY KEY AUTOINCREMENT, "
+                    "name VARCHAR(64) NOT NULL UNIQUE, "
+                    "author TEXT NOT NULL "
+                    ")")) {
+        qDebug() << "error creating plugins:" << query.lastError().text();
+        return false;
+    }
+
+    {
+        if (!query.exec("SELECT COUNT(*) FROM plugins")) {
+            qDebug() << "error checking characters count:" << query.lastError().text();
+            return false;
+        }
+
+        int rowCount = 0;
+        if (query.next()) {
+            rowCount = query.value(0).toInt();
+        }
+
+        if (rowCount == 0) {
+            if (!query.exec("INSERT INTO plugins ('name', 'author') "
+                            "VALUES('ExamplePlugin', "
+                            "'asianirish@gmail.com')")) {
+                qDebug() << "error creating a plugin:" << query.lastError().text();
+                return false;
+            }
+        }
     }
 
     qDebug() << "db success";
