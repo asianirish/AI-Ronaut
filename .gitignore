@@ -6,3 +6,4 @@ plg/*.dll
 plg/lib*.a
 ai-ronaut.db
 ai-ronaut_client*
+*.log
