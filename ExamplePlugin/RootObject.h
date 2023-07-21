@@ -14,6 +14,8 @@ public:
 
     void doIt() const;
 
+    PageWidget *createPageWidget(QWidget *parent) const;
+
 signals:
 
 };

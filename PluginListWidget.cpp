@@ -1,12 +1,6 @@
 #include "PluginListWidget.h"
 #include "ui_PluginListWidget.h"
 
-#include "plg/IRootObject.h"
-
-#include <QGenericPlugin>
-#include <QPluginLoader>
-#include <QDir>
-
 PluginListWidget::PluginListWidget(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::PluginListWidget)
@@ -22,18 +16,20 @@ PluginListWidget::~PluginListWidget()
 void PluginListWidget::on_openPluginButton_clicked()
 {
 //    qDebug() << "CURRENT PATH:" << QCoreApplication::applicationDirPath();
-#ifdef Q_OS_WIN
-    QPluginLoader pluginLoader("plg/ExamplePlugin.dll");
-#elif defined(Q_OS_LINUX)
-    QPluginLoader pluginLoader("plg/ExamplePlugin.so");
-#endif
 
-    QObject *plugin = pluginLoader.instance();
+//#ifdef Q_OS_WIN
+//    QPluginLoader pluginLoader("plg/ExamplePlugin.dll");
+//#elif defined(Q_OS_LINUX)
+//    QPluginLoader pluginLoader("plg/ExamplePlugin.so");
+//#endif
 
-    IRootObject* rootObject = qobject_cast<IRootObject *>(plugin);
+//    QObject *plugin = pluginLoader.instance();
 
-    if (rootObject) {
-        rootObject->doIt();
-    }
+//    IRootObject* rootObject = qobject_cast<IRootObject *>(plugin);
+
+//    if (rootObject) {
+//        rootObject->doIt();
+//    }
+    emit openExamplePlugin();
 }
 

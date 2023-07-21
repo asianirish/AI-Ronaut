@@ -36,6 +36,7 @@ UI_DIR = $$OBJECTS_DIR/ui
 
 
 SOURCES += \
+    ../PageWidget.cpp \
     ../oaic/Auth.cpp \
     ../oaic/Chat.cpp \
     ../oaic/Component.cpp \
@@ -47,9 +48,11 @@ SOURCES += \
     ../oaic/MsgData.cpp \
     ../oaic/TestChatConsumer.cpp \
     ../oaic/TestImageConsumer.cpp \
+    ExamplePluginPageWidget.cpp \
     RootObject.cpp
 
 HEADERS += \
+    ../PageWidget.h \
     ../oaic/Auth.h \
     ../oaic/Chat.h \
     ../oaic/Component.h \
@@ -62,6 +65,7 @@ HEADERS += \
     ../oaic/TestChatConsumer.h \
     ../oaic/TestImageConsumer.h \
     ../plg/IRootObject.h \
+    ExamplePluginPageWidget.h \
     RootObject.h
 
 DISTFILES += ExamplePlugin.json
@@ -71,3 +75,6 @@ unix {
     target.path = $$[QT_INSTALL_PLUGINS]/generic
 }
 !isEmpty(target.path): INSTALLS += target
+
+FORMS += \
+    ExamplePluginPageWidget.ui

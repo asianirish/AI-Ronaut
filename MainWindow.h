@@ -26,6 +26,8 @@ private slots:
     void onOpenPlot();
     void on_tabWidget_tabCloseRequested(int index);
 
+    void onOpenExamplPlugin();
+
 private:
     Ui::MainWindow *ui;
 };

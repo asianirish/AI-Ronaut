@@ -10,10 +10,12 @@ class PluginListWidget;
 class PluginListWidget : public QWidget
 {
     Q_OBJECT
-
 public:
     explicit PluginListWidget(QWidget *parent = nullptr);
     ~PluginListWidget();
+
+signals:
+    void openExamplePlugin();
 
 private slots:
     void on_openPluginButton_clicked();

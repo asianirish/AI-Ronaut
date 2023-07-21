@@ -43,6 +43,8 @@ signals:
     void openPlotAction();
 //    void openNetworkConfigAction();
 
+    void openExamplePluginAction();
+
 protected:
     void synchronizeClient(oaic::Manager *_client) override;
 

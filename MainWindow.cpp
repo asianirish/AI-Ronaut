@@ -7,9 +7,14 @@
 
 #include "NetworkConfiWidget.h"
 
+#include "plg/IRootObject.h"
+
 #include "ui_MainWindow.h"
 
 #include <QMessageBox>
+#include <QGenericPlugin>
+#include <QPluginLoader>
+#include <QDir>
 
 
 MainWindow::MainWindow(QWidget *parent)
@@ -29,6 +34,8 @@ MainWindow::MainWindow(QWidget *parent)
     connect(welcomePage, &PageWelcomePage::openAboutAction, this, &MainWindow::onOpenAbout);
     connect(welcomePage, &PageWelcomePage::openPlotAction, this, &MainWindow::onOpenPlot);
 //    connect(welcomePage, &PageWelcomePage::openNetworkConfigAction, this, &MainWindow::onOpenNetworkConfig);
+
+    connect(welcomePage, &PageWelcomePage::openExamplePluginAction, this, &MainWindow::onOpenExamplPlugin);
 }
 
 MainWindow::~MainWindow()
@@ -87,6 +94,26 @@ void MainWindow::on_tabWidget_tabCloseRequested(int index)
 
     if (welcomeWidget == nullptr) {
         ui->tabWidget->removeTab(index);
+    }
+}
+
+void MainWindow::onOpenExamplPlugin()
+{
+#ifdef Q_OS_WIN
+    QPluginLoader pluginLoader("plg/ExamplePlugin.dll");
+#elif defined(Q_OS_LINUX)
+    QPluginLoader pluginLoader("plg/ExamplePlugin.so");
+#endif
+
+    QObject *plugin = pluginLoader.instance();
+
+    IRootObject* rootObject = qobject_cast<IRootObject *>(plugin);
+
+    if (rootObject) {
+//        rootObject->doIt();
+        auto specificPage = rootObject->createPageWidget(this);
+        int index = ui->tabWidget->addTab(specificPage, tr("Example Plugin"));
+        ui->tabWidget->setCurrentIndex(index);
     }
 }
 

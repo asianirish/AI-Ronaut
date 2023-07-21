@@ -40,6 +40,8 @@ PageWelcomePage::PageWelcomePage(QWidget *parent) :
     ui->activityComboBox->setCurrentIndex(-1);
 
     displayWait();
+
+    connect(ui->pluginListWidget, &PluginListWidget::openExamplePlugin, this, &PageWelcomePage::openExamplePluginAction);
 }
 
 PageWelcomePage::~PageWelcomePage()
