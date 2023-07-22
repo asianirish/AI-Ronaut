@@ -87,31 +87,11 @@ bool maybeCreateDb() {
     if (!query.exec("CREATE TABLE IF NOT EXISTS plugins ("
                     "id INTEGER PRIMARY KEY AUTOINCREMENT, "
                     "name VARCHAR(64) NOT NULL UNIQUE, "
-                    "author TEXT NOT NULL "
+                    "author TEXT NOT NULL, "
+                    "hash BLOB"
                     ")")) {
         qDebug() << "error creating plugins:" << query.lastError().text();
         return false;
-    }
-
-    {
-        if (!query.exec("SELECT COUNT(*) FROM plugins")) {
-            qDebug() << "error checking characters count:" << query.lastError().text();
-            return false;
-        }
-
-        int rowCount = 0;
-        if (query.next()) {
-            rowCount = query.value(0).toInt();
-        }
-
-        if (rowCount == 0) {
-            if (!query.exec("INSERT INTO plugins ('name', 'author') "
-                            "VALUES('ExamplePlugin', "
-                            "'asianirish@gmail.com')")) {
-                qDebug() << "error creating a plugin:" << query.lastError().text();
-                return false;
-            }
-        }
     }
 
     qDebug() << "db success";
