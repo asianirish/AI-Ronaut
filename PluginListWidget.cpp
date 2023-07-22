@@ -33,6 +33,18 @@ PluginListWidget::PluginListWidget(QWidget *parent) :
     ui(new Ui::PluginListWidget)
 {
     ui->setupUi(this);
+
+    _model = new QSqlTableModel(this);
+    _model->setTable("plugins");
+
+    ui->listView->setModel(_model);
+    ui->listView->setModelColumn(1);
+
+    _model->select();
+
+    _model->setEditStrategy(QSqlTableModel::OnFieldChange);
+
+    connect(_model, SIGNAL(dataChanged(const QModelIndex &, const QModelIndex &)), ui->listView, SLOT(update()));
 }
 
 PluginListWidget::~PluginListWidget()

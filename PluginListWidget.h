@@ -2,6 +2,7 @@
 #define PLUGINLISTWIDGET_H
 
 #include <QWidget>
+#include <QSqlTableModel>
 
 namespace Ui {
 class PluginListWidget;
@@ -24,6 +25,8 @@ private slots:
 
 private:
     Ui::PluginListWidget *ui;
+
+    QSqlTableModel *_model;
 };
 
 #endif // PLUGINLISTWIDGET_H
