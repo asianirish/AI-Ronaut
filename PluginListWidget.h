@@ -20,6 +20,8 @@ signals:
 private slots:
     void on_openPluginButton_clicked();
 
+    void on_registerPluginButton_clicked();
+
 private:
     Ui::PluginListWidget *ui;
 };
