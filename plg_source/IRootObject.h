@@ -11,6 +11,8 @@ public:
     virtual void doIt() const = 0;
 
     virtual PageWidget *createPageWidget(QWidget *parent) const = 0;
+
+    virtual QString author() const = 0;
 };
 
 Q_DECLARE_INTERFACE(IRootObject, "org.asianirish.IRootObject")

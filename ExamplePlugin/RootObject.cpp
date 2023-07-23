@@ -18,3 +18,8 @@ PageWidget *RootObject::createPageWidget(QWidget *parent) const
 {
     return new ExamplePluginPageWidget(parent);
 }
+
+QString RootObject::author() const
+{
+    return QString("asianirish@gmail.com")
+}

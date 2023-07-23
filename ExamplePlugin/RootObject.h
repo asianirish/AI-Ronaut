@@ -16,6 +16,8 @@ public:
 
     PageWidget *createPageWidget(QWidget *parent) const;
 
+    QString author() const;
+
 signals:
 
 };
