@@ -23,10 +23,15 @@ private slots:
 
     void on_registerPluginButton_clicked();
 
+    void on_unregisterPluginButton_clicked();
+
 private:
     Ui::PluginListWidget *ui;
 
     QSqlTableModel *_model;
+
+private:
+
 };
 
 #endif // PLUGINLISTWIDGET_H

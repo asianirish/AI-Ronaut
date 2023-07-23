@@ -152,3 +152,9 @@ void PluginListWidget::on_registerPluginButton_clicked()
     _model->select();
 }
 
+
+void PluginListWidget::on_unregisterPluginButton_clicked()
+{
+    // TODO: implement
+}
+
