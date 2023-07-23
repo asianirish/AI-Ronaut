@@ -64,7 +64,7 @@ HEADERS += \
     ../oaic/MsgData.h \
     ../oaic/TestChatConsumer.h \
     ../oaic/TestImageConsumer.h \
-    ../plg/IRootObject.h \
+    ../plg_source/IRootObject.h \
     ExamplePluginPageWidget.h \
     RootObject.h
 
