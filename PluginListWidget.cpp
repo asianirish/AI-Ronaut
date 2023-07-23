@@ -7,6 +7,8 @@
 #include <QSqlQuery>
 #include <QSqlError>
 
+#include <QMessageBox>
+
 QByteArray calculateFileHash(const QString& filePath, QCryptographicHash::Algorithm hashAlgorithm)
 {
     QFile file(filePath);
@@ -101,6 +103,15 @@ void PluginListWidget::on_registerPluginButton_clicked()
 
     QByteArray hash = calculateFileHash(filePath, QCryptographicHash::Md5);
     qDebug() << "HASH:" << hash.toHex();
+
+    // TODO: check online
+    QMessageBox::StandardButton reply;
+    reply = QMessageBox::warning(this, tr("Plugin"),
+                                  tr("Registering this plugin can be potentially dangerouss. Continue?"),
+                                  QMessageBox::Yes|QMessageBox::No);
+    if (reply != QMessageBox::Yes) {
+        return;
+    }
 
     QSqlQuery query;
 
