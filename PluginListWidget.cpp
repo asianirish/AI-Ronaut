@@ -84,9 +84,13 @@ void PluginListWidget::on_registerPluginButton_clicked()
         dir.mkpath(destinationDir);
     }
 
-    // TODO: .so
+#ifdef Q_OS_WIN
     auto filePath = QFileDialog::getOpenFileName(this, tr("Register a plugin file..."),
                                                 QString(), tr("DLLs: (*.dll)"));
+#elif defined(Q_OS_LINUX)
+    auto filePath = QFileDialog::getOpenFileName(this, tr("Register a plugin file..."),
+                                                 QString(), tr("DLLs: (*.so)"));
+#endif
 
     if (filePath.isNull()) {
         return;
