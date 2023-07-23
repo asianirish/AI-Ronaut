@@ -7,3 +7,4 @@ plg/lib*.a
 ai-ronaut.db
 ai-ronaut_client*
 *.log
+plg_dest/*
