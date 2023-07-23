@@ -8,6 +8,7 @@ ErrorMessageItemWidget::ErrorMessageItemWidget(QWidget *parent) :
     ui->setupUi(this);
 
     addAction(ui->actionCopy);
+    addAction(ui->actionDelete);
 }
 
 ErrorMessageItemWidget::~ErrorMessageItemWidget()
@@ -32,5 +33,11 @@ int ErrorMessageItemWidget::extraSpaceHeight() const
 void ErrorMessageItemWidget::on_actionCopy_triggered()
 {
     onCopyAction();
+}
+
+
+void ErrorMessageItemWidget::on_actionDelete_triggered()
+{
+    emit deleteMe();
 }
 

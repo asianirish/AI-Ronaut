@@ -24,6 +24,8 @@ protected:
 private slots:
     void on_actionCopy_triggered();
 
+    void on_actionDelete_triggered();
+
 private:
     Ui::ErrorMessageItemWidget *ui;
 };

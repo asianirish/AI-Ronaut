@@ -150,6 +150,7 @@ void ChatWidget::onDeltaError(const QString &deltaError)
 {
     qDebug() << "ERROR:" << deltaError;
     ErrorMessageItemWidget *itemWidget = new ErrorMessageItemWidget(this);
+    connect(itemWidget, &ErrorMessageItemWidget::deleteMe, this, &ChatWidget::onDeleteItemRequest);
     addMessageItem(itemWidget, deltaError);
 }
 
