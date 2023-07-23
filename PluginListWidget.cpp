@@ -41,6 +41,7 @@ PluginListWidget::PluginListWidget(QWidget *parent) :
 
     ui->tableView->setModel(_model);
     ui->tableView->setColumnHidden(0, true);
+    ui->tableView->setColumnHidden(3, true);
 
     _model->select();
 
