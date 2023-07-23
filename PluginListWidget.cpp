@@ -37,8 +37,8 @@ PluginListWidget::PluginListWidget(QWidget *parent) :
     _model = new QSqlTableModel(this);
     _model->setTable("plugins");
 
-    ui->listView->setModel(_model);
-    ui->listView->setModelColumn(1);
+    ui->tableView->setModel(_model);
+    ui->tableView->setColumnHidden(0, true);
 
     _model->select();
 
