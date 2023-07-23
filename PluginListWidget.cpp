@@ -42,9 +42,9 @@ PluginListWidget::PluginListWidget(QWidget *parent) :
 
     _model->select();
 
-    _model->setEditStrategy(QSqlTableModel::OnFieldChange);
+//    _model->setEditStrategy(QSqlTableModel::OnFieldChange);
 
-    connect(_model, SIGNAL(dataChanged(const QModelIndex &, const QModelIndex &)), ui->listView, SLOT(update()));
+//    connect(_model, SIGNAL(dataChanged(const QModelIndex &, const QModelIndex &)), ui->listView, SLOT(update()));
 }
 
 PluginListWidget::~PluginListWidget()
@@ -133,7 +133,7 @@ void PluginListWidget::on_registerPluginButton_clicked()
 
     db.commit();
 
-    // TODO: add to the list
 
+    _model->select();
 }
 
