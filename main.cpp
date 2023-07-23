@@ -115,7 +115,7 @@ int main(int argc, char *argv[])
     }
 
     MainWindow w;
-    w.show();
+    w.showMaximized();
     int result = a.exec();
 
     QSqlDatabase db = QSqlDatabase::database();
