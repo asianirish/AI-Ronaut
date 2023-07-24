@@ -62,6 +62,8 @@ private slots:
 
     void onSessionDeleted(int pageIndex, const QString sessionId);
 
+    void on_textEdit_textChanged();
+
 signals:
      // TODO: take a model context from the current session
     void sendCurrentSessionMessages(const oaic::ModelContext &modelCntx);

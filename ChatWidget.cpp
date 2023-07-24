@@ -346,3 +346,10 @@ void ChatWidget::onSessionDeleted(int pageIndex, const QString sessionId)
 
 }
 
+void ChatWidget::on_textEdit_textChanged()
+{
+    auto doc = ui->textEdit->document();
+    int newHeight = doc->size().toSize().height();
+    ui->textEdit->setFixedHeight(newHeight);
+}
+
