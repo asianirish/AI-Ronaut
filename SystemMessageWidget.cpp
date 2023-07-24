@@ -120,8 +120,6 @@ void SystemMessageWidget::on_characterBox_currentIndexChanged(int index)
 
         auto session = gSessions->session(sessionId);
 
-        qDebug() << "CHARACTER_BOX: CHARACTER:" << pCharacter->name() << pCharacter->message();
-
         session->setCharacter(*pCharacter);
     }
 }
