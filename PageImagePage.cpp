@@ -132,3 +132,11 @@ void PageImagePage::onReplyDestroyed(QObject *)
     // TODO: ?
 }
 
+
+void PageImagePage::on_requestEdit_textChanged()
+{
+    auto doc = ui->requestEdit->document();
+    int newHeight = doc->size().toSize().height();
+    ui->requestEdit->setFixedHeight(newHeight);
+}
+

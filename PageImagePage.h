@@ -34,6 +34,8 @@ private slots:
     void onResponseError(const QString &errMsg);
     void onReplyDestroyed(QObject * = nullptr);
 
+    void on_requestEdit_textChanged();
+
 private:
     Ui::PageImagePage *ui;
     QNetworkAccessManager *_nam;
