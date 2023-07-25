@@ -21,6 +21,8 @@ protected:
 
     void synchronizeClient(oaic::Manager *_client) override;
 
+    void showEvent(QShowEvent *event) override;
+
 private slots:
     void on_requestButton_clicked();
 

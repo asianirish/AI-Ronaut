@@ -59,6 +59,13 @@ void PageImagePage::synchronizeClient(oaic::Manager *client)
     connect(client->image(), &oaic::Component::replyDestroyed, this, &PageImagePage::onReplyDestroyed);
 }
 
+void PageImagePage::showEvent(QShowEvent *event)
+{
+    QWidget::showEvent(event);
+
+    ui->requestEdit->setFocus(Qt::OtherFocusReason);
+}
+
 void PageImagePage::on_requestButton_clicked()
 {
     auto text = ui->requestEdit->toPlainText();
