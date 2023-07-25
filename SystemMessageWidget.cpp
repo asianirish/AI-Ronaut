@@ -60,7 +60,9 @@ void SystemMessageWidget::synchronizeCurrentSession()
     qDebug() << "SYSTEM MESSAGE:" << character.fullMessage();
 
     ui->textEdit->setText(character.message());
-    ui->characterBox->setEditText(character.name());
+
+    int index = ui->characterBox->findText(character.name());
+    ui->characterBox->setCurrentIndex(index);
 }
 
 void SystemMessageWidget::onSessionCreatedSpecific(int pageIndex, const QString &newSessionId)
