@@ -29,6 +29,8 @@ PageImagePage::PageImagePage(QWidget *parent) :
     ui->imgLabel->addAction(ui->actionSet_as_Base_Image);
     ui->imgLabel->addAction(ui->actionEdit_Image);
     ui->imgLabel->addAction(ui->actionCopy_to_Clipboard);
+
+    on_requestEdit_textChanged();
 }
 
 PageImagePage::~PageImagePage()
