@@ -116,7 +116,7 @@ bool Character::insertIntoDb()
         return true;
     }
 
-    qDebug() << "Query execution error: " << query.lastError().text();
+    qDebug() << "(INSERT) Query execution error: " << query.lastError().text();
     return false;
 }
 
@@ -143,7 +143,7 @@ bool Character::updateInDb()
         return true;
     }
 
-    qDebug() << "Query execution error: " << query.lastError().text();
+    qDebug() << "(UPDATE) Query execution error: " << query.lastError().text();
     return false;
 }
 

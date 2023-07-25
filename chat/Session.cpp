@@ -145,7 +145,7 @@ void Session::save()
 
     db.transaction();
 
-    qDebug() << "SAVING CHARACTER..." << _character.id() << _character.name() << _character.message();
+    qDebug() << "SAVING CHARACTER:" << _character.id();
 
     if (_character) {
         if (!_character.save()) {
