@@ -353,5 +353,7 @@ void ChatWidget::on_textEdit_textChanged()
     auto doc = ui->textEdit->document();
     int newHeight = doc->size().toSize().height();
     ui->textEdit->setFixedHeight(newHeight);
+
+    ui->messageWidget->setFixedHeight(newHeight + 18); // TODO: const EXTRA_HEIGHT = 18
 }
 
