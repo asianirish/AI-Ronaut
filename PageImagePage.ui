@@ -99,7 +99,7 @@
            <set>Qt::AlignCenter</set>
           </property>
          </widget>
-         <widget class="QWidget" name="widget_3" native="true">
+         <widget class="QWidget" name="requestWidget" native="true">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
             <horstretch>0</horstretch>
