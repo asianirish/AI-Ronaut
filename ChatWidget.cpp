@@ -34,6 +34,8 @@ ChatWidget::ChatWidget(QWidget *parent) :
     connect(gSessions, &chat::SessionManager::sessionDeleted, this, &ChatWidget::onSessionDeleted);
 
     ui->newSessionButton->setHidden(true);
+
+    on_textEdit_textChanged();
 }
 
 ChatWidget::~ChatWidget()
