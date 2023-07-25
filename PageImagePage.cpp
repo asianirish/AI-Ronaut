@@ -94,9 +94,12 @@ void PageImagePage::on_actionSave_Image_as_File_triggered()
         return;
     }
 
+    QDateTime date = QDateTime::currentDateTime();
+    QString formattedTime = date.toString("yyyyMMddhhmmss");
+
     auto text = ui->requestEdit->toPlainText();
     auto ftext = potato_util::phraseToCamelCase(text, 7);
-    ftext = ftext.left(64);
+    ftext = ftext.left(64) + "_" + formattedTime;
     auto fileName = QFileDialog::getSaveFileName(this, tr("Save Image"), ftext + ".png", tr("Image Files (*.png *.jpg *.bmp)"));
 
     if (!fileName.contains(".png")) {
