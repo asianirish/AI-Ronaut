@@ -151,6 +151,6 @@ void PageImagePage::on_requestEdit_textChanged()
     int newHeight = doc->size().toSize().height();
     ui->requestEdit->setFixedHeight(newHeight);
 
-    ui->requestWidget->setFixedHeight(newHeight + 28); // TODO: const EXTRA_HEIGHT = 28
+    ui->requestWidget->setFixedHeight(newHeight + MSG_WIDGET_EXTRA_HEIGHT);
 }
 

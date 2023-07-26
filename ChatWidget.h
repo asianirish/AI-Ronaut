@@ -20,8 +20,9 @@ class ChatWidget;
 class ChatWidget : public ChatToolWidget
 {
     Q_OBJECT
-
 public:
+    static const int MSG_WIDGET_EXTRA_HEIGHT = 18;
+
     explicit ChatWidget(QWidget *parent = nullptr);
     ~ChatWidget();
 

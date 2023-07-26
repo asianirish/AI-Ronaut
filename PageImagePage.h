@@ -11,8 +11,9 @@ class PageImagePage;
 class PageImagePage : public PageWidget
 {
     Q_OBJECT
-
 public:
+    static const int MSG_WIDGET_EXTRA_HEIGHT = 28;
+
     explicit PageImagePage(QWidget *parent = nullptr);
     ~PageImagePage();
 
