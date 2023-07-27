@@ -14,21 +14,66 @@
    <string>Form</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="0" column="0">
-    <widget class="QLabel" name="label">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-       <horstretch>1</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
+   <item row="1" column="0" colspan="2">
+    <widget class="QLabel" name="label_7">
      <property name="text">
-      <string>Model:</string>
+      <string>Temperature:</string>
      </property>
     </widget>
    </item>
-   <item row="1" column="2">
-    <widget class="QLabel" name="temperatureLabel">
+   <item row="5" column="2">
+    <widget class="QLabel" name="topPLabel">
+     <property name="text">
+      <string>1</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+     <property name="buddy">
+      <cstring>maxTokensSlider</cstring>
+     </property>
+    </widget>
+   </item>
+   <item row="8" column="0" colspan="3">
+    <widget class="QSlider" name="frequencyPenaltySlider">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>12</height>
+      </size>
+     </property>
+     <property name="minimum">
+      <number>0</number>
+     </property>
+     <property name="maximum">
+      <number>200</number>
+     </property>
+     <property name="pageStep">
+      <number>1</number>
+     </property>
+     <property name="value">
+      <number>0</number>
+     </property>
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+    </widget>
+   </item>
+   <item row="12" column="0" colspan="2">
+    <spacer name="verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>243</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="7" column="2">
+    <widget class="QLabel" name="frequencyPenaltyLabel">
      <property name="text">
       <string>0</string>
      </property>
@@ -53,29 +98,17 @@
      </property>
     </widget>
    </item>
-   <item row="5" column="2">
-    <widget class="QLabel" name="topPLabel">
+   <item row="9" column="0" colspan="2">
+    <widget class="QLabel" name="label_6">
      <property name="text">
-      <string>1</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-     </property>
-     <property name="buddy">
-      <cstring>maxTokensSlider</cstring>
+      <string>Presence penalty:</string>
      </property>
     </widget>
    </item>
-   <item row="7" column="2">
-    <widget class="QLabel" name="frequencyPenaltyLabel">
+   <item row="5" column="0" colspan="2">
+    <widget class="QLabel" name="label_4">
      <property name="text">
-      <string>0</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-     </property>
-     <property name="buddy">
-      <cstring>maxTokensSlider</cstring>
+      <string>Top P:</string>
      </property>
     </widget>
    </item>
@@ -92,19 +125,6 @@
      </property>
     </widget>
    </item>
-   <item row="11" column="0" colspan="2">
-    <spacer name="verticalSpacer">
-     <property name="orientation">
-      <enum>Qt::Vertical</enum>
-     </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>20</width>
-       <height>243</height>
-      </size>
-     </property>
-    </spacer>
-   </item>
    <item row="0" column="1" colspan="2">
     <widget class="QComboBox" name="modelComboBox">
      <property name="sizePolicy">
@@ -115,10 +135,10 @@
      </property>
     </widget>
    </item>
-   <item row="1" column="0" colspan="2">
-    <widget class="QLabel" name="label_7">
+   <item row="7" column="0" colspan="2">
+    <widget class="QLabel" name="label_5">
      <property name="text">
-      <string>Temperature:</string>
+      <string>Frequency penalty:</string>
      </property>
     </widget>
    </item>
@@ -141,31 +161,6 @@
      </property>
      <property name="value">
       <number>70</number>
-     </property>
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-    </widget>
-   </item>
-   <item row="4" column="0" colspan="3">
-    <widget class="QSlider" name="maxTokensSlider">
-     <property name="minimumSize">
-      <size>
-       <width>0</width>
-       <height>12</height>
-      </size>
-     </property>
-     <property name="minimum">
-      <number>1</number>
-     </property>
-     <property name="maximum">
-      <number>2048</number>
-     </property>
-     <property name="pageStep">
-      <number>1</number>
-     </property>
-     <property name="value">
-      <number>512</number>
      </property>
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
@@ -200,28 +195,16 @@
      </property>
     </widget>
    </item>
-   <item row="8" column="0" colspan="3">
-    <widget class="QSlider" name="frequencyPenaltySlider">
-     <property name="minimumSize">
-      <size>
-       <width>0</width>
-       <height>12</height>
-      </size>
+   <item row="0" column="0">
+    <widget class="QLabel" name="label">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+       <horstretch>1</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
      </property>
-     <property name="minimum">
-      <number>0</number>
-     </property>
-     <property name="maximum">
-      <number>200</number>
-     </property>
-     <property name="pageStep">
-      <number>1</number>
-     </property>
-     <property name="value">
-      <number>0</number>
-     </property>
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
+     <property name="text">
+      <string>Model:</string>
      </property>
     </widget>
    </item>
@@ -253,6 +236,31 @@
      </property>
     </widget>
    </item>
+   <item row="4" column="0" colspan="3">
+    <widget class="QSlider" name="maxTokensSlider">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>12</height>
+      </size>
+     </property>
+     <property name="minimum">
+      <number>1</number>
+     </property>
+     <property name="maximum">
+      <number>2048</number>
+     </property>
+     <property name="pageStep">
+      <number>1</number>
+     </property>
+     <property name="value">
+      <number>512</number>
+     </property>
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+    </widget>
+   </item>
    <item row="3" column="0" colspan="2">
     <widget class="QLabel" name="label_3">
      <property name="text">
@@ -260,24 +268,33 @@
      </property>
     </widget>
    </item>
-   <item row="5" column="0" colspan="2">
-    <widget class="QLabel" name="label_4">
+   <item row="1" column="2">
+    <widget class="QLabel" name="temperatureLabel">
      <property name="text">
-      <string>Top P:</string>
+      <string>0</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+     <property name="buddy">
+      <cstring>maxTokensSlider</cstring>
      </property>
     </widget>
    </item>
-   <item row="7" column="0" colspan="2">
-    <widget class="QLabel" name="label_5">
+   <item row="11" column="2">
+    <widget class="QPushButton" name="defaultButton">
      <property name="text">
-      <string>Frequency penalty:</string>
+      <string>Default</string>
      </property>
     </widget>
    </item>
-   <item row="9" column="0" colspan="2">
-    <widget class="QLabel" name="label_6">
+   <item row="11" column="0" colspan="2">
+    <widget class="QPushButton" name="saveConfigurationButton">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
      <property name="text">
-      <string>Presence penalty:</string>
+      <string>Save configuration</string>
      </property>
     </widget>
    </item>

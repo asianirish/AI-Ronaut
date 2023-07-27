@@ -27,6 +27,9 @@ protected:
     void synchronizeCurrentSession() override;
     void onSessionCreatedSpecific(int pageIndex, const QString &newSessionId) override;
 
+private:
+    void updateElements(bool updateModelName = false);
+
 private slots:
     void on_modelComboBox_currentTextChanged(const QString &modelName);
 
@@ -51,6 +54,10 @@ private slots:
     void on_temperatureSlider_valueChanged(int value);
 
     void onModels(const QStringList &mdls);
+
+    void on_saveConfigurationButton_clicked();
+
+    void on_defaultButton_clicked();
 
 private:
     Ui::ChatConfigWidget *ui;

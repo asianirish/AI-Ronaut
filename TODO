@@ -1,7 +1,7 @@
 TODO:
 
-* ModelContext per a Session instead ModelContext per a Page
 * One session in two different pages
+* Add model configurations
 
 DONE:
 
@@ -32,3 +32,4 @@ DONE:
 
 CANCELED:
 * Update messages problem (What a problem?)
+* ModelContext per a Session instead ModelContext per a Page (use model configurations instead)

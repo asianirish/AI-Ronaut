@@ -3,6 +3,8 @@
 
 #include "chat/SessionManager.h"
 
+#include <QSettings>
+
 
 PageGeneralChatPage::PageGeneralChatPage(QWidget *parent) :
     PageWidget(parent),
@@ -31,7 +33,36 @@ PageGeneralChatPage::PageGeneralChatPage(QWidget *parent) :
 
     // TODO: implement & connect ChatSessionWidget signals
 
-    // TODO: connect to change _currentSessionId of this
+    QSettings settings;
+
+    auto modelName = settings.value("model/name").toString();
+    _modelCntx.setModelName(modelName);
+
+    // read other model settings
+    {
+        auto temperature = settings.value("model/temperature").toDouble();
+        _modelCntx.setTemperature(temperature);
+    }
+
+    {
+        auto maxTokens = settings.value("model/maxTokens").toInt();
+        _modelCntx.setMaxTokens(maxTokens);
+    }
+
+    {
+        auto topP = settings.value("model/topP").toDouble();
+        _modelCntx.setTopP(topP);
+    }
+
+    {
+        auto frequencyPenalty = settings.value("model/frequencyPenalty").toDouble();
+        _modelCntx.setFrequencyPenalty(frequencyPenalty);
+    }
+
+    {
+        auto presencePenalty = settings.value("model/presencePenalty").toDouble();
+        _modelCntx.setPresencePenalty(presencePenalty);
+    }
 
     ui->chatConfigWidget->setModelCntx(&_modelCntx);
     ui->chatWidget->setModelCntx(&_modelCntx);

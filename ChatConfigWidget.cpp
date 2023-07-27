@@ -40,12 +40,12 @@ void ChatConfigWidget::on_modelComboBox_currentTextChanged(const QString &modelN
     }
 
     if (_modelCntx) {
-        qDebug() << "MODEL NAME:" << modelName;
-        _modelCntx->setModelName(modelName);
+        if (_modelCntx->modelName() != modelName) {
+            qDebug() << "MODEL NAME:" << modelName;
+            _modelCntx->setModelName(modelName);
+            ui->saveConfigurationButton->setEnabled(true);
+        }
     }
-
-    QSettings settings;
-    settings.setValue("model/default", modelName);
 }
 
 ModelContext *ChatConfigWidget::modelCntx() const
@@ -57,7 +57,28 @@ void ChatConfigWidget::setModelCntx(ModelContext *newModelCntx)
 {
     _modelCntx = newModelCntx;
 
-    // update elements
+    updateElements(false);
+}
+
+void ChatConfigWidget::synchronizeCurrentSession()
+{
+    qDebug() << "CHAT CONFIG SESSION ID:" << pageContext()->currentSessionId();
+    // TODO: copy the model context data from the given session's ModelContext (if _modelCntx exist)
+}
+
+void ChatConfigWidget::onSessionCreatedSpecific(int pageIndex, const QString &newSessionId)
+{
+    // TODO: implement in case of model per session
+    qDebug() << "ChatConfigWidget CREATE SESSION ON PAGE:" << pageIndex << "NEW SESSION:" << newSessionId;
+}
+
+void ChatConfigWidget::updateElements(bool updateModelName)
+{
+    if (updateModelName) {
+        auto modelName = _modelCntx->modelName();
+        ui->modelComboBox->setCurrentText(modelName);
+    }
+
     int temperatureInt = _modelCntx->temperature() * 100;
     ui->temperatureSlider->setValue(temperatureInt);
     on_temperatureSlider_valueChanged(temperatureInt); // call directly because the value can be the same
@@ -78,18 +99,7 @@ void ChatConfigWidget::setModelCntx(ModelContext *newModelCntx)
     ui->presencePenaltySlider->setValue(presenceInt);
     on_presencePenaltySlider_valueChanged(presenceInt);
 
-}
-
-void ChatConfigWidget::synchronizeCurrentSession()
-{
-    qDebug() << "CHAT CONFIG SESSION ID:" << pageContext()->currentSessionId();
-    // TODO: copy the model context data from the given session's ModelContext (if _modelCntx exist)
-}
-
-void ChatConfigWidget::onSessionCreatedSpecific(int pageIndex, const QString &newSessionId)
-{
-    // TODO: implement in case of model per session
-    qDebug() << "ChatConfigWidget CREATE SESSION ON PAGE:" << pageIndex << "NEW SESSION:" << newSessionId;
+    ui->saveConfigurationButton->setEnabled(updateModelName);
 }
 
 void ChatConfigWidget::on_maxTokensSlider_sliderMoved(int position)
@@ -104,6 +114,7 @@ void ChatConfigWidget::on_maxTokensSlider_valueChanged(int value)
     if (_modelCntx) {
         _modelCntx->setMaxTokens(value);
         qDebug() << "max tokens" << value;
+        ui->saveConfigurationButton->setEnabled(true);
     }
 }
 
@@ -123,6 +134,7 @@ void ChatConfigWidget::on_topPSlider_valueChanged(int value)
     if (_modelCntx) {
         _modelCntx->setTopP(fPosition);
         qDebug() << "top_p" << fPosition;
+        ui->saveConfigurationButton->setEnabled(true);
     }
 }
 
@@ -143,6 +155,7 @@ void ChatConfigWidget::on_frequencyPenaltySlider_valueChanged(int value)
     if (_modelCntx) {
         _modelCntx->setFrequencyPenalty(fPosition);
         qDebug() << "frequencyPenalty" << fPosition;
+        ui->saveConfigurationButton->setEnabled(true);
     }
 }
 
@@ -162,6 +175,7 @@ void ChatConfigWidget::on_presencePenaltySlider_valueChanged(int value)
     if (_modelCntx) {
         _modelCntx->setPresencePenalty(fPosition);
         qDebug() << "presencePenalty" << fPosition;
+        ui->saveConfigurationButton->setEnabled(true);
     }
 }
 
@@ -181,6 +195,7 @@ void ChatConfigWidget::on_temperatureSlider_valueChanged(int value)
     if (_modelCntx) {
         _modelCntx->setTemperature(fPosition);
         qDebug() << "temperature" << fPosition;
+        ui->saveConfigurationButton->setEnabled(true);
     }
 }
 
@@ -192,12 +207,48 @@ void ChatConfigWidget::onModels(const QStringList &mdls)
     ui->modelComboBox->blockSignals(false);
 
     QSettings settings;
-    auto defaultModel = settings.value("model/default").toString();
+    auto defaultModel = settings.value("model/name").toString();
 
     if (defaultModel.isEmpty()) {
-        ui->modelComboBox->setCurrentIndex(-1);
+        auto modelName = _modelCntx->modelName();
+        qDebug() << "MODEL NAME:" << modelName;
+        ui->modelComboBox->setCurrentText(modelName);
     } else {
         ui->modelComboBox->setCurrentText(defaultModel);
     }
+}
+
+
+void ChatConfigWidget::on_saveConfigurationButton_clicked()
+{
+    QSettings settings;
+
+    auto modelName = _modelCntx->modelName();
+    settings.setValue("model/name", modelName);
+
+    auto temperature = _modelCntx->temperature();
+    settings.setValue("model/temperature", temperature);
+
+    auto maxTokens = _modelCntx->maxTokens();
+    settings.setValue("model/maxTokens", maxTokens);
+
+    auto topP = _modelCntx->topP();
+    settings.setValue("model/topP", topP);
+
+    auto frequencyPenalty = _modelCntx->frequencyPenalty();
+    settings.setValue("model/frequencyPenalty", frequencyPenalty);
+
+    auto presencePenalty = _modelCntx->presencePenalty();
+    settings.setValue("model/presencePenalty", presencePenalty);
+
+    ui->saveConfigurationButton->setEnabled(false);
+}
+
+
+void ChatConfigWidget::on_defaultButton_clicked()
+{
+    _modelCntx->setDefault();
+
+    updateElements(true);
 }
 
