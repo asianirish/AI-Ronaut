@@ -34,6 +34,8 @@ public:
     double presencePenalty() const;
     void setPresencePenalty(double newPresencePenalty);
 
+    void setDefault();
+
 private:
     QString _modelName;
     double _temperature;

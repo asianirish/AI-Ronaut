@@ -78,4 +78,9 @@ void ModelContext::setPresencePenalty(double newPresencePenalty)
     _presencePenalty = newPresencePenalty;
 }
 
+void ModelContext::setDefault()
+{
+    *this = ModelContext();
+}
+
 } // namespace oaic
