@@ -38,6 +38,8 @@ protected:
 private:
     QListWidgetItem *_listItem;
 
+    mutable QString _debugText;
+
 signals:
     void deleteMe();
 

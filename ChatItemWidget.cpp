@@ -15,7 +15,7 @@ ChatItemWidget::ChatItemWidget(QWidget *parent)
 
 ChatItemWidget::~ChatItemWidget()
 {
-    qDebug() << "DELETING CHAT ITEM WIDGET" << this << "...";
+    qDebug() << "DELETING CHAT ITEM WIDGET" << this << "MESSAGE:" << _debugText;
 }
 
 void ChatItemWidget::setText(const QString &text)
@@ -41,6 +41,7 @@ void ChatItemWidget::stylize() const
 
 QString ChatItemWidget::text() const
 {
+    _debugText = textBrowser()->toPlainText();
     return textBrowser()->toPlainText();
 }
 
