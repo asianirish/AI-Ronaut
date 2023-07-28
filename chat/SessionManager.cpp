@@ -23,8 +23,14 @@ SessionManager *SessionManager::instance()
 QString SessionManager::createSession(int pageIndex, const QString &sessionName)
 {
     SessionPtr session = SessionPtr(new Session());
+
+    qDebug() << "CREATED SESION:" << session->uuid();
+
+    // TODO: uuid already set in the Session constructor, no sense doing it again:
     QUuid sessionId = QUuid::createUuid();
     session->setUuid(sessionId);
+
+    qDebug() << "RESET SESSION_ID:" << session->uuid();
 
     if (!sessionName.isEmpty()) {
         session->setName(sessionName);
