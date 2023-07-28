@@ -12,8 +12,11 @@ public:
     static const double DEFAULT_TEMPERATURE;
     static const int DEFAULT_MAX_TOKENS;
     static const double DEFAULT_TOP_P;
+    static const double DEFAULT_FREQUENCY_PENALTY;
+    static const double DEFAULT_PRESENCE_PENALTY;
 
     static const QString DEFAULT_MODEL;
+
     ModelContext();
 
     QString modelName() const;

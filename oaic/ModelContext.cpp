@@ -5,6 +5,10 @@ namespace oaic {
 const double ModelContext::DEFAULT_TEMPERATURE = 0.70;
 const int ModelContext::DEFAULT_MAX_TOKENS = 512;
 const double ModelContext::DEFAULT_TOP_P = 1.;
+
+const double ModelContext::DEFAULT_FREQUENCY_PENALTY = 0.;
+const double ModelContext::DEFAULT_PRESENCE_PENALTY = 0.;
+
 const QString ModelContext::DEFAULT_MODEL("gpt-4-0613");
 
 ModelContext::ModelContext() :
@@ -12,8 +16,8 @@ ModelContext::ModelContext() :
     _temperature(DEFAULT_TEMPERATURE),
     _maxTokens(DEFAULT_MAX_TOKENS),
     _topP(DEFAULT_TOP_P),
-    _frequencyPenalty(0.),
-    _presencePenalty(0.)
+    _frequencyPenalty(DEFAULT_FREQUENCY_PENALTY),
+    _presencePenalty(DEFAULT_PRESENCE_PENALTY)
 {
 
 }
