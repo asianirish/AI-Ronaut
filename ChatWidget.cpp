@@ -244,7 +244,7 @@ void ChatWidget::setClient(oaic::Manager *newClient)
 void ChatWidget::synchronizeCurrentSession()
 {
     auto sessionId = pageContext()->currentSessionId();
-    qDebug() << "CHAT WIDGET SESSION ID:" << sessionId;
+    qDebug() << "\nSYNCHRONIZE_CURRENT_SESSION:" << sessionId;
 
     ui->listWidget->clear();
 
@@ -253,7 +253,7 @@ void ChatWidget::synchronizeCurrentSession()
     auto lst = session->messageList();
 
     for (auto &msgPtr : lst) {
-        qDebug() << msgPtr->role() << ":" << msgPtr->text();
+        qDebug() << "CURRENT_SESSION CHAT MESSAGE:" << msgPtr->role() << ":" << msgPtr->text();
         ChatSessionItemWidget *itemWidget = nullptr;
         if (msgPtr->role() == chat::Message::USER) {
             itemWidget = createMessageItemWidget<UserMessageItemWidget>(msgPtr->text(), msgPtr);
