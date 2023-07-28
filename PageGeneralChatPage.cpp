@@ -35,32 +35,32 @@ PageGeneralChatPage::PageGeneralChatPage(QWidget *parent) :
 
     QSettings settings;
 
-    auto modelName = settings.value("model/name").toString();
+    auto modelName = settings.value("model/name", _modelCntx.DEFAULT_MODEL).toString();
     _modelCntx.setModelName(modelName);
 
     // read other model settings
     {
-        auto temperature = settings.value("model/temperature").toDouble();
+        auto temperature = settings.value("model/temperature", _modelCntx.DEFAULT_TEMPERATURE).toDouble();
         _modelCntx.setTemperature(temperature);
     }
 
     {
-        auto maxTokens = settings.value("model/maxTokens").toInt();
+        auto maxTokens = settings.value("model/maxTokens", _modelCntx.DEFAULT_MAX_TOKENS).toInt();
         _modelCntx.setMaxTokens(maxTokens);
     }
 
     {
-        auto topP = settings.value("model/topP").toDouble();
+        auto topP = settings.value("model/topP", _modelCntx.DEFAULT_TOP_P).toDouble();
         _modelCntx.setTopP(topP);
     }
 
     {
-        auto frequencyPenalty = settings.value("model/frequencyPenalty").toDouble();
+        auto frequencyPenalty = settings.value("model/frequencyPenalty", _modelCntx.DEFAULT_FREQUENCY_PENALTY).toDouble();
         _modelCntx.setFrequencyPenalty(frequencyPenalty);
     }
 
     {
-        auto presencePenalty = settings.value("model/presencePenalty").toDouble();
+        auto presencePenalty = settings.value("model/presencePenalty", _modelCntx.DEFAULT_PRESENCE_PENALTY).toDouble();
         _modelCntx.setPresencePenalty(presencePenalty);
     }
 
