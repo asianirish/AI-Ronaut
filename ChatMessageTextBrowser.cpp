@@ -12,11 +12,9 @@ void ChatMessageTextBrowser::focusOutEvent(QFocusEvent *e)
     if (!this->isReadOnly()) {
 
         auto text = this->toPlainText();
-        qDebug() << "THE TEXT IS:" << text;
 
         if (e->reason() != Qt::PopupFocusReason) {
             setReadOnly(true);
-            qDebug() << "SET READONLY" << e->reason();
         }
 
         if (_msgPtr) {

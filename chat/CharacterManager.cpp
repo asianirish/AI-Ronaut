@@ -41,9 +41,6 @@ void CharacterManager::select()
         // TODO: create and add in a seperate function
         CharacterPtr character = CharacterPtr(new Character(name, message, useNameInMessage));
         character->setId(id); // TODO: in a constructor
-
-        qDebug() << "CHARACTER:" << character->id() << character->name() << character->message() << character->useNameInMessage();
-
         _characters.insert(id, character);
     }
 }
