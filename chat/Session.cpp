@@ -19,6 +19,9 @@ Session::Session() : _isPersistent(false)
     _uuid = QUuid::createUuid();
     _name = _created.toString("yyyyMMddhhmmss");
 
+    qDebug() << "\nCREATING SESSION:" << _uuid << "\n";
+}
+
 Session::Session(const QString &sessionId, const QString &name) :
     _uuid(QUuid(sessionId)),
     _name(name)
@@ -27,6 +30,10 @@ Session::Session(const QString &sessionId, const QString &name) :
     _created = QDateTime::currentDateTime();
     _accessed = _created;
 }
+
+Session::~Session()
+{
+    qDebug() << "\nDELETING SESSION:" << _uuid << "\n";
 }
 
 QList<MessagePtr> Session::messageList() const

@@ -22,6 +22,9 @@ public:
 
     // for select
     Session(const QString &sessionId, const QString &name);
+
+    ~Session();
+
     QList<MessagePtr> messageList() const;
     void addMessage(const MessagePtr &msgPtr);
 
