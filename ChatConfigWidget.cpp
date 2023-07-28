@@ -41,7 +41,6 @@ void ChatConfigWidget::on_modelComboBox_currentTextChanged(const QString &modelN
 
     if (_modelCntx) {
         if (_modelCntx->modelName() != modelName) {
-            qDebug() << "MODEL NAME:" << modelName;
             _modelCntx->setModelName(modelName);
             ui->saveConfigurationButton->setEnabled(true);
         }
@@ -113,7 +112,6 @@ void ChatConfigWidget::on_maxTokensSlider_valueChanged(int value)
     ui->maxTokensLabel->setText(QString::number(value));
     if (_modelCntx) {
         _modelCntx->setMaxTokens(value);
-        qDebug() << "max tokens" << value;
         ui->saveConfigurationButton->setEnabled(true);
     }
 }
@@ -133,7 +131,6 @@ void ChatConfigWidget::on_topPSlider_valueChanged(int value)
     ui->topPLabel->setText(QString::number(fPosition));
     if (_modelCntx) {
         _modelCntx->setTopP(fPosition);
-        qDebug() << "top_p" << fPosition;
         ui->saveConfigurationButton->setEnabled(true);
     }
 }
@@ -143,7 +140,6 @@ void ChatConfigWidget::on_frequencyPenaltySlider_sliderMoved(int position)
 {
     double fPosition = (double)position/100.;
     auto strPos = QString::number(fPosition);
-    qDebug() << "frequency position:" << fPosition << strPos;
     ui->frequencyPenaltyLabel->setText(strPos);
 }
 
@@ -154,7 +150,6 @@ void ChatConfigWidget::on_frequencyPenaltySlider_valueChanged(int value)
     ui->frequencyPenaltyLabel->setText(QString::number(fPosition));
     if (_modelCntx) {
         _modelCntx->setFrequencyPenalty(fPosition);
-        qDebug() << "frequencyPenalty" << fPosition;
         ui->saveConfigurationButton->setEnabled(true);
     }
 }
@@ -174,7 +169,6 @@ void ChatConfigWidget::on_presencePenaltySlider_valueChanged(int value)
     ui->presencePenaltyLabel->setText(QString::number(fPosition));
     if (_modelCntx) {
         _modelCntx->setPresencePenalty(fPosition);
-        qDebug() << "presencePenalty" << fPosition;
         ui->saveConfigurationButton->setEnabled(true);
     }
 }
@@ -194,7 +188,6 @@ void ChatConfigWidget::on_temperatureSlider_valueChanged(int value)
     ui->temperatureLabel->setText(QString::number(fPosition));
     if (_modelCntx) {
         _modelCntx->setTemperature(fPosition);
-        qDebug() << "temperature" << fPosition;
         ui->saveConfigurationButton->setEnabled(true);
     }
 }
@@ -211,7 +204,6 @@ void ChatConfigWidget::onModels(const QStringList &mdls)
 
     if (defaultModel.isEmpty()) {
         auto modelName = _modelCntx->modelName();
-        qDebug() << "MODEL NAME:" << modelName;
         ui->modelComboBox->setCurrentText(modelName);
     } else {
         ui->modelComboBox->setCurrentText(defaultModel);
