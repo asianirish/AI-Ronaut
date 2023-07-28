@@ -20,6 +20,8 @@ class Session
 public:
     Session();
 
+    // for select
+    Session(const QString &sessionId, const QString &name);
     QList<MessagePtr> messageList() const;
     void addMessage(const MessagePtr &msgPtr);
 

@@ -88,6 +88,7 @@ void SessionManager::select()
 
     QSqlQuery query("SELECT uuid, character_id, name, created, accessed  FROM sessions ORDER BY created DESC");
 
+
     while (query.next()) { // TODO: error?
         QString sessionId = query.value(0).toString();
 
@@ -98,9 +99,10 @@ void SessionManager::select()
         QDateTime created = query.value(3).toDateTime();
         QDateTime accessed = query.value(4).toDateTime();
 
-        SessionPtr session = SessionPtr(new Session());
-        session->setUuid(sessionId);
-        session->setName(name);
+        // TODO: protect from recreating!
+        SessionPtr session = SessionPtr(new Session(sessionId, name));
+
+        // TODO: already set in the constructor, not sence
         session->setCreated(created);
         session->setAccessed(accessed);
 

@@ -18,6 +18,15 @@ Session::Session() : _isPersistent(false)
 
     _uuid = QUuid::createUuid();
     _name = _created.toString("yyyyMMddhhmmss");
+
+Session::Session(const QString &sessionId, const QString &name) :
+    _uuid(QUuid(sessionId)),
+    _name(name)
+
+{
+    _created = QDateTime::currentDateTime();
+    _accessed = _created;
+}
 }
 
 QList<MessagePtr> Session::messageList() const
