@@ -65,6 +65,8 @@ public:
 
     void setAccessed(const QDateTime &newAccessed);
 
+    void touch();
+
 private:
     QString fileName() const;
     bool save(QSqlQuery &query);

@@ -55,7 +55,8 @@ void Session::addMessage(const MessagePtr &msgPtr)
     } else {
         _messageList.append(msgPtr);
     }
-    _accessed = QDateTime::currentDateTime();
+
+    touch();
 }
 
 QUuid Session::uuid() const
@@ -101,7 +102,7 @@ QString Session::name() const
 void Session::setName(const QString &newName)
 {
     _name = newName;
-    _accessed = QDateTime::currentDateTime();
+    touch();
 }
 
 bool Session::isPersistent() const
@@ -257,6 +258,11 @@ void Session::selectMessages() const
 void Session::setAccessed(const QDateTime &newAccessed)
 {
     _accessed = newAccessed;
+}
+
+void Session::touch()
+{
+    _accessed = QDateTime::currentDateTime();
 }
 
 void Session::setCreated(const QDateTime &newCreated)
