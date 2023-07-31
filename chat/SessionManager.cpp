@@ -92,7 +92,7 @@ void SessionManager::select()
 
     // Do not clear the _sessions, as it also leads to the removal of values not from the database
 
-    QSqlQuery query("SELECT uuid, character_id, name, created, accessed  FROM sessions ORDER BY created DESC");
+    QSqlQuery query("SELECT uuid, character_id, name, created, accessed  FROM sessions ORDER BY accessed DESC");
 
 
     while (query.next()) { // TODO: error?

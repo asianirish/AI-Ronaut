@@ -38,7 +38,7 @@ bool SessionItem::operator<(const QListWidgetItem &other) const
     }
 
     if (pOther) {
-        return (session()->created() < pOther->session()->created());
+        return (session()->accessed() < pOther->session()->accessed());
     }
 
     return QListWidgetItem::operator<(other);
