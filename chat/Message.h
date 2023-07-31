@@ -25,7 +25,7 @@ public:
 
     Message();
 
-    virtual ~Message() = default;
+    virtual ~Message();
 
     virtual ROLE role() const = 0;
 
