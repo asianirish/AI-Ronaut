@@ -21,11 +21,6 @@ Message::Message()
 
 }
 
-Message::~Message()
-{
-    qDebug() << "TEST DELETING MESSAGE:" << _text;
-}
-
 QString Message::text() const
 {
     return _text;

@@ -32,11 +32,6 @@ Session::Session(const QString &sessionId, const QString &name, const QDateTime 
 
 }
 
-Session::~Session()
-{
-    qDebug() << "\nDELETING SESSION:" << _uuid << "\n";
-}
-
 QList<MessagePtr> Session::messageList() const
 {
     if (_messageList.isEmpty()) {

@@ -24,8 +24,6 @@ public:
     Session(const QString &sessionId, const QString &name,
             const QDateTime &created, const QDateTime &accessed);
 
-    ~Session();
-
     QList<MessagePtr> messageList() const;
     void addMessage(const MessagePtr &msgPtr);
 
