@@ -51,13 +51,13 @@ void SystemMessageWidget::synchronizeCurrentSession()
 {
     auto sessionId = pageContext()->currentSessionId();
 
-    qDebug() << "SYSTEM MESSAGE SESSION ID:" << sessionId;
+//    qDebug() << "SYSTEM MESSAGE SESSION ID:" << sessionId;
 
     auto session = gSessions->session(sessionId);
 //    auto msg = session->systemMessage();
     auto character = session->character();
 
-    qDebug() << "SYSTEM MESSAGE:" << character.fullMessage();
+//    qDebug() << "SYSTEM MESSAGE:" << character.fullMessage();
 
     ui->textEdit->setText(character.message());
 
