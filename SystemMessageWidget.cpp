@@ -67,8 +67,10 @@ void SystemMessageWidget::synchronizeCurrentSession()
 
 void SystemMessageWidget::onSessionCreatedSpecific(int pageIndex, const QString &newSessionId)
 {
+    Q_UNUSED(pageIndex)
+    Q_UNUSED(newSessionId)
     // the character will be changed by synchronizeCurrentSession
-    qDebug() << "SystemMessageWidget CREATE SESSION ON PAGE:" << pageIndex << "NEW SESSION:" << newSessionId;
+//    qDebug() << "SystemMessageWidget CREATE SESSION ON PAGE:" << pageIndex << "NEW SESSION:" << newSessionId;
 }
 
 void SystemMessageWidget::showEvent(QShowEvent *event)
