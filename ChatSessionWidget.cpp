@@ -33,8 +33,8 @@ ChatSessionWidget::~ChatSessionWidget()
 
 void ChatSessionWidget::synchronizeCurrentSession()
 {
-    qDebug() << "CHAT SESSION SESSION ID:" << pageContext()->currentSessionId();
-    qWarning() << "ChatSessionWidget::synchronize should not be called (?)";
+//    qDebug() << "CHAT SESSION SESSION ID:" << pageContext()->currentSessionId();
+//    qWarning() << "ChatSessionWidget::synchronize should not be called (?)";
 }
 
 void ChatSessionWidget::onSessionCreatedSpecific(int pageIndex, const QString &newSessionId)

@@ -274,7 +274,9 @@ void ChatWidget::synchronizeCurrentSession()
 
 void ChatWidget::onSessionCreatedSpecific(int pageIndex, const QString &newSessionId)
 {
-    qDebug() << "ChatWidget CREATE SESSION ON PAGE:" << pageIndex << "NEW SESSION:" << newSessionId;
+    Q_UNUSED(pageIndex)
+    Q_UNUSED(newSessionId)
+//    qDebug() << "ChatWidget CREATE SESSION ON PAGE:" << pageIndex << "NEW SESSION:" << newSessionId;
 }
 
 void ChatWidget::on_newSessionButton_clicked()

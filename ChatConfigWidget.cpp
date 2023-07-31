@@ -67,8 +67,10 @@ void ChatConfigWidget::synchronizeCurrentSession()
 
 void ChatConfigWidget::onSessionCreatedSpecific(int pageIndex, const QString &newSessionId)
 {
+    Q_UNUSED(pageIndex)
+    Q_UNUSED(newSessionId)
     // TODO: implement in case of model per session
-    qDebug() << "ChatConfigWidget CREATE SESSION ON PAGE:" << pageIndex << "NEW SESSION:" << newSessionId;
+//    qDebug() << "ChatConfigWidget CREATE SESSION ON PAGE:" << pageIndex << "NEW SESSION:" << newSessionId;
 }
 
 void ChatConfigWidget::updateElements(bool updateModelName)
