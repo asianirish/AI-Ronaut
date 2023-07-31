@@ -59,9 +59,9 @@ void SessionManager::addMessage(MessagePtr msgPtr, const QString &sessionId)
     session(sessionId)->addMessage(msgPtr);
 }
 
-void SessionManager::addCharacter(const Character &character, const QString &sessionId)
+void SessionManager::addCharacter(const Character &character, const QString &sessionId, bool doTouch)
 {
-    session(sessionId)->setCharacter(character);
+    session(sessionId)->setCharacter(character, doTouch);
 }
 
 void SessionManager::onQuit()
@@ -120,9 +120,11 @@ void SessionManager::select()
             auto pCharacter = gCharacters->character(characterId);
 
             if (pCharacter) {
-                addCharacter(*pCharacter, sessionId);
+                addCharacter(*pCharacter, sessionId, false);
             }
         }
+
+        // TODO: load messages?
     }
 }
 

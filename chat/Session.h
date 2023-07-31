@@ -59,7 +59,7 @@ public:
     void deleteMessage(MessagePtr msgPtr);
     
     Character character() const;
-    void setCharacter(const Character &newCharacter);
+    void setCharacter(const Character &newCharacter, bool doTouch = true);
 
     void setCreated(const QDateTime &newCreated);
 

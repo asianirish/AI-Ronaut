@@ -31,7 +31,7 @@ public:
 
     void addMessage(MessagePtr msgPtr, const QString &sessionId);
     
-    void addCharacter(const Character &character, const QString &sessionId);
+    void addCharacter(const Character &character, const QString &sessionId, bool doTouch = true);
 
     void saveAsTextFile(const QString &sessionId) const;
     void save(const QString &sessionId) const;

@@ -275,10 +275,13 @@ Character Session::character() const
     return _character;
 }
 
-void Session::setCharacter(const Character &newCharacter)
+void Session::setCharacter(const Character &newCharacter, bool doTouch)
 {
     _character = newCharacter;
-    _accessed = QDateTime::currentDateTime();
+
+    if (doTouch) {
+        touch();
+    }
 }
 
 } // namespace chat
