@@ -19,7 +19,7 @@ Session::Session() : _isPersistent(false)
     _uuid = QUuid::createUuid();
     _name = _created.toString("yyyyMMddhhmmss");
 
-    qDebug() << "\nCREATING SESSION:" << _uuid << "\n";
+    qDebug() << "\nTEST CREATING SESSION ():" << _uuid << "\n";
 }
 
 Session::Session(const QString &sessionId, const QString &name) :
