@@ -94,9 +94,13 @@ void SessionManager::select()
 
     QSqlQuery query("SELECT uuid, character_id, name, created, accessed  FROM sessions ORDER BY accessed DESC");
 
-
-    while (query.next()) { // TODO: error?
+    while (query.next()) {
         QString sessionId = query.value(0).toString();
+
+        // prevent sessions from being recreated
+        if (_sessions.contains(sessionId)) {
+            continue;
+        }
 
         QVariant characterIdVar = query.value(1);
         int characterId = characterIdVar.isValid() ? query.value(1).toInt() : 0; // if NULL
@@ -105,14 +109,7 @@ void SessionManager::select()
         QDateTime created = query.value(3).toDateTime();
         QDateTime accessed = query.value(4).toDateTime();
 
-        // TODO: protect from recreating!
-        SessionPtr session = SessionPtr(new Session(sessionId, name));
-
-        // TODO: already set in the constructor, not sence
-        session->setCreated(created);
-        session->setAccessed(accessed);
-
-        session->setIsPersistent(true);
+        SessionPtr session = SessionPtr(new Session(sessionId, name, created, accessed));
 
         _sessions.insert(sessionId, session);
 
