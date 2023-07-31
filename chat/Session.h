@@ -21,7 +21,8 @@ public:
     Session();
 
     // for select
-    Session(const QString &sessionId, const QString &name);
+    Session(const QString &sessionId, const QString &name,
+            const QDateTime &created, const QDateTime &accessed);
 
     ~Session();
 

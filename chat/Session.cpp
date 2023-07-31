@@ -22,13 +22,14 @@ Session::Session() : _isPersistent(false)
     qDebug() << "\nTEST CREATING SESSION ():" << _uuid << "\n";
 }
 
-Session::Session(const QString &sessionId, const QString &name) :
+Session::Session(const QString &sessionId, const QString &name, const QDateTime &created, const QDateTime &accessed) :
     _uuid(QUuid(sessionId)),
-    _name(name)
-
+    _name(name),
+    _created(created),
+    _accessed(accessed),
+    _isPersistent(true)
 {
-    _created = QDateTime::currentDateTime();
-    _accessed = _created;
+
 }
 
 Session::~Session()
