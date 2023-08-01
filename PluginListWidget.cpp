@@ -108,7 +108,10 @@ void PluginListWidget::on_registerPluginButton_clicked()
     // TODO: check online
     QMessageBox::StandardButton reply;
     reply = QMessageBox::warning(this, tr("Plugin"),
-                                  tr("Registering this plugin can be potentially dangerouss. Continue?"),
+                                  tr("Registering this plugin can be potentially dangerouss.\n\n"
+                                    "Ensure that you have received the file from a reliable source "
+                                    "or compiled it from verified source codes.\n\n"
+                                    "Continue?"),
                                   QMessageBox::Yes|QMessageBox::No);
     if (reply != QMessageBox::Yes) {
         return;
