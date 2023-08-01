@@ -60,6 +60,9 @@ SOURCES += \
     oaic/ModelContext.cpp \
     oaic/Models.cpp \
     oaic/MsgData.cpp \
+    plg_source/Info.cpp \
+    plg_source/Record.cpp \
+    plg_source/Version.cpp \
     util/gfunc.cpp
 
 HEADERS += \
@@ -104,6 +107,9 @@ HEADERS += \
     oaic/ModelContext.h \
     oaic/Models.h \
     oaic/MsgData.h \
+    plg_source/Info.h \
+    plg_source/Record.h \
+    plg_source/Version.h \
     util/OrderedMap.h \
     util/gfunc.h
 
