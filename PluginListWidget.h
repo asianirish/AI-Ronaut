@@ -31,7 +31,7 @@ private:
     QSqlTableModel *_model;
 
 private:
-
+    plg::Info loadPluginInfo(const QString &filePath);
 };
 
 #endif // PLUGINLISTWIDGET_H

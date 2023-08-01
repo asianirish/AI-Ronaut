@@ -185,3 +185,23 @@ void PluginListWidget::on_unregisterPluginButton_clicked()
     // TODO: implement
 }
 
+plg::Info PluginListWidget::loadPluginInfo(const QString &filePath)
+{
+#ifdef Q_OS_WIN
+    QPluginLoader pluginLoader(filePath);
+#elif defined(Q_OS_LINUX)
+    QPluginLoader pluginLoader(filePath);
+#endif
+
+    QObject *plugin = pluginLoader.instance();
+
+    IRootObject* rootObject = qobject_cast<IRootObject *>(plugin);
+
+    if (rootObject) {
+        auto info = rootObject->pluginInfo();
+        qDebug() << "INFO:" << info.name() << info.desc() << info.author() << info.version();
+        return info;
+    }
+
+    return plg::Info();
+}
