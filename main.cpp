@@ -86,8 +86,11 @@ bool maybeCreateDb() {
 
     if (!query.exec("CREATE TABLE IF NOT EXISTS plugins ("
                     "id INTEGER PRIMARY KEY AUTOINCREMENT, "
-                    "name VARCHAR(64) NOT NULL UNIQUE, "
+                    "file VARCHAR(64) NOT NULL UNIQUE, "
+                    "name VARCHAR(64), "
+                    "desc TEXT, "
                     "author TEXT NOT NULL, "
+                    "version VARCHAR(16), "
                     "hash BLOB"
                     ")")) {
         qDebug() << "error creating plugins:" << query.lastError().text();

@@ -1,6 +1,8 @@
 #include "PluginListWidget.h"
 #include "ui_PluginListWidget.h"
 
+#include "plg_source/IRootObject.h"
+
 #include <QFileDialog>
 
 #include <QCryptographicHash>
@@ -8,6 +10,8 @@
 #include <QSqlError>
 
 #include <QMessageBox>
+
+#include <QPluginLoader>
 
 QByteArray calculateFileHash(const QString& filePath, QCryptographicHash::Algorithm hashAlgorithm)
 {
@@ -41,7 +45,7 @@ PluginListWidget::PluginListWidget(QWidget *parent) :
 
     ui->tableView->setModel(_model);
     ui->tableView->setColumnHidden(0, true);
-    ui->tableView->setColumnHidden(3, true);
+    ui->tableView->setColumnHidden(6, true);
 
     _model->select();
     resizeToContent();
@@ -75,20 +79,9 @@ void PluginListWidget::on_openPluginButton_clicked()
         QMessageBox::information(this, tr("Plugins"), tr("Please, select a plugin"));
     }
 
-//#ifdef Q_OS_WIN
-//    QPluginLoader pluginLoader("plg/ExamplePlugin.dll");
-//#elif defined(Q_OS_LINUX)
-//    QPluginLoader pluginLoader("plg/ExamplePlugin.so");
-//#endif
 
-//    QObject *plugin = pluginLoader.instance();
 
-//    IRootObject* rootObject = qobject_cast<IRootObject *>(plugin);
 
-//    if (rootObject) {
-//        rootObject->doIt();
-//    }
-    emit openExamplePlugin();
 }
 
 
@@ -133,18 +126,31 @@ void PluginListWidget::on_registerPluginButton_clicked()
         return;
     }
 
+    auto info = loadPluginInfo(filePath);
+
     QSqlQuery query;
 
     // TODO: insert or update
-    QString queryString("INSERT OR REPLACE INTO plugins ('name', 'author', 'hash') "
-                        "VALUES(:name, "
-                        "'asianirish@gmail.com', " // TODO: from the resources?
+    QString queryString("INSERT OR REPLACE INTO plugins ('file', 'name', 'desc', 'author', 'version', 'hash') "
+                        "VALUES(:file, "
+                        ":name, "
+                        ":desc, "
+                        ":author, "
+                        ":version, "
                         ":hash)");
 
     query.prepare(queryString);
 
-    query.bindValue(":name", fileName);
+    query.bindValue(":file", fileName);
+
+    query.bindValue(":name", info.name());
+    query.bindValue(":desc", info.desc());
+    query.bindValue(":author", info.author());
+    query.bindValue(":version", info.version().toString());
+
     query.bindValue(":hash", hash);
+
+    // TODO: read the author
 
     QSqlDatabase db = QSqlDatabase::database();
 
@@ -176,8 +182,8 @@ void PluginListWidget::on_registerPluginButton_clicked()
 
     db.commit();
 
-
     _model->select();
+    resizeToContent();
 }
 
 
