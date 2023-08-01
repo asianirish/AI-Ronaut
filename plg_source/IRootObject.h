@@ -1,6 +1,8 @@
 #ifndef IROOTOBJECT_H
 #define IROOTOBJECT_H
 
+#include "Info.h"
+
 #include <PageWidget.h>
 
 #include <QObject>
@@ -12,7 +14,7 @@ public:
 
     virtual PageWidget *createPageWidget(QWidget *parent) const = 0;
 
-    virtual QString author() const = 0;
+    virtual plg::Info pluginInfo() const = 0;
 };
 
 Q_DECLARE_INTERFACE(IRootObject, "org.asianirish.IRootObject")

@@ -16,7 +16,7 @@ public:
 
     PageWidget *createPageWidget(QWidget *parent) const override;
 
-    QString author() const;
+    plg::Info pluginInfo() const override;
 
 signals:
 

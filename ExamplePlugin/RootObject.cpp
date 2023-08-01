@@ -19,7 +19,18 @@ PageWidget *RootObject::createPageWidget(QWidget *parent) const
     return new ExamplePluginPageWidget(parent);
 }
 
-QString RootObject::author() const
+plg::Info RootObject::pluginInfo() const
 {
-    return QString("asianirish@gmail.com")
+    plg::Info info;
+    info.setName("Example Plugin");
+    info.setDesc("The plugin is designed to illustrate the process of connecting to and using the plugin mechanism within the AI-ronaut software");
+    info.setAuthor("asianirish@gmail.com");
+    info.setVersion(plg::Version("1.0.0"));
+
+    return info;
 }
+
+//QString RootObject::author() const
+//{
+//    return QString("asianirish@gmail.com");
+//}
