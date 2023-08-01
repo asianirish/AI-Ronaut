@@ -1,6 +1,8 @@
 #ifndef PLUGINLISTWIDGET_H
 #define PLUGINLISTWIDGET_H
 
+#include "plg_source/Info.h"
+
 #include <QWidget>
 #include <QSqlTableModel>
 
@@ -32,6 +34,7 @@ private:
 
 private:
     plg::Info loadPluginInfo(const QString &filePath);
+    void resizeToContent();
 };
 
 #endif // PLUGINLISTWIDGET_H

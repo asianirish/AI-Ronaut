@@ -44,6 +44,7 @@ PluginListWidget::PluginListWidget(QWidget *parent) :
     ui->tableView->setColumnHidden(3, true);
 
     _model->select();
+    resizeToContent();
 
 //    _model->setEditStrategy(QSqlTableModel::OnFieldChange);
 
@@ -205,3 +206,12 @@ plg::Info PluginListWidget::loadPluginInfo(const QString &filePath)
 
     return plg::Info();
 }
+
+void PluginListWidget::resizeToContent()
+{
+    ui->tableView->resizeColumnToContents(1);
+    ui->tableView->resizeColumnToContents(2);
+    ui->tableView->resizeColumnToContents(4);
+    ui->tableView->resizeColumnToContents(5);
+}
+
