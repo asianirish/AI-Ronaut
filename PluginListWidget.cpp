@@ -142,6 +142,14 @@ void PluginListWidget::on_registerPluginButton_clicked()
 
     qDebug() << "destFilePath" << destFilePath;
 
+    if (QFile::exists(destFilePath)) {
+        if (!QFile::remove(destFilePath)) {
+            qDebug() << "FILE REMOVING ERROR";
+            db.rollback();
+            return;
+        }
+    }
+
     bool success = QFile::copy(filePath, destFilePath);
     if (!success)
     {
