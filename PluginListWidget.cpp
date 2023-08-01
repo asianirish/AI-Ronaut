@@ -57,7 +57,22 @@ PluginListWidget::~PluginListWidget()
 
 void PluginListWidget::on_openPluginButton_clicked()
 {
-//    qDebug() << "CURRENT PATH:" << QCoreApplication::applicationDirPath();
+    auto selectionModel = ui->tableView->selectionModel();
+
+    if (selectionModel->hasSelection()) {
+        auto rowList = selectionModel->selectedRows(1);
+
+        auto firstIndex = rowList.first();
+
+        auto pluginName = firstIndex.data().toString();
+
+        qDebug() << "Plugin name:" << pluginName;
+
+        // TODO: emit openPluginName(pluginName);
+        emit openExamplePlugin();
+    } else {
+        QMessageBox::information(this, tr("Plugins"), tr("Please, select a plugin"));
+    }
 
 //#ifdef Q_OS_WIN
 //    QPluginLoader pluginLoader("plg/ExamplePlugin.dll");
