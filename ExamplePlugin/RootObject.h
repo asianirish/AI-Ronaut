@@ -12,9 +12,9 @@ class RootObject : public QObject, public IRootObject
 public:
     explicit RootObject(QObject *parent = nullptr);
 
-    void doIt() const;
+    void doIt() const override;
 
-    PageWidget *createPageWidget(QWidget *parent) const;
+    PageWidget *createPageWidget(QWidget *parent) const override;
 
     QString author() const;
 
