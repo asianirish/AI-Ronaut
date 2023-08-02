@@ -255,3 +255,36 @@ QMap<QString, QString> PluginListWidget::mapPluginValues(const QItemSelectionMod
 
     return retMap;
 }
+
+void PluginListWidget::on_tableView_doubleClicked(const QModelIndex &index)
+{
+    auto model = index.model();
+
+
+    QMap<QString, int> mp = mapHeaderNames(model);
+
+    QModelIndex fileIndex = model->index(index.row(), mp.value("file"));
+    auto file = model->data(fileIndex).toString();
+
+    QModelIndex nameIndex = model->index(index.row(), mp.value("name"));
+    auto name = model->data(nameIndex).toString();
+
+    QModelIndex descIndex = model->index(index.row(), mp.value("desc"));
+    auto desc = model->data(descIndex).toString();
+
+    QModelIndex authorIndex = model->index(index.row(), mp.value("author"));
+    auto author = model->data(authorIndex).toString();
+
+    QModelIndex versionIndex = model->index(index.row(), mp.value("version"));
+    auto version = model->data(versionIndex).toString();
+
+    QString destinationDir("plg");
+    QString filePath = destinationDir + QDir::separator() + file;
+
+    PluginDialog dlg;
+
+    // TODO: set plg::Info
+
+    dlg.exec(); // TODO: if
+}
+
