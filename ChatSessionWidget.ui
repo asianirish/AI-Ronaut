@@ -83,6 +83,9 @@
       </item>
       <item>
        <widget class="QPushButton" name="saveAsTextFileButton">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
         <property name="text">
          <string>Save As Text File</string>
         </property>
@@ -90,8 +93,11 @@
       </item>
       <item>
        <widget class="QPushButton" name="saveButton">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
         <property name="text">
-         <string>Save</string>
+         <string>Save the session</string>
         </property>
        </widget>
       </item>
