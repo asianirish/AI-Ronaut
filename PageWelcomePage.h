@@ -3,6 +3,8 @@
 
 #include "PageWidget.h"
 
+#include "plg_source/Info.h"
+
 
 namespace Ui {
 class PageWelcomePage;
@@ -43,7 +45,7 @@ signals:
     void openPlotAction();
 //    void openNetworkConfigAction();
 
-    void openExamplePluginAction();
+    void openPluginAction(const QString &filePath, const plg::Info &plgInfo);
 
 protected:
     void synchronizeClient(oaic::Manager *_client) override;

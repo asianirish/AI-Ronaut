@@ -1,6 +1,8 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include "plg_source/Info.h"
+
 #include <oaic/Manager.h>
 
 #include <QMainWindow>
@@ -26,7 +28,7 @@ private slots:
     void onOpenPlot();
     void on_tabWidget_tabCloseRequested(int index);
 
-    void onOpenExamplPlugin();
+    void onOpenPlugin(const QString &filePath, const plg::Info &plgInfo);
 
 private:
     Ui::MainWindow *ui;

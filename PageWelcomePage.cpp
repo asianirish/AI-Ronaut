@@ -41,7 +41,7 @@ PageWelcomePage::PageWelcomePage(QWidget *parent) :
 
     displayWait();
 
-    connect(ui->pluginListWidget, &PluginListWidget::openExamplePlugin, this, &PageWelcomePage::openExamplePluginAction);
+    connect(ui->pluginListWidget, &PluginListWidget::openPlugin, this, &PageWelcomePage::openPluginAction);
 }
 
 PageWelcomePage::~PageWelcomePage()

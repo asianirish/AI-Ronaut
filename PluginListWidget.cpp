@@ -3,6 +3,8 @@
 
 #include "plg_source/IRootObject.h"
 
+#include "PluginDialog.h"
+
 #include <QFileDialog>
 
 #include <QCryptographicHash>
@@ -65,23 +67,24 @@ void PluginListWidget::on_openPluginButton_clicked()
     auto selectionModel = ui->tableView->selectionModel();
 
     if (selectionModel->hasSelection()) {
-        auto rowList = selectionModel->selectedRows(1);
+        QMap<QString, QString> mp = mapPluginValues(selectionModel);
 
-        auto firstIndex = rowList.first();
+        QString destinationDir("plg");
+        QString filePath = destinationDir + QDir::separator() + mp.value("file");
 
-        auto pluginName = firstIndex.data().toString();
+        plg::Info plgInfo;
+        plgInfo.setName(mp.value("name"));
+        plgInfo.setDesc(mp.value("desc"));
+        plgInfo.setAuthor(mp.value("author"));
+        plgInfo.setVersion(plg::Version(mp.value("version")));
 
-        qDebug() << "Plugin name:" << pluginName;
+        qDebug() << "Plugin:" << filePath << mp.value("name") << mp.value("desc") << mp.value("author") << mp.value("version");
 
-        // TODO: emit openPluginName(pluginName);
-        emit openExamplePlugin();
+        emit openPlugin(filePath, plgInfo);
+
     } else {
         QMessageBox::information(this, tr("Plugins"), tr("Please, select a plugin"));
     }
-
-
-
-
 }
 
 
@@ -205,7 +208,7 @@ plg::Info PluginListWidget::loadPluginInfo(const QString &filePath)
     IRootObject* rootObject = qobject_cast<IRootObject *>(plugin);
 
     if (rootObject) {
-        auto info = rootObject->pluginInfo();
+        plg::Info info = rootObject->pluginInfo();
         qDebug() << "INFO:" << info.name() << info.desc() << info.author() << info.version();
         return info;
     }
@@ -221,3 +224,34 @@ void PluginListWidget::resizeToContent()
     ui->tableView->resizeColumnToContents(5);
 }
 
+QMap<QString, int> PluginListWidget::mapHeaderNames(const QAbstractItemModel *mdl) const
+{
+    QMap<QString, int> mp;
+    int count = mdl->columnCount();
+
+    for (int i = 0; i < count; i++) {
+        QString hdr = mdl->headerData(i, Qt::Horizontal).toString();
+        mp.insert(hdr, i);
+    }
+
+    return mp;
+}
+
+QMap<QString, QString> PluginListWidget::mapPluginValues(const QItemSelectionModel *selectionModel) const
+{
+    QMap<QString, QString> retMap;
+
+    auto mdl = selectionModel->model();
+    QMap<QString, int> mp = mapHeaderNames(mdl);
+
+    auto headerNames = mp.keys();
+
+    for (auto &key : headerNames) {
+        auto valueList = selectionModel->selectedRows(mp.value(key));
+        auto value = valueList.first().data().toString();
+
+        retMap.insert(key, value);
+    }
+
+    return retMap;
+}

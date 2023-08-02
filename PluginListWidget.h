@@ -5,6 +5,7 @@
 
 #include <QWidget>
 #include <QSqlTableModel>
+#include <QItemSelectionModel>
 
 namespace Ui {
 class PluginListWidget;
@@ -18,7 +19,7 @@ public:
     ~PluginListWidget();
 
 signals:
-    void openExamplePlugin();
+    void openPlugin(const QString &filePath, const plg::Info &plgInfo);
 
 private slots:
     void on_openPluginButton_clicked();
@@ -35,6 +36,9 @@ private:
 private:
     plg::Info loadPluginInfo(const QString &filePath);
     void resizeToContent();
+
+    QMap<QString, int> mapHeaderNames(const QAbstractItemModel *mdl) const;
+    QMap<QString, QString> mapPluginValues(const QItemSelectionModel *selectionModel) const;
 };
 
 #endif // PLUGINLISTWIDGET_H

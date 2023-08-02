@@ -35,7 +35,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(welcomePage, &PageWelcomePage::openPlotAction, this, &MainWindow::onOpenPlot);
 //    connect(welcomePage, &PageWelcomePage::openNetworkConfigAction, this, &MainWindow::onOpenNetworkConfig);
 
-    connect(welcomePage, &PageWelcomePage::openExamplePluginAction, this, &MainWindow::onOpenExamplPlugin);
+    connect(welcomePage, &PageWelcomePage::openPluginAction, this, &MainWindow::onOpenPlugin);
 }
 
 MainWindow::~MainWindow()
@@ -97,12 +97,12 @@ void MainWindow::on_tabWidget_tabCloseRequested(int index)
     }
 }
 
-void MainWindow::onOpenExamplPlugin()
+void MainWindow::onOpenPlugin(const QString &filePath, const plg::Info &plgInfo)
 {
 #ifdef Q_OS_WIN
-    QPluginLoader pluginLoader("plg/ExamplePlugin.dll");
+    QPluginLoader pluginLoader(filePath);
 #elif defined(Q_OS_LINUX)
-    QPluginLoader pluginLoader("plg/ExamplePlugin.so");
+    QPluginLoader pluginLoader(filePath);
 #endif
 
     QObject *plugin = pluginLoader.instance();
@@ -110,9 +110,9 @@ void MainWindow::onOpenExamplPlugin()
     IRootObject* rootObject = qobject_cast<IRootObject *>(plugin);
 
     if (rootObject) {
-//        rootObject->doIt();
+        //        rootObject->doIt();
         auto specificPage = rootObject->createPageWidget(this);
-        int index = ui->tabWidget->addTab(specificPage, tr("Example Plugin"));
+        int index = ui->tabWidget->addTab(specificPage, plgInfo.name() + " v" + plgInfo.version());
         ui->tabWidget->setCurrentIndex(index);
     }
 }
