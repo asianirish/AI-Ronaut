@@ -73,6 +73,12 @@ chat::SessionItem* ChatSessionWidget::findItemBySessionId(const QString &session
     return nullptr;
 }
 
+void ChatSessionWidget::enableOrDisableControls(bool isChanged)
+{
+    ui->saveAsTextFileButton->setEnabled(isChanged);
+    ui->saveButton->setEnabled(isChanged);
+}
+
 void ChatSessionWidget::on_sessionListWidget_itemActivated(QListWidgetItem *item)
 {
     chat::SessionItem *sessionItem = dynamic_cast<chat::SessionItem *>(item);

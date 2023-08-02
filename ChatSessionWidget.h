@@ -30,6 +30,8 @@ private:
 
     chat::SessionItem *findItemBySessionId(const QString& sessionId);
 
+    void enableOrDisableControls(bool isChanged);
+
 signals:
 
 
