@@ -2,6 +2,8 @@
 
 #include "chat/SessionManager.h"
 
+#include "plg_source/Info.h"
+
 #include <ModelContext.h>
 
 #include <QApplication>
@@ -110,6 +112,7 @@ int main(int argc, char *argv[])
     QCoreApplication::setApplicationName("ai-ronaut");
 
     qRegisterMetaType<oaic::ModelContext>();
+    qRegisterMetaType<plg::Info>();
 
     QObject::connect(&a, &QApplication::aboutToQuit, gSessions, &chat::SessionManager::onQuit);
 

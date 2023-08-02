@@ -3,6 +3,8 @@
 
 #include "Version.h"
 
+#include <QMetaType>
+
 namespace plg {
 
 class Info
@@ -30,5 +32,7 @@ private:
 };
 
 } // namespace plg
+
+Q_DECLARE_METATYPE(plg::Info)
 
 #endif // PLG_INFO_H
