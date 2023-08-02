@@ -15,8 +15,11 @@ public:
     explicit PluginDialog(QWidget *parent = nullptr);
     ~PluginDialog();
 
+    QString fileName() const;
+    void setFileName(const QString &newFileName);
 private:
     Ui::PluginDialog *ui;
+    QString _fileName;
 };
 
 #endif // PLUGINDIALOG_H

@@ -283,6 +283,8 @@ void PluginListWidget::on_tableView_doubleClicked(const QModelIndex &index)
 
     PluginDialog dlg;
 
+    dlg.setFileName(filePath);
+
     // TODO: set plg::Info
 
     dlg.exec(); // TODO: if

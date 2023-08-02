@@ -12,3 +12,21 @@ PluginDialog::~PluginDialog()
 {
     delete ui;
 }
+
+QString PluginDialog::fileName() const
+{
+    return _fileName;
+}
+
+void PluginDialog::setFileName(const QString &newFileName)
+{
+    _fileName = newFileName;
+
+    QFileInfo info(_fileName);
+
+    auto absPath = info.absoluteFilePath();
+
+    qDebug() << "PATH:" << absPath;
+
+    ui->fileEdit->setText(absPath);
+}
