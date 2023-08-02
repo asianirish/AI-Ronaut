@@ -37,6 +37,7 @@ SOURCES += \
     PagePlotPage.cpp \
     PageWelcomePage.cpp \
     PageWidget.cpp \
+    PluginDialog.cpp \
     PluginListWidget.cpp \
     SystemMessageWidget.cpp \
     UserMessageItemWidget.cpp \
@@ -86,6 +87,7 @@ HEADERS += \
     PagePlotPage.h \
     PageWelcomePage.h \
     PageWidget.h \
+    PluginDialog.h \
     PluginListWidget.h \
     SystemMessageWidget.h \
     UserMessageItemWidget.h \
@@ -127,6 +129,7 @@ FORMS += \
     PageImagePage.ui \
     PagePlotPage.ui \
     PageWelcomePage.ui \
+    PluginDialog.ui \
     PluginListWidget.ui \
     SystemMessageWidget.ui \
     UserMessageItemWidget.ui

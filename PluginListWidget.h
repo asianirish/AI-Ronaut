@@ -28,6 +28,8 @@ private slots:
 
     void on_unregisterPluginButton_clicked();
 
+    void on_tableView_doubleClicked(const QModelIndex &index);
+
 private:
     Ui::PluginListWidget *ui;
 
