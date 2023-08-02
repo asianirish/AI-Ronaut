@@ -1,6 +1,8 @@
 #include "PluginDialog.h"
 #include "ui_PluginDialog.h"
 
+#include <QFileInfo>
+
 PluginDialog::PluginDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::PluginDialog)
