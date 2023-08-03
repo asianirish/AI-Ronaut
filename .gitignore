@@ -7,4 +7,4 @@ build-ExamplePlugin*/*
 ai-ronaut.db
 ai-ronaut_client*
 *.log
-plg_dest/*
+plg_shared/*

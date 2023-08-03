@@ -13,7 +13,7 @@ CONFIG += c++17
 
 INCLUDEPATH += "../"
 
-DESTDIR = "$$PWD/../plg_dest"
+DESTDIR = "$$PWD/../plg_shared"
 OBJECTS_DIR = "$$PWD/../../BuildExamplePlugin"
 
 CONFIG(debug, debug|release) {
