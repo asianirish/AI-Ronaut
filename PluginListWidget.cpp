@@ -93,7 +93,7 @@ void PluginListWidget::on_registerPluginButton_clicked()
     QDir dir;
 
 //    destinationPath.append(QDir::separator()).append(filename);
-    QString destinationDir("plg");
+    QString destinationDir(PLUGIN_DIR);
 
     if (!dir.exists(destinationDir)) {
         dir.mkpath(destinationDir);
@@ -156,6 +156,8 @@ void PluginListWidget::on_registerPluginButton_clicked()
     // TODO: read the author
 
     QSqlDatabase db = QSqlDatabase::database();
+
+    db.transaction();
 
     if (!query.exec()) {
         qDebug() << "error creating a plugin:" << query.lastError().text();
