@@ -333,6 +333,42 @@ void PluginListWidget::on_tableView_doubleClicked(const QModelIndex &index)
 
     // TODO: set plg::Info
 
+void PluginListWidget::on_propertiesButton_clicked()
+{
+    auto selectionModel = ui->tableView->selectionModel();
+
+    if (selectionModel->hasSelection()) {
+        QMap<QString, QByteArray> mp = mapPluginValues(selectionModel);
+
+        QString destinationDir(PLUGIN_DIR);
+        QString filePath = destinationDir + QDir::separator() + mp.value("file");
+
+        if (!checkFileHash(filePath, mp.value("hash"))) {
+            displayPluginAuthenticationError();
+            return;
+        }
+
+        plg::Info plgInfo;
+        plgInfo.setName(mp.value("name"));
+        plgInfo.setDesc(mp.value("desc"));
+        plgInfo.setAuthor(mp.value("author"));
+        plgInfo.setVersion(plg::Version(QString(mp.value("version"))));
+
+        PluginDialog dlg;
+
+        dlg.setFileName(filePath);
+        dlg.setPluginInfo(plgInfo);
+
+        if (dlg.exec() == QDialog::Accepted) {
+            emit openPlugin(filePath, plgInfo);
+        }
+
+    } else {
+        QMessageBox::information(this, tr("Plugins"), tr("Please, select a plugin"));
+    }
+}
+
+
     dlg.exec(); // TODO: if
 }
 

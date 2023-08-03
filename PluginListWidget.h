@@ -32,6 +32,8 @@ private slots:
 
     void on_tableView_doubleClicked(const QModelIndex &index);
 
+    void on_propertiesButton_clicked();
+
 private:
     Ui::PluginListWidget *ui;
 
