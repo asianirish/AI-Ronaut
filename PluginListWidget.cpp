@@ -310,6 +310,20 @@ bool PluginListWidget::deleteFromDb(int id)
     return true;
 }
 
+bool PluginListWidget::checkFileHash(const QString &filePath, const QByteArray &hash)
+{
+    QByteArray original = calculateFileHash(filePath, QCryptographicHash::Md5);
+    qDebug() << "ORIGINAL HASH:" << original.toHex();
+    qDebug() << "GIVEN HASH:" << hash.toHex();
+
+    return (hash == original);
+}
+
+void PluginListWidget::displayPluginAuthenticationError()
+{
+    QMessageBox::warning(this, tr("Plugin Authentication Error"), tr("You are attempting to open an unauthorized plugin. Access denied."));
+}
+
 void PluginListWidget::on_tableView_doubleClicked(const QModelIndex &index)
 {
     auto model = index.model();
@@ -332,11 +346,18 @@ void PluginListWidget::on_tableView_doubleClicked(const QModelIndex &index)
     QModelIndex versionIndex = model->index(index.row(), mp.value("version"));
     auto version = model->data(versionIndex).toString();
 
-    QString destinationDir("plg");
+    QModelIndex hashIndex = model->index(index.row(), mp.value("hash"));
+    auto hash = model->data(hashIndex).toByteArray();
+
+    QString destinationDir(PLUGIN_DIR);
     QString filePath = destinationDir + QDir::separator() + file;
 
-    PluginDialog dlg;
+    if (!checkFileHash(filePath, hash)) {
+        displayPluginAuthenticationError();
+        return;
+    }
 
+    PluginDialog dlg;
     dlg.setFileName(filePath);
 
     // TODO: set plg::Info

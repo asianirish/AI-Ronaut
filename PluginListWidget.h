@@ -47,6 +47,10 @@ private:
     QMap<QString, QByteArray> mapPluginValues(const QItemSelectionModel *selectionModel) const;
 
     bool deleteFromDb(int id);
+
+    bool checkFileHash(const QString &filePath, const QByteArray &hash);
+
+    void displayPluginAuthenticationError();
 };
 
 #endif // PLUGINLISTWIDGET_H
