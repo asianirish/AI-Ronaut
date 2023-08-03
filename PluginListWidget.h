@@ -44,7 +44,7 @@ private:
     void resizeToContent();
 
     QMap<QString, int> mapHeaderNames(const QAbstractItemModel *mdl) const;
-    QMap<QString, QString> mapPluginValues(const QItemSelectionModel *selectionModel) const;
+    QMap<QString, QByteArray> mapPluginValues(const QItemSelectionModel *selectionModel) const;
 
     bool deleteFromDb(int id);
 };

@@ -67,18 +67,24 @@ void PluginListWidget::on_openPluginButton_clicked()
     auto selectionModel = ui->tableView->selectionModel();
 
     if (selectionModel->hasSelection()) {
-        QMap<QString, QString> mp = mapPluginValues(selectionModel);
+        QMap<QString, QByteArray> mp = mapPluginValues(selectionModel);
 
-        QString destinationDir("plg");
+        QString destinationDir(PLUGIN_DIR);
         QString filePath = destinationDir + QDir::separator() + mp.value("file");
+
+        if (!checkFileHash(filePath, mp.value("hash"))) {
+            displayPluginAuthenticationError();
+            return;
+        }
 
         plg::Info plgInfo;
         plgInfo.setName(mp.value("name"));
         plgInfo.setDesc(mp.value("desc"));
         plgInfo.setAuthor(mp.value("author"));
-        plgInfo.setVersion(plg::Version(mp.value("version")));
+        plgInfo.setVersion(plg::Version(QString(mp.value("version"))));
 
         qDebug() << "Plugin:" << filePath << mp.value("name") << mp.value("desc") << mp.value("author") << mp.value("version");
+        qDebug() << "HASH:" << mp.value("hash").toHex(' ');
 
         emit openPlugin(filePath, plgInfo);
 
@@ -267,9 +273,9 @@ QMap<QString, int> PluginListWidget::mapHeaderNames(const QAbstractItemModel *md
     return mp;
 }
 
-QMap<QString, QString> PluginListWidget::mapPluginValues(const QItemSelectionModel *selectionModel) const
+QMap<QString, QByteArray> PluginListWidget::mapPluginValues(const QItemSelectionModel *selectionModel) const
 {
-    QMap<QString, QString> retMap;
+    QMap<QString, QByteArray> retMap;
 
     auto mdl = selectionModel->model();
     QMap<QString, int> mp = mapHeaderNames(mdl);
@@ -278,7 +284,7 @@ QMap<QString, QString> PluginListWidget::mapPluginValues(const QItemSelectionMod
 
     for (auto &key : headerNames) {
         auto valueList = selectionModel->selectedRows(mp.value(key));
-        auto value = valueList.first().data().toString();
+        auto value = valueList.first().data().toByteArray();
 
         retMap.insert(key, value);
     }
