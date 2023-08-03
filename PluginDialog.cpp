@@ -23,6 +23,11 @@ plg::Info PluginDialog::pluginInfo() const
 void PluginDialog::setPluginInfo(const plg::Info &newPluginInfo)
 {
     _pluginInfo = newPluginInfo;
+
+    ui->nameEdit->setText(_pluginInfo.name());
+    ui->descTextEdit->setPlainText(_pluginInfo.desc());
+    ui->authorEdit->setText(_pluginInfo.author());
+    ui->versionEdit->setText(_pluginInfo.version());
 }
 
 QString PluginDialog::fileName() const
