@@ -15,6 +15,8 @@ class PluginListWidget : public QWidget
 {
     Q_OBJECT
 public:
+    const QString PLUGIN_DIR{".plg"};
+
     explicit PluginListWidget(QWidget *parent = nullptr);
     ~PluginListWidget();
 
@@ -41,6 +43,8 @@ private:
 
     QMap<QString, int> mapHeaderNames(const QAbstractItemModel *mdl) const;
     QMap<QString, QString> mapPluginValues(const QItemSelectionModel *selectionModel) const;
+
+    bool deleteFromDb(int id);
 };
 
 #endif // PLUGINLISTWIDGET_H

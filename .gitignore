@@ -1,9 +1,9 @@
 *.pro.user
 build-oaiclient*/*
 build-ExamplePlugin*/*
-plg/*.so
-plg/*.dll
-plg/lib*.a
+.plg/*.so
+.plg/*.dll
+.plg/lib*.a
 ai-ronaut.db
 ai-ronaut_client*
 *.log

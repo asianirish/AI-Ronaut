@@ -192,7 +192,35 @@ void PluginListWidget::on_registerPluginButton_clicked()
 
 void PluginListWidget::on_unregisterPluginButton_clicked()
 {
-    // TODO: implement
+    auto selectionModel = ui->tableView->selectionModel();
+
+    if (selectionModel->hasSelection()) {
+        QMap<QString, QByteArray> mp = mapPluginValues(selectionModel);
+
+        QString destinationDir(PLUGIN_DIR);
+        QString filePath = destinationDir + QDir::separator() + mp.value("file");
+
+        int id = mp.value("id").toInt();
+
+        qDebug() << "Plugin:" << filePath << id;
+
+        // delete a file & record
+        QSqlDatabase db = QSqlDatabase::database();
+        db.transaction();
+
+        if (!deleteFromDb(id)) {
+            return;
+        }
+
+        if (!QFile::remove(filePath)) {
+            db.rollback();
+        }
+
+        db.commit();
+        _model->select();
+    } else {
+        QMessageBox::information(this, tr("Plugins"), tr("Please, select a plugin"));
+    }
 }
 
 plg::Info PluginListWidget::loadPluginInfo(const QString &filePath)
@@ -254,6 +282,24 @@ QMap<QString, QString> PluginListWidget::mapPluginValues(const QItemSelectionMod
     }
 
     return retMap;
+}
+
+bool PluginListWidget::deleteFromDb(int id)
+{
+    QSqlQuery query;
+
+    // TODO: insert or update
+    QString queryString("DELETE FROM plugins WHERE id=:id");
+
+    query.prepare(queryString);
+    query.bindValue(":id", id);
+
+    if (!query.exec()) {
+        qDebug() << "error deleting a plugin:" << query.lastError().text();
+        return false;
+    }
+
+    return true;
 }
 
 void PluginListWidget::on_tableView_doubleClicked(const QModelIndex &index)
