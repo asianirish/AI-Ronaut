@@ -328,7 +328,6 @@ void PluginListWidget::on_tableView_doubleClicked(const QModelIndex &index)
 {
     auto model = index.model();
 
-
     QMap<QString, int> mp = mapHeaderNames(model);
 
     QModelIndex fileIndex = model->index(index.row(), mp.value("file"));
@@ -360,7 +359,18 @@ void PluginListWidget::on_tableView_doubleClicked(const QModelIndex &index)
     PluginDialog dlg;
     dlg.setFileName(filePath);
 
-    // TODO: set plg::Info
+    plg::Info plgInfo;
+    plgInfo.setName(name);
+    plgInfo.setDesc(desc);
+    plgInfo.setAuthor(author);
+    plgInfo.setVersion(plg::Version(version));
+
+    dlg.setPluginInfo(plgInfo);
+
+    if (dlg.exec() == QDialog::Accepted) {
+        emit openPlugin(filePath, plgInfo);
+    }
+}
 
 void PluginListWidget::on_propertiesButton_clicked()
 {
