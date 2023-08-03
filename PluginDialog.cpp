@@ -15,6 +15,16 @@ PluginDialog::~PluginDialog()
     delete ui;
 }
 
+plg::Info PluginDialog::pluginInfo() const
+{
+    return _pluginInfo;
+}
+
+void PluginDialog::setPluginInfo(const plg::Info &newPluginInfo)
+{
+    _pluginInfo = newPluginInfo;
+}
+
 QString PluginDialog::fileName() const
 {
     return _fileName;
