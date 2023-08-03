@@ -22,7 +22,11 @@
     </widget>
    </item>
    <item row="0" column="1">
-    <widget class="QLineEdit" name="fileEdit"/>
+    <widget class="QLineEdit" name="fileEdit">
+     <property name="readOnly">
+      <bool>true</bool>
+     </property>
+    </widget>
    </item>
    <item row="2" column="0">
     <widget class="QLabel" name="label_2">
@@ -39,7 +43,11 @@
     </widget>
    </item>
    <item row="5" column="0" colspan="2">
-    <widget class="QPlainTextEdit" name="descTextEdit"/>
+    <widget class="QPlainTextEdit" name="descTextEdit">
+     <property name="readOnly">
+      <bool>true</bool>
+     </property>
+    </widget>
    </item>
    <item row="7" column="0">
     <widget class="QLabel" name="label_4">
@@ -49,7 +57,11 @@
     </widget>
    </item>
    <item row="7" column="1">
-    <widget class="QLineEdit" name="authorEdit"/>
+    <widget class="QLineEdit" name="authorEdit">
+     <property name="readOnly">
+      <bool>true</bool>
+     </property>
+    </widget>
    </item>
    <item row="9" column="0" colspan="2">
     <widget class="QDialogButtonBox" name="buttonBox">
@@ -69,10 +81,18 @@
     </widget>
    </item>
    <item row="8" column="1">
-    <widget class="QLineEdit" name="versionEdit"/>
+    <widget class="QLineEdit" name="versionEdit">
+     <property name="readOnly">
+      <bool>true</bool>
+     </property>
+    </widget>
    </item>
    <item row="2" column="1">
-    <widget class="QLineEdit" name="nameEdit"/>
+    <widget class="QLineEdit" name="nameEdit">
+     <property name="readOnly">
+      <bool>true</bool>
+     </property>
+    </widget>
    </item>
   </layout>
  </widget>
