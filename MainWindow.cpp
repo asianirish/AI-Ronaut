@@ -7,7 +7,7 @@
 
 #include "NetworkConfiWidget.h"
 
-#include "plg_source/IRootObject.h"
+#include "plg/IRootObject.h"
 
 #include "ui_MainWindow.h"
 

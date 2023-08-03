@@ -1,7 +1,7 @@
 #include "PluginListWidget.h"
 #include "ui_PluginListWidget.h"
 
-#include "plg_source/IRootObject.h"
+#include "plg/IRootObject.h"
 
 #include "PluginDialog.h"
 

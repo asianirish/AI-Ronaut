@@ -2,7 +2,7 @@
 
 #include "chat/SessionManager.h"
 
-#include "plg_source/Info.h"
+#include "plg/Info.h"
 
 #include <ModelContext.h>
 

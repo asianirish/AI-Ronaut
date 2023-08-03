@@ -1,7 +1,7 @@
 #ifndef ROOTOBJECT_H
 #define ROOTOBJECT_H
 
-#include <plg_source/IRootObject.h>
+#include <plg/IRootObject.h>
 #include <QObject>
 
 class RootObject : public QObject, public IRootObject

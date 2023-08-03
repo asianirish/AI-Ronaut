@@ -48,9 +48,9 @@ SOURCES += \
     ../oaic/MsgData.cpp \
     ../oaic/TestChatConsumer.cpp \
     ../oaic/TestImageConsumer.cpp \
-    ../plg_source/Info.cpp \
-    ../plg_source/Record.cpp \
-    ../plg_source/Version.cpp \
+    ../plg/Info.cpp \
+    ../plg/Record.cpp \
+    ../plg/Version.cpp \
     ExamplePluginPageWidget.cpp \
     RootObject.cpp
 
@@ -67,10 +67,10 @@ HEADERS += \
     ../oaic/MsgData.h \
     ../oaic/TestChatConsumer.h \
     ../oaic/TestImageConsumer.h \
-    ../plg_source/IRootObject.h \
-    ../plg_source/Info.h \
-    ../plg_source/Record.h \
-    ../plg_source/Version.h \
+    ../plg/IRootObject.h \
+    ../plg/Info.h \
+    ../plg/Record.h \
+    ../plg/Version.h \
     ExamplePluginPageWidget.h \
     RootObject.h
 

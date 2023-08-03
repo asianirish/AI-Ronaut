@@ -3,7 +3,7 @@
 
 #include "PageWidget.h"
 
-#include "plg_source/Info.h"
+#include "plg/Info.h"
 
 
 namespace Ui {

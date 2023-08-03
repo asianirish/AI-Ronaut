@@ -1,7 +1,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include "plg_source/Info.h"
+#include "plg/Info.h"
 
 #include <oaic/Manager.h>
 
