@@ -372,6 +372,7 @@ void PluginListWidget::on_tableView_doubleClicked(const QModelIndex &index)
     }
 }
 
+
 void PluginListWidget::on_propertiesButton_clicked()
 {
     auto selectionModel = ui->tableView->selectionModel();
@@ -408,6 +409,28 @@ void PluginListWidget::on_propertiesButton_clicked()
 }
 
 
-    dlg.exec(); // TODO: if
+void PluginListWidget::on_filterEdit_textChanged(const QString &text)
+{
+    if (text.isEmpty()) {
+        _model->setFilter(QString());
+    }
+
+    QString filterText("file LIKE '%");
+    filterText += text;
+    filterText += "%'";
+
+    filterText += " OR name LIKE '%";
+    filterText += text;
+    filterText += "%'";
+
+    filterText += " OR desc LIKE '%";
+    filterText += text;
+    filterText += "%'";
+
+    filterText += " OR author LIKE '%";
+    filterText += text;
+    filterText += "%'";
+
+    _model->setFilter(filterText);
 }
 

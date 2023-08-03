@@ -1,7 +1,7 @@
 #ifndef PLUGINLISTWIDGET_H
 #define PLUGINLISTWIDGET_H
 
-#include "plg_source/Info.h"
+#include "plg/Info.h"
 
 #include <QWidget>
 #include <QSqlTableModel>
@@ -33,6 +33,8 @@ private slots:
     void on_tableView_doubleClicked(const QModelIndex &index);
 
     void on_propertiesButton_clicked();
+
+    void on_filterEdit_textChanged(const QString &text);
 
 private:
     Ui::PluginListWidget *ui;
