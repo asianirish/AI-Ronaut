@@ -55,15 +55,15 @@ void Component::onNetworkError(QNetworkReply::NetworkError code)
         if (code == 0) {
             msg = "No Error (redirect?)";
         } else if (code < 100) {
-            msg = "network layer errors";
+            msg = "Network layer errors";
         } else if (code < 200) {
-            msg = "proxy error";
+            msg = "Proxy error";
         } else if (code < 300) {
-            msg = "content error";
+            msg = "Content error";
         } else if (code < 400) {
-            msg = "protocol error";
+            msg = "Protocol error";
         } else {
-            msg = "server side error";
+            msg = "Server side error";
         }
 
         emit networkError(msg, code);
