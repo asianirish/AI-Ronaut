@@ -26,6 +26,48 @@ After successfully building the project, you need to set an environment variable
 
 A distinctive advantage of our C++ client lies in its ability to handle intensive computations on the client side, independent of the OpenAI API. This allows for significant performance benefits, particularly for applications that require high computational power and efficiency. As we move forward, we plan to further optimize and enhance this feature, to provide an even more powerful tool for your AI development needs.
 
+## Plugins
+
+### Overview
+
+Our application now supports third-party plugins in the form of dynamic libraries, both for Linux and Windows users. These plugins allow for enhanced flexibility and can be used to extend the functionality of the program. 
+
+### Creating a Plugin
+
+To create a plugin, developers need to create a class that inherits from the `IRootObject` interface class and override its virtual functions. 
+
+Here is an example:
+
+```cpp
+class RootObject : public QObject, public IRootObject
+{
+    Q_OBJECT
+    Q_PLUGIN_METADATA(IID "org.asianirish.IRootObject" FILE "ExamplePlugin.json")
+    Q_INTERFACES(IRootObject)
+public:
+    explicit RootObject(QObject *parent = nullptr);
+
+    void doIt() const override;
+
+    PageWidget *createPageWidget(QWidget *parent) const override;
+
+    plg::Info pluginInfo() const override;
+
+signals:
+
+};
+```
+
+### Registering and Using a Plugin
+
+To use a plugin, you first need to register it with the application. This can be done using the `Register Plugin` command, which copies the plugin file and records information about the plugin (title, description, author, plugin version, and plugin file hash code) in a database. 
+
+After registering the plugin, the application will automatically verify its integrity at startup by checking its hash code. If the hash code in the database matches the hash code of the file, the application will open a tab with the plugin's widget.
+
+**Note:** If you encounter any issues or have any questions, please feel free to raise an issue on our GitHub repository. We value your feedback and contributions.
+
+Make sure that your plugins are compatible with the application's current version to avoid any potential issues.
+
 ## Licenses
 
 This project is distributed under two licenses: the [CC BY-NC-SA](https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode.txt) License and a commercial license. This means:
@@ -35,28 +77,7 @@ This project is distributed under two licenses: the [CC BY-NC-SA](https://creati
 
 We aim to maintain the openness and accessibility of this project by providing the permissive [CC BY-NC-SA](https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode.txt) License. However, we also understand that some organizations may be interested in commercial usage. We offer the option of a commercial license to provide additional support and development for the project.
 
-
-## Future Plans
-
-Our project is continuously evolving, and we have a number of exciting plans for the future. We are looking forward to implementing the following features:
-
-1. **Developing an in-house QT-based library for accessing the OpenAI API:** Our goal is to create a robust, efficient, and user-friendly library, built by our own team and tailored specifically for our project, making accessing the OpenAI API easier and more intuitive without relying on third-party libraries.
- 
-2. **Coordinating and integrating multiple AI models to create multi-component AI systems:** We plan on utilizing multiple AI models in a cooperative fashion. This approach is aimed at overcoming certain limitations and crafting more complex and dynamic AI systems.
-
-3. **Developing tools for AI research:** We intend to design tools to assist in AI research, enabling researchers to train, test, and understand AI models more effectively.
-
-4. **Creating educational tools:** To foster learning and education in AI, we will be developing tools that can be used for training and educational purposes.
-
-5. **Developing data analysis tools:** We are planning to create tools to facilitate data analysis, which will aid in making sense of large volumes of data and deriving actionable insights.
-
-6. **Creating tools for data visualization and AI results:** We recognize the importance of understanding AI outputs. Therefore, we aim to develop tools that can visually represent data and AI results, making them easier to interpret.
-
-7. **Developing intelligent decision-making systems:** We intend to create systems that can analyze vast amounts of information and provide recommendations based on the analysis. This will involve the use of AI models to make informed decisions.
-
-Our team is committed to realizing these plans and continuously improving the project. We believe that these enhancements will greatly benefit our users and contribute to the further development of AI.
-
-
+Additionally, we offer paid customization of the software, including the development of new features based on your specific needs. For inquiries and more details, please reach out to us at asianirish@gmail.com.
 
 ## Donate
 
