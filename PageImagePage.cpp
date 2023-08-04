@@ -26,9 +26,12 @@ PageImagePage::PageImagePage(QWidget *parent) :
     connect(_nam, &QNetworkAccessManager::finished, this, &PageImagePage::onDownloadFinished);
 
     ui->imgLabel->addAction(ui->actionSave_Image_as_File);
-    ui->imgLabel->addAction(ui->actionSave_Image_to_List);
-    ui->imgLabel->addAction(ui->actionSet_as_Base_Image);
-    ui->imgLabel->addAction(ui->actionEdit_Image);
+
+    // TODO: implement these features in 1.1.0
+//    ui->imgLabel->addAction(ui->actionSave_Image_to_List);
+//    ui->imgLabel->addAction(ui->actionSet_as_Base_Image);
+//    ui->imgLabel->addAction(ui->actionEdit_Image);
+
     ui->imgLabel->addAction(ui->actionCopy_to_Clipboard);
 
     on_requestEdit_textChanged();
