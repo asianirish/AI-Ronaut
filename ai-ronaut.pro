@@ -64,6 +64,7 @@ SOURCES += \
     plg/Info.cpp \
     plg/Record.cpp \
     plg/Version.cpp \
+    util/Copyright.cpp \
     util/gfunc.cpp
 
 HEADERS += \
@@ -113,6 +114,7 @@ HEADERS += \
     plg/Info.h \
     plg/Record.h \
     plg/Version.h \
+    util/Copyright.h \
     util/OrderedMap.h \
     util/gfunc.h
 
