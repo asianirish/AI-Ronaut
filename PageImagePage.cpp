@@ -35,6 +35,7 @@ PageImagePage::PageImagePage(QWidget *parent) :
     ui->imgLabel->addAction(ui->actionCopy_to_Clipboard);
 
     on_requestEdit_textChanged();
+    onRequestComplete(true);
 }
 
 PageImagePage::~PageImagePage()
@@ -72,6 +73,11 @@ void PageImagePage::showEvent(QShowEvent *event)
 
 void PageImagePage::on_requestButton_clicked()
 {
+    if (!_isComplete) {
+        qDebug() << "prevent double request submission";
+        return;
+    }
+
     auto text = ui->requestEdit->toPlainText();
 
     if (text.length() <= 3) {
@@ -80,7 +86,7 @@ void PageImagePage::on_requestButton_clicked()
         return;
     }
 
-    ui->requestButton->setEnabled(false);
+    onRequestComplete(false);
 
     auto size = ui->imageSizeComboBox->currentText();
 
@@ -93,7 +99,9 @@ void PageImagePage::onDownloadFinished(QNetworkReply *reply)
     QPixmap pm;
     pm.loadFromData(reply->readAll());
     ui->imgLabel->setPixmap(pm);
-    ui->requestButton->setEnabled(true);
+
+    onRequestComplete(true);
+
     ui->imgLabel->setEnabled(true);
 }
 
@@ -125,8 +133,9 @@ void PageImagePage::onUrlResponse(const QStringList &urls)
 {
     auto url = urls.at(0);
 
-    ui->requestButton->setEnabled(true);
-    ui->imgLabel->setEnabled(true);
+    onRequestComplete(true);
+
+    ui->imgLabel->setEnabled(true); // TODO: the image hasn't been downloaded yet!
 
     QNetworkRequest request(url);
     _nam->get(request);
@@ -143,6 +152,8 @@ void PageImagePage::onNetworkError(const QString &errMsg, int errCode)
 
         QMessageBox::warning(this, tr("Network error"), msg);
     }
+
+    onRequestComplete(true);
 }
 
 void PageImagePage::onResponseError(const QString &errMsg)
@@ -150,6 +161,8 @@ void PageImagePage::onResponseError(const QString &errMsg)
     qDebug() << "RESPONSE ERROR:" << errMsg;
 
     QMessageBox::warning(this, tr("Response error"), errMsg);
+
+    onRequestComplete(true);
 }
 
 void PageImagePage::onReplyDestroyed(QObject *)
@@ -174,3 +187,11 @@ void PageImagePage::on_actionCopy_to_Clipboard_triggered()
     QClipboard *clipboard = QGuiApplication::clipboard();
     clipboard->setPixmap(pm);
 }
+
+void PageImagePage::onRequestComplete(bool isComplete)
+{
+    _isComplete = isComplete;
+    ui->requestButton->setEnabled(isComplete);
+    ui->requestButton->setText(isComplete ? REQUST_TEXT : WAIT_TEXT);
+}
+

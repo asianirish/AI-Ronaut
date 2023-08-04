@@ -12,6 +12,10 @@ class PageImagePage : public PageWidget
 {
     Q_OBJECT
 public:
+    const QString REQUST_TEXT{tr("Request")};
+    const QString WAIT_TEXT{tr("Wait...")};
+
+
     static const int MSG_WIDGET_EXTRA_HEIGHT = 28;
 
     explicit PageImagePage(QWidget *parent = nullptr);
@@ -39,9 +43,14 @@ private slots:
 
     void on_requestEdit_textChanged();
 
+    void on_actionCopy_to_Clipboard_triggered();
+
 private:
     Ui::PageImagePage *ui;
     QNetworkAccessManager *_nam;
+    bool _isComplete = true;
+
+    void onRequestComplete(bool isComplete);
 };
 
 #endif // PAGEIMAGEPAGE_H
