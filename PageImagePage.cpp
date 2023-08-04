@@ -136,11 +136,20 @@ void PageImagePage::onUrlResponse(const QStringList &urls)
 void PageImagePage::onNetworkError(const QString &errMsg, int errCode)
 {
     qDebug() << "NETWORK ERROR:" << errMsg << errCode;
+
+    if (errCode != QNetworkReply::ProtocolInvalidOperationError) { // Will be shown as a response error
+        QString msg(errMsg);
+        msg += "\n\nError code: " + QString::number(errCode);
+
+        QMessageBox::warning(this, tr("Network error"), msg);
+    }
 }
 
 void PageImagePage::onResponseError(const QString &errMsg)
 {
     qDebug() << "RESPONSE ERROR:" << errMsg;
+
+    QMessageBox::warning(this, tr("Response error"), errMsg);
 }
 
 void PageImagePage::onReplyDestroyed(QObject *)
