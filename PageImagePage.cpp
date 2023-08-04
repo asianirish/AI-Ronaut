@@ -10,6 +10,7 @@
 #include <QKeyEvent>
 #include <QMessageBox>
 #include <QFileDialog>
+#include <QClipboard>
 
 PageImagePage::PageImagePage(QWidget *parent) :
     PageWidget(parent),
@@ -154,3 +155,10 @@ void PageImagePage::on_requestEdit_textChanged()
     ui->requestWidget->setFixedHeight(newHeight + MSG_WIDGET_EXTRA_HEIGHT);
 }
 
+
+void PageImagePage::on_actionCopy_to_Clipboard_triggered()
+{
+    auto pm = ui->imgLabel->pixmap();
+    QClipboard *clipboard = QGuiApplication::clipboard();
+    clipboard->setPixmap(pm);
+}
