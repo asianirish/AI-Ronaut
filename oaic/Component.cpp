@@ -27,7 +27,9 @@ void Component::onJsonRequestFinished()
             emit jsonResponse(dataRead);
         }
 
-        reply->deleteLater();
+        if (_postReply) {
+            reply->deleteLater();
+        }
 
         if (reply == _postReply) {
             _postReply = nullptr;
@@ -68,7 +70,9 @@ void Component::onNetworkError(QNetworkReply::NetworkError code)
 
         emit networkError(msg, code);
 
-        reply->deleteLater();
+        if (_postReply) {
+            reply->deleteLater();
+        }
 
         if (reply == _postReply) {
             _postReply = nullptr;
