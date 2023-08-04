@@ -8,8 +8,6 @@ This is an **unofficial** client QT based application with a graphical user inte
 
 To access the Openal API, this application uses our OAIC libraries. Currently, OAIC is part of the AI-Ronaut project and is distributed under the same license. In the future, we plan to create a separate project for OAIC and use OAIC as a static library subproject.
 
-The project no longer uses third-party libraries by [D7EAD](https://github.com/D7EAD/liboai) (**thank you, D7EAD**)
-
 ### Prerequisites
 
 - Qt development environment
