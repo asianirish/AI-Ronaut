@@ -24,12 +24,19 @@ void Copyright::addCopyright(const QString &path, const QString &copyrightInfo)
     }
 
     dir.setFilter(QDir::Files | QDir::Dirs | QDir::NoDotAndDotDot);
-    dir.setNameFilters(QStringList() << "*.cpp" << "*.h"); // <==== TODO: can't find dirs because of this
+//    dir.setNameFilters(QStringList() << "*.cpp" << "*.h"); // <==== TODO: can't find dirs because of this
 
     for (const QFileInfo &fileInfo : dir.entryInfoList()) {
         if (fileInfo.isDir()) {
             addCopyright(fileInfo.absoluteFilePath(), copyrightInfo);
         } else {
+
+            QStringList list;
+            list << "cpp" << "h";
+            if (!list.contains(fileInfo.suffix())) {
+                continue;
+            }
+
             QFile file(fileInfo.absoluteFilePath());
             if (file.open(QIODevice::ReadOnly)) {
                 QString content = file.readAll();
