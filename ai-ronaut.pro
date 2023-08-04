@@ -144,6 +144,7 @@ DISTFILES += \
     LICENSE  \
     README.md \
     TODO \
+    copyright_template \
     oaic/README.md
 
 RESOURCES += \
