@@ -9,13 +9,21 @@
 
 const QStringList fileTypes { "*.h", "*.cpp" };
 
+const QString Copyright::COPYRIGHT_INFO{"/*\n"
+                            "* Copyright (c) 2023, Asianirish, asianirish@gmail.com\n"
+                            "* \n"
+                            "* This work is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.\n"
+                            "* To view a copy of this license, visit http://creativecommons.org/licenses/by-nc-sa/4.0/ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.\n"
+                                       "*/\n"};
+
+
 
 Copyright::Copyright()
 {
 
 }
 
-void Copyright::addCopyright(const QString &path, const QString &copyrightInfo)
+void Copyright::addCopyright(const QString &path)
 {
     QDir dir(path);
     if (!dir.exists()) {
@@ -24,11 +32,10 @@ void Copyright::addCopyright(const QString &path, const QString &copyrightInfo)
     }
 
     dir.setFilter(QDir::Files | QDir::Dirs | QDir::NoDotAndDotDot);
-//    dir.setNameFilters(QStringList() << "*.cpp" << "*.h"); // <==== TODO: can't find dirs because of this
 
     for (const QFileInfo &fileInfo : dir.entryInfoList()) {
         if (fileInfo.isDir()) {
-            addCopyright(fileInfo.absoluteFilePath(), copyrightInfo);
+            addCopyright(fileInfo.absoluteFilePath());
         } else {
 
             QStringList list;
@@ -44,7 +51,7 @@ void Copyright::addCopyright(const QString &path, const QString &copyrightInfo)
 
                 if (file.open(QIODevice::WriteOnly | QIODevice::Truncate)) {
                     QTextStream out(&file);
-                    out << copyrightInfo << "\n" << content;
+                    out << COPYRIGHT_INFO << "\n" << content;
                     file.close();
                 }
             }
@@ -52,7 +59,7 @@ void Copyright::addCopyright(const QString &path, const QString &copyrightInfo)
     }
 }
 
-void Copyright::addCopyright1(const QString &dirPath, const QString &copyright)
+void Copyright::addCopyright1(const QString &dirPath)
 {
     QDir dir(dirPath);
     if (!dir.exists()) {
@@ -76,7 +83,7 @@ void Copyright::addCopyright1(const QString &dirPath, const QString &copyright)
         QTextStream in(&f);
         content = in.readAll();
         f.resize(0);
-        in << copyright << "\n" << content;
+        in << COPYRIGHT_INFO << "\n" << content;
         f.close();
     }
 }
