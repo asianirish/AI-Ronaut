@@ -8,3 +8,7 @@ ai-ronaut.db
 ai-ronaut_client*
 *.log
 plg_shared/*
+installer/packages/ai.asianirish.ai-ronaut/data/*.exe
+installer/packages/ai.asianirish.ai-ronaut/data/ai-ronaut
+installer/packages/ai.asianirish.ai-ronaut/data/*.dll
+installer/packages/ai.asianirish.ai-ronaut/data/*.so
