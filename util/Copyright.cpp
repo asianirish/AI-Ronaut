@@ -87,3 +87,49 @@ void Copyright::addCopyright1(const QString &dirPath)
         f.close();
     }
 }
+
+void Copyright::removeCopyright(const QString &path)
+{
+    QDir dir(path);
+    if (!dir.exists()) {
+        qWarning("The directory does not exist");
+        return;
+    }
+
+    dir.setFilter(QDir::Files | QDir::Dirs | QDir::NoDotAndDotDot);
+
+    for (const QFileInfo &fileInfo : dir.entryInfoList()) {
+        if (fileInfo.isDir()) {
+            removeCopyright(fileInfo.absoluteFilePath());
+        } else {
+            QStringList list;
+            list << "cpp" << "h";
+            if (!list.contains(fileInfo.suffix())) {
+                continue;
+            }
+
+            QFile file(fileInfo.absoluteFilePath());
+            if (file.open(QIODevice::ReadOnly)) {
+                QString content = file.readAll();
+                file.close();
+
+                int startIndex = content.indexOf("/*");
+                int endIndex = content.indexOf("*/\n");
+
+                if (endIndex < 0) {
+                    endIndex = content.indexOf("*/");
+                }
+
+                if (startIndex == 0 && endIndex != -1) {
+                    content.remove(startIndex, endIndex - startIndex + 2);
+
+                    if (file.open(QIODevice::WriteOnly | QIODevice::Truncate)) {
+                        QTextStream out(&file);
+                        out << content;
+                        file.close();
+                    }
+                }
+            }
+        }
+    }
+}

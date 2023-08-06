@@ -26,6 +26,8 @@ public:
     // a non-recursive version of
     static void addCopyright1(const QString& dirPath);
 
+    static void removeCopyright(const QString &path);
+
 
 };
 
