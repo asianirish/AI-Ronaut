@@ -15,6 +15,11 @@ PageAboutPage::PageAboutPage(QWidget *parent) :
     ui(new Ui::PageAboutPage)
 {
     ui->setupUi(this);
+
+    QString aboutText = ui->textBrowser->toHtml();
+    aboutText.replace("{VERSION}", VERSION);
+
+    ui->textBrowser->setHtml(aboutText);
 }
 
 PageAboutPage::~PageAboutPage()
