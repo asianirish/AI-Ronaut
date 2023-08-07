@@ -11,6 +11,8 @@ namespace oaic {
 
 const int Manager::DEFAULT_TIMEOUT = 30000;
 
+Auth Manager::_auth;
+
 Manager::Manager(QObject *parent) : QObject(parent),
     _image(nullptr),
     _chat(nullptr),

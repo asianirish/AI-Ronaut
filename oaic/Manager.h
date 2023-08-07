@@ -37,7 +37,7 @@ public:
     void setTimeout(int newTimeout);
 
 private:
-    Auth _auth;
+    static Auth _auth;
     Image *_image;
     Chat *_chat;
     Models *_models;
