@@ -37,6 +37,8 @@ public:
 
     Headers headers() const;
 
+    bool isEmpty();
+
 private:
     QString _key;
     Headers _headers;

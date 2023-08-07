@@ -38,8 +38,10 @@ void PageWidget::initClient()
             QMessageBox::warning(this, "OpenAI Key", "Please set OPENAI_API_KEY as an environment variable with your OpenAI API key");
         }
     } else {
-        qDebug() << "AUTH ERROR";
-        QMessageBox::warning(this, "OpenAI Key", "Please set OPENAI_API_KEY as an environment variable with your OpenAI API key");
+        if (oaic::Manager::auth().isEmpty()) {
+            qDebug() << "AUTH ERROR";
+            QMessageBox::warning(this, "OpenAI Key", "Please set OPENAI_API_KEY as an environment variable with your OpenAI API key");
+        }
     }
     synchronizeClient(_client);
 }

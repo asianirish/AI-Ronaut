@@ -78,6 +78,11 @@ Headers Auth::headers() const
     return _headers;
 }
 
+bool Auth::isEmpty()
+{
+    return _key.isEmpty() && _headers.isEmpty();
+}
+
 
 
 } // namespace oaic
