@@ -13,6 +13,14 @@ message("TARGET: $$TARGET")
 TARGET = $${TARGET}_client
 message("TARGET: $$TARGET")
 
+MAJOR = 1
+MINOR = 0
+PATCH = 0
+
+VERSION = $${MAJOR}.$${MINOR}.$${PATCH}
+
+DEFINES += "VERSION=\\\"$${VERSION}\\\""
+
 # You can make your code fail to compile if it uses deprecated APIs.
 # In order to do so, uncomment the following line.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
