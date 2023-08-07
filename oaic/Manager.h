@@ -22,14 +22,13 @@ public:
     static const int DEFAULT_TIMEOUT;
     explicit Manager(QObject *parent = nullptr);
 
-    Auth &auth();
+    static Auth &auth();
 
     Image *image();
 
     Chat *chat();
 
     Models *models();
-
 
     QNetworkAccessManager *networkAccessManager() const;
 
