@@ -1,8 +1,8 @@
     <Package>
         <DisplayName>AI-Ronaut</DisplayName>
         <Description>AI-Ronaut is an unofficial GUI client, built with C++ and Qt, designed to simplify access to the OpenAI API</Description>
-        <Version>1.0.0</Version>
-        <ReleaseDate>2023-08-06</ReleaseDate>
+        <Version>1.0.1</Version>
+        <ReleaseDate>2023-08-07</ReleaseDate>
         <Name>ai.asianirish.ai-ronaut</Name>
         <Script>installscript.qs</Script>
         <Licenses>
