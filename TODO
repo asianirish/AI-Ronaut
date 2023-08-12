@@ -3,6 +3,23 @@ TODO:
 * One session in two different pages
 * Add model configurations
 
+1.0.2
+
+* Invoke setx for key selection on Windows
+* Set a maximum height for chat message field (add scroll if it exceeds the external window size)
+* Include screenshots and operation descriptions in README
+
+1.0.1
+
+* Implement feedback with buttons (status bar?)
+* Make chat::Session a subclass of QObject and use signals
+* Implement proxy in oaic library
+* Make oaic a standalone library and project
+* "Save...", "New Session" buttons accessible regardless of any opened tab on Chat page
+* Checkbox for "New Session" button: "On a new page"
+* "URL" field for plugin description
+* Handle images (commented actions)
+
 DONE:
 
 * The first letter of the message is lost when saving
@@ -28,6 +45,10 @@ DONE:
 * Make PageContext inherit from QObject and emit a signal on session change
 * createSession emits a signal when _pageContex doesn't exist (see PageGeneralChatPage::PageGeneralChatPage)
 * Response problem
+
+1.0.2
+
+* Ensure settings timeout is utilized in oaic (fix)
 
 
 CANCELED:
