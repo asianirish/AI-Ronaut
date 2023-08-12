@@ -149,9 +149,11 @@ void PageWelcomePage::openAction(const QString &actionData)
 
 void PageWelcomePage::onKeySuccess()
 {
-    // read other app context settings here
+    // TODO: now there is no point in this, unless there are requests to the AI on this page
     QSettings settings;
     int timeout = settings.value("oai/timeout", oaic::Manager::DEFAULT_TIMEOUT).toInt();
+
+    qDebug() << "TIMEOUT:" << timeout;
 
     client()->setTimeout(timeout);
 

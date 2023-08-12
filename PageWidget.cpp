@@ -11,6 +11,7 @@
 
 #include <QMessageBox>
 #include <QProcessEnvironment>
+#include <QSettings>
 
 PageWidget::PageWidget(QWidget *parent)
     : QWidget{parent},
@@ -43,5 +44,10 @@ void PageWidget::initClient()
             QMessageBox::warning(this, "OpenAI Key", "Please set OPENAI_API_KEY as an environment variable with your OpenAI API key");
         }
     }
+
+    QSettings settings;
+    int timeout = settings.value("oai/timeout", oaic::Manager::DEFAULT_TIMEOUT).toInt();
+    client()->setTimeout(timeout);
+
     synchronizeClient(_client);
 }
