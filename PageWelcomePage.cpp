@@ -152,10 +152,17 @@ void PageWelcomePage::onKeySuccess()
     // TODO: now there is no point in this, unless there are requests to the AI on this page
     QSettings settings;
     int timeout = settings.value("oai/timeout", oaic::Manager::DEFAULT_TIMEOUT).toInt();
-
-    qDebug() << "TIMEOUT:" << timeout;
-
     client()->setTimeout(timeout);
+
+    // set system variable for windows
+#ifdef Q_OS_WIN
+    if (!oaic::Manager::auth().isEmpty()) {
+        QProcess proc;
+        proc.start("setx", {"OPENAI_API_KEY", oaic::Manager::auth().key()});
+        proc.waitForStarted();
+        proc.waitForFinished();
+    }
+#endif
 
     displaySuccess();
 }

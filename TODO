@@ -5,7 +5,6 @@ TODO:
 
 1.0.2
 
-* Invoke setx for key selection on Windows
 * Set a maximum height for chat message field (add scroll if it exceeds the external window size)
 * Include screenshots and operation descriptions in README
 
@@ -49,7 +48,7 @@ DONE:
 1.0.2
 
 * Ensure settings timeout is utilized in oaic (fix)
-
+* Set environment variable using setx on windows
 
 CANCELED:
 * Update messages problem (What a problem?)
