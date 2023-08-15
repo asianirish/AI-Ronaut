@@ -53,6 +53,7 @@ ChatWidget::~ChatWidget()
 void ChatWidget::resizeEvent(QResizeEvent *event)
 {
     QWidget::resizeEvent(event);
+    ChatItemWidget::setParentHeight(height());
     updateItemsHeight();
 }
 
@@ -72,7 +73,7 @@ void ChatWidget::resizeEvent(QResizeEvent *event)
 void ChatWidget::showEvent(QShowEvent *event)
 {
     QWidget::showEvent(event);
-
+    ChatItemWidget::setParentHeight(height());
     ui->textEdit->setFocus(Qt::OtherFocusReason);
 }
 
@@ -182,6 +183,7 @@ void ChatWidget::updateItemsHeight()
         auto widget = qobject_cast<ChatItemWidget*>(ui->listWidget->itemWidget(item));
         if (widget) {
             int idealHeight = widget->textHeight();
+            qDebug() << "IDEAL_HEIGHT:" << idealHeight;
             item->setSizeHint({widget->sizeHint().width(), int(idealHeight)});
         }
     }
@@ -363,6 +365,11 @@ void ChatWidget::on_textEdit_textChanged()
 {
     auto doc = ui->textEdit->document();
     int newHeight = doc->size().toSize().height();
+
+    if (newHeight >= height()/4) {
+        newHeight = height()/4;
+    }
+
     ui->textEdit->setFixedHeight(newHeight);
 
     ui->messageWidget->setFixedHeight(newHeight + MSG_WIDGET_EXTRA_HEIGHT);

@@ -11,6 +11,8 @@
 
 #include "chat/AssistantMessage.h"
 
+#include <QScrollBar>
+
 AIMessageItemWidget::AIMessageItemWidget(const QString &sessionId, chat::MessagePtr msgPtr, QWidget *parent) :
     ChatSessionItemWidget(sessionId, msgPtr, parent),
     ui(new Ui::AIMessageItemWidget)
@@ -70,6 +72,13 @@ void AIMessageItemWidget::on_actionEdit_triggered()
 void AIMessageItemWidget::on_textBrowser_textChanged()
 {
     adjustHeight();
+
+    ui->textBrowser->moveCursor(QTextCursor::End);
+//    ui->textBrowser->ensureCursorVisible();
+
+//    QScrollBar *scrollbar = ui->textBrowser->verticalScrollBar();
+//    qDebug() << "TEXT_BROWSER_CHANGED:" << scrollbar->maximum();
+//    scrollbar->setValue(scrollbar->maximum());
 }
 
 

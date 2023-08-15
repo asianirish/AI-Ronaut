@@ -13,6 +13,8 @@
 #include <QGuiApplication>
 #include <QTimer>
 
+int ChatItemWidget::_parentHeight = 0;
+
 ChatItemWidget::ChatItemWidget(QWidget *parent)
     : QWidget{parent},
     _listItem(nullptr)
@@ -32,7 +34,16 @@ int ChatItemWidget::textHeight() const
     doc->setTextWidth(width);
     auto idealHeight = doc->documentLayout()->documentSize().height();
 
-    return idealHeight + extraSpaceHeight(); // TODO: other controls
+    auto height = idealHeight + extraSpaceHeight(); // TODO: other controls
+
+    if (height >= _parentHeight/2) {
+        height = _parentHeight/2;
+
+        qDebug() << "PARENT HEIGHT:" << _parentHeight;
+        qDebug() << "MY HEIGHT:" << _parentHeight/2;
+    }
+
+    return height;
 }
 
 void ChatItemWidget::stylize() const
@@ -60,6 +71,16 @@ void ChatItemWidget::adjustHeight()
         int idealHeight = textHeight();
         _listItem->setSizeHint({sizeHint().width(), int(idealHeight)});
     }
+}
+
+int ChatItemWidget::parentHeight()
+{
+    return _parentHeight;
+}
+
+void ChatItemWidget::setParentHeight(int newParentHeight)
+{
+    _parentHeight = newParentHeight;
 }
 
 void ChatItemWidget::callAdjustHeight()

@@ -4,8 +4,6 @@ TODO:
 * Add model configurations
 
 1.0.2
-
-* Set a maximum height for chat message field (add scroll if it exceeds the external window size)
 * Include screenshots and operation descriptions in README
 
 1.0.1
@@ -46,9 +44,9 @@ DONE:
 * Response problem
 
 1.0.2
-
 * Ensure settings timeout is utilized in oaic (fix)
 * Set environment variable using setx on windows
+* Set a maximum height for chat message field (add scroll if it exceeds the external window size)
 
 CANCELED:
 * Update messages problem (What a problem?)

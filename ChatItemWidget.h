@@ -32,6 +32,9 @@ public:
 
     void callAdjustHeight();
 
+    static int parentHeight();
+    static void setParentHeight(int newParentHeight);
+
 protected:
     virtual QTextBrowser *textBrowser() const = 0;
     virtual int extraSpaceHeight() const = 0;
@@ -46,6 +49,8 @@ private:
     QListWidgetItem *_listItem;
 
     mutable QString _debugText;
+
+    static int _parentHeight;
 
 signals:
     void deleteMe();
