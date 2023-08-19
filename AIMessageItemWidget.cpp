@@ -15,7 +15,8 @@
 
 AIMessageItemWidget::AIMessageItemWidget(const QString &sessionId, chat::MessagePtr msgPtr, QWidget *parent) :
     ChatSessionItemWidget(sessionId, msgPtr, parent),
-    ui(new Ui::AIMessageItemWidget)
+    ui(new Ui::AIMessageItemWidget),
+    _isProgramInput(false)
 {
     ui->setupUi(this);
 
@@ -34,7 +35,9 @@ AIMessageItemWidget::~AIMessageItemWidget()
 void AIMessageItemWidget::appendText(const QString &deltaText)
 {
     QString prevText = textBrowser()->toPlainText();
+    _isProgramInput = true;
     textBrowser()->setPlainText(prevText + deltaText);
+    _isProgramInput = false;
 }
 
 QTextBrowser *AIMessageItemWidget::textBrowser() const
@@ -73,12 +76,9 @@ void AIMessageItemWidget::on_textBrowser_textChanged()
 {
     adjustHeight();
 
-    ui->textBrowser->moveCursor(QTextCursor::End);
-//    ui->textBrowser->ensureCursorVisible();
-
-//    QScrollBar *scrollbar = ui->textBrowser->verticalScrollBar();
-//    qDebug() << "TEXT_BROWSER_CHANGED:" << scrollbar->maximum();
-//    scrollbar->setValue(scrollbar->maximum());
+    if (_isProgramInput) {
+        ui->textBrowser->moveCursor(QTextCursor::End);
+    }
 }
 
 

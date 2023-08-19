@@ -47,6 +47,7 @@ DONE:
 * Ensure settings timeout is utilized in oaic (fix)
 * Set environment variable using setx on windows
 * Set a maximum height for chat message field (add scroll if it exceeds the external window size)
+* Bug: going to the last position
 
 CANCELED:
 * Update messages problem (What a problem?)

@@ -41,6 +41,8 @@ private slots:
 
 private:
     Ui::AIMessageItemWidget *ui;
+
+    bool _isProgramInput;
 };
 
 #endif // AIMESSAGEITEMWIDGET_H
