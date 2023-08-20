@@ -36,11 +36,11 @@ int ChatItemWidget::textHeight() const
 
     auto height = idealHeight + extraSpaceHeight(); // TODO: other controls
 
-    if (height >= _parentHeight/2) {
-        height = _parentHeight/2;
+    if (height >= _parentHeight * 3./4.) {
+        height = _parentHeight * 3./4.;
 
         qDebug() << "PARENT HEIGHT:" << _parentHeight;
-        qDebug() << "MY HEIGHT:" << _parentHeight/2;
+        qDebug() << "MY HEIGHT:" << height;
     }
 
     return height;
