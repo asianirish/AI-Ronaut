@@ -42,7 +42,7 @@ ChatWidget::ChatWidget(QWidget *parent) :
 
     ui->newSessionButton->setHidden(true);
 
-    on_textEdit_textChanged();
+    QTimer::singleShot(1, this, &ChatWidget::on_textEdit_textChanged); // using timer to prevent displaying a vertical scroll
 }
 
 ChatWidget::~ChatWidget()
