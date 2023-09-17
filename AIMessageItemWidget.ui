@@ -32,7 +32,7 @@
       </size>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-color: #F0F8FF;</string>
+      <string notr="true">background-color: rgba(230, 255, 255, 255);</string>
      </property>
      <property name="frameShape">
       <enum>QFrame::NoFrame</enum>

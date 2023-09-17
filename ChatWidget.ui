@@ -27,7 +27,8 @@
        </sizepolicy>
       </property>
       <property name="styleSheet">
-       <string notr="true">background-color: rgb(141, 186, 132);</string>
+       <string notr="true">background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(190, 190, 200, 255), stop:0.5 rgba(150, 150, 160, 255), stop:1 rgba(80, 80, 90, 255));
+selection-background-color: rgba(150, 150, 160, 255);</string>
       </property>
       <layout class="QGridLayout" name="gridLayout_2">
        <item row="0" column="0">
@@ -37,6 +38,9 @@
            <horstretch>1</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: rgba(0, 0, 0, 0);</string>
          </property>
         </widget>
        </item>
@@ -55,7 +59,7 @@
           </size>
          </property>
          <property name="styleSheet">
-          <string notr="true">background-color: rgb(141, 186, 132);</string>
+          <string notr="true">background-color: rgba(0, 0, 0, 0);</string>
          </property>
          <property name="frameShape">
           <enum>QFrame::NoFrame</enum>
@@ -75,6 +79,9 @@
            <horstretch>1</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: rgba(0, 0, 0, 0);</string>
          </property>
         </widget>
        </item>
@@ -140,7 +147,9 @@
              </sizepolicy>
             </property>
             <property name="styleSheet">
-             <string notr="true">border-radius: 10px; background-color: #EFFDDE;</string>
+             <string notr="true">border-radius: 10px; background-color: #EFFDDE;
+
+font: 14pt &quot;Noto Sans&quot;;</string>
             </property>
            </widget>
           </item>

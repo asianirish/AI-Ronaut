@@ -19,7 +19,7 @@ ChatItemWidget::ChatItemWidget(QWidget *parent)
     : QWidget{parent},
     _listItem(nullptr)
 {
-
+    setStyleSheet(" QMenu { background-color: #BEBEC8; };");
 }
 
 void ChatItemWidget::setText(const QString &text)
