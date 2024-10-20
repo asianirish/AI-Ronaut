@@ -32,7 +32,7 @@
       </size>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-color: rgba(230, 255, 255, 255);</string>
+      <string notr="true">background-color: rgba(255, 255, 255, 255);</string>
      </property>
      <property name="frameShape">
       <enum>QFrame::NoFrame</enum>
@@ -63,6 +63,9 @@
       </size>
      </property>
     </spacer>
+   </item>
+   <item row="1" column="0">
+    <layout class="QFormLayout" name="formLayout"/>
    </item>
   </layout>
   <action name="actionCopy">
