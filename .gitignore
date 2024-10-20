@@ -13,3 +13,4 @@ installer/packages/ai.asianirish.ai-ronaut/data/ai-ronaut
 installer/packages/ai.asianirish.ai-ronaut/data/*.dll
 installer/packages/ai.asianirish.ai-ronaut/data/*.so
 installer/packages/ai.asianirish.ai-ronaut/data/plugins/*
+build/*
