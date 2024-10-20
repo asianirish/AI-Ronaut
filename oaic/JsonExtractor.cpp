@@ -23,9 +23,19 @@ QStringList JsonExtractor::parse(const QString &input, bool &isComplete)
 
     for (auto const& potentialJson : potentialJsons) {
         QJsonParseError parseError;
+
+        if (potentialJson.isEmpty()) {
+            continue;
+        }
+
         QJsonDocument::fromJson(potentialJson.toUtf8(), &parseError);
 
         if (parseError.error == QJsonParseError::NoError) {
+            if (potentialJson == "[DONE]") { // TODO: const
+                isComplete = true;
+                break;
+            }
+
             parsedJsons.append(potentialJson);
         }
         else {
